@@ -374,6 +374,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\ShippingDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlBar\EditProductUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
