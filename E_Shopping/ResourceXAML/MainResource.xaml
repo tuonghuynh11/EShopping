@@ -9,4 +9,15 @@
     <viewmodel:DeliveryOptionViewModel x:Key="DeliveryOptionsVM"></viewmodel:DeliveryOptionViewModel>
     <viewmodel:PaymentOptionsViewModel x:Key="PaymentOptionsVM"></viewmodel:PaymentOptionsViewModel>
     <viewmodel:OrderedHistoryViewModel x:Key="OrderedHistoryVM"></viewmodel:OrderedHistoryViewModel>
+    <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:ForgetPasswordViewModel x:Key="ForgetPasswordVM"></viewmodel:ForgetPasswordViewModel>
+    <viewmodel:SignupViewModel x:Key="SignupVM"></viewmodel:SignupViewModel>
+    <viewmodel:ChangePassViewModel x:Key="ChangPassVM"></viewmodel:ChangePassViewModel>
+    <viewmodel:UserInfoViewModel x:Key="UserInfoVM"></viewmodel:UserInfoViewModel>
+    <viewmodel:UserManageViewModel x:Key="UserManageVM"></viewmodel:UserManageViewModel>
+    <viewmodel:UserAccountDetailViewModel x:Key="UserAccountDetailVM"></viewmodel:UserAccountDetailViewModel>
+    <viewmodel:ConfirmOrderViewModel x:Key="ConfirmOrderVM"></viewmodel:ConfirmOrderViewModel>
+    <viewmodel:UploadProductViewModel x:Key="UploadProductVM"></viewmodel:UploadProductViewModel>
+    <viewmodel:ManageProductForOwnerViewModel x:Key="ManageProductForOwnerVM"></viewmodel:ManageProductForOwnerViewModel>
+    
 </ResourceDictionary>

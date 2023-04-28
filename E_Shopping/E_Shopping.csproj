@@ -111,6 +111,18 @@
     <Compile Include="Class\EmailService.cs" />
     <Compile Include="Class\ShoppingCart.cs" />
     <Compile Include="Convert\ConvertStringToCurrency.cs" />
+    <Compile Include="AccountInfo.xaml.cs">
+      <DependentUpon>AccountInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForgetPassword.xaml.cs">
+      <DependentUpon>ForgetPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\CART.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -123,6 +135,7 @@
     <Compile Include="Model\CREDITCARD.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Customer_order.cs" />
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DELIVERY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -181,6 +194,7 @@
     <Compile Include="Model\PRODUCTTECHNICAL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Product_order.cs" />
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -206,6 +220,16 @@
     <Compile Include="Untils\VnPhoneNumberValidator.cs" />
     <Compile Include="UserControlBar\Screen\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
+    <Compile Include="Model\UserAccess.cs" />
+    <Compile Include="PasswordEncode\EncodeString.cs" />
+    <Compile Include="SignupWindow.xaml.cs">
+      <DependentUpon>SignupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccountDetail.xaml.cs">
+      <DependentUpon>UserAccountDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\ConfirmOrderUC.xaml.cs">
+      <DependentUpon>ConfirmOrderUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlBar\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
@@ -234,6 +258,48 @@
     <Compile Include="ViewModel\PaymentOptionsViewModel.cs" />
     <Compile Include="ViewModel\ShippingAddressViewModel.cs" />
     <Compile Include="ViewModel\ShippingDetailsViewModel.cs" />
+    <Compile Include="UserControlBar\EditProductUC.xaml.cs">
+      <DependentUpon>EditProductUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\ManageProductForOwnerUC.xaml.cs">
+      <DependentUpon>ManageProductForOwnerUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\UploadProductUC.xaml.cs">
+      <DependentUpon>UploadProductUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\UserInfoUC.xaml.cs">
+      <DependentUpon>UserInfoUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\UserManageUC.xaml.cs">
+      <DependentUpon>UserManageUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ChangePassViewModel.cs" />
+    <Compile Include="ViewModel\ConfirmOrderViewModel.cs" />
+    <Compile Include="ViewModel\ManageProductForOwnerViewModel.cs" />
+    <Compile Include="ViewModel\UploadProductViewModel.cs" />
+    <Compile Include="ViewModel\UserAccountDetailViewModel.cs" />
+    <Compile Include="ViewModel\UserInfoViewModel.cs" />
+    <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\ForgetPasswordViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\SignupViewModel.cs" />
+    <Compile Include="ViewModel\UserManageViewModel.cs" />
+    <Page Include="AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Feedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForgetPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,6 +341,15 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\Cart.xaml">
+    <Page Include="SignupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserAccountDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\ConfirmOrderUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,6 +374,23 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\ShippingDetails.xaml">
+    <Page Include="UserControlBar\EditProductUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\ManageProductForOwnerUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\UploadProductUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\UserInfoUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\UserManageUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,6 +460,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\order_history_backround.jpg" />
+    <Resource Include="Image\loginimage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\loginimage2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\x_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Merry-Christmas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Avatar.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\image.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">

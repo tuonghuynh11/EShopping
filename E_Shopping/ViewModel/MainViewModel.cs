@@ -15,7 +15,7 @@ namespace E_Shopping.ViewModel
     {
         public bool IsLoad = false;
 
-        public ICommand LoadWindowCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
 
         private static ObservableCollection<CHATBOX> _chatBox;
@@ -91,23 +91,40 @@ namespace E_Shopping.ViewModel
 
         public MainViewModel()
         {
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                IsLoad = true;
+                if (p == null)
+                    return;
+                p.Hide();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
+                if (loginWindow.DataContext == null)
+                    return;
+                var loginVM = loginWindow.DataContext as LoginViewModel;
+                if (loginVM.IsClose)
+                {
+
+                    p.Close();
+                }
+                if (loginVM.IsLogin)
+                {
+
+                    p.Show();
+                }
+                else
+                {
+                    p.Close();
+                }
+            });
+
+
 
             // Startup Page
             CurrentView = new CartViewModel();
             stackView.Push(CurrentView);
 
             // CurrentView = new OrderedHistoryViewModel();
-            LoadWindowCommand = new RelayCommand<UserControl>((p) => { return true; },
-                (p) => {
-                    if (!IsLoad)
-                    {
-                        IsLoad = true;
-
-                    }
-                    //RateProduc rateProduc = new RateProduc(2,2);
-                    //rateProduc.ShowDialog();
-
-                });
+           
 
             //Mốt chuyển thành idUser
             int userID = 2;

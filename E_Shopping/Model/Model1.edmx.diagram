@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b1da37f23ff4bbab7e791bd37643aa3" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CART" Width="1.5" PointX="5.25" PointY="19.125" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CATEGORY" Width="1.5" PointX="3.75" PointY="35.625" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CHATBOX" Width="1.5" PointX="5.25" PointY="21.75" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CREDITCARD" Width="1.5" PointX="3.75" PointY="2" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DELIVERY" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DISCOUNT" Width="1.5" PointX="5.25" PointY="24.875" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.IMAGE" Width="1.5" PointX="8.25" PointY="32.625" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" Width="1.5" PointX="7.5" PointY="5.25" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" Width="1.5" PointX="8.25" PointY="38.625" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Notification" Width="1.5" PointX="5.25" PointY="27.875" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDER" Width="1.5" PointX="7.5" PointY="18.625" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDERSRECEIPT" Width="1.5" PointX="9.75" PointY="15.375" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Width="1.5" PointX="6" PointY="1.375" />
+      <Diagram DiagramId="80d2d1cdc03f48ab990d613508474836" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CART" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CATEGORY" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CHATBOX" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CREDITCARD" Width="1.5" PointX="3.75" PointY="18.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DELIVERY" Width="1.5" PointX="6" PointY="21.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DISCOUNT" Width="1.5" PointX="5.25" PointY="27.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.IMAGE" Width="1.5" PointX="7.5" PointY="24.875" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" Width="1.5" PointX="10.5" PointY="17.25" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" Width="1.5" PointX="7.5" PointY="4.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Notification" Width="1.5" PointX="5.25" PointY="24.875" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDER" Width="1.5" PointX="7.5" PointY="7.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDERSRECEIPT" Width="1.5" PointX="10.5" PointY="13" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Width="1.5" PointX="6" PointY="18" />
         <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Person" Width="1.5" PointX="3" PointY="10.875" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PEOPLEINFO" Width="1.5" PointX="8.25" PointY="9.25" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCT" Width="1.5" PointX="6" PointY="34.625" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTRATE" Width="1.5" PointX="8.25" PointY="12.375" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" Width="1.5" PointX="8.25" PointY="35.375" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIPT" Width="1.5" PointX="5.25" PointY="11.375" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Width="1.5" PointX="6" PointY="31" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PEOPLEINFO" Width="1.5" PointX="8.25" PointY="12.25" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCT" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTRATE" Width="1.5" PointX="5.25" PointY="14.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIPT" Width="1.5" PointX="8.25" PointY="16.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Width="1.5" PointX="6" PointY="31.375" />
         <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Role" Width="1.5" PointX="0.75" PointY="12.625" />
         <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CART" />
         <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDER2" />
