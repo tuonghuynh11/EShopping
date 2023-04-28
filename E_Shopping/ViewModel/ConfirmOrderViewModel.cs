@@ -84,12 +84,12 @@ namespace E_Shopping.ViewModel
                         var cart = DataProvider.ins.db.CARTs.Where(c => c.id == o.idCart).FirstOrDefault();
 
                         var customer = DataProvider.ins.db.PEOPLE.Where(p => p.id == cart.idCustomer).SingleOrDefault();
-                        if (!checkId(cartList, Convert.ToInt32(cart.id)))
+                        if (!checkId(cartList, System.Convert.ToInt32(cart.id)))
                         {
                             Customer_order customer_Order = new Customer_order(o, customer.name);
                             OrderList.Add(customer_Order);
                         }
-                        cartList.Add(Convert.ToInt32(o.idCart));
+                        cartList.Add(System.Convert.ToInt32(o.idCart));
                     }
                 }
             }

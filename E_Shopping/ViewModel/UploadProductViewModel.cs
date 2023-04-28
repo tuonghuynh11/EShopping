@@ -98,7 +98,7 @@ namespace E_Shopping.ViewModel
                     name = Name,
                     nameOfManufacturer = ProducerName,
                     
-                    price = Convert.ToInt32(Price),
+                    price = Int32.Parse(Price),
                     descriptionInformation = Description,
                 };
                 if(OldCheked && SelectedCate!= null)
@@ -121,7 +121,7 @@ namespace E_Shopping.ViewModel
                 PRODUCTTECHNICAL pRODUCTTECHNICAL = new PRODUCTTECHNICAL()
                 {
                     uses = Function,
-                    exps = Convert.ToInt32(WarrantyTime),
+                    exps = Int32.Parse(WarrantyTime),
                     material = Materital
                 };
                 var prd = DataProvider.ins.db.PRODUCTs.Where(x => x.id == pRODUCT.id).SingleOrDefault();
