@@ -3,4 +3,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
+    <viewmodel:CartViewModel x:Key="CartVM"></viewmodel:CartViewModel>
+    <viewmodel:ShippingAddressViewModel x:Key="ShippingAddressVM"></viewmodel:ShippingAddressViewModel>
+    <viewmodel:ShippingDetailsViewModel x:Key="ShippingDetailsVM"></viewmodel:ShippingDetailsViewModel>
+    <viewmodel:DeliveryOptionViewModel x:Key="DeliveryOptionsVM"></viewmodel:DeliveryOptionViewModel>
+    <viewmodel:PaymentOptionsViewModel x:Key="PaymentOptionsVM"></viewmodel:PaymentOptionsViewModel>
+    <viewmodel:OrderedHistoryViewModel x:Key="OrderedHistoryVM"></viewmodel:OrderedHistoryViewModel>
 </ResourceDictionary>

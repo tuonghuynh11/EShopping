@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="E_ShOPPING_NEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CART">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CHATBOX">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="idCustomer" />
+      <PropertyRef Name="idAssistant" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" Nullable="false" />
+    <Property Name="idAssistant" Type="int" Nullable="false" />
+    <Property Name="content" Type="text" />
+    <Property Name="isSend" Type="int" />
+  </EntityType>
+  <EntityType Name="CREDITCARD">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type_name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DELIVERY">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+    <Property Name="time" Type="date" />
+    <Property Name="cost" Type="bigint" />
+  </EntityType>
+  <EntityType Name="DISCOUNT">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="code" Type="varchar" MaxLength="1000" />
+    <Property Name="value" Type="bigint" />
+    <Property Name="exp_time" Type="date" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="IMAGES">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="idSP" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idSP" Type="int" Nullable="false" />
+    <Property Name="imageLink" Type="nvarchar(max)" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LISTOFPRODUCTBUY">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="idProduct" Type="int" />
+    <Property Name="idReceipt" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="purchaseDate" Type="date" />
+  </EntityType>
+  <EntityType Name="MANAGEPRODUCTSYSTEM">
+    <Key>
+      <PropertyRef Name="idSP" />
+    </Key>
+    <Property Name="idSP" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDPEOPLE" Type="int" />
+    <Property Name="NOTIFY" Type="nvarchar(max)" />
+    <Property Name="CHECKED" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ORDERS">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCart" Type="int" />
+    <Property Name="idProduct" Type="int" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="date" Type="date" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="ORDERSRECEIPT">
+    <Key>
+      <PropertyRef Name="idReceipt" />
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idReceipt" Type="int" Nullable="false" />
+    <Property Name="idOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PAYMENTINFORMATION">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typeOfCard" Type="int" />
+    <Property Name="cardNumber" Type="varchar" MaxLength="100" />
+    <Property Name="expDate" Type="date" />
+    <Property Name="ownName" Type="nvarchar" MaxLength="100" />
+    <Property Name="csv" Type="varchar" MaxLength="10" />
+    <Property Name="idPerson" Type="int" />
+  </EntityType>
+  <EntityType Name="PEOPLE">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="birthday" Type="date" />
+    <Property Name="cmnd_passport" Type="varchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="300" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="100" />
+    <Property Name="userName" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="avatar" Type="nvarchar(max)" />
+    <Property Name="idRole" Type="int" />
+    <Property Name="gender" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="PEOPLEINFO">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" Nullable="false" />
+    <Property Name="idReceiverInfo" Type="int" />
+    <Property Name="idPaymentOption" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="nameOfManufacturer" Type="nvarchar" MaxLength="200" />
+    <Property Name="descriptionInformation" Type="text" />
+    <Property Name="technicalInformation" Type="text" />
+    <Property Name="price" Type="bigint" />
+    <Property Name="status" Type="int" />
+    <Property Name="idCategory" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCTRATE">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="idProduct" Type="int" />
+    <Property Name="rate" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCTTECHNICAL">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idProduct" Type="int" />
+    <Property Name="nameOfAttribute" Type="nvarchar" MaxLength="50" />
+    <Property Name="content" Type="text" />
+    <Property Name="uses" Type="nvarchar" MaxLength="100" />
+    <Property Name="material" Type="nvarchar" MaxLength="100" />
+    <Property Name="exps" Type="int" />
+  </EntityType>
+  <EntityType Name="RECEIPT">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCustomer" Type="int" />
+    <Property Name="paymentInfo" Type="int" />
+    <Property Name="receiverInfo" Type="int" />
+    <Property Name="typeOfDelivery" Type="int" />
+    <Property Name="totalCost" Type="bigint" />
+    <Property Name="date" Type="date" />
+    <Property Name="status" Type="int" />
+    <Property Name="idDiscount" Type="int" />
+    <Property Name="saleValue" Type="bigint" />
+  </EntityType>
+  <EntityType Name="RECEIVERINFORMATION">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="100" />
+    <Property Name="note" Type="text" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CART">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="CART" Type="Self.CART" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CART">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CB1">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="1" />
+    <End Role="CHATBOX" Type="Self.CHATBOX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CHATBOX">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CB2">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="1" />
+    <End Role="CHATBOX" Type="Self.CHATBOX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CHATBOX">
+        <PropertyRef Name="idAssistant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DISCOUNT">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="DISCOUNT" Type="Self.DISCOUNT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DISCOUNT">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMAGES">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="IMAGES" Type="Self.IMAGES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="IMAGES">
+        <PropertyRef Name="idSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LISTOFPRODUCTBUY">
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="0..1" />
+    <End Role="LISTOFPRODUCTBUY" Type="Self.LISTOFPRODUCTBUY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIPT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LISTOFPRODUCTBUY">
+        <PropertyRef Name="idReceipt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MDS">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="MANAGEPRODUCTSYSTEM" Type="Self.MANAGEPRODUCTSYSTEM" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MANAGEPRODUCTSYSTEM">
+        <PropertyRef Name="idSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTIFY">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="IDPEOPLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER1">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERS">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER2">
+    <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
+    <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CART">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERS">
+        <PropertyRef Name="idCart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERS_RECEIPT1">
+    <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="1" />
+    <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDERS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERSRECEIPT">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERS_RECEIPT2">
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
+    <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIPT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERSRECEIPT">
+        <PropertyRef Name="idReceipt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERSRECEIPT1">
+    <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="1" />
+    <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDERS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERSRECEIPT">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERSRECEIPT2">
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
+    <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIPT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ORDERSRECEIPT">
+        <PropertyRef Name="idReceipt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAYMENTINFORMATION">
+    <End Role="CREDITCARD" Type="Self.CREDITCARD" Multiplicity="0..1" />
+    <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CREDITCARD">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PAYMENTINFORMATION">
+        <PropertyRef Name="typeOfCard" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEOPLE">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PEOPLE">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEOPLEINFO1">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="1" />
+    <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PEOPLEINFO">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEOPLEINFO2">
+    <End Role="RECEIVERINFORMATION" Type="Self.RECEIVERINFORMATION" Multiplicity="0..1" />
+    <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIVERINFORMATION">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PEOPLEINFO">
+        <PropertyRef Name="idReceiverInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEOPLEINFO3">
+    <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="0..1" />
+    <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAYMENTINFORMATION">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PEOPLEINFO">
+        <PropertyRef Name="idPaymentOption" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCT">
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="idCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTRATE1">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="PRODUCTRATE" Type="Self.PRODUCTRATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PRODUCTRATE">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTRATE2">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <End Role="PRODUCTRATE" Type="Self.PRODUCTRATE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PRODUCTRATE">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PT">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <End Role="PRODUCTTECHNICAL" Type="Self.PRODUCTTECHNICAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PRODUCTTECHNICAL">
+        <PropertyRef Name="idProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT1">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT2">
+    <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="0..1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAYMENTINFORMATION">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="paymentInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT3">
+    <End Role="RECEIVERINFORMATION" Type="Self.RECEIVERINFORMATION" Multiplicity="0..1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RECEIVERINFORMATION">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="receiverInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECEIPT4">
+    <End Role="DELIVERY" Type="Self.DELIVERY" Multiplicity="0..1" />
+    <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DELIVERY">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RECEIPT">
+        <PropertyRef Name="typeOfDelivery" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="E_ShOPPING_NEWModelStoreContainer">
+    <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CHATBOX" EntityType="Self.CHATBOX" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CREDITCARD" EntityType="Self.CREDITCARD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DELIVERY" EntityType="Self.DELIVERY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DISCOUNT" EntityType="Self.DISCOUNT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IMAGES" EntityType="Self.IMAGES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LISTOFPRODUCTBUY" EntityType="Self.LISTOFPRODUCTBUY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MANAGEPRODUCTSYSTEM" EntityType="Self.MANAGEPRODUCTSYSTEM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDERSRECEIPT" EntityType="Self.ORDERSRECEIPT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAYMENTINFORMATION" EntityType="Self.PAYMENTINFORMATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PEOPLE" EntityType="Self.PEOPLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PEOPLEINFO" EntityType="Self.PEOPLEINFO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTRATE" EntityType="Self.PRODUCTRATE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTTECHNICAL" EntityType="Self.PRODUCTTECHNICAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RECEIVERINFORMATION" EntityType="Self.RECEIVERINFORMATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CART" Association="Self.FK_CART">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="CART" EntitySet="CART" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CB1" Association="Self.FK_CB1">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="CHATBOX" EntitySet="CHATBOX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CB2" Association="Self.FK_CB2">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="CHATBOX" EntitySet="CHATBOX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DISCOUNT" Association="Self.FK_DISCOUNT">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="DISCOUNT" EntitySet="DISCOUNT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMAGES" Association="Self.FK_IMAGES">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="IMAGES" EntitySet="IMAGES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LISTOFPRODUCTBUY" Association="Self.FK_LISTOFPRODUCTBUY">
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+      <End Role="LISTOFPRODUCTBUY" EntitySet="LISTOFPRODUCTBUY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MDS" Association="Self.FK_MDS">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="MANAGEPRODUCTSYSTEM" EntitySet="MANAGEPRODUCTSYSTEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTIFY" Association="Self.FK_NOTIFY">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="Notification" EntitySet="Notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER1" Association="Self.FK_ORDER1">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="ORDERS" EntitySet="ORDERS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER2" Association="Self.FK_ORDER2">
+      <End Role="CART" EntitySet="CART" />
+      <End Role="ORDERS" EntitySet="ORDERS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERS_RECEIPT1" Association="Self.FK_ORDERS_RECEIPT1">
+      <End Role="ORDERS" EntitySet="ORDERS" />
+      <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERS_RECEIPT2" Association="Self.FK_ORDERS_RECEIPT2">
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+      <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERSRECEIPT1" Association="Self.FK_ORDERSRECEIPT1">
+      <End Role="ORDERS" EntitySet="ORDERS" />
+      <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERSRECEIPT2" Association="Self.FK_ORDERSRECEIPT2">
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+      <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAYMENTINFORMATION" Association="Self.FK_PAYMENTINFORMATION">
+      <End Role="CREDITCARD" EntitySet="CREDITCARD" />
+      <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEOPLE" Association="Self.FK_PEOPLE">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEOPLEINFO1" Association="Self.FK_PEOPLEINFO1">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="PEOPLEINFO" EntitySet="PEOPLEINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEOPLEINFO2" Association="Self.FK_PEOPLEINFO2">
+      <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATION" />
+      <End Role="PEOPLEINFO" EntitySet="PEOPLEINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEOPLEINFO3" Association="Self.FK_PEOPLEINFO3">
+      <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATION" />
+      <End Role="PEOPLEINFO" EntitySet="PEOPLEINFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCT" Association="Self.FK_PRODUCT">
+      <End Role="CATEGORY" EntitySet="CATEGORY" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTRATE1" Association="Self.FK_PRODUCTRATE1">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="PRODUCTRATE" EntitySet="PRODUCTRATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTRATE2" Association="Self.FK_PRODUCTRATE2">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="PRODUCTRATE" EntitySet="PRODUCTRATE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PT" Association="Self.FK_PT">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="PRODUCTTECHNICAL" EntitySet="PRODUCTTECHNICAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT1" Association="Self.FK_RECEIPT1">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT2" Association="Self.FK_RECEIPT2">
+      <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATION" />
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT3" Association="Self.FK_RECEIPT3">
+      <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATION" />
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECEIPT4" Association="Self.FK_RECEIPT4">
+      <End Role="DELIVERY" EntitySet="DELIVERY" />
+      <End Role="RECEIPT" EntitySet="RECEIPT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

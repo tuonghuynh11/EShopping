@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.Screen.DeliveryOption"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar.Screen"
+             mc:Ignorable="d" 
+             x:Name="DeliveryOptionsUC"
+             xmlns:convert="clr-namespace:E_Shopping.Convert"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            Style="{StaticResource Page_Style}"
+             
+             d:DesignHeight="800" d:DesignWidth="650">
+    <UserControl.Resources>
+        <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="20 0 20 0 ">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="0 35 0 0" Foreground="#FF45AB20" Text="Shipping" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="-10 20 0 0">
+                <Image  Source="/Icon/lineselect.png" Width="30" Margin="0 0 5 0"></Image>
+                <Image  Source="/Icon/check.png" Width="30"></Image>
+                <Image  Source="/Icon/lineselect.png" Width="30" Margin="5 0 0 0"></Image>
+            </StackPanel>
+
+            <TextBlock Grid.Column="2" Margin="0 35 0 0" Foreground="#FF45AB20" Text="Delivery" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="-10 20 0 0">
+                <Image  Source="/Icon/line1.png" Width="30" Margin="0 0 5 0"></Image>
+                <Image  Source="/Icon/nocheck.png" Width="30"></Image>
+                <Image  Source="/Icon/line1.png" Width="30" Margin="5 0 0 0"></Image>
+            </StackPanel>
+            <TextBlock Grid.Column="4" Margin="0 35 0 0" Foreground="#585858" Text="Payment" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0 0 20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="310"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"  Background="White" CornerRadius="10">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Delivery Options" Margin="20 25 0 10" FontSize="30" FontWeight="Bold" FontFamily="Poppins"></TextBlock>
+                    <DockPanel Margin="20 10 0 20">
+                        <TextBlock Text="{Binding standardDeliveryPrice,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceKey=currencyconvert}}" Foreground="#FF3DCE3D" Margin="10 12 34 10" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                        <RadioButton x:Name="freeshiprdbtn" GroupName="delivery" IsChecked="{Binding standardDelivery,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" Checked="freeshiprdbtn_Checked" ></RadioButton>
+                        <TextBlock Text="Standard 5-7 Business Days" Margin="10 12 0 10" DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                    </DockPanel>
+                    <DockPanel Margin="20 0 0 20">
+                        <TextBlock Text="{Binding businessDeliveryPrice,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceKey=currencyconvert}}"  Margin="10 12 34 10" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                        <RadioButton x:Name="expressshiprdbtn" IsChecked="{Binding businessDelivery,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GroupName="delivery" DockPanel.Dock="Left" Checked="expressshiprdbtn_Checked" ></RadioButton>
+                        <TextBlock Text="2-4 Business Days" Margin="10 12 0 10" DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                    </DockPanel>
+                    <DockPanel Margin="20 0 0 0">
+                        <TextBlock Text="{Binding sameDayDeliveryPrice,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceKey=currencyconvert}}"  Margin="10 12 34 10" DockPanel.Dock="Right" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                        <RadioButton x:Name="SuperExpressShiprdbtn" IsChecked="{Binding sameDayDelivery,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GroupName="delivery" DockPanel.Dock="Left" Checked="SuperExpressShiprdbtn_Checked" ></RadioButton>
+                        <TextBlock Text="Same day delivery" Margin="10 12 0 10" DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Regular" FontFamily="Poppins"></TextBlock>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+            <DockPanel Grid.Row="1" Margin="0 0 0 0" >
+                <Border DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200"  Margin="0 10 0 0" CornerRadius="10" Background="Red" BorderThickness="2" >
+                    <Button x:Name="continuebtn" Height="30" Content="Continue" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Command="{Binding ContinueMakePaymentCommand}"  CommandParameter="{Binding ElementName=DeliveryOptionsUC}"></Button>
+                </Border>
+                <Border x:Name="borderbackbtn" Visibility="{Binding backButtonVisibility, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"  VerticalAlignment="Top" Width="200"  Margin="-230 10 0 0" CornerRadius="10" BorderBrush="#A2A6B0" Background="Transparent" BorderThickness="2" >
+                    <Button x:Name="backbtn" Height="30" Content="Back" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Foreground="#A2A6B0" Command="{Binding BackToShipingDetailCommand}"  CommandParameter="{Binding ElementName=DeliveryOptionsUC}"></Button>
+                </Border>
+            </DockPanel>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
