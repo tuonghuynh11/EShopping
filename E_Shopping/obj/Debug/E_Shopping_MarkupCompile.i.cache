@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Tuong_301\source\repos\E-Shopping\E_Shopping\obj\Debug\
+C:\Users\84944\source\repos\EShopping\E_Shopping\obj\Debug\
 E_Shopping
 none
 false
 DEBUG;TRACE
-C:\Users\Tuong_301\source\repos\E-Shopping\E_Shopping\App.xaml
-3-624667489
+C:\Users\84944\source\repos\EShopping\E_Shopping\App.xaml
+151985090337
+2739969757
+611576619651
+232069437675
+AccountInfo.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;
 
-10-1248515450
-18784569191
-MainWindow.xaml;ResourceXAML\MainResource.xaml;UserControlBar\ControlBarUC.xaml;
-
-True
+False
 

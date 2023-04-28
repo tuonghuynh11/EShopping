@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.UserInfoUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource UserInfoVM}"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Background="Transparent" Name="userInfoUC"
+             d:DesignHeight="800" d:DesignWidth="1300">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=userInfoUC}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border CornerRadius="10" Background="#f5f2f2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="450"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <materialDesign:Card Margin="30">
+                        <StackPanel>
+                            <Image Source="/Image/Avatar.jpeg" Height="220" Width="220" VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch" Stretch="Fill" Margin="0 30 0 0"/>
+                            <Button Height="50" HorizontalAlignment="Center" Foreground="#878787"
+                                Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding UploadCommand}"
+                                Width="200" FontSize="11" Margin="0 30 0 0" 
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                <StackPanel Orientation="Horizontal" Width="170">
+                                    <TextBlock Margin="49 2 22 0" HorizontalAlignment="Center" 
+                                           FontSize="22">Upload</TextBlock>
+                                    <materialDesign:PackIcon Kind="Camera" Foreground="#f89090"
+                                                        Width="30" Height="30"/>
+
+                                </StackPanel>
+
+
+                            </Button>
+                        </StackPanel>
+
+
+                    </materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <materialDesign:Card Margin="0 30 30 30">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Personal information:" 
+                                   VerticalContentAlignment="Center"
+                                   FontSize="20" Margin="20 0 0 0"
+                                   Foreground="#878787"></Label>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="1" x:Name="Nametb"
+                            materialDesign:HintAssist.Hint="Name" FontSize="20" Text="{Binding Name}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True">
+                                
+                                        
+                                    
+                            </TextBox>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="2" x:Name="dobtb" 
+                            materialDesign:HintAssist.Hint="Date Of Birth" FontSize="20" Text="{Binding DOB}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <DatePicker Grid.Row="2" x:Name="dpDob" Visibility="Hidden"
+                                  Margin="20 0 20 0" FontSize="20" Background="#eeeeee"
+                                  materialDesign:HintAssist.Hint="Date Of Birth" SelectedDate="{Binding SelectedDate}"
+                                  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="3" x:Name="addresstb"
+                            materialDesign:HintAssist.Hint="Address" FontSize="20" Text="{Binding Address}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="4" x:Name="genderTB"
+                            materialDesign:HintAssist.Hint="Gender" FontSize="20" Text="{Binding Gender}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <ComboBox FontSize="20"  Grid.Row="4" Visibility="Hidden"
+                                      materialDesign:HintAssist.Hint="Gender" 
+                                      MinWidth="72" Background="#eeeeee" x:Name="cbGender"
+                                      Margin="20 0 20 0" Foreground="Black"
+                                      ItemsSource="{Binding GenderList}" SelectedValue="{Binding SelectedGender, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <Label Grid.Row="5" Content="Contact information:" 
+                                   VerticalContentAlignment="Center"
+                                   FontSize="20" Margin="20 0 0 0"
+                                   Foreground="#878787"></Label>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="6" x:Name="Phonetb"
+                            materialDesign:HintAssist.Hint="Phone number" FontSize="20" Text="{Binding PhoneNumber}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="7" x:Name="Emailtb"
+                            materialDesign:HintAssist.Hint="Email" FontSize="20" Text="{Binding Email}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <Label Grid.Row="8" Content="Card:" 
+                                   VerticalContentAlignment="Center"
+                                   FontSize="20" Margin="20 0 0 0"
+                                   Foreground="#878787"></Label>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="9" x:Name="cardTypetb"
+                            materialDesign:HintAssist.Hint="Card type" FontSize="20" Text="{Binding CardType}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <ComboBox FontSize="20"  Grid.Row="9" Visibility="Hidden"
+                                      materialDesign:HintAssist.Hint="Card type"
+                                      MinWidth="72" Background="#eeeeee" x:Name="cbCardType"
+                                      Margin="20 0 20 0" Foreground="Black"
+                                      ItemsSource="{Binding CardList}" SelectedValue="{Binding SelectedCardType, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="10" x:Name="CardNumtb"
+                            materialDesign:HintAssist.Hint="Card number" FontSize="20" Text="{Binding CardNum}" Background="#eeeeee"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
+                            <Button Grid.Row="11" HorizontalAlignment="Right" x:Name="Editbtt"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="220" Margin="0 0 30 0" FontSize="20" 
+                            ToolTip="Edit" Background="#ffe599" Foreground="White" Click="Editbtt_Click">
+                                Edit
+                            </Button>
+                            <Button Grid.Row="11" HorizontalAlignment="Right" x:Name="Savebtt"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding SaveCommand}"
+                            Width="220" Margin="0 0 30 0" FontSize="20" Visibility="Hidden"
+                            ToolTip="Edit" Background="#b6d7a8" Foreground="White" Click="Savebtt_Click">
+                                Save
+                            </Button>
+                            <Button Grid.Row="11" HorizontalAlignment="Center" x:Name="Cancelbtt"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding CancelCommand}"
+                            Width="220" Margin="0 0 30 0" FontSize="20" Visibility="Hidden"
+                            ToolTip="Edit" Background="#eda4a4" Foreground="White" Click="Cancelbtt_Click">
+                                Cancel
+                            </Button>
+                        </Grid>
+
+                    </materialDesign:Card>
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

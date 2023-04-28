@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:E_Shopping"
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:E_Shopping.UserControlBar"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -14,25 +15,34 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         DataContext="{StaticResource MainVM}"
-         WindowStyle="None"
+        WindowStyle="None"
         ResizeMode="NoResize" 
-       
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Height="800" 
         Width="1300" 
         AllowsTransparency="True"
         Background="Transparent" 
+        Name="mainWindow"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <uc:ControlBarUC Grid.Row="0"></uc:ControlBarUC>
-        <Border Grid.Row="1" Background="Lavender" BorderBrush="Red" BorderThickness="2" CornerRadius="0 0 10 10">
-            <materialDesign:Card HorizontalAlignment="Center" Background="Green" VerticalAlignment="Center" Width="200" Height="200">
-                <TextBlock Text="E-Shopping" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            </materialDesign:Card>
+        <Border Grid.Row="1" Background="Lavender"  CornerRadius="0 0 10 10">
+            <!--<uc:UserInfoUC></uc:UserInfoUC>-->
+            <!--<uc:UserManageUC></uc:UserManageUC>-->
+            <!--<uc:ConfirmOrderUC></uc:ConfirmOrderUC>-->
+            <!--<uc:UploadProductUC></uc:UploadProductUC>-->
+            <!--<uc:EditProductUC></uc:EditProductUC>-->
+            <!--<uc:ManageProductForOwnerUC></uc:ManageProductForOwnerUC>-->
         </Border>
         
     </Grid>

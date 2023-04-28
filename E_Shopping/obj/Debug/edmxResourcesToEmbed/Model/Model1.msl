@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="E_ShOPPING_NEWModelStoreContainer" CdmEntityContainer="E_ShOPPING_NEWEntities">
+    <EntitySetMapping Name="CARTs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CART">
+        <MappingFragment StoreEntitySet="CART">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORies">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CATEGORY">
+        <MappingFragment StoreEntitySet="CATEGORY">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHATBOXes">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CHATBOX">
+        <MappingFragment StoreEntitySet="CHATBOX">
+          <ScalarProperty Name="isSend" ColumnName="isSend" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="idAssistant" ColumnName="idAssistant" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CREDITCARDs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CREDITCARD">
+        <MappingFragment StoreEntitySet="CREDITCARD">
+          <ScalarProperty Name="type_name" ColumnName="type_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DELIVERies">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.DELIVERY">
+        <MappingFragment StoreEntitySet="DELIVERY">
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DISCOUNTs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.DISCOUNT">
+        <MappingFragment StoreEntitySet="DISCOUNT">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="exp_time" ColumnName="exp_time" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMAGES">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.IMAGE">
+        <MappingFragment StoreEntitySet="IMAGES">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="imageLink" ColumnName="imageLink" />
+          <ScalarProperty Name="idSP" ColumnName="idSP" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LISTOFPRODUCTBUYs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY">
+        <MappingFragment StoreEntitySet="LISTOFPRODUCTBUY">
+          <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MANAGEPRODUCTSYSTEMs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM">
+        <MappingFragment StoreEntitySet="MANAGEPRODUCTSYSTEM">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="idSP" ColumnName="idSP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="CHECKED" ColumnName="CHECKED" />
+          <ScalarProperty Name="NOTIFY" ColumnName="NOTIFY" />
+          <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDERS">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.ORDER">
+        <MappingFragment StoreEntitySet="ORDERS">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idCart" ColumnName="idCart" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDERSRECEIPTs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.ORDERSRECEIPT">
+        <MappingFragment StoreEntitySet="ORDERSRECEIPT">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAYMENTINFORMATIONs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PAYMENTINFORMATION">
+        <MappingFragment StoreEntitySet="PAYMENTINFORMATION">
+          <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+          <ScalarProperty Name="csv" ColumnName="csv" />
+          <ScalarProperty Name="ownName" ColumnName="ownName" />
+          <ScalarProperty Name="expDate" ColumnName="expDate" />
+          <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+          <ScalarProperty Name="typeOfCard" ColumnName="typeOfCard" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEOPLE">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Person">
+        <MappingFragment StoreEntitySet="PEOPLE">
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="cmnd_passport" ColumnName="cmnd_passport" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEOPLEINFOes">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PEOPLEINFO">
+        <MappingFragment StoreEntitySet="PEOPLEINFO">
+          <ScalarProperty Name="idPaymentOption" ColumnName="idPaymentOption" />
+          <ScalarProperty Name="idReceiverInfo" ColumnName="idReceiverInfo" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCT">
+        <MappingFragment StoreEntitySet="PRODUCT">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="technicalInformation" ColumnName="technicalInformation" />
+          <ScalarProperty Name="descriptionInformation" ColumnName="descriptionInformation" />
+          <ScalarProperty Name="nameOfManufacturer" ColumnName="nameOfManufacturer" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTRATEs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCTRATE">
+        <MappingFragment StoreEntitySet="PRODUCTRATE">
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTTECHNICALs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCTTECHNICAL">
+        <MappingFragment StoreEntitySet="PRODUCTTECHNICAL">
+          <ScalarProperty Name="exps" ColumnName="exps" />
+          <ScalarProperty Name="material" ColumnName="material" />
+          <ScalarProperty Name="uses" ColumnName="uses" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="nameOfAttribute" ColumnName="nameOfAttribute" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECEIPTs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.RECEIPT">
+        <MappingFragment StoreEntitySet="RECEIPT">
+          <ScalarProperty Name="idDiscount" ColumnName="idDiscount" />
+          <ScalarProperty Name="saleValue" ColumnName="saleValue" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+          <ScalarProperty Name="typeOfDelivery" ColumnName="typeOfDelivery" />
+          <ScalarProperty Name="receiverInfo" ColumnName="receiverInfo" />
+          <ScalarProperty Name="paymentInfo" ColumnName="paymentInfo" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECEIVERINFORMATIONs">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.RECEIVERINFORMATION">
+        <MappingFragment StoreEntitySet="RECEIVERINFORMATION">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

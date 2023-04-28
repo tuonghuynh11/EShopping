@@ -1,0 +1,177 @@
+﻿<Window x:Class="E_Shopping.SignupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:E_Shopping"
+        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        Title="SignupWindow" Height="450" Width="800"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize" 
+        Name="signUp"
+        DataContext="{StaticResource SignupVM}"
+        Background="Transparent" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=signUp}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF4B1314" Offset="1"/>
+                <GradientStop Color="#FF7F0305" Offset="0.548"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <!--<Image Source="/Image/Merry-Christmas.jpg" />-->
+                <Rectangle RadiusX="10" RadiusY="10"
+                        Width="430"
+                        Height="450">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="myImage" ImageSource="/Image/Merry-Christmas.jpg"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+            <Grid Grid.Column="0">
+                <materialDesign:Card Margin="30" UniformCornerRadius="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Content="REGISTER" FontSize="27" FontWeight="Bold" VerticalAlignment="Center"
+                               HorizontalAlignment="Center"></Label>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Margin="5"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <TextBox Margin="8 0 8 0" VerticalAlignment="Center" Text="{Binding UserName}"
+                            materialDesign:HintAssist.Hint="Enter Email or Phone number"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                </Grid>
+
+                            </Grid>
+
+
+
+
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Margin="5"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <PasswordBox Margin="8 0 8 0"
+                            x:Name="FloatingPasswordBox"
+                            materialDesign:HintAssist.Hint="Enter Password" VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PasswordChanged">
+                                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </PasswordBox>
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="KeyChange" VerticalAlignment="Center" Margin="5"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <PasswordBox Margin="8 0 8 0"
+                            x:Name="FloatingPasswordBox2"
+                            materialDesign:HintAssist.Hint="Re-enter password" VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PasswordChanged">
+                                                <i:InvokeCommandAction Command="{Binding rePasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox2}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </PasswordBox>
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Margin="34 0 8 0" VerticalAlignment="Center"
+                            materialDesign:HintAssist.Hint="Enter OTP" Width="160" Text="{Binding OTP}"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                <Button Margin="0 5 0 0" Command="{Binding OTPSendCommand}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                ToolTip="Send OTP">
+                                    _Send OTP
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Button Command="{Binding RegisterCommand}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="220"
+                            ToolTip="Register" Background="#eda4a4" Foreground="White">
+                                Register
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="6">
+                            <Button Background="Transparent" Content="Go back to login"  
+                                    Command="{Binding BackToLoginCommand}" CommandParameter="{Binding ElementName=signUp}"
+                                        Foreground="Red" FontSize="12" BorderBrush="{x:Null}"></Button>
+                        </Grid>
+
+                    </Grid>
+
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
