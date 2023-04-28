@@ -48,7 +48,15 @@ namespace E_Shopping {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 91 "..\..\MainWindow.xaml"
+        #line 25 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal E_Shopping.MainWindow mainWindow;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 92 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListView MessageList;
         
@@ -56,7 +64,7 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 113 "..\..\MainWindow.xaml"
+        #line 114 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox messageTb;
         
@@ -64,7 +72,7 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 115 "..\..\MainWindow.xaml"
+        #line 116 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button sendBtn;
         #line 25 "..\..\MainWindow.xaml"
@@ -115,23 +123,26 @@ namespace E_Shopping {
             switch (connectionId)
             {
             case 1:
+            this.mainWindow = ((E_Shopping.MainWindow)(target));
+            return;
+            case 2:
             
-            #line 45 "..\..\MainWindow.xaml"
+            #line 46 "..\..\MainWindow.xaml"
             ((MaterialDesignThemes.Wpf.Flipper)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Flipper_Loaded);
             
             #line default
             #line hidden
             return;
-            case 2:
+            case 3:
             this.MessageList = ((System.Windows.Controls.ListView)(target));
             return;
-            case 3:
+            case 4:
             this.messageTb = ((System.Windows.Controls.TextBox)(target));
             return;
-            case 4:
+            case 5:
             this.sendBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 115 "..\..\MainWindow.xaml"
+            #line 116 "..\..\MainWindow.xaml"
             this.sendBtn.Click += new System.Windows.RoutedEventHandler(this.sendBtn_Click);
             
             #line default

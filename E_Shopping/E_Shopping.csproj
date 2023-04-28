@@ -238,6 +238,7 @@
     <Compile Include="Untils\VnPhoneNumberValidator.cs" />
     <Compile Include="UserControlBar\Screen\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
+      </Compile>
     <Compile Include="Model\UserAccess.cs" />
     <Compile Include="PasswordEncode\EncodeString.cs" />
     <Compile Include="SignupWindow.xaml.cs">
@@ -369,6 +370,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\Cart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+       </Page>
     <Page Include="SignupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -406,6 +410,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\ShippingDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlBar\EditProductUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

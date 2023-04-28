@@ -52,7 +52,7 @@ namespace E_Shopping
 
         private void Flipper_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
+            //MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
 
         }
 
