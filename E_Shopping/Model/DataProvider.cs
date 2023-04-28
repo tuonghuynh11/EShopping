@@ -25,13 +25,28 @@ namespace E_Shopping.Model
        
         public E_ShOPPING_NEWEntities DB { get; set; }
         public E_ShOPPING_NEWEntities db { get; set; }
+  
+        private static DataProvider _Instance;
+        public static DataProvider Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new DataProvider();
+                }
+                return _Instance;
 
+            }
+            set { _Instance = value; }
+        }
         private DataProvider()
         {
             DB = new E_ShOPPING_NEWEntities();
             db = new E_ShOPPING_NEWEntities();
         }
 
-       
+     
+        
     }
 }

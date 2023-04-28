@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:viewmodel="clr-namespace:E_Shopping.ViewModel"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:uc="clr-namespace:E_Shopping.UserControlBar">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
     <viewmodel:CartViewModel x:Key="CartVM"></viewmodel:CartViewModel>
@@ -19,5 +20,10 @@
     <viewmodel:ConfirmOrderViewModel x:Key="ConfirmOrderVM"></viewmodel:ConfirmOrderViewModel>
     <viewmodel:UploadProductViewModel x:Key="UploadProductVM"></viewmodel:UploadProductViewModel>
     <viewmodel:ManageProductForOwnerViewModel x:Key="ManageProductForOwnerVM"></viewmodel:ManageProductForOwnerViewModel>
-    
+    <viewmodel:CategoryViewModel x:Key="CategoryVM">
+        
+    </viewmodel:CategoryViewModel>
+    <DataTemplate DataType="{x:Type viewmodel:CategoryViewModel}">
+        <uc:DashboardUC></uc:DashboardUC>
+    </DataTemplate>
 </ResourceDictionary>

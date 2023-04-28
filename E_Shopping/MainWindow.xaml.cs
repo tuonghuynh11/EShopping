@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using E_Shopping.ViewModel;
 
 namespace E_Shopping
 {
@@ -25,6 +26,10 @@ namespace E_Shopping
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
+
+            Dashboard ds = new Dashboard();
+            ds.Show();
         }
 
         private void sendBtn_Click(object sender, RoutedEventArgs e)

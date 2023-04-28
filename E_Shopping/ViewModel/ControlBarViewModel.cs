@@ -18,6 +18,9 @@ namespace E_Shopping.ViewModel
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
         public ICommand MouseMoveWindowCommand { get; set; }
+        public ICommand PartyInTheUSA { get; set; }
+        public ICommand FeedBackClick { get; set; }
+        public ICommand CartClick { get; set; }
 
 
         #endregion
@@ -54,6 +57,22 @@ namespace E_Shopping.ViewModel
                     {
                         w.DragMove();
                     }
+
+                });
+            PartyInTheUSA = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
+                (p) =>
+                {
+                    System.Diagnostics.Process.Start("http://www.wwe.com");
+
+                });
+            FeedBackClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
+                (p) =>
+                {
+
+                });
+            CartClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
+                (p) =>
+                {
 
                 });
         }
