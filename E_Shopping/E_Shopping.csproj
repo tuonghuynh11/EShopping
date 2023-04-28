@@ -220,6 +220,7 @@
     <Compile Include="Untils\VnPhoneNumberValidator.cs" />
     <Compile Include="UserControlBar\Screen\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
+      </Compile>
     <Compile Include="Model\UserAccess.cs" />
     <Compile Include="PasswordEncode\EncodeString.cs" />
     <Compile Include="SignupWindow.xaml.cs">
