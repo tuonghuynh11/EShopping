@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Nhập môn CNPM\Đồ án E_Shopping\EShop\E_Shopping\obj\Debug\
+C:\Users\Tuong_301\source\repos\EShopping\E_Shopping\obj\Debug\
 E_Shopping
 none
 false
 DEBUG;TRACE
-D:\Nhập môn CNPM\Đồ án E_Shopping\EShop\E_Shopping\App.xaml
-3-624667489
+C:\Users\Tuong_301\source\repos\EShopping\E_Shopping\App.xaml
+15826880052
+2739969757
+57-1678427046
+1341499903570
+MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\Screen\Cart.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;
 
-10-1248515450
-18-621769277
-MainWindow.xaml;ResourceXAML\MainResource.xaml;UserControlBar\ControlBarUC.xaml;
-
-True
+False
 

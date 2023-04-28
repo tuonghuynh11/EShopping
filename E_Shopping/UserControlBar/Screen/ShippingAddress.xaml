@@ -1,0 +1,256 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.Screen.ShippingAddress"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar.Screen"
+             mc:Ignorable="d" 
+             xmlns:ucscreen="clr-namespace:E_Shopping.UserControlBar.Screen"
+               xmlns:convert="clr-namespace:E_Shopping.Convert"
+             x:Name="ShippingAddressUC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            Style="{StaticResource Page_Style}"
+             d:DesignHeight="800" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
+    </UserControl.Resources>
+    <Border Background="#F1F1F1" CornerRadius="0 0 10 10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Margin="15 30 0 10" VerticalAlignment="Top" Command="{Binding BackToCartCommand}">
+                    <materialDesign:PackIcon
+                            Kind="ArrowLeft"
+                            Height="30"
+                            Width="30" />
+                </Button>
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20 20 20 20">
+                    <!--<StackPanel Orientation="Horizontal">
+                        <Image Source="https://logos-world.net/wp-content/uploads/2021/02/App-Store-Logo-700x394.png" Width="60" Height="60" Margin="-10 0 0 0"></Image>
+                        <TextBlock Text="EShop" Margin="0 14 0 10" FontSize="30" FontWeight="Regular" FontFamily="Lato"></TextBlock>
+                    </StackPanel>-->
+                    <TextBlock Text="Order Summary" Margin="0 15 0 10" FontSize="30" FontWeight="Bold" FontFamily="Poppins"></TextBlock>
+                    <Border BorderBrush="White" BorderThickness="1" Background="White" Height="570" Width="510"  CornerRadius="10" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Vertical">
+                            <DataGrid IsEnabled="True" Name="ShoppingCartdtg" ItemsSource="{Binding listItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" Width="500" Height="200" Margin="4 4 0 0"  VerticalAlignment="Top" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn  Header="Item" Width="175"  IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate >
+                                                <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                                                    <Image Source="{Binding productImage}" DockPanel.Dock="Left" Width="30" Height="30"></Image>
+                                                    <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+                                                    <TextBlock  Text="{Binding prodductName}" VerticalAlignment="Center"></TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn  Header="Price" Width="175"  IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate >
+                                                <TextBlock  Text="{Binding productPrice, Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Quantity" Width="150"  IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate >
+                                                <Border Background="#F5F7FF" HorizontalAlignment="Left" Width="70" Height="50" CornerRadius="10">
+                                                    <DockPanel Width="70"  VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                        <TextBlock Text="{Binding quantity}" Margin="15 0 0 0" Width="15" FontSize="14" FontFamily="Poppins" FontWeight="SemiBold" VerticalAlignment="Center" DockPanel.Dock="Left" ></TextBlock>
+                                                        <StackPanel Width="60" Height="50" Margin="-10 3 5 -5" Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center" >
+                                                            <Button IsEnabled="False" Width="16" Height="16" Name="increase" Margin="0 2 0 5" 
+                                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                                <materialDesign:PackIcon 
+                                                            Foreground="Black"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Kind="ChevronUp"
+                                                            Height="16"
+                                                            Width="16" />
+                                                            </Button>
+                                                            <Button IsEnabled="False" Width="16" Height="16" Name="decrease"  
+                                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                                <materialDesign:PackIcon 
+                                                            Foreground="Black"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Kind="ChevronDown"
+                                                            Height="16"
+                                                            Width="16" />
+                                                            </Button>
+                                                        </StackPanel>
+
+                                                    </DockPanel>
+                                                </Border>
+
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+                            <Separator BorderBrush="Black" BorderThickness="1"></Separator>
+                            <StackPanel Orientation="Vertical" Margin="20">
+                                <TextBlock Text="Gift Card / Discount Code" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                <DockPanel  Height="50">
+                                    <Border Background="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="1" CornerRadius="5">
+                                        <TextBox materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Gift code" Text="{Binding giftcode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0" Width="270" BorderBrush="Transparent"  ></TextBox>
+                                    </Border>
+                                    <Border BorderBrush="#6B72D6" BorderThickness="1" Width="130" Height="50" DockPanel.Dock="Right" CornerRadius="5">
+                                        <Button Width="130" Height="50"  Foreground="#6B72D6" Command="{Binding ApplyGiftCodeCommand}"  Style="{StaticResource MaterialDesignFlatButton}" >
+                                            Apply
+                                        </Button>
+                                    </Border>
+                                </DockPanel>
+                                <DockPanel Margin="10 20 28 0" >
+                                    <TextBlock x:Name="subtotaltb" Text="{Binding Instance.subTotal, Converter={StaticResource ResourceKey=currencyconvert},UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Right"></TextBlock>
+                                    <TextBlock Text="Subtotal" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Left"></TextBlock>
+                                </DockPanel>
+                                <Separator BorderBrush="#3C4257" Margin="10 20 40 20"></Separator>
+                                <DockPanel Margin="10 0 28 0" >
+                                    <TextBlock x:Name="SaleTaxtb" Text="{Binding Instance.saleTax, Converter={StaticResource ResourceKey=currencyconvert}}" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Right"></TextBlock>
+                                    <TextBlock Text="Sales tax" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Left"></TextBlock>
+                                </DockPanel>
+                                <Separator BorderBrush="#3C4257" Margin="10 20 40 20"></Separator>
+                                <DockPanel Margin="10 0 28 0" >
+                                    <TextBlock x:Name="ShippingFeetb" Text="{Binding Instance.shippingFee, Converter={StaticResource ResourceKey=currencyconvert},UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Right"></TextBlock>
+                                    <TextBlock Text="Shipping Fee" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Left"></TextBlock>
+                                </DockPanel>
+                                <Separator BorderBrush="#3C4257" Margin="10 20 40 20"></Separator>
+                                <DockPanel Margin="10 0 28 0" >
+                                    <TextBlock x:Name="TotalDuetb" Text="{Binding Instance.totalDue, Converter={StaticResource ResourceKey=currencyconvert},UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Right"></TextBlock>
+                                    <TextBlock Text="Total Due" FontSize="15" FontWeight="Medium" FontFamily="Roboto" DockPanel.Dock="Left"></TextBlock>
+                                </DockPanel>
+                                
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </StackPanel>
+
+            </Grid>
+            <!--<Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="20 0 20 0 ">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="0 35 0 0" Foreground="#FF45AB20" Text="Shipping" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="-10 20 0 0">
+                        <Image  Source="/Icon/line1.png" Width="30" Margin="0 0 5 0"></Image>
+                        <Image  Source="/Icon/nocheck.png" Width="30"></Image>
+                        <Image  Source="/Icon/line1.png" Width="30" Margin="5 0 0 0"></Image>
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="2" Margin="0 35 0 0" Foreground="#585858" Text="Delivery" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="-10 20 0 0">
+                        <Image  Source="/Icon/line1.png" Width="30" Margin="0 0 5 0"></Image>
+                        <Image  Source="/Icon/nocheck.png" Width="30"></Image>
+                        <Image  Source="/Icon/line1.png" Width="30" Margin="5 0 0 0"></Image>
+                    </StackPanel>
+                    <TextBlock Grid.Column="4" Margin="0 35 0 0" Foreground="#585858" Text="Payment" FontSize="22" FontWeight="Medium" FontFamily="Roboto"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0 0 20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="310"></RowDefinition>
+                        <RowDefinition Height="260"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0"  Background="White" CornerRadius="10">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Contact Details" Margin="20 5 0 10" FontSize="30" FontWeight="Bold" FontFamily="Poppins"></TextBlock>
+                            <DockPanel Margin="20 0 0 0" >
+                                <StackPanel Orientation="Vertical" DockPanel.Dock="Left"  >
+                                    <TextBlock Text="First Name" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                    <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5" Width="286">
+                                        <TextBox x:Name="contactfirstNametb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Your first name" Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0" Width="270" BorderBrush="Transparent"  ></TextBox>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="10 0 20 0">
+                                    <TextBlock Text="Last Name" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                    <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5">
+                                        <TextBox x:Name="contactlastNametb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Your last name" Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0" Width="270" BorderBrush="Transparent"  ></TextBox>
+                                    </Border>
+                                </StackPanel>
+                            </DockPanel>
+                            <StackPanel Orientation="Vertical" Margin="20 10 20 0">
+                                <TextBlock Text="Email" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5">
+                                    <TextBox x:Name="contactEmailtb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Your email"  Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0"  BorderBrush="Transparent"  ></TextBox>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="20 10 20 0">
+                                <TextBlock Text="Phone" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5">
+                                    <TextBox x:Name="contactphonetb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Your phone number"  Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0"  BorderBrush="Transparent"  ></TextBox>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1"  Margin="0 20 0 0" Background="White" CornerRadius="10">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Shipping Details" Margin="20 5 0 10" FontSize="30" FontWeight="Bold" FontFamily="Poppins"></TextBlock>
+                            <StackPanel Orientation="Vertical" Margin="20 0 20 0">
+                                <TextBlock Text="Address" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5">
+                                    <TextBox x:Name="shippingAddresstb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Your address"  Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0"  BorderBrush="Transparent"  ></TextBox>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="20 10 20 0">
+                                <TextBlock Text="Note" Margin="0 0 0 10" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" FontFamily="Poppins"></TextBlock>
+                                <Border Background="White" BorderBrush="#FFE8DDDD" DockPanel.Dock="Left" BorderThickness="2" CornerRadius="5">
+                                    <TextBox x:Name="shippingnotetb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Note for shop"  Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0"  BorderBrush="Transparent"  ></TextBox>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Border>
+                    <Border HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" Grid.Row="2" Margin="0 10 0 0" CornerRadius="10" Background="Red" BorderThickness="2" >
+                        <Button x:Name="continuebtn" Height="30" Content="Continue" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold"></Button>
+                    </Border>
+                </Grid>
+                
+            </Grid>-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ContentControl x:Name="paymentprocess" Grid.Row="0" Content="{Binding Instance.CurrentView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+                <!--<DockPanel Grid.Row="1" Margin="0 0 20 0" >
+                    <Border DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200"  Margin="0 10 0 0" CornerRadius="10" Background="Red" BorderThickness="2" >
+                        <Button x:Name="continuebtn" Height="30" Content="Continue" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Command="{Binding ContinueMakePayment}"  CommandParameter="{Binding ElementName=ShippingAddressUC}"></Button>
+                    </Border>
+                    <Border x:Name="borderbackbtn" Visibility="{Binding backButtonVisibility, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left"  VerticalAlignment="Top" Width="200"  Margin="-230 10 0 0" CornerRadius="10" BorderBrush="#A2A6B0" Background="Transparent" BorderThickness="2" >
+                        <Button x:Name="backbtn" Height="30" Content="Back" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Foreground="#A2A6B0" Command="{Binding BackToShipingDetail}"  CommandParameter="{Binding ElementName=ShippingAddressUC}"></Button>
+                    </Border>
+                </DockPanel>-->
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

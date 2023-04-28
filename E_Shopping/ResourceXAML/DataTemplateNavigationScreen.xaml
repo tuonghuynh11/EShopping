@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:E_Shopping.ViewModel"
+                    xmlns:view="clr-namespace:E_Shopping.UserControlBar.Screen"
+                    xmlns:view1="clr-namespace:E_Shopping.UserControlBar"
+                    >
+    <DataTemplate DataType="{x:Type vm:ShippingDetailsViewModel}">
+        <view:ShippingDetails />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CartViewModel}">
+        <view1:Cart x:Name="CartViewxaml" />
+    </DataTemplate>
+    <DataTemplate  DataType="{x:Type vm:ShippingAddressViewModel}">
+        <view:ShippingAddress />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DeliveryOptionViewModel}">
+        <view:DeliveryOption />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PaymentOptionsViewModel}">
+        <view:PaymentOptions />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:OrderedHistoryViewModel}">
+        <view:OrderedHistory />
+    </DataTemplate>
+</ResourceDictionary>

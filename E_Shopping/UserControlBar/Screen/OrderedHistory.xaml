@@ -1,0 +1,387 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.Screen.OrderedHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar.Screen"
+             mc:Ignorable="d" 
+               xmlns:convert="clr-namespace:E_Shopping.Convert"
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            Style="{StaticResource Page_Style}"
+             DataContext="{StaticResource OrderedHistoryVM}"
+             d:DesignHeight="800" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
+    </UserControl.Resources>
+    <Border Background="#F1F1F1" CornerRadius="0 0 10 10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Ordered History" Margin="20 20 20 0" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" FontFamily="Poppins"></TextBlock>
+            <Grid Grid.Row="1" Margin="0 -50 0 0" >
+                <TabControl Padding="0 0 0 0" Margin="0 0 0 0"  >
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Border
+                                    Name="Border"
+                                    Margin="2,0"
+                                    BorderBrush="Gainsboro"
+                                    BorderThickness="1,1,1,0"
+                                    CornerRadius="0,0,4,4">
+                                            <ContentPresenter
+                                        x:Name="ContentSite"
+                                        Margin="10,2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        ContentSource="Header" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#FF61C0FA" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                    <TabItem Header="Buying" FontSize="16" Height="25" Margin="5 0 0 0" HorizontalAlignment="Left">
+                        <Grid Margin="0 15 0 0">
+                            <Border BorderBrush="Black" Opacity="1" Margin="10 10 10 10" BorderThickness="1"  CornerRadius="10">
+                                <Border.Background>
+                                    <ImageBrush  ImageSource="/image/order_history_backround.jpg"></ImageBrush>
+                                </Border.Background>
+                                <!--<DataGrid Name="itemBuyingDataGrid" Opacity="0.85" HorizontalAlignment="Center" ItemsSource="{Binding buyingList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True"  CanUserResizeColumns="False" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  CanUserAddRows="False"  Margin="0 0 0 0"  VerticalAlignment="Top" Width="950" Height="645" AutoGenerateColumns="False" SelectionMode="Single">
+                                        <DataGrid.Resources>
+                                            --><!--Chỉnh backgroud row selected--><!--
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <Setter Property="BorderThickness" Value="1" ></Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="DataGridRow.IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="#FF76C4DD" />
+                                                    </Trigger>
+                                                    <Trigger Property="DataGridRow.IsMouseOver" Value="True" >
+                                                        <Setter Property="BorderBrush"  Value="Orange" />
+                                                        <Setter Property="BorderThickness" Value="1"></Setter>
+                                                    </Trigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                            <Style TargetType="{x:Type DataGridCell}" >
+                                                <Setter Property="BorderThickness" Value="0"></Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="#FF76C4DD" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.Resources>
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn  Header="Item" Width="245"  IsReadOnly="True" CanUserSort="True">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate >
+                                                        <StackPanel Orientation="Horizontal" Margin="15 20 0 20">
+                                                            <Image Source="{Binding productImage}" DockPanel.Dock="Left" Width="70" Height="50"></Image>
+                                                            <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+                                                            <TextBlock FontSize="20"  Text="{Binding prodductName}" VerticalAlignment="Center"></TextBlock>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn  Header="Price" Width="175" CanUserSort="True" IsReadOnly="True">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate >
+                                                    <TextBlock FontSize="20" Text="{Binding productPrice, Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center"></TextBlock>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <DataGridTemplateColumn Header="Quantity" Width="150"  IsReadOnly="True">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate >
+                                                        <Border Background="#F5F7FF" HorizontalAlignment="Left" Width="70" Height="50" CornerRadius="10">
+                                                            <Label HorizontalContentAlignment="Center" Content="{Binding quantity}" Margin="0 0 0 0" Width="auto" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" VerticalAlignment="Center"  ></Label>
+                                                        </Border>
+
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <DataGridTemplateColumn  Header="Subotal" Width="200"  IsReadOnly="True">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate >
+                                                    <TextBlock  Text="{Binding total , Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center" FontSize="20"></TextBlock>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn  Header="Status" Width="200" CanUserSort="True"  IsReadOnly="True">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate >
+                                                    <TextBlock  Text="{Binding statusAppear}" Foreground="Red" VerticalAlignment="Center" FontSize="20"></TextBlock>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                        
+
+                                    </DataGrid>-->
+
+
+                                <Border Background="White" Opacity="0.85" Height="645" Width="1100" CornerRadius="10">
+                                    <ListView Name="lvBuying"   Height="645" Width="1100" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  HorizontalAlignment="Center" ItemsSource="{Binding buyingList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <ListView.View>
+                                            <GridView >
+                                                <GridViewColumn  Header="Item" Width="300" >
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate >
+                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15 20 0 20">
+                                                                <Image Source="{Binding productImage}" DockPanel.Dock="Left" Width="70" Height="50"></Image>
+                                                                <Separator Background="Transparent" Width="20" Foreground="Transparent" BorderBrush="Transparent" BorderThickness="0"></Separator>
+                                                                <TextBlock FontSize="20"  Text="{Binding prodductName}" VerticalAlignment="Center"></TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn  Header="Price" Width="175"  >
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate >
+                                                            <TextBlock FontSize="20" Margin="15 30 0 20" Text="{Binding productPrice, Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Header="Quantity" Width="150"  >
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate >
+                                                            <Border Background="#F5F7FF" Margin="15 20 0 20" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="50" CornerRadius="10">
+                                                                <Label  HorizontalContentAlignment="Center" Content="{Binding quantity}"  Width="auto" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" VerticalAlignment="Center"  ></Label>
+                                                            </Border>
+
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn  Header="Subotal" Width="200"  >
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate >
+                                                            <TextBlock Margin="15 30 0 20" Text="{Binding total , Converter={StaticResource ResourceKey=currencyconvert}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></TextBlock>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn  Header="Status" Width="200" >
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate >
+                                                            <TextBlock Margin="15 30 0 20"  Text="{Binding statusAppear}" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                        <ListView.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.ContainerStyle>
+                                                    <Style TargetType="{x:Type GroupItem}">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate>
+                                                                    <Expander IsExpanded="true" BorderBrush="Black" BorderThickness="0 0 0 1">
+                                                                        <Expander.Header>
+                                                                                <StackPanel Orientation="Horizontal">
+                                                                                    <TextBlock Text="Receipt " FontWeight="Bold" Foreground="Red" FontSize="18" VerticalAlignment="Bottom" />
+                                                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Red" FontSize="18" VerticalAlignment="Bottom" />
+                                                                                    <TextBlock Text=" (" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                                                    <TextBlock Text= "{Binding ItemCount}" FontSize="20" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="0,0,0,0" VerticalAlignment="Bottom" />
+                                                                                    <TextBlock Text=")" FontSize="18" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+                                                                                </StackPanel>
+                                                                             </Expander.Header>
+                                                                        <ItemsPresenter />
+                                                                    </Expander>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </GroupStyle.ContainerStyle>
+                                            </GroupStyle>
+                                        </ListView.GroupStyle>
+                                    </ListView>
+
+                                </Border>
+
+
+
+                            </Border>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Deliveried" VerticalAlignment="Center"  FontSize="16" Height="25" Margin="0 0 5 0" HorizontalAlignment="Right">
+                        <Grid Margin="0 15 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition ></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,10,10,10">
+                                <TextBlock Text="Search" HorizontalAlignment="Center" Margin="10 10 10 5"  FontFamily="Poppins" FontSize="20"/>
+                                <Border Background="#FF6DCC73" DockPanel.Dock="Left" BorderThickness="1" CornerRadius="5">
+                                    <TextBox x:Name="searchtb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Enter the item name" Margin="10 10 10 10" FontSize="14" BorderThickness="0 0 0 0" Width="270" BorderBrush="Transparent" TextChanged="searchtb_TextChanged"  ></TextBox>
+                                </Border>
+                                <Separator Margin="10" BorderBrush="Black" BorderThickness="2"></Separator>
+                                <TextBlock Text="Category" HorizontalAlignment="Left" Margin="10 10 10 5"  FontFamily="Poppins" FontSize="20"/>
+                                <DataGrid Name="categoryDataGrid" HeadersVisibility="None" Background="Transparent" ItemsSource="{Binding productCategory, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled"   CanUserAddRows="False" Height="400" Margin="10 0 10 10" VerticalAlignment="Top" AutoGenerateColumns="False" SelectionMode="Single">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn  Width="70" >
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <RadioButton x:Name="isSelectCategory" GroupName="categoryradiobtn"  Width="20" Height="20" Margin="0 2 0 2"   />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                        <DataGridTemplateColumn  Width="200"  IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <TextBlock  FontSize="15" Text="{Binding type, Mode=TwoWay}" VerticalAlignment="Center"></TextBlock>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                                <Border Width="auto" CornerRadius="10" Height="46" Background="#FFFD2121" BorderThickness="2" Margin="20 0 20 20">
+                                    <Button x:Name="applySearchbtn" Height="42" Content="APPLY" Background="Transparent" BorderThickness="0" FontSize="14" FontFamily="Poppins" FontWeight="SemiBold" Click="applySearchbtn_Click" ></Button>
+                                </Border>
+                            </StackPanel>
+                            <Grid Margin="10 10 0 0" Grid.Column="1">
+                                <ListView x:Name="itemboughtlist"  SelectionMode="Single" ItemsSource="{Binding boughtList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                    <!--<ListView.Resources>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="DarkCyan" />
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Background" Value="Red">
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>-->
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <!--<Setter Property="Focusable" Value="True"/>-->
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Red" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        <!--<Style TargetType="ListBoxItem"> 
+                                <Style.Triggers> 
+                                    <Trigger Property="IsSelected" Value="True" > 
+                                        <Setter Property="FontWeight" Value="Bold" /> 
+                                        <Setter Property="Foreground" Value="Black" /> 
+                                    </Trigger> 
+ 
+                                    <Trigger Property="IsSelected" Value="False" > 
+                                        <Setter Property="FontWeight" Value="Normal" /> 
+                                        <Setter Property="Foreground" Value="White" /> 
+                                    </Trigger> 
+                                </Style.Triggers> 
+                                 
+                            </Style>-->
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border VerticalAlignment="Center" Background="White" CornerRadius="10" Margin="0 10 0 10">
+                                                <Border Background="White" CornerRadius="10" Height="270">
+                                                    <Grid >
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition></RowDefinition>
+                                                            <RowDefinition></RowDefinition>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                                                <ColumnDefinition Width="600"></ColumnDefinition>
+                                                                <ColumnDefinition Width="180"></ColumnDefinition>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Image Margin="10" Grid.Column="0" Source="https://vinmec-prod.s3.amazonaws.com/images/20210419_031329_240031_qua-thanh-long.max-1800x1800.jpg"></Image>
+                                                            <StackPanel Grid.Column="1">
+                                                                <TextBlock Text="{Binding prodductName}" HorizontalAlignment="Left" Margin="10 15 10 5"  FontFamily="Poppins" FontSize="25" FontWeight="DemiBold"/>
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 5 10 5" >
+                                                                    <TextBlock Text="x" HorizontalAlignment="Left" Margin="0 0 0 0"  FontFamily="Poppins" FontSize="18"/>
+                                                                    <TextBlock Text="{Binding quantity}" HorizontalAlignment="Left" Margin="0 0 0 0"  FontFamily="Poppins" FontSize="18"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 5 10 5">
+                                                                    <TextBlock Text="Type: " HorizontalAlignment="Left" Margin="0 0 0 0"  FontFamily="Poppins" FontSize="18"/>
+                                                                    <TextBlock Text="{Binding productType}" HorizontalAlignment="Left" Margin="0 0 0 0"  FontFamily="Poppins" FontSize="18"/>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                            <TextBlock Grid.Column="2" Foreground="Red" Text="{Binding productPrice, Converter={StaticResource ResourceKey=currencyconvert}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 5 20 5"  FontFamily="Poppins" FontSize="25"/>
+
+                                                        </Grid>
+                                                        <Border Grid.Row="1" Background="#FFF7FCED" CornerRadius="10 0 10 10">
+                                                            <Grid>
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition></ColumnDefinition>
+                                                                    <ColumnDefinition Width="450"></ColumnDefinition>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Border Grid.Column="0" CornerRadius="0 0 0 10">
+                                                                    <Border.Background>
+                                                                        <ImageBrush ImageSource="/image/merryorderbackground.jpg"></ImageBrush>
+                                                                    </Border.Background>
+                                                                </Border>
+                                                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                                                                        <Image  Source="/icon/dollar.png" Width="50"></Image>
+                                                                        <TextBlock Text="Total cost: " VerticalAlignment="Center" Margin="10" FontSize="25"></TextBlock>
+                                                                        <TextBlock Text="{Binding total, Converter={StaticResource ResourceKey=currencyconvert}}" VerticalAlignment="Center" Margin="0 10 10 10 " FontSize="25"></TextBlock>
+                                                                    </StackPanel>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                                                                        <Border VerticalAlignment="Center" Width="auto" CornerRadius="10" Height="46" Background="Red" BorderThickness="2" Margin="20 0 20 20">
+                                                                            <Button x:Name="buyAgainbtn" Height="42" Content="Buy It Again" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Click="buyAgainbtn_Click" ></Button>
+                                                                        </Border>
+                                                                        <Border VerticalAlignment="Center" Width="auto" CornerRadius="10" Height="46" Background="SeaGreen" BorderThickness="2" Margin="0 0 5 20">
+                                                                            <Button x:Name="ratebtn" Height="42" Content="Shop Rate" Background="Transparent" BorderThickness="0" FontSize="20" FontFamily="Poppins" FontWeight="SemiBold" Click="ratebtn_Click" ></Button>
+                                                                        </Border>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+
+                                                            </Grid>
+                                                        </Border>
+
+                                                    </Grid>
+                                                </Border>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+                        </Grid>
+
+                    </TabItem>
+
+
+                </TabControl>
+            </Grid>
+        </Grid>
+
+
+    </Border>
+
+</UserControl>
