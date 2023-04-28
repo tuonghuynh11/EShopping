@@ -124,6 +124,7 @@
           <Property Name="expDate" Type="date" />
           <Property Name="ownName" Type="nvarchar" MaxLength="100" />
           <Property Name="csv" Type="varchar" MaxLength="10" />
+          <Property Name="idPerson" Type="int" />
         </EntityType>
         <EntityType Name="PEOPLE">
           <Key>
@@ -140,6 +141,7 @@
           <Property Name="email" Type="varchar" MaxLength="200" />
           <Property Name="avatar" Type="nvarchar(max)" />
           <Property Name="idRole" Type="int" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="PEOPLEINFO">
           <Key>
@@ -181,6 +183,9 @@
           <Property Name="idProduct" Type="int" />
           <Property Name="nameOfAttribute" Type="nvarchar" MaxLength="50" />
           <Property Name="content" Type="text" />
+          <Property Name="uses" Type="nvarchar" MaxLength="100" />
+          <Property Name="material" Type="nvarchar" MaxLength="100" />
+          <Property Name="exps" Type="int" />
         </EntityType>
         <EntityType Name="RECEIPT">
           <Key>
@@ -814,6 +819,7 @@
           <Property Name="expDate" Type="DateTime" Precision="0" />
           <Property Name="ownName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="csv" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="idPerson" Type="Int32" />
           <NavigationProperty Name="CREDITCARD" Relationship="Self.FK_PAYMENTINFORMATION" FromRole="PAYMENTINFORMATION" ToRole="CREDITCARD" />
           <NavigationProperty Name="PEOPLEINFOes" Relationship="Self.FK_PEOPLEINFO3" FromRole="PAYMENTINFORMATION" ToRole="PEOPLEINFO" />
           <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT2" FromRole="PAYMENTINFORMATION" ToRole="RECEIPT" />
@@ -833,6 +839,7 @@
           <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="idRole" Type="Int32" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CARTs" Relationship="Self.FK_CART" FromRole="PEOPLE" ToRole="CART" />
           <NavigationProperty Name="CHATBOXes" Relationship="Self.FK_CB1" FromRole="PEOPLE" ToRole="CHATBOX" />
           <NavigationProperty Name="CHATBOXes1" Relationship="Self.FK_CB2" FromRole="PEOPLE" ToRole="CHATBOX" />
@@ -894,6 +901,9 @@
           <Property Name="idProduct" Type="Int32" />
           <Property Name="nameOfAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="uses" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="material" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="exps" Type="Int32" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PT" FromRole="PRODUCTTECHNICAL" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="RECEIPT">
@@ -1526,6 +1536,7 @@
                 <ScalarProperty Name="expDate" ColumnName="expDate" />
                 <ScalarProperty Name="ownName" ColumnName="ownName" />
                 <ScalarProperty Name="csv" ColumnName="csv" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1543,6 +1554,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1587,6 +1599,9 @@
                 <ScalarProperty Name="idProduct" ColumnName="idProduct" />
                 <ScalarProperty Name="nameOfAttribute" ColumnName="nameOfAttribute" />
                 <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="uses" ColumnName="uses" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="exps" ColumnName="exps" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

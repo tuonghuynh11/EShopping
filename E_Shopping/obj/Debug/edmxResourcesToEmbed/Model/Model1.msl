@@ -127,6 +127,7 @@
           <ScalarProperty Name="expDate" ColumnName="expDate" />
           <ScalarProperty Name="ownName" ColumnName="ownName" />
           <ScalarProperty Name="csv" ColumnName="csv" />
+          <ScalarProperty Name="idPerson" ColumnName="idPerson" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -144,6 +145,7 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -188,6 +190,9 @@
           <ScalarProperty Name="idProduct" ColumnName="idProduct" />
           <ScalarProperty Name="nameOfAttribute" ColumnName="nameOfAttribute" />
           <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="uses" ColumnName="uses" />
+          <ScalarProperty Name="material" ColumnName="material" />
+          <ScalarProperty Name="exps" ColumnName="exps" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

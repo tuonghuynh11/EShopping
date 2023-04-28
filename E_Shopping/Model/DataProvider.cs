@@ -19,11 +19,11 @@ namespace E_Shopping.Model
             }
         }
 
-        public E_ShOPPING_NEWEntities DB { get; set; }
+        public E_ShOPPING_NEWEntities1 DB { get; set; }
 
         private DataProvider()
         {
-            DB = new E_ShOPPING_NEWEntities();
+            DB = new E_ShOPPING_NEWEntities1();
         }
     }
 }

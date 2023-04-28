@@ -18,6 +18,9 @@ namespace E_Shopping.Model
         public Nullable<int> idProduct { get; set; }
         public string nameOfAttribute { get; set; }
         public string content { get; set; }
+        public string uses { get; set; }
+        public string material { get; set; }
+        public Nullable<int> exps { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
     }

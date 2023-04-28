@@ -27,6 +27,7 @@ namespace E_Shopping.Model
         public Nullable<System.DateTime> expDate { get; set; }
         public string ownName { get; set; }
         public string csv { get; set; }
+        public Nullable<int> idPerson { get; set; }
     
         public virtual CREDITCARD CREDITCARD { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

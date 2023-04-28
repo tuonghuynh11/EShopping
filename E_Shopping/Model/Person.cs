@@ -38,6 +38,7 @@ namespace E_Shopping.Model
         public string email { get; set; }
         public string avatar { get; set; }
         public Nullable<int> idRole { get; set; }
+        public string gender { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CART> CARTs { get; set; }

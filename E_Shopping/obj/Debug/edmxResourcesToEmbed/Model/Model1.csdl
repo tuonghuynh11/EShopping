@@ -139,6 +139,7 @@
     <Property Name="expDate" Type="DateTime" Precision="0" />
     <Property Name="ownName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="csv" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="idPerson" Type="Int32" />
     <NavigationProperty Name="CREDITCARD" Relationship="Self.FK_PAYMENTINFORMATION" FromRole="PAYMENTINFORMATION" ToRole="CREDITCARD" />
     <NavigationProperty Name="PEOPLEINFOes" Relationship="Self.FK_PEOPLEINFO3" FromRole="PAYMENTINFORMATION" ToRole="PEOPLEINFO" />
     <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT2" FromRole="PAYMENTINFORMATION" ToRole="RECEIPT" />
@@ -158,6 +159,7 @@
     <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="idRole" Type="Int32" />
+    <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CARTs" Relationship="Self.FK_CART" FromRole="PEOPLE" ToRole="CART" />
     <NavigationProperty Name="CHATBOXes" Relationship="Self.FK_CB1" FromRole="PEOPLE" ToRole="CHATBOX" />
     <NavigationProperty Name="CHATBOXes1" Relationship="Self.FK_CB2" FromRole="PEOPLE" ToRole="CHATBOX" />
@@ -219,6 +221,9 @@
     <Property Name="idProduct" Type="Int32" />
     <Property Name="nameOfAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="uses" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="material" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="exps" Type="Int32" />
     <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PT" FromRole="PRODUCTTECHNICAL" ToRole="PRODUCT" />
   </EntityType>
   <EntityType Name="RECEIPT">

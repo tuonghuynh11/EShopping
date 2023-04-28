@@ -119,6 +119,7 @@
     <Property Name="expDate" Type="date" />
     <Property Name="ownName" Type="nvarchar" MaxLength="100" />
     <Property Name="csv" Type="varchar" MaxLength="10" />
+    <Property Name="idPerson" Type="int" />
   </EntityType>
   <EntityType Name="PEOPLE">
     <Key>
@@ -135,6 +136,7 @@
     <Property Name="email" Type="varchar" MaxLength="200" />
     <Property Name="avatar" Type="nvarchar(max)" />
     <Property Name="idRole" Type="int" />
+    <Property Name="gender" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="PEOPLEINFO">
     <Key>
@@ -176,6 +178,9 @@
     <Property Name="idProduct" Type="int" />
     <Property Name="nameOfAttribute" Type="nvarchar" MaxLength="50" />
     <Property Name="content" Type="text" />
+    <Property Name="uses" Type="nvarchar" MaxLength="100" />
+    <Property Name="material" Type="nvarchar" MaxLength="100" />
+    <Property Name="exps" Type="int" />
   </EntityType>
   <EntityType Name="RECEIPT">
     <Key>
