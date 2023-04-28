@@ -116,7 +116,14 @@
             </DockPanel>
         </materialDesign:ColorZone>
 
-        <Grid Background="#FF52AE4B" Height="65">
+        <!--<Grid Background="#FF52AE4B" Height="65">-->
+        <Grid Height="65">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 65">
+                    <GradientStop Color="#3f3269" Offset="0"></GradientStop>
+                    <GradientStop Color="#6e21" Offset="2"></GradientStop>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"></ColumnDefinition>
                 <ColumnDefinition Width="600"></ColumnDefinition>
@@ -155,15 +162,39 @@
             </Border>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0 0 40 0"  VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Border x:Name="CartNote" Margin="0 0 30 0" CornerRadius="5" BorderBrush="Aqua" Height="33" Width="33">
+                    <Border.Background>
+                        <ImageBrush ImageSource="\Image\cart.png"></ImageBrush>
+                    </Border.Background>
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CartClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                    </Border.InputBindings>
+                </Border>
+                <Border x:Name="ChatIcon" Margin="0 0 30 0" CornerRadius="5" BorderBrush="Aqua" Height="33" Width="33">
+                    <Border.Background>
+                        <ImageBrush ImageSource="\Image\chat.png"></ImageBrush>
+                    </Border.Background>
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding PartyInTheUSA}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                    </Border.InputBindings>
+                </Border>
+                <Border x:Name="FeedBackIcon" Margin="0 0 30 0" CornerRadius="5" BorderBrush="Aqua" Height="33" Width="33" MouseUp="FeedBack_Mouse_Up" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="\Image\feedback.png"></ImageBrush>
+                    </Border.Background>
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding FeedBackClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                    </Border.InputBindings>
+                </Border>
                 <Grid Margin="0 0 20 0" >
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <materialDesign:PopupBox x:Name="notifipopup" ToolTip="Bạn có 0 thông báo mới"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0"   >
+                    <materialDesign:PopupBox x:Name="notifipopup" ToolTip="Bạn có 0 thông báo mới"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0" Opened="PopOpened" Closed="PopClosed" >
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon Kind="Bell" Foreground="White" Height="25" Width="25"  Margin="0 0 0 0" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                        <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged" >
                             <ListView.View>
                                 <GridView >
                                     <GridViewColumn Header="Thông báo"  Width="300"  >
@@ -228,8 +259,58 @@
                 </Border>
                 <Label x:Name="UserNamelb" Content="User1" VerticalAlignment="Center" Margin="5"></Label>
                 <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" >
-                    <ComboBoxItem Content="Thông tin tài khoản"></ComboBoxItem>
-                    <ComboBoxItem Content="Đăng xuất"></ComboBoxItem>
+                    <ComboBoxItem >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/personalinfo.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Thông tin cá nhân"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/billing.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Billing"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/setting.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Cài đặt"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/contact.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Liên lạc"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/logout.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Đăng xuất"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text ="Thay đổi mật khẩu"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem x:Name="cmbAccountList">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Danh sách account"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    
+                    <ComboBoxItem x:Name="cmbItemList">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Thêm sản phẩm"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem x:Name="cmbUnConfirmed">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Danh sách đơn hàng chưa giao"/>
+                        </StackPanel>
+                    </ComboBoxItem>
 
                 </ComboBox>
             </StackPanel>

@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.DashboardUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar"
+             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:E_Shopping.ViewModel"   
+            xmlns:model="clr-namespace:E_Shopping.Model"
+        xmlns:uc="clr-namespace:E_Shopping.UserControlBar"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="700" d:DesignWidth="1300"
+             DataContext="{StaticResource CategoryVM}">
+    <UserControl.Resources>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="\Image\christmas.jpg"></ImageBrush>
+
+    </UserControl.Background>
+    <ScrollViewer>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="250"></RowDefinition>
+                <RowDefinition Height="350"></RowDefinition>
+                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="210"></RowDefinition>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0"   Margin="50,4,50,0" BorderBrush="LightPink" BorderThickness="2" CornerRadius="10 10 10 10" Height="210" VerticalAlignment="Top" Grid.RowSpan="2">
+
+                        <Image x:Name="Advertisement"  Stretch= "Fill"/>
+                    </Border>
+                    <Border Grid.Row="1" >
+                        <StackPanel Grid.Row="1" Height="auto" HorizontalAlignment="Center" Margin="10 0 10 10" Orientation="Horizontal">
+                            <ToggleButton
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                DockPanel.Dock="Right"
+                                IsEnabled="True" Height="15" Width="15" Click="ButtonLeft_Click" >
+                                <materialDesign:PackIcon
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        Kind="ArrowBack"
+                                        Height="15"
+                                         Width="15" RenderTransformOrigin="3.353,0.692" VerticalAlignment="Center"
+                                        >
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                            </ToggleButton>
+                            <TextBlock  Text=". . ." FontSize="15" FontWeight="Bold" Width="24" Margin="5 0 0 0"></TextBlock>
+
+                            <ToggleButton 
+                                DockPanel.Dock="Right"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                IsEnabled="True" Height="15" Width="15"  Click="ButtonRight_Click">
+                                <materialDesign:PackIcon
+                                        Foreground="Black"
+                                        Kind="ArrowRight"
+                                        Height="14"
+                                        HorizontalAlignment="Center"
+                                         Width="14" RenderTransformOrigin="3.353,0.692" VerticalAlignment="Center"
+                                        >
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                            </ToggleButton>
+                        </StackPanel>
+
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Background="#FF91D6C2" Margin="50 0 50 0" BorderBrush="Red" BorderThickness="2" CornerRadius="10 10 10 10">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="DANH MỤC SẢN PHẨM" FontSize="40" FontWeight="Black"></Label>
+                        <ItemsControl ItemsSource="{Binding CATEGORies}">
+                            <ItemsControl.Resources>
+                                <DataTemplate DataType="{x:Type model:CATEGORY}">
+                                    <uc:CategoryCardUC  Margin="8"/>
+                                </DataTemplate>
+                            </ItemsControl.Resources>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel
+                                    Margin="4 4 4 4"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            <Border Grid.Row="3" Background="Lavender" Margin="50 0 50 0">
+                <ListView x:Name="ItemBox" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="20" BorderBrush="Red" Background="White">
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Image Source="{Binding ImageData}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                                    <TextBlock Text="{Binding name}"  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding price}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
+                                        <Label></Label>
+                                        <Label/>
+                                        <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <Border Grid.Row="4">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF37C8C8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"></ColumnDefinition>
+                        <ColumnDefinition Width="800"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Image/ad2.jpg" Stretch="Fill">
+
+                            </ImageBrush>
+                        </Border.Background>
+
+
+                    </Border>
+                    <Border Grid.Column="1">
+                        <TextBlock FontSize="50" FontStyle="Italic" FontWeight="Black" Foreground="Green">"Không có gì là không thể"</TextBlock>
+
+
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
