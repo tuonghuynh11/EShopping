@@ -1,6 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:viewmodel="clr-namespace:E_Shopping.ViewModel"
+                    xmlns:vm="clr-namespace:E_Shopping.ViewModel"
+                    xmlns:view="clr-namespace:E_Shopping.View"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
-    <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
+    <vm:MainViewModel x:Key="MainVM"></vm:MainViewModel>
+    <vm:ControlBarViewModel x:Key="ControlBarVM"></vm:ControlBarViewModel>
+    <DataTemplate DataType="{x:Type vm:ProductDetailViewModel}">
+        <view:ProductDetailView></view:ProductDetailView>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SearchFilterProductViewModel}">
+        <view:SearchFilterProduct></view:SearchFilterProduct>
+    </DataTemplate>
+    <vm:ProductDetailViewModel x:Key="ProductDetailVM"></vm:ProductDetailViewModel>
+    <vm:SearchFilterProductViewModel x:Key="SearchFilterProductVM"></vm:SearchFilterProductViewModel>
 </ResourceDictionary>
