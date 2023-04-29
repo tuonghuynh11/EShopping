@@ -810,6 +810,7 @@
             <End Role="RECEIPT" EntitySet="RECEIPTs" />
           </AssociationSet>
         </EntityContainer>
+         </Schema>
         <EntityType Name="CART">
           <Key>
             <PropertyRef Name="id" />

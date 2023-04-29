@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Blazored.Toast.4.1.0\build\Blazored.Toast.props" Condition="Exists('..\packages\Blazored.Toast.4.1.0\build\Blazored.Toast.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -329,6 +330,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="ViewModel\ProductDetailViewModel.cs" />
+    <Compile Include="ViewModel\SearchFilterProductViewModel.cs" />
+    <Compile Include="View\ProductDetailView.xaml.cs">
+      <DependentUpon>ProductDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchFilterProduct.xaml.cs">
+      <DependentUpon>SearchFilterProduct.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -434,6 +443,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\DashboardUC.xaml">
+    <Page Include="View\ProductDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchFilterProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,6 +488,33 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
+    <Resource Include="Assets\Images\Star_rating_0.5_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_0_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_1.5_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_1_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_2.5_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_2_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_3.5_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_3_of_5.png" />
+    <Resource Include="Assets\Images\Star_rating_4_of_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Star_rating_5_of_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\check.png" />
@@ -576,5 +617,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets'))" />
+    <Error Condition="!Exists('..\packages\Blazored.Toast.4.1.0\build\Blazored.Toast.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Blazored.Toast.4.1.0\build\Blazored.Toast.props'))" />
   </Target>
 </Project>

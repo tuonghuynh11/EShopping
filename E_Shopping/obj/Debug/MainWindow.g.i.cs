@@ -13,6 +13,7 @@ using E_Shopping;
 using E_Shopping.UserControlBar;
 using E_Shopping.UserControlBar.Screen;
 using E_Shopping.ViewModel;
+using E_Shopping.View;
 using MaterialDesignThemes.Wpf;
 using MaterialDesignThemes.Wpf.Converters;
 using MaterialDesignThemes.Wpf.Transitions;

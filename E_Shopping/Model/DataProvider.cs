@@ -22,6 +22,19 @@ namespace E_Shopping.Model
             }
             set { _ins = value; }
         }
+         public static DataProvider Ins
+        {
+            get
+            {
+                if (_ins == null)
+                {
+                    _ins = new DataProvider();
+                }
+                return _ins;
+
+            }
+            set { _ins = value; }
+        }
        
         public E_ShOPPING_NEWEntities DB { get; set; }
         public E_ShOPPING_NEWEntities db { get; set; }
