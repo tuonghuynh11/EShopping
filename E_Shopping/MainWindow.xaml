@@ -39,8 +39,8 @@
             </Grid.RowDefinitions>
             <uc:ControlBarUC Grid.Row="0"></uc:ControlBarUC>
             <Border Grid.Row="1" Background="Lavender" BorderBrush="Green" BorderThickness="2 0 2 2" CornerRadius="0 0 10 10" Margin="0">
-                <!--<ContentControl x:Name="Pages" Content="{Binding Instance.CurrentView,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ContentControl>-->
-                <ucScreen:OrderedHistory></ucScreen:OrderedHistory>
+                <ContentControl x:Name="Pages" Content="{Binding Instance.CurrentView,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+                <!--<ucScreen:OrderedHistory></ucScreen:OrderedHistory>-->
             </Border>
         </Grid>
 

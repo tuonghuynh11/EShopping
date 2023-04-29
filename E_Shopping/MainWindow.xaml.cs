@@ -28,8 +28,7 @@ namespace E_Shopping
             InitializeComponent();
             this.DataContext = new MainViewModel();
 
-            Dashboard ds = new Dashboard();
-            ds.Show();
+          
         }
 
         private void sendBtn_Click(object sender, RoutedEventArgs e)

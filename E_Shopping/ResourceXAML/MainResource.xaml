@@ -28,8 +28,7 @@
         <uc:DashboardUC></uc:DashboardUC>
     </DataTemplate>
 
-    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
-    <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
+    
     <DataTemplate DataType="{x:Type viewmodel:ProductDetailViewModel}">
         <view:ProductDetailView></view:ProductDetailView>
     </DataTemplate>

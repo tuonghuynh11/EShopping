@@ -1,4 +1,5 @@
-﻿using E_Shopping.Model;
+﻿using E_Shopping.Class;
+using E_Shopping.Model;
 using E_Shopping.PopUp;
 using System;
 using System.Collections.Generic;
@@ -111,7 +112,9 @@ namespace E_Shopping.ViewModel
                 if (loginVM.IsLogin)
                 {
 
+                    AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
                     p.Show();
+
                 }
                 else
                 {
@@ -122,11 +125,11 @@ namespace E_Shopping.ViewModel
 
 
             // Startup Page
-            CurrentView = new CartViewModel();
-            stackView.Push(CurrentView);
 
+            CurrentView = new CategoryViewModel();
+            stackView.Push(CurrentView);
             // CurrentView = new OrderedHistoryViewModel();
-           
+
 
             //Mốt chuyển thành idUser
             int userID = 2;

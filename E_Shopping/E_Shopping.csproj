@@ -123,6 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\AccessUser.cs" />
     <Compile Include="Class\Category.cs" />
     <Compile Include="Class\DistanceCalculate.cs" />
     <Compile Include="Class\EmailService.cs" />
@@ -139,7 +140,7 @@
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
-        </Compile>
+    </Compile>
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -240,7 +241,7 @@
     <Compile Include="Untils\VnPhoneNumberValidator.cs" />
     <Compile Include="UserControlBar\Screen\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="Model\UserAccess.cs" />
     <Compile Include="PasswordEncode\EncodeString.cs" />
     <Compile Include="SignupWindow.xaml.cs">
@@ -251,7 +252,7 @@
     </Compile>
     <Compile Include="UserControlBar\ConfirmOrderUC.xaml.cs">
       <DependentUpon>ConfirmOrderUC.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="UserControlBar\CategoryCardUC.xaml.cs">
       <DependentUpon>CategoryCardUC.xaml</DependentUpon>
     </Compile>
@@ -383,7 +384,7 @@
     <Page Include="UserControlBar\Screen\Cart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-       </Page>
+    </Page>
     <Page Include="SignupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -445,7 +446,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\DashboardUC.xaml">
-       <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductDetailView.xaml">
@@ -492,7 +493,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\" />
     <Resource Include="Assets\Images\Star_rating_0.5_of_5.png" />
     <Resource Include="Assets\Images\Star_rating_0_of_5.png" />
     <Resource Include="Assets\Images\Star_rating_1.5_of_5.png" />
@@ -508,18 +508,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\check.png" />
@@ -601,19 +589,19 @@
     <Resource Include="Image\setting.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />
