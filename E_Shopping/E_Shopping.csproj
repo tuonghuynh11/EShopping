@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
+        </Compile>
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -250,6 +251,7 @@
     </Compile>
     <Compile Include="UserControlBar\ConfirmOrderUC.xaml.cs">
       <DependentUpon>ConfirmOrderUC.xaml</DependentUpon>
+      </Compile>
     <Compile Include="UserControlBar\CategoryCardUC.xaml.cs">
       <DependentUpon>CategoryCardUC.xaml</DependentUpon>
     </Compile>
