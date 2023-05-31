@@ -20,7 +20,7 @@
         Title="LoginWindow" Height="450" Width="800"
         AllowsTransparency="True"
         Background="Transparent" 
-        DataContext="{StaticResource LoginVM}">
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=loginWindow}"/>
@@ -98,7 +98,7 @@
                                 </Grid>
                                 <Grid Grid.Column="1">
                                     <TextBox Margin="8 0 8 0" VerticalAlignment="Center" Text="{Binding UserName}"
-                            materialDesign:HintAssist.Hint="Enter Email or Phone number"
+                            materialDesign:HintAssist.Hint="Enter Email"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                                 </Grid>
 

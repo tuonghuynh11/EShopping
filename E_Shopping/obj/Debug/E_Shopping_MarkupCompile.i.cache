@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\obj\Debug\
+C:\Users\84944\source\repos\EShoppingofficial29_04\E_Shopping\obj\Debug\
 E_Shopping
 none
 false
 DEBUG;TRACE
-C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\App.xaml
+C:\Users\84944\source\repos\EShoppingofficial29_04\E_Shopping\App.xaml
 32-1592715328
 2739969757
-94-17661971
-142-1388565021
+951001936838
+1491882468211
 AccountInfo.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;Dashboard.xaml;MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\Screen\Cart.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\CategoryCardUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;UserControlBar\DashboardUC.xaml;View\ProductDetailView.xaml;View\SearchFilterProduct.xaml;
 
 True

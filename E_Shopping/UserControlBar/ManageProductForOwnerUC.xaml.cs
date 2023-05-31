@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Shopping.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace E_Shopping.UserControlBar
         public ManageProductForOwnerUC()
         {
             InitializeComponent();
+            this.DataContext = new ManageProductForOwnerViewModel();
+
+            
+
+            List<int> temp = new List<int>();
+            temp.Add(1);
+            
+                CbPage.ItemsSource = temp;
+
+            
         }
     }
 }

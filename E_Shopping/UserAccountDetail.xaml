@@ -17,7 +17,7 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         Name="userAccountDetail"
-        DataContext="{StaticResource UserAccountDetailVM}"
+        
         Background="Transparent" 
         Title="UserAccountDetail" Height="350" Width="600">
     <Border CornerRadius="10" Background="#f5f2f2" BorderThickness="2" BorderBrush="Black">
@@ -75,18 +75,25 @@
                     
                 </StackPanel>
             </Grid>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="250 10 10 10">
-                <Button
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="30 10 10 10">
+                <Button x:Name="UnbanBTT" Visibility="Hidden"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="150" FontSize="20"
-                                ToolTip="Ban" Background="#f89090" Click="Button_Click_1">
-                    _Ban
+                                Width="150" FontSize="20" Margin="0 0 0 0"
+                                ToolTip="Unban" Background="#9fc5e8" Click="UnbanBTT_Click">
+                    Unban
                 </Button>
-                <Button
+                <Button x:Name="AuthoBTT" 
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="150" FontSize="20" Margin="20 0 0 0"
+                                Width="150" FontSize="20" Margin="70 0 0 0"
                                 ToolTip="Authorize" Background="#b6d7a8" Click="Button_Click">
                     _Authorize
+                </Button>
+                <Button x:Name="BanBtt" Visibility="Hidden"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="150" FontSize="20"
+                                Margin="20 0 0 0" 
+                                ToolTip="Ban" Background="#f89090" Click="Button_Click_1">
+                    _Ban
                 </Button>
             </StackPanel>
         </Grid>

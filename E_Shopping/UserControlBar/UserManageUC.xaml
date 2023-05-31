@@ -14,7 +14,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource UserManageVM}"
+        
         Background="Transparent" 
              d:DesignHeight="800" d:DesignWidth="1300">
     <i:Interaction.Triggers>
@@ -40,7 +40,7 @@
                     </Label>
                     <DataGrid x:Name="DTGuseracc" IsReadOnly="True" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Margin="115,20,115,0" Grid.Row="1" RowBackground="#eeeeee" 
-                                AlternatingRowBackground="#E6EBF0"
+                                AlternatingRowBackground="#E6EBF0" 
                               SelectionMode="Extended" SelectionUnit="FullRow"
                       Background="#eeeeee" RenderTransformOrigin="0.494,0.52"
                       CanUserAddRows="False" ScrollViewer.CanContentScroll="True"
@@ -83,7 +83,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Email" Width="230" 
+                            <DataGridTextColumn Header="Email" Width="250" 
                                         Binding="{Binding email}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
@@ -91,8 +91,8 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Gender" Width="200" 
-                                        Binding="{Binding gender}">
+                            <DataGridTextColumn Header="Username" Width="250" 
+                                        Binding="{Binding userName}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="HorizontalAlignment" Value="Center" />

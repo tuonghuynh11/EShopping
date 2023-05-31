@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using E_Shopping.Model;
 using E_Shopping.PasswordEncode;
+using E_Shopping.PopUp;
 
 namespace E_Shopping.ViewModel
 {
@@ -74,19 +75,23 @@ namespace E_Shopping.ViewModel
                         smt.Port = 587;
                         smt.Send(msg);
 
-                        MessageBox.Show("Succeeded");
+                        SucceedNotify succeedNotify = new SucceedNotify();
+                        succeedNotify.ShowDialog();
 
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Failed");
+                        ValidationNotify validationNotify = new ValidationNotify("Failed to send OTP");
+                        validationNotify.ShowDialog();
+
 
                     }
                 }
                 // add else if for phone verification
                 else
                 {
-                    MessageBox.Show("Not valid");
+                    ValidationNotify validationNotify = new ValidationNotify("Invalid Email");
+                    validationNotify.ShowDialog();
                 }
 
             });
@@ -107,13 +112,15 @@ namespace E_Shopping.ViewModel
                 {
                     user.password = EncodeString.EncodePass(newPassWord);
                     DataProvider.ins.db.SaveChanges();
-                    MessageBox.Show("Done");
+                    SucceedNotify succeedNotify = new SucceedNotify();
+                    succeedNotify.ShowDialog();
                     p.Close();
                 }
                 else
                 {
                     otp = -1;
-                    MessageBox.Show("Not done");
+                    ValidationNotify validationNotify = new ValidationNotify("Failed to change password");
+                    validationNotify.ShowDialog();
                 }
             });
         }

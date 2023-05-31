@@ -1,6 +1,7 @@
 ﻿using E_Shopping.Class;
 using E_Shopping.Model;
 using E_Shopping.PopUp;
+using E_Shopping.UserControlBar;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -112,8 +113,10 @@ namespace E_Shopping.ViewModel
                 if (loginVM.IsLogin)
                 {
 
-                    AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
+                    //AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
                     p.Show();
+
+                    
 
                 }
                 else
@@ -126,7 +129,7 @@ namespace E_Shopping.ViewModel
 
             // Startup Page
 
-            CurrentView = new CategoryViewModel();
+            CurrentView = new ManageProductForOwnerViewModel();
             stackView.Push(CurrentView);
             // CurrentView = new OrderedHistoryViewModel();
 

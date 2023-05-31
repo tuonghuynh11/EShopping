@@ -22,38 +22,5 @@ namespace E_Shopping.Model
     
         public virtual Person Person { get; set; }
         public virtual Person Person1 { get; set; }
-        public Person Customer
-        {
-            get
-            {
-                Person cus = DataProvider.ins.DB.PEOPLE.Find(this.idCustomer);
-                return cus;
-
-            }
-            set { }
-        }
-        public Person Assistant
-        {
-            get
-            {
-                Person ass = DataProvider.ins.DB.PEOPLE.Find(this.idAssistant);
-                return ass;
-
-            }
-            set { }
-        }
-        public Person Sender
-        {
-            get
-            {
-                if (this.isSend == 0)
-                {
-                    return Assistant;
-                }
-                return Customer;
-
-            }
-            set { }
-        }
     }
 }

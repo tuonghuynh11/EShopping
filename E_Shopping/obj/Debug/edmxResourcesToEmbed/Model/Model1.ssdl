@@ -160,6 +160,7 @@
     <Property Name="price" Type="bigint" />
     <Property Name="status" Type="int" />
     <Property Name="idCategory" Type="int" />
+    <Property Name="thumbnailimage" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="PRODUCTRATE">
     <Key>
@@ -194,8 +195,8 @@
     <Property Name="totalCost" Type="bigint" />
     <Property Name="date" Type="date" />
     <Property Name="status" Type="int" />
-    <Property Name="idDiscount" Type="int" />
     <Property Name="saleValue" Type="bigint" />
+    <Property Name="idDiscount" Type="int" />
   </EntityType>
   <EntityType Name="RECEIVERINFORMATION">
     <Key>

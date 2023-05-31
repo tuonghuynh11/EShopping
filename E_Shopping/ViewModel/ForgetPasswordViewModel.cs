@@ -11,6 +11,7 @@ using static System.Net.WebRequestMethods;
 using System.Windows.Controls;
 using E_Shopping.Model;
 using E_Shopping.PasswordEncode;
+using E_Shopping.PopUp;
 
 namespace E_Shopping.ViewModel
 {
@@ -58,7 +59,7 @@ namespace E_Shopping.ViewModel
                     {
 
                         MailMessage msg = new MailMessage();
-                        msg.From = new MailAddress("eshoppingprojectcnpm@gmail.com");
+                        msg.From = new MailAddress("shopgo870@gmail.com");
                         msg.To.Add(UserName);
 
                         msg.Subject = "OTP for forget password confirmation";
@@ -67,26 +68,29 @@ namespace E_Shopping.ViewModel
                         SmtpClient smt = new SmtpClient();
                         smt.Host = "smtp.gmail.com";
                         System.Net.NetworkCredential ntcd = new NetworkCredential();
-                        ntcd.UserName = "eshoppingprojectcnpm@gmail.com";
-                        ntcd.Password = "skczhwysbwxkwfxy";
+                        ntcd.UserName = "shopgo870@gmail.com";
+                        ntcd.Password = "jkotoxlrmbqchpqu";
                         smt.Credentials = ntcd;
                         smt.EnableSsl = true;
                         smt.Port = 587;
                         smt.Send(msg);
 
-                        MessageBox.Show("Succeeded");
+                        SucceedNotify succeedNotify = new SucceedNotify();
+                        succeedNotify.ShowDialog();
 
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Failed");
+                        ValidationNotify validationNotify = new ValidationNotify("Failed to send OTP");
+                        validationNotify.ShowDialog();
 
                     }
                 }
                 // add else if for phone verification
                 else
                 {
-                    MessageBox.Show("Not valid");
+                    ValidationNotify validationNotify = new ValidationNotify("Invalid Email");
+                    validationNotify.ShowDialog();
                 }
                 
             });
@@ -105,13 +109,15 @@ namespace E_Shopping.ViewModel
                     var user = DataProvider.ins.db.PEOPLE.Where(x => x.userName == UserName).SingleOrDefault();
                     user.password = EncodeString.EncodePass(PassWord);
                     DataProvider.ins.db.SaveChanges();
-                    MessageBox.Show("Done");
+                    SucceedNotify succeedNotify = new SucceedNotify();
+                    succeedNotify.ShowDialog();
                     p.Close();
                 }
                 else
                 {
                     otp = -1;
-                    MessageBox.Show("Not done");
+                    ValidationNotify validationNotify = new ValidationNotify("Failed to change password");
+                    validationNotify.ShowDialog();
                 }
             });
         }

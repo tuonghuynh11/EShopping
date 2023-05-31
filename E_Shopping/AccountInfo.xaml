@@ -19,7 +19,7 @@
         Name="changePass"
         ResizeMode="NoResize" 
         Background="Transparent" 
-        DataContext="{StaticResource ChangPassVM}"
+        
         Title="AccountInfo" Height="400" Width="400">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

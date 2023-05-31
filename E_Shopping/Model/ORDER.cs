@@ -114,7 +114,7 @@ namespace E_Shopping.Model
         public Nullable<int> quantity { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<int> status { get; set; }
-    
+
         public virtual CART CART { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -5,54 +5,54 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c0881222d7e14bc4a01b1d0f0b19f7aa" Name="Diagram1">
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CART" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CATEGORY" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CHATBOX" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CREDITCARD" Width="1.5" PointX="5.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DELIVERY" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DISCOUNT" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.IMAGE" Width="1.5" PointX="7.5" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" Width="1.5" PointX="12.5" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" Width="1.5" PointX="7.5" PointY="26" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Notification" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDER" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDERSRECEIPT" Width="1.5" PointX="12.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Width="1.5" PointX="8" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Person" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PEOPLEINFO" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCT" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTRATE" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" Width="1.5" PointX="7.5" PointY="28.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIPT" Width="1.5" PointX="10.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Width="1.5" PointX="8" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Role" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CART" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDER2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCT" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CB1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CB2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PAYMENTINFORMATION" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT4" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_DISCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_IMAGES" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_MDS" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_NOTIFY" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDER1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO3" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLE" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT1" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE2" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PT" ManuallyRouted="false" />
-        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CART" Width="1.5" PointX="5.25" PointY="25.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CATEGORY" Width="1.5" PointX="0.75" PointY="18.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CHATBOX" Width="1.5" PointX="5.25" PointY="19.125" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.CREDITCARD" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DELIVERY" Width="1.5" PointX="6" PointY="15.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.DISCOUNT" Width="1.5" PointX="5.25" PointY="22.25" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.IMAGE" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" Width="1.5" PointX="10.5" PointY="12.25" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" Width="1.5" PointX="5.25" PointY="31.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Notification" Width="1.5" PointX="5.25" PointY="27.875" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDER" Width="1.5" PointX="7.5" PointY="24.875" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.ORDERSRECEIPT" Width="1.5" PointX="10.5" PointY="18.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Person" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PEOPLEINFO" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCT" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTRATE" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" Width="1.5" PointX="5.25" PointY="33.75" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIPT" Width="1.5" PointX="8.25" PointY="11.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="E_ShOPPING_NEWModel.Role" Width="1.5" PointX="0.75" PointY="12.625" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CART" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDER2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCT" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CB1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_CB2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PAYMENTINFORMATION" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT4" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_DISCOUNT" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_IMAGES" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_MDS" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_NOTIFY" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDER1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO3" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLE" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT1" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE2" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_PT" />
+        <AssociationConnector Association="E_ShOPPING_NEWModel.FK_RECEIPT3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

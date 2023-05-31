@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Name="confirmOrder"
-            DataContext="{StaticResource ConfirmOrderVM}"
+            
         Background="Transparent" 
              d:DesignHeight="800" d:DesignWidth="1300">
     <i:Interaction.Triggers>

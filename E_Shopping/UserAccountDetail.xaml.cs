@@ -1,4 +1,6 @@
 ﻿using E_Shopping.Model;
+using E_Shopping.PopUp;
+using E_Shopping.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace E_Shopping
         public UserAccountDetail(Person person)
         {
             InitializeComponent();
+            this.DataContext = new UserAccountDetailViewModel();
             ID.Text = person.id.ToString();
             Username.Text = person.userName;
             Name.Text = person.name;
@@ -35,6 +38,25 @@ namespace E_Shopping
             if(temp != "")
                 Dob.Text = temp.Substring(0, temp.IndexOf(' '));
             selectedPerson = person;
+            var updatePerson = DataProvider.ins.db.PEOPLE.Where(p => p.id == selectedPerson.id).SingleOrDefault();
+            if(updatePerson != null)
+            {
+                if(updatePerson.idRole == 2)
+                {
+                    AuthoBTT.Visibility = Visibility.Hidden;
+                }
+                if(updatePerson.cmnd_passport != null)
+                {
+                    if(updatePerson.cmnd_passport == "1")
+                    {
+                        BanBtt.Visibility = Visibility.Visible;
+                    }
+                    if (updatePerson.cmnd_passport == "0")
+                    {
+                        UnbanBTT.Visibility = Visibility.Visible;
+                    }
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,14 +66,34 @@ namespace E_Shopping
             {
                 updatePerson.idRole = 2;
                 DataProvider.ins.db.SaveChanges();
-                MessageBox.Show("Staff done");
+                SucceedNotify succeedNotify = new SucceedNotify();
+                succeedNotify.ShowDialog();
             }
         }
 
-        //Ban account can phai them 1 cai gi do de phan biet(chua lam)
+        //Lay cmnd_passport lam status cho "ban" vi khong su dung, 0 la ban, 1 la unban
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            var updatePerson = DataProvider.ins.db.PEOPLE.Where(p => p.id == selectedPerson.id).SingleOrDefault();
+            if (updatePerson != null)
+            {
+                updatePerson.cmnd_passport = "0";
+                DataProvider.ins.db.SaveChanges();
+                SucceedNotify succeedNotify = new SucceedNotify();
+                succeedNotify.ShowDialog();
+            }
+        }
 
+        private void UnbanBTT_Click(object sender, RoutedEventArgs e)
+        {
+            var updatePerson = DataProvider.ins.db.PEOPLE.Where(p => p.id == selectedPerson.id).SingleOrDefault();
+            if (updatePerson != null)
+            {
+                updatePerson.cmnd_passport = "1";
+                DataProvider.ins.db.SaveChanges();
+                SucceedNotify succeedNotify = new SucceedNotify();
+                succeedNotify.ShowDialog();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource UserInfoVM}"
+        
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Background="Transparent" Name="userInfoUC"
              d:DesignHeight="800" d:DesignWidth="1300">
@@ -39,12 +39,14 @@
                 <Grid Grid.Column="0">
                     <materialDesign:Card Margin="30">
                         <StackPanel>
-                            <Image Source="/Image/Avatar.jpeg" Height="220" Width="220" VerticalAlignment="Stretch"
-                           HorizontalAlignment="Stretch" Stretch="Fill" Margin="0 30 0 0"/>
-                            <Button Height="50" HorizontalAlignment="Center" Foreground="#878787"
+                            <Image Source="{Binding DisplayedImagePath}" 
+
+                           Height="220" Width="220" VerticalAlignment="Stretch"
+                           HorizontalAlignment="Stretch" Stretch="Fill" Margin="0 30 0 0" x:Name="avatarImg"/>
+                            <Button Height="50" HorizontalAlignment="Center" Foreground="#878787" x:Name="uploadBtt"
                                 Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding UploadCommand}"
-                                Width="200" FontSize="11" Margin="0 30 0 0" 
-                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                Width="200" FontSize="11" Margin="0 30 0 0" IsHitTestVisible="False"
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2" Click="Button_Click">
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <TextBlock Margin="49 2 22 0" HorizontalAlignment="Center" 
                                            FontSize="22">Upload</TextBlock>
@@ -84,9 +86,9 @@
                             <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="1" x:Name="Nametb"
                             materialDesign:HintAssist.Hint="Name" FontSize="20" Text="{Binding Name}" Background="#eeeeee"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True">
-                                
-                                        
-                                    
+
+
+
                             </TextBox>
                             <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="2" x:Name="dobtb" 
                             materialDesign:HintAssist.Hint="Date Of Birth" FontSize="20" Text="{Binding DOB}" Background="#eeeeee"
@@ -145,22 +147,22 @@
                             <TextBox Margin="20 0 20 0" VerticalAlignment="Center" Grid.Row="10" x:Name="CardNumtb"
                             materialDesign:HintAssist.Hint="Card number" FontSize="20" Text="{Binding CardNum}" Background="#eeeeee"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
-                            <Button Grid.Row="11" HorizontalAlignment="Right" x:Name="Editbtt"
+                            <Button Grid.Row="11" HorizontalAlignment="Left" x:Name="Editbtt"
                             Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Width="220" Margin="0 0 30 0" FontSize="20" 
+                            Width="220" Margin="70,10,0,5" FontSize="20" 
                             ToolTip="Edit" Background="#ffe599" Foreground="White" Click="Editbtt_Click">
                                 Edit
                             </Button>
-                            <Button Grid.Row="11" HorizontalAlignment="Right" x:Name="Savebtt"
+                            <Button Grid.Row="11" HorizontalAlignment="Left" x:Name="Savebtt"
                             Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding SaveCommand}"
-                            Width="220" Margin="0 0 30 0" FontSize="20" Visibility="Hidden"
-                            ToolTip="Edit" Background="#b6d7a8" Foreground="White" Click="Savebtt_Click">
+                            Width="220" Margin="70,10,0,5" FontSize="20" Visibility="Hidden"
+                            ToolTip="Save" Background="#b6d7a8" Foreground="White" Click="Savebtt_Click">
                                 Save
                             </Button>
-                            <Button Grid.Row="11" HorizontalAlignment="Center" x:Name="Cancelbtt"
+                            <Button Grid.Row="11" HorizontalAlignment="Left" x:Name="Cancelbtt"
                             Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding CancelCommand}"
-                            Width="220" Margin="0 0 30 0" FontSize="20" Visibility="Hidden"
-                            ToolTip="Edit" Background="#eda4a4" Foreground="White" Click="Cancelbtt_Click">
+                            Width="220" Margin="310,10,0,5" FontSize="20" Visibility="Hidden"
+                            ToolTip="Cancel" Background="#eda4a4" Foreground="White" Click="Cancelbtt_Click">
                                 Cancel
                             </Button>
                         </Grid>
