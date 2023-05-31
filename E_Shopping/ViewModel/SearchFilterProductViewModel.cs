@@ -13,13 +13,88 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Security.Cryptography.Xml;
+using Stripe;
+using System.Diagnostics;
+using MaterialDesignThemes.Wpf;
 
 namespace E_Shopping.ViewModel
 {
     public class SearchFilterProductViewModel : BaseViewModel
     {
         private ObservableCollection<PRODUCT> _listProductsOG;
-        private ObservableCollection<PRODUCT> _listProducts;
+        private ObservableCollection<PRODUCT> _listProductsFiltered;
+        private ObservableCollection<PRODUCTWRAPPER> _listProductsFilteredWrapper;
+        private ObservableCollection<PRODUCTWRAPPER> _listProductsWrapper;
+        private int _numCheckRating;
+        public static Stack<object> stackView = new Stack<object>();
+        private static MainViewModel _Instance;
+        private object _currentView;
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set { _currentView = value; OnPropertyChanged(); }
+        }
+        public static void addViewToStack(object view)
+        {
+            Instance.CurrentView = view;
+            stackView.Push(view);
+        }
+        public static void removeViewToStack()
+        {
+            stackView.Pop();
+            Instance.CurrentView = stackView.Peek();
+        }
+        public static MainViewModel Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new MainViewModel();
+                }
+
+                return _Instance;
+
+            }
+            set { _Instance = value; }
+        }
+
+        public int NumCheckRating
+        {
+            get => _numCheckRating;
+            set
+            {
+                _numCheckRating = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<PRODUCTWRAPPER> ListProductsFilteredWrapper
+        {
+            get => _listProductsFilteredWrapper;
+            set
+            {
+                _listProductsFilteredWrapper = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<PRODUCTWRAPPER> ListProductsWrapper
+        {
+            get => _listProductsWrapper;
+            set
+            {
+                _listProductsWrapper = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<PRODUCT> ListProductsFiltered
+        {
+            get => _listProductsFiltered;
+            set
+            {
+                _listProductsFiltered = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<PRODUCT> ListProductsOG
         {
             get { return _listProductsOG; }
@@ -28,11 +103,6 @@ namespace E_Shopping.ViewModel
                 _listProductsOG = value;
                 OnPropertyChanged();
             }
-        }
-        public ObservableCollection<PRODUCT> ListProducts
-        {
-            get { return _listProducts; }
-            set { _listProducts = value; OnPropertyChanged(); }
         }
         private string _searchValue;
         public string SearchValue
@@ -43,23 +113,23 @@ namespace E_Shopping.ViewModel
                 OnPropertyChanged();
             }
         }
-        private string _imageProduct;
-        public string ImageProduct
+        private string _id;
+        private string Id
         {
-            get => _imageProduct;
+            get => _id;
             set
             {
-                _imageProduct = value;
+                Id = value;
                 OnPropertyChanged();
             }
         }
-        private string name;
+        private string _name;
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                name = value;
+                Name = value;
                 OnPropertyChanged();
             }
         }
@@ -69,83 +139,23 @@ namespace E_Shopping.ViewModel
             get => _price;
             set
             {
-                _price = value;
-                OnPropertyChanged();
-            }
-        } 
-        /*
-        private string _priceString;
-        public string PriceString
-        {
-            get
-            {
-                CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
-                return price.ToString("#,###", cul.NumberFormat);
-            }
-            set
-            {
-                _priceString = value;
+                Price = value;
                 OnPropertyChanged();
             }
         }
-        */
-        private int _rating;
-        public int Rating
-        {
-            get => _rating;
-            set
-            {
-                _rating = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _ratingStar; 
-        public string RatingStar
-        {
-            get {
-                double averageProductRating = 4.5;
-                int rating = (int)averageProductRating;
-                string rateImageSource = "/Assets/Images/Star_rating_0_of_5.png";
-                switch (rating)
-                {
-                    case 0:
-                        rateImageSource = "/Assets/Images/Star_rating_0_of_5.png";
-                        break;
-                    case 1:
-                        rateImageSource = "/Assets/Images/Star_rating_1_of_5.png";
-                        break;
-                    case 2:
-                        rateImageSource = "/Assets/Images/Star_rating_2_of_5.png";
-                        break;
-                    case 3:
-                        rateImageSource = "/Assets/Images/Star_rating_3_of_5.png";
-                        break;
-                    case 4:
-                        rateImageSource = "/Assets/Images/Star_rating_4_of_5.png";
-                        break;
-                    case 5:
-                        rateImageSource = "/Assets/Images/Star_rating_5_of_5.png";
-                        break;
-                }
-                return rateImageSource;
-            }
-            set
-            {
-                _ratingStar = value;
-                OnPropertyChanged();
-            }
-        }
-        private PRODUCT _selectedProduct;
-        public PRODUCT SelectedProduct
+
+        private PRODUCTWRAPPER _selectedProduct;
+        public PRODUCTWRAPPER SelectedProduct
         {
             get => _selectedProduct;
             set
             {
                 _selectedProduct = value;
+
                 OnPropertyChanged();
             }
         }
-        private int[] _checkRatingStar = new int[5];
+        private int[] _checkRatingStar = new int[6];
         public int[] CheckRatingStar
         {
             get => _checkRatingStar;
@@ -155,35 +165,97 @@ namespace E_Shopping.ViewModel
                 OnPropertyChanged();
             }
         }
+        private string RatingImage(PRODUCT product)
+        {
+            int ratingTemp = 0, count = 0;
+            ObservableCollection<PRODUCTRATE> listProductRate = new ObservableCollection<PRODUCTRATE>(DataProvider.Ins.DB.PRODUCTRATEs);
+            foreach (PRODUCTRATE prodRate in listProductRate)
+            {
+                if (prodRate.idProduct.Equals(product.id))
+                {
+                    ratingTemp += (int)prodRate.rate;
+                    count += 1;
+                }
+            }
+            if (count == 0)
+            {
+                ratingTemp = 0;
+            }
+            else
+            {
+                ratingTemp /= count;
+            }
+
+            string ratingURL = "/Assets/Images/Star_rating_0_of_5.png";
+            switch (ratingTemp)
+            {
+                case 0:
+                    ratingURL = "/Assets/Images/Star_rating_0_of_5.png";
+                    break;
+                case 1:
+                    ratingURL = "/Assets/Images/Star_rating_1_of_5.png";
+                    break;
+                case 2:
+                    ratingURL = "/Assets/Images/Star_rating_2_of_5.png";
+                    break;
+                case 3:
+                    ratingURL = "/Assets/Images/Star_rating_3_of_5.png";
+                    break;
+                case 4:
+                    ratingURL = "/Assets/Images/Star_rating_4_of_5.png";
+                    break;
+                case 5:
+                    ratingURL = "/Assets/Images/Star_rating_5_of_5.png";
+                    break;
+                default:
+                    ratingURL = "/Assets/Images/Star_rating_0_of_5.png";
+                    break;
+            }
+            return ratingURL;
+        }
         private void ProductToList()
         {
-            /*
+            string search = SearchValue.ToLower();
             ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
-            ListProducts = new ObservableCollection<PRODUCT>();
-            foreach (PRODUCT product in DataProvider.Ins.DB.PRODUCTs)
+            ListProductsFiltered = new ObservableCollection<PRODUCT>();
+            foreach (PRODUCT product in ListProductsOG)
             {
                 CATEGORY category = product.CATEGORY;
                 string productName = product.name;
-                if (category.type.Contains(SearchValue) || productName.Contains(SearchValue))
+                if (category.type.ToLower().Contains(search) || productName.ToLower().Contains(search))
                 {
-                    ListProducts.Add(product);
+                    ListProductsFiltered.Add(product);
                 }
             }
-            */
-            ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
-            ListProducts = ListProductsOG;
-            for (int i = 0; i < 5; i++)
+            ListProductsFilteredWrapper = new ObservableCollection<PRODUCTWRAPPER>();
+            foreach (PRODUCT product in ListProductsFiltered)
+            {
+                PRODUCTWRAPPER productWrapper = new PRODUCTWRAPPER()
+                {
+                    Product = product,
+                    MainImage = new BitmapImage(new Uri(product.mainImage)),
+                    CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0} VND", product.price),
+                    RatingStarImage = RatingImage(product),
+                };
+                ListProductsFilteredWrapper.Add(productWrapper);
+            }
+            ListProductsWrapper = ListProductsFilteredWrapper;
+            for (int i = 0; i < 6; i++)
             {
                 CheckRatingStar[i] = 0;
             }
         }
+
         private string _minPrice;
         public string MinPrice
         {
             get => _minPrice;
             set
             {
-                _minPrice = value;
+                if (!string.Equals(_minPrice, value))
+                {
+                    _minPrice = value;
+                }
                 OnPropertyChanged();
             }
         }
@@ -193,7 +265,10 @@ namespace E_Shopping.ViewModel
             get => _maxPrice;
             set
             {
-                _maxPrice = value;
+                if (!string.Equals(_maxPrice, value))
+                {
+                    _maxPrice = value;
+                }
                 OnPropertyChanged();
             }
         }
@@ -228,10 +303,18 @@ namespace E_Shopping.ViewModel
         public ICommand Rating3Star { get; set; }
         public ICommand Rating2Star { get; set; }
         public ICommand Rating1Star { get; set; }
+        public ICommand Rating0Star { get; set; }
+        public ICommand BackCommand { get; set; }
+        public void Back()
+        {
+            MainViewModel.Instance.CurrentView = new CategoryViewModel();
+            stackView.Push(CurrentView);
+        }
+
         //public SearchFilterProductViewModel() { }
         public int checkIndexRatingStar()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (CheckRatingStar[i] == 1)
                 {
@@ -240,10 +323,91 @@ namespace E_Shopping.ViewModel
             }
             return -1;
         }
-        public SearchFilterProductViewModel(/*string searchValue*/)
+        private long _minPriceNum;
+        public long MinPriceNum
         {
-            //SearchValue = searchValue;
+            get => _minPriceNum;
+            set
+            {
+                _minPriceNum = value;
+                OnPropertyChanged();
+            }
+        }
+        private long _maxPriceNum;
+        public long MaxPriceNum
+        {
+            get => _maxPriceNum;
+            set
+            {
+                _maxPriceNum = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool isCheckPrice()
+        {
+            if ((MinPrice == null || MinPrice == "") && (MaxPrice == null || MaxPrice == ""))
+            {
+                return false;
+            }
+            MinPriceNum = (MinPrice == null || MinPrice == "") ? 0 : Int64.Parse(MinPrice);
+            MaxPriceNum = (MaxPrice == null || MaxPrice == "") ? (Int64.MaxValue) : Int64.Parse(MaxPrice);
+            if (MinPriceNum > MaxPriceNum)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool isCheckRating()
+        {
+            int i;
+            for (i = 0; i < 6; i++)
+            {
+                if (CheckRatingStar[i] != 0)
+                {
+                    return true;
+                }
+            }
+            return (i == 5) ? true : false;
+        }
+        public SearchFilterProductViewModel() { }
+        public SearchFilterProductViewModel(string searchValue)
+        {
+            SearchValue = searchValue;
+            FilterPrice = 0;
+            ProductToList();
+            BackCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                Back();
+            });
             Rating5Star = new RelayCommand<object>((p) =>
+            {
+                if (checkIndexRatingStar() == -1)
+                {
+                    return true;
+                }
+                if (checkIndexRatingStar() != 5)
+                {
+                    return false;
+                }
+                return true;
+            }, (p) =>
+            {
+                if (CheckRatingStar[5] == 1)
+                {
+                    FilterChanged = false;
+                    CheckRatingStar[5] = 0;
+                }
+                else
+                {
+                    FilterChanged = true;
+                    CheckRatingStar[5] = 1;
+                }
+                NumCheckRating = 5;
+            });
+            Rating4Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
                 {
@@ -258,14 +422,17 @@ namespace E_Shopping.ViewModel
             {
                 if (CheckRatingStar[4] == 1)
                 {
+                    FilterChanged = false;
                     CheckRatingStar[4] = 0;
                 }
                 else
                 {
+                    FilterChanged = true;
                     CheckRatingStar[4] = 1;
                 }
+                NumCheckRating = 4;
             });
-            Rating4Star = new RelayCommand<object>((p) =>
+            Rating3Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
                 {
@@ -280,15 +447,17 @@ namespace E_Shopping.ViewModel
             {
                 if (CheckRatingStar[3] == 1)
                 {
+                    FilterChanged = false;
                     CheckRatingStar[3] = 0;
                 }
                 else
                 {
+                    FilterChanged = true;
                     CheckRatingStar[3] = 1;
                 }
-
+                NumCheckRating = 3;
             });
-            Rating3Star = new RelayCommand<object>((p) =>
+            Rating2Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
                 {
@@ -303,15 +472,17 @@ namespace E_Shopping.ViewModel
             {
                 if (CheckRatingStar[2] == 1)
                 {
+                    FilterChanged = false;
                     CheckRatingStar[2] = 0;
                 }
                 else
                 {
+                    FilterChanged = true;
                     CheckRatingStar[2] = 1;
                 }
-
+                NumCheckRating = 2;
             });
-            Rating2Star = new RelayCommand<object>((p) =>
+            Rating1Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
                 {
@@ -326,15 +497,17 @@ namespace E_Shopping.ViewModel
             {
                 if (CheckRatingStar[1] == 1)
                 {
+                    FilterChanged = false;
                     CheckRatingStar[1] = 0;
                 }
                 else
                 {
+                    FilterChanged = true;
                     CheckRatingStar[1] = 1;
                 }
-
+                NumCheckRating = 1;
             });
-            Rating1Star = new RelayCommand<object>((p) =>
+            Rating0Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
                 {
@@ -349,40 +522,53 @@ namespace E_Shopping.ViewModel
             {
                 if (CheckRatingStar[0] == 1)
                 {
+                    FilterChanged = false;
                     CheckRatingStar[0] = 0;
                 }
                 else
                 {
+                    FilterChanged = true;
                     CheckRatingStar[0] = 1;
                 }
-
+                NumCheckRating = 0;
             });
-            FilterPrice = 0;
-            ProductToList();
             ApplyCommand = new RelayCommand<object>((p) =>
             {
-                if (MinPrice == null || MaxPrice == null)
-                {
-                    return false;
-                }
-                long minPrice = Int64.Parse(MinPrice);
-                long maxPrice = Int64.Parse(MaxPrice);
-                if (minPrice > maxPrice)
-                {
-                    return false;
-                }
-                return true;
+                return (isCheckPrice() || isCheckRating());
             }, (p) =>
             {
                 FilterChanged = true;
-                ListProducts = new ObservableCollection<PRODUCT>();
-                long minPrice = Int64.Parse(MinPrice);
-                long maxPrice = Int64.Parse(MaxPrice);
-                foreach (PRODUCT product in ListProductsOG)
+                ListProductsWrapper = new ObservableCollection<PRODUCTWRAPPER>();
+                foreach (PRODUCTWRAPPER product in ListProductsFilteredWrapper)
                 {
-                    if (product.price >= minPrice && product.price <= maxPrice)
+                    if (isCheckPrice())
                     {
-                        ListProducts.Add(product);
+                        MinPriceNum = (MinPrice == null) ? 0 : Int64.Parse(MinPrice);
+                        MaxPriceNum = (MaxPrice == null) ? (Int64.MaxValue) : Int64.Parse(MaxPrice);
+                        if (product.Product.price >= MinPriceNum && product.Product.price <= MaxPriceNum)
+                        {
+                            if (isCheckRating())
+                            {
+                                if (product.RatingStar() == NumCheckRating)
+                                {
+                                    ListProductsWrapper.Add(product);
+                                }
+                            }
+                            else
+                            {
+                                ListProductsWrapper.Add(product);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (isCheckRating())
+                        {
+                            if (product.RatingStar() == NumCheckRating)
+                            {
+                                ListProductsWrapper.Add(product);
+                            }
+                        }
                     }
                 }
             });
@@ -392,7 +578,14 @@ namespace E_Shopping.ViewModel
             }, (p) =>
             {
                 FilterChanged = false;
-                ListProducts = ListProductsOG;
+                FilterPrice = 0;
+                ListProductsWrapper = ListProductsFilteredWrapper;
+                NumCheckRating = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                    CheckRatingStar[i] = 0;
+                }
+                MinPrice = MaxPrice = null;
             });
             TopSalesCommand = new RelayCommand<object>((p) =>
             {
@@ -406,39 +599,57 @@ namespace E_Shopping.ViewModel
                 return false;
             }, (p) =>
             {
-
+                FilterChanged = true;
             });
             LowToHighCommand = new RelayCommand<object>((p) =>
             {
+                if (ListProductsFilteredWrapper == null)
+                {
+                    return false;
+                }
                 return true;
             }, (p) =>
             {
-                if (FilterPrice == -1)
+                ObservableCollection<PRODUCTWRAPPER> ListProductsFilteredWrapperTemp = new ObservableCollection<PRODUCTWRAPPER>();
+                if (isCheckPrice() || isCheckRating())
                 {
-                    FilterPrice = 0;
-                    ListProducts = ListProductsOG;
+                    ListProductsFilteredWrapperTemp = ListProductsWrapper;
                 }
                 else
                 {
+                    ListProductsFilteredWrapperTemp = ListProductsFilteredWrapper;
+                }
+                FilterChanged = true;
+                if (FilterPrice != -1)
+                {
                     FilterPrice = -1;
-                    ListProducts = new ObservableCollection<PRODUCT>(ListProductsOG.OrderBy(o => o.price));
+                    ListProductsWrapper = new ObservableCollection<PRODUCTWRAPPER>(ListProductsFilteredWrapperTemp.OrderBy(o => o.Product.price));
                 }
                 OnPropertyChanged();
             });
             HighToLowCommand = new RelayCommand<object>((p) =>
             {
+                if (ListProductsFilteredWrapper == null)
+                {
+                    return false;
+                }
                 return true;
             }, (p) =>
             {
-                if (FilterPrice == 1)
+                ObservableCollection<PRODUCTWRAPPER> ListProductsFilteredWrapperTemp = new ObservableCollection<PRODUCTWRAPPER>();
+                if (isCheckPrice() || isCheckRating())
                 {
-                    FilterPrice = 0;
-                    ListProducts = ListProductsOG;
+                    ListProductsFilteredWrapperTemp = ListProductsWrapper;
                 }
                 else
                 {
+                    ListProductsFilteredWrapperTemp = ListProductsFilteredWrapper;
+                }
+                FilterChanged = true;
+                if (FilterPrice != 1)
+                {
                     FilterPrice = 1;
-                    ListProducts = new ObservableCollection<PRODUCT>(ListProductsOG.OrderByDescending(o => o.price));
+                    ListProductsWrapper = new ObservableCollection<PRODUCTWRAPPER>(ListProductsFilteredWrapperTemp.OrderByDescending(o => o.Product.price));
                 }
                 OnPropertyChanged();
             });

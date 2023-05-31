@@ -26,99 +26,21 @@ namespace E_Shopping.View
     /// </summary>
     public partial class ProductDetailView : UserControl
     {
-        private List<IMAGE> _images;
-        private int _currentIndexImage = 0;
-        private BitmapImage _currentImage;
-        private HashSet<PRODUCTRATE> _productRate;
-        public ProductDetailView(/*PRODUCT selectedProduct*/)
+        private int quantity = ProductDetailViewModel.QuantityProduct;
+        public ProductDetailView()
         {
             InitializeComponent();
-            /*this.DataContext = new ProductDetailViewModel(selectedProduct.id);*/
-            _images = new List<IMAGE>();
-            IMAGE image1 = new IMAGE();
-            image1.imageLink = "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg";
-            IMAGE image2 = new IMAGE();
-            image2.imageLink = "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/3/_/3_225.jpg";
-            IMAGE image3 = new IMAGE();
-            image3.imageLink = "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/1992615027.jpeg";
-            _images.Add(image1);
-            _images.Add(image2);
-            _images.Add(image3);
-
-            _currentImage = new BitmapImage();
-            _currentIndexImage = 0;
-
-            _productRate = new HashSet<PRODUCTRATE>();
-            double averageProductRating = 4.5;
-            int rating = (int)averageProductRating;
-            string rateImageSource = "/Assets/Images/Star_rating_0_of_5.png";
-            switch (rating)
-            {
-                case 0:
-                    rateImageSource = "/Assets/Images/Star_rating_0_of_5.png";
-                    break;
-                case 1:
-                    rateImageSource = "/Assets/Images/Star_rating_1_of_5.png";
-                    break;
-                case 2:
-                    rateImageSource = "/Assets/Images/Star_rating_2_of_5.png";
-                    break;
-                case 3:
-                    rateImageSource = "/Assets/Images/Star_rating_3_of_5.png";
-                    break;
-                case 4:
-                    rateImageSource = "/Assets/Images/Star_rating_4_of_5.png";
-                    break;
-                case 5:
-                    rateImageSource = "/Assets/Images/Star_rating_5_of_5.png";
-                    break;
-            }
-            var uriSource = new Uri($@"/E_Shopping;component{rateImageSource}", UriKind.Relative);
-            RateImageSource.Source = new BitmapImage(uriSource);
-            RateImageSource2.Source = new BitmapImage(uriSource);
-            Rating.Text = Rating2.Text = averageProductRating.ToString();
+            this.DataContext = MainViewModel.Instance.CurrentView;
         }
-        private BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
+        private void checkText(object sender, TextChangedEventArgs e)
         {
-            BitmapImage img = new BitmapImage();
-            using (MemoryStream memStream = new MemoryStream(imageByteArray))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(TextBoxQuantity.Text, "^[0-9]*$"))
             {
-                img.BeginInit();
-                img.CacheOption = BitmapCacheOption.OnLoad;
-                img.StreamSource = memStream;
-                img.EndInit();
-                img.Freeze();
+                TextBoxQuantity.Text = "0";
             }
-            return img;
-        }
-        private BitmapImage ConvertImageLinkToBitMapImage(string imageLink)
-        {
-            using (var webClient = new WebClient())
+            if (Int32.Parse(TextBoxQuantity.Text) > quantity)
             {
-                byte[] imageBytes = webClient.DownloadData(imageLink);
-                return ConvertByteArrayToBitMapImage(imageBytes);
-            }
-        }
-        private void preImage_Click(Object sender, RoutedEventArgs e)
-        {
-            if (_currentIndexImage < _images.Count && _currentIndexImage > 0)
-            {
-                imageProduct.ImageSource = ConvertImageLinkToBitMapImage(_images[--_currentIndexImage].imageLink);
-            }
-            else
-            {
-                _currentIndexImage = _images.Count - 1;
-                imageProduct.ImageSource = ConvertImageLinkToBitMapImage(_images[_currentIndexImage].imageLink);
-            }
-        }
-        private void nextImage_Click(Object sender, RoutedEventArgs e)
-        {
-            if (_currentIndexImage < _images.Count - 1)
-                imageProduct.ImageSource = ConvertImageLinkToBitMapImage(_images[++_currentIndexImage].imageLink);
-            else
-            {
-                _currentIndexImage = 0;
-                imageProduct.ImageSource = ConvertImageLinkToBitMapImage(_images[_currentIndexImage].imageLink);
+                TextBoxQuantity.Text = quantity.ToString();
             }
         }
     }

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:E_Shopping.View"
              xmlns:vm="clr-namespace:E_Shopping.ViewModel"
-             DataContext="{StaticResource ProductDetailVM}"
              x:Name="ProductDetail"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
@@ -32,6 +31,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Button
+                            Command="{Binding BackCommand}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                             ToolTip="MaterialDesignFloatingActionMiniLightButton" HorizontalAlignment="Left" Margin="50,0,0,0" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}">
@@ -45,11 +45,9 @@
                         <TextBlock FontSize="21" HorizontalAlignment="Left" VerticalAlignment="Center">Back to previous page | Listed in category:</TextBlock>
                     </Border>
                     <Grid Grid.Column="2">
-                        <Button BorderThickness="0" HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="WhiteSmoke">
-                            <Button.Content>
-                            <TextBlock x:Name="Category" TextDecorations="Underline" FontSize="21" Foreground="#FF267DD6" ></TextBlock>
-                            </Button.Content>
-                        </Button>
+                    <Button BorderThickness="0" HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="WhiteSmoke">
+                        <TextBlock Text="{Binding CategoryProduct, UpdateSourceTrigger=PropertyChanged}" TextDecorations="Underline" FontSize="21" Foreground="#FF267DD6"/>
+                    </Button>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Background="WhiteSmoke">
@@ -60,9 +58,10 @@
                 <Grid Grid.Column="0">
                     <DockPanel>
                         <Button
+                            Command="{Binding preImageCommand, UpdateSourceTrigger=PropertyChanged}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                            ToolTip="MaterialDesignFloatingActionMiniLightButton" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}" Margin="30,0,0,0" Click="preImage_Click">
+                            ToolTip="MaterialDesignFloatingActionMiniLightButton" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}" Margin="30,0,0,0">
                             <materialDesign:PackIcon
                             Width="30"
                             Height="30"
@@ -75,13 +74,14 @@
                                 Margin="30,5,0,0"
                                 BorderThickness="1.6" BorderBrush="Gray" Height="500">
                             <Border.Background>
-                                <ImageBrush Stretch="Fill" x:Name="imageProduct" ImageSource="https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-den-thumb-600x600.jpg"/>
+                                <ImageBrush Stretch="Fill" ImageSource="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}"/>
                             </Border.Background>
                         </Border>
                         <Button
+                            Command="{Binding nextImageCommand, UpdateSourceTrigger=PropertyChanged}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                            ToolTip="MaterialDesignFloatingActionMiniLightButton" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}" Click="nextImage_Click">
+                            ToolTip="MaterialDesignFloatingActionMiniLightButton" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}">
                             <materialDesign:PackIcon
                             Width="30"
                             Height="30"
@@ -98,20 +98,30 @@
                         <RowDefinition Height="100"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <TextBlock FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Arial Rounded MT Bold" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <StackPanel>
+                            <TextBlock FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Arial Rounded MT Bold" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <DockPanel Margin="0,20,0,0">
+                                <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Left" Text="ID: " VerticalAlignment="Center" Opacity="0.4"/>
+                                <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Left" Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Opacity="0.4"/>
+                            </DockPanel>
+                        </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
                         <DockPanel HorizontalAlignment="Left" Height="70">
                             <DockPanel >
-                                <Image x:Name="RateImageSource" Source="/Assets/Images/Star_rating_0_of_5.png" Height="60" Width="120"/>
+                                <Image Source="{Binding RatingStarImage}" Height="60" Width="120"/>
                             </DockPanel>
-                            <TextBlock x:Name="Rating" FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Width="50" VerticalAlignment="Center" Margin="15,0,0,0" Opacity="0.6"/>
-                            <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Text="from 400 Reviews" VerticalAlignment="Center" Opacity="0.4"/>
+                            <TextBlock Text="{Binding Rating}" FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Width="50" VerticalAlignment="Center" Margin="15,0,0,0" Opacity="0.6"/>
+                            <DockPanel>
+                                <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Text="from " VerticalAlignment="Center" Opacity="0.4"/>
+                                <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Text="{Binding Reviews, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Opacity="0.4"/>
+                                <TextBlock FontSize="22" FontWeight="DemiBold" HorizontalAlignment="Center" Text=" Reviews" VerticalAlignment="Center" Opacity="0.4"/>
+                            </DockPanel>
                         </DockPanel>
                     </Grid>
                     <Grid Grid.Row="2">
                         <TextBlock FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8C8C8C">VNĐ</TextBlock>
-                        <TextBlock FontSize="80" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" FontFamily="Arial Rounded MT Bold" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <TextBlock FontSize="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0" FontFamily="Arial Rounded MT Bold" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="3">
                         <StackPanel>
@@ -122,7 +132,7 @@
                                         <TextBlock Foreground="Black">-</TextBlock>
                                     </Button.Content>
                                 </Button>
-                                <TextBox Text="{Binding QuantityTextBox}" TextAlignment="Center" Width="100" FontSize="20" HorizontalAlignment="Center"/>
+                                <TextBox Name="TextBoxQuantity" Text="{Binding QuantityTextBox}" TextAlignment="Center" Width="100" FontSize="20" HorizontalAlignment="Center" TextChanged="checkText"/>
                                 <Button Command="{Binding IncreaseQuantityCommand}" HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="#FF267DD6" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Width="50">
                                     <Button.Content>
                                         <TextBlock Foreground="Black">+</TextBlock>
@@ -169,7 +179,7 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Category:" FontSize="25" Opacity="0.5" Grid.Column="0"/>
-                        <TextBlock Text="{Binding Category}" FontSize="25" Grid.Column="1"/>
+                        <TextBlock Text="{Binding CategoryProduct}" FontSize="25" Grid.Column="1"/>
                     </Grid>
                     <Grid Margin="200,0,0,20" >
                         <Grid.ColumnDefinitions>
@@ -202,16 +212,23 @@
                     <TextBlock FontSize="30" VerticalAlignment="Center" Margin="25,0,0,0" >Product Description</TextBlock>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="5" Background="#F5F5F5">
-                <ListView d:ItemsSource="{d:SampleData ItemCount=5}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock  Text="Description" FontSize="20" Margin="100,0,0,10"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            <Grid Grid.Row="5" Background="#F5F5F5" MaxWidth="1100">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel>
+                        <TextBlock Text="- Description Information: " FontSize="30" />
+                        <TextBlock Text="{Binding DescriptionInformation}" FontSize="30" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <TextBlock Text="- Technical Information: " FontSize="30" />
+                        <TextBlock Text="{Binding TechnicalInformation}" FontSize="30" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
             <Grid Grid.Row="6" Background="#F5F5F5" >
                 <Grid.RowDefinitions>
@@ -230,40 +247,55 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
                         <DockPanel HorizontalAlignment="Center">
-                            <TextBlock x:Name="Rating2" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Opacity="0.6"/>
+                            <TextBlock Text="{Binding Rating}" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Opacity="0.6"/>
                             <TextBlock FontSize="30" FontWeight="DemiBold" Text="out of 5.0" Margin="15,0,0,0" Opacity="0.6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </DockPanel>
-                        <Image x:Name="RateImageSource2" Source="/Assets/Images/Star_rating_0.5_of_5.png" Height="60" Width="120"/>
+                        <Image Source="{Binding RatingStarImage}" Height="60" Width="120"/>
                     </StackPanel>
                     <DockPanel Grid.Column="1">
                         <Button HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" IsEnabled="False" Opacity="1" Margin="10,0,0,0">
                             <Button.Content>
-                                <TextBlock Text="5 Star (1)">
-                                </TextBlock>
+                                <DockPanel>
+                                    <TextBlock Text="5 Star ("/>
+                                    <TextBlock Text="{Binding NumOf5Star}"/>
+                                    <TextBlock Text=")"/>
+                                </DockPanel>
                             </Button.Content>
                         </Button>
                         <Button HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" IsEnabled="False" Opacity="1" Margin="10,0,0,0">
                             <Button.Content>
-                                <TextBlock Text="4 Star (1)">
-                                </TextBlock>
+                                <DockPanel>
+                                    <TextBlock Text="4 Star ("/>
+                                    <TextBlock Text="{Binding NumOf4Star}"/>
+                                    <TextBlock Text=")"/>
+                                </DockPanel>
                             </Button.Content>
                         </Button>
                         <Button HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" IsEnabled="False" Opacity="1" Margin="10,0,0,0">
                             <Button.Content>
-                                <TextBlock Text="3 Star (1)">
-                                </TextBlock>
+                                <DockPanel>
+                                    <TextBlock Text="3 Star ("/>
+                                    <TextBlock Text="{Binding NumOf3Star}"/>
+                                    <TextBlock Text=")"/>
+                                </DockPanel>
                             </Button.Content>
                         </Button>
                         <Button HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" IsEnabled="False" Opacity="1" Margin="10,0,0,0">
                             <Button.Content>
-                                <TextBlock Text="2 Star (1)">
-                                </TextBlock>
+                                <DockPanel>
+                                    <TextBlock Text="2 Star ("/>
+                                    <TextBlock Text="{Binding NumOf2Star}"/>
+                                    <TextBlock Text=")"/>
+                                </DockPanel>
                             </Button.Content>
                         </Button>
                         <Button HorizontalAlignment="Left" Background="WhiteSmoke" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" IsEnabled="False" Opacity="1" Margin="10,0,0,0">
                             <Button.Content>
-                                <TextBlock Text="1 Star (1)">
-                                </TextBlock>
+                                <DockPanel>
+                                    <TextBlock Text="1 Star ("/>
+                                    <TextBlock Text="{Binding NumOf1Star}"/>
+                                    <TextBlock Text=")"/>
+                                </DockPanel>
                             </Button.Content>
                         </Button>
                     </DockPanel>

@@ -111,7 +111,6 @@ namespace E_Shopping.ViewModel
                 }
                 if (loginVM.IsLogin)
                 {
-
                     AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
                     p.Show();
 
@@ -132,10 +131,10 @@ namespace E_Shopping.ViewModel
 
 
             //Mốt chuyển thành idUser
-            int userID = 2;
+            //int userID = 2;
 
             //ChatBox
-            chatBox = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(p=>p.idCustomer== userID));
+            //chatBox = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(p=>p.idCustomer== userID));
            
         }
             
