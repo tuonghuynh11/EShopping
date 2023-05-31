@@ -347,6 +347,7 @@
     <Compile Include="Model\PRODUCTTECHNICAL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PRODUCTWRAPPER.cs" />
     <Compile Include="Model\Product_order.cs" />
     <Compile Include="Model\RECEIPT.cs">
       <DependentUpon>Model1.tt</DependentUpon>

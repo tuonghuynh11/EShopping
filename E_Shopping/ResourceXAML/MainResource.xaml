@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:viewmodel="clr-namespace:E_Shopping.ViewModel"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:view="clr-namespace:E_Shopping.View"
                     xmlns:uc="clr-namespace:E_Shopping.UserControlBar">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ControlBarViewModel x:Key="ControlBarVM"></viewmodel:ControlBarViewModel>
@@ -33,12 +32,7 @@
     </DataTemplate>
 
     
-    <DataTemplate DataType="{x:Type viewmodel:ProductDetailViewModel}">
-        <view:ProductDetailView></view:ProductDetailView>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:SearchFilterProductViewModel}">
-        <view:SearchFilterProduct></view:SearchFilterProduct>
-    </DataTemplate>
+    
     <viewmodel:ProductDetailViewModel x:Key="ProductDetailVM"></viewmodel:ProductDetailViewModel>
     <viewmodel:SearchFilterProductViewModel x:Key="SearchFilterProductVM"></viewmodel:SearchFilterProductViewModel>
 </ResourceDictionary>

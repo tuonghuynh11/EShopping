@@ -21,13 +21,14 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="120"></RowDefinition>
-                    <RowDefinition Height="300"></RowDefinition>
+                    <RowDefinition Height="130"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="330"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <Button
+                        Command="{Binding BackCommand}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                             ToolTip="MaterialDesignFloatingActionMiniLightButton" HorizontalAlignment="Left" Margin="50,20,0,0" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}" VerticalAlignment="Top">
@@ -44,7 +45,7 @@
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Price Range" Padding="0,10,0,0" Margin="15,0,0,0" FontSize="24"/>
                     <DockPanel Margin="0,20,0,0">
-                        <TextBox Text="{Binding MinPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,15,0" AutomationProperties.HelpText="MIN"/>
+                        <TextBox  x:Name="TextBoxMin" Text="{Binding MinPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,15,0" AutomationProperties.HelpText="MIN" TextChanged="checkText"/>
                         <Canvas VerticalAlignment="Center">
                             <Line
                             X1="50" Y1="0"
@@ -52,7 +53,7 @@
                             Stroke="Black"
                             StrokeThickness="1" />
                         </Canvas>
-                        <TextBox Text="{Binding MaxPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,0,0" Tag="" ToolTip="" AutomationProperties.HelpText="MAX"/>
+                        <TextBox Name="TextBoxMax" Text="{Binding MaxPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,0,0" Tag="" ToolTip="" AutomationProperties.HelpText="MAX" TextChanged="checkText"/>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="2">
@@ -82,6 +83,11 @@
                             <Image x:Name="StartRating1" Source="/Assets/Images/Star_rating_1_of_5.png"/>
                         </Button.Content>
                     </Button>
+                    <Button Command="{Binding Rating0Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating0" Source="/Assets/Images/Star_rating_0_of_5.png"/>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
                 <StackPanel Grid.Row="3">
                     <Button Command="{Binding ApplyCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="15,20,0,0" Width="275">
@@ -108,7 +114,7 @@
                         <DockPanel>
                             <materialDesign:PackIcon Kind="LightbulbOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24">
-                                Search result for '<TextBlock Text="{Binding SearchValue}"></TextBlock>'
+                                Search result for '<TextBlock Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"></TextBlock>'
                             </TextBlock>
                         </DockPanel>
                     </Grid>
@@ -141,7 +147,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProducts}" SelectedItem="{Binding SelectedProduct}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=5}" >
+                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProductsWrapper, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970"  SelectionChanged="ListViewProducts_SelectionChanged" SelectionMode="Single" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border HorizontalAlignment="Center"
@@ -158,14 +164,14 @@
                                                 CornerRadius="10"
                                                 BorderThickness="1.6" BorderBrush="Gray">
                                                 <Border.Background>
-                                                    <ImageBrush Stretch="Fill" ImageSource="{Binding ImageProduct, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <ImageBrush Stretch="Fill" ImageSource="{Binding MainImage, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </Border.Background>
                                             </Border>
                                         </DockPanel>
                                         <StackPanel VerticalAlignment="Center" Margin="0 9">
-                                            <TextBlock FontSize="20" Text="{Binding name}" Foreground="White" HorizontalAlignment="Center"/>
-                                            <TextBlock FontSize="20" Text="{Binding price}" Foreground="#DDFFFFFF" HorizontalAlignment="Center" Margin="0,20,0,0"></TextBlock>
-                                            <Image Source="{Binding RatingStar}" Height="30" Width="120" Margin="0,20,0,0"/>
+                                            <TextBlock FontSize="20" Text="{Binding Product.name}" Foreground="White" HorizontalAlignment="Center"/>
+                                            <TextBlock FontSize="20" Text="{Binding CustomPrice}" Foreground="#DDFFFFFF" HorizontalAlignment="Center" Margin="0,20,0,0"></TextBlock>
+                                            <Image Source="{Binding RatingStarImage, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="120" Margin="0,20,0,0"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>

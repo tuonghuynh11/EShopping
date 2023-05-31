@@ -120,8 +120,7 @@ namespace E_Shopping.ViewModel
                 }
                 if (loginVM.IsLogin)
                 {
-
-                    //AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
+                    AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
                     p.Show();
                     //ChatBox
                     if (AccessUser.currentUser.idRole == 1)

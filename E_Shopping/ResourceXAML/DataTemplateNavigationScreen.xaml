@@ -3,6 +3,7 @@
                     xmlns:vm="clr-namespace:E_Shopping.ViewModel"
                     xmlns:view="clr-namespace:E_Shopping.UserControlBar.Screen"
                     xmlns:view1="clr-namespace:E_Shopping.UserControlBar"
+                    xmlns:view2="clr-namespace:E_Shopping.View"
                     >
     <DataTemplate DataType="{x:Type vm:ShippingDetailsViewModel}">
         <view:ShippingDetails />
@@ -39,5 +40,10 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ConfirmOrderViewModel}">
         <view1:ConfirmOrderUC/>
+    <DataTemplate DataType="{x:Type vm:ProductDetailViewModel}">
+        <view2:ProductDetailView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SearchFilterProductViewModel}">
+        <view2:SearchFilterProduct/>
     </DataTemplate>
 </ResourceDictionary>

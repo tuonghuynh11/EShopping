@@ -1,4 +1,6 @@
-﻿using System;
+﻿using E_Shopping.Model;
+using E_Shopping.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,33 @@ namespace E_Shopping.View
     /// </summary>
     public partial class SearchFilterProduct : UserControl
     {
-        public SearchFilterProduct()
+        public SearchFilterProduct(/*string searchValue*/)
         {
             InitializeComponent();
+            this.DataContext = MainViewModel.Instance.CurrentView;
         }
+
+        private void checkText(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(TextBoxMin.Text, "^[0-9]*$"))
+            {
+                TextBoxMin.Text = string.Empty;
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(TextBoxMax.Text, "^[0-9]*$"))
+            {
+                TextBoxMax.Text = string.Empty;
+            }
+        }
+
+        private void ListViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PRODUCTWRAPPER product = ListViewProducts.SelectedItems[0] as PRODUCTWRAPPER;
+            if (product != null)
+            {
+                MainViewModel.Instance.CurrentView = new ProductDetailViewModel(product.Product);
+                MainViewModel.stackView.Push(MainViewModel.Instance.CurrentView);
+            }
+        }
+
     }
 }
