@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Security.Cryptography.Xml;
+using E_Shopping.Class;
+using E_Shopping.UserControlBar;
 
 namespace E_Shopping.ViewModel
 {
@@ -155,23 +157,31 @@ namespace E_Shopping.ViewModel
                 OnPropertyChanged();
             }
         }
-        private void ProductToList()
+        public void ProductToList()
         {
-            /*
+
             ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
             ListProducts = new ObservableCollection<PRODUCT>();
             foreach (PRODUCT product in DataProvider.Ins.DB.PRODUCTs)
             {
                 CATEGORY category = product.CATEGORY;
                 string productName = product.name;
+                if(DashboardUC.m == 1)
+                {
+                    if (category.type.Contains(SearchValue))
+                    {
+                        ListProducts.Add(product);
+                    }
+                }  
+                else
                 if (category.type.Contains(SearchValue) || productName.Contains(SearchValue))
                 {
                     ListProducts.Add(product);
                 }
             }
-            */
-            ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
-            ListProducts = ListProductsOG;
+
+            //ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
+            //ListProducts = ListProductsOG;
             for (int i = 0; i < 5; i++)
             {
                 CheckRatingStar[i] = 0;
@@ -242,7 +252,8 @@ namespace E_Shopping.ViewModel
         }
         public SearchFilterProductViewModel(/*string searchValue*/)
         {
-            //SearchValue = searchValue;
+            SearchValue = AccessUser.searchWd;
+            ProductToList();
             Rating5Star = new RelayCommand<object>((p) =>
             {
                 if (checkIndexRatingStar() == -1)
@@ -358,7 +369,6 @@ namespace E_Shopping.ViewModel
 
             });
             FilterPrice = 0;
-            ProductToList();
             ApplyCommand = new RelayCommand<object>((p) =>
             {
                 if (MinPrice == null || MaxPrice == null)
@@ -442,6 +452,8 @@ namespace E_Shopping.ViewModel
                 }
                 OnPropertyChanged();
             });
+
+
         }
     }
 }

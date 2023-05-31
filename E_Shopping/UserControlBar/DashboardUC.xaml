@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:E_Shopping.UserControlBar"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:E_Shopping.ViewModel"   
@@ -15,6 +16,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
+             x:Name="Dashboard"
              d:DesignHeight="700" d:DesignWidth="1300"
              DataContext="{StaticResource CategoryVM}">
     <UserControl.Resources>
@@ -26,14 +28,14 @@
         <ImageBrush ImageSource="\Image\christmas.jpg"></ImageBrush>
 
     </UserControl.Background>
+    
     <ScrollViewer>
         <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="250"></RowDefinition>
-                <RowDefinition Height="350"></RowDefinition>
-                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition Height="250"></RowDefinition>
                 <RowDefinition Height="500"></RowDefinition>
                 <RowDefinition></RowDefinition>
 
@@ -104,12 +106,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
                     <StackPanel Orientation="Vertical">
                         <Label Content="DANH MỤC SẢN PHẨM" FontSize="40" FontWeight="Black"></Label>
-                        <ItemsControl ItemsSource="{Binding CATEGORies}">
-                            <ItemsControl.Resources>
-                                <DataTemplate DataType="{x:Type model:CATEGORY}">
-                                    <uc:CategoryCardUC  Margin="8"/>
-                                </DataTemplate>
-                            </ItemsControl.Resources>
+                        <ListView  x:Name="CategoryList" SelectionChanged="lv_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding CATEGORies}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel
@@ -118,22 +115,41 @@
                                     Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
-                        </ItemsControl>
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="{x:Type model:CATEGORY}">
+                                    <uc:CategoryCardUC  Margin="8" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                           
+                            <!--"<i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding CategoryClick}" CommandParameter="{Binding ElementName=Dashboard}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>-->
+
+
+
+                        </ListView>
+
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border Grid.Row="3" Background="Lavender" Margin="50 0 50 0">
-                <ListView x:Name="ItemBox" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}">
+            <Border Grid.Row="3" Background="#FF91D6C2" Margin="50 0 50 0">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="TOP 10 SẢN PHẨM BÁN CHẠY" FontSize="40" FontWeight="Black"></Label>
+
+
+                    <ListView x:Name="ItemBox" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectionChanged="Product_SelectionChanged">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="5"/>
+                            <UniformGrid Columns="5" Margin="4"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="20" BorderBrush="Red" Background="White">
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Image Source="{Binding ImageData}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                            <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
+                                <StackPanel x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Image x:Name="Thumbnail" Source="{Binding mainImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
                                     <TextBlock Text="{Binding name}"  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding price}"></TextBlock>
                                     <StackPanel Orientation="Horizontal">
@@ -147,8 +163,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </StackPanel>
             </Border>
-            <Border Grid.Row="4">
+            <!--<Border Grid.Row="4">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -170,12 +187,34 @@
 
                     </Border>
                     <Border Grid.Column="1">
-                        <TextBlock FontSize="50" FontStyle="Italic" FontWeight="Black" Foreground="Green">"Không có gì là không thể"</TextBlock>
-
+                        <ListView x:Name="RandomItems" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="5"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
+                                        <StackPanel x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <Image x:Name="Thumbnail" Source="{Binding mainImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                                            <TextBlock Text="{Binding name}"  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding price}"></TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
+                                                <Label></Label>
+                                                <Label/>
+                                                <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
                     </Border>
                 </Grid>
-            </Border>
+            </Border>-->
         </Grid>
     </ScrollViewer>
 </UserControl>

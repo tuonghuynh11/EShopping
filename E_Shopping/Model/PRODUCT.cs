@@ -28,7 +28,9 @@ namespace E_Shopping.Model
             get
             {
                 IMAGE image = DataProvider.ins.DB.IMAGES.Where(p => p.idSP == this.id && p.title == "Thumnail").FirstOrDefault();
-                return image.imageLink;
+                //if(image.imageLink != null)
+                //    return image.imageLink;
+                return null;
 
             }
             set { }
@@ -38,6 +40,7 @@ namespace E_Shopping.Model
         public string nameOfManufacturer { get; set; }
         public string descriptionInformation { get; set; }
         public string technicalInformation { get; set; }
+        public string thumbnailimage { get; set; }
         public Nullable<long> price { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> idCategory { get; set; }

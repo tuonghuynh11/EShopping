@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using E_Shopping.Class;
+using E_Shopping.ViewModel;
 
 namespace E_Shopping.View
 {
@@ -20,9 +22,14 @@ namespace E_Shopping.View
     /// </summary>
     public partial class SearchFilterProduct : UserControl
     {
+        public static SearchFilterProductViewModel _searchFilterProductViewModel { get; set; }
+
         public SearchFilterProduct()
         {
             InitializeComponent();
+            this.DataContext = _searchFilterProductViewModel = new SearchFilterProductViewModel();
+            //this.DataContext = MainViewModel.Instance.CurrentView;
+
         }
     }
 }

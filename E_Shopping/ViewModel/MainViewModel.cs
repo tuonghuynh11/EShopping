@@ -30,7 +30,7 @@ namespace E_Shopping.ViewModel
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
         }
-      
+        
         private static MainViewModel _Instance;
         public static MainViewModel Instance
         {
@@ -113,6 +113,15 @@ namespace E_Shopping.ViewModel
                 {
 
                     AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
+                    // Startup Page
+                    if (AccessUser.currentUser.idRole == 1)
+                    {
+                        chatBox = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(m => m.idCustomer == AccessUser.currentUser.id));
+
+                    }
+                    Instance.CurrentView = new CategoryViewModel();
+                    stackView.Push(CurrentView);
+                    (p as MainWindow).ControlBar.DataContext = new ControlBarViewModel();
                     p.Show();
 
                 }
@@ -124,18 +133,13 @@ namespace E_Shopping.ViewModel
 
 
 
-            // Startup Page
-
-            CurrentView = new CategoryViewModel();
-            stackView.Push(CurrentView);
+            
             // CurrentView = new OrderedHistoryViewModel();
 
 
             //Mốt chuyển thành idUser
             int userID = 2;
 
-            //ChatBox
-            chatBox = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(p=>p.idCustomer== userID));
            
         }
             

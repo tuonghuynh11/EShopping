@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="E_ShOPPING_NEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="E_ShOPPING_NEWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CART">
           <Key>
             <PropertyRef Name="id" />
@@ -165,6 +165,7 @@
           <Property Name="price" Type="bigint" />
           <Property Name="status" Type="int" />
           <Property Name="idCategory" Type="int" />
+          <Property Name="thumbnailimage" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="PRODUCTRATE">
           <Key>
@@ -199,8 +200,8 @@
           <Property Name="totalCost" Type="bigint" />
           <Property Name="date" Type="date" />
           <Property Name="status" Type="int" />
-          <Property Name="idDiscount" Type="int" />
           <Property Name="saleValue" Type="bigint" />
+          <Property Name="idDiscount" Type="int" />
         </EntityType>
         <EntityType Name="RECEIVERINFORMATION">
           <Key>
@@ -544,6 +545,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="E_ShOPPING_NEWModelStoreContainer">
           <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
@@ -675,19 +707,149 @@
             <End Role="RECEIPT" EntitySet="RECEIPT" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="E_ShOPPING_NEWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="E_ShOPPING_NEWEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARTs" EntityType="E_ShOPPING_NEWModel.CART" />
+          <EntitySet Name="CATEGORies" EntityType="E_ShOPPING_NEWModel.CATEGORY" />
+          <EntitySet Name="CHATBOXes" EntityType="E_ShOPPING_NEWModel.CHATBOX" />
+          <EntitySet Name="CREDITCARDs" EntityType="E_ShOPPING_NEWModel.CREDITCARD" />
+          <EntitySet Name="DELIVERies" EntityType="E_ShOPPING_NEWModel.DELIVERY" />
+          <EntitySet Name="DISCOUNTs" EntityType="E_ShOPPING_NEWModel.DISCOUNT" />
+          <EntitySet Name="IMAGES" EntityType="E_ShOPPING_NEWModel.IMAGE" />
+          <EntitySet Name="LISTOFPRODUCTBUYs" EntityType="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" />
+          <EntitySet Name="MANAGEPRODUCTSYSTEMs" EntityType="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" />
+          <EntitySet Name="Notifications" EntityType="E_ShOPPING_NEWModel.Notification" />
+          <EntitySet Name="ORDERS" EntityType="E_ShOPPING_NEWModel.ORDER" />
+          <EntitySet Name="ORDERSRECEIPTs" EntityType="E_ShOPPING_NEWModel.ORDERSRECEIPT" />
+          <EntitySet Name="PAYMENTINFORMATIONs" EntityType="E_ShOPPING_NEWModel.PAYMENTINFORMATION" />
+          <EntitySet Name="PEOPLE" EntityType="E_ShOPPING_NEWModel.Person" />
+          <EntitySet Name="PEOPLEINFOes" EntityType="E_ShOPPING_NEWModel.PEOPLEINFO" />
+          <EntitySet Name="PRODUCTs" EntityType="E_ShOPPING_NEWModel.PRODUCT" />
+          <EntitySet Name="PRODUCTRATEs" EntityType="E_ShOPPING_NEWModel.PRODUCTRATE" />
+          <EntitySet Name="PRODUCTTECHNICALs" EntityType="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" />
+          <EntitySet Name="RECEIPTs" EntityType="E_ShOPPING_NEWModel.RECEIPT" />
+          <EntitySet Name="RECEIVERINFORMATIONs" EntityType="E_ShOPPING_NEWModel.RECEIVERINFORMATION" />
+          <EntitySet Name="Roles" EntityType="E_ShOPPING_NEWModel.Role" />
+          <AssociationSet Name="FK_CART" Association="E_ShOPPING_NEWModel.FK_CART">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="CART" EntitySet="CARTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER2" Association="E_ShOPPING_NEWModel.FK_ORDER2">
+            <End Role="CART" EntitySet="CARTs" />
+            <End Role="ORDER" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT" Association="E_ShOPPING_NEWModel.FK_PRODUCT">
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CB1" Association="E_ShOPPING_NEWModel.FK_CB1">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="CHATBOX" EntitySet="CHATBOXes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CB2" Association="E_ShOPPING_NEWModel.FK_CB2">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="CHATBOX" EntitySet="CHATBOXes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTINFORMATION" Association="E_ShOPPING_NEWModel.FK_PAYMENTINFORMATION">
+            <End Role="CREDITCARD" EntitySet="CREDITCARDs" />
+            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT4" Association="E_ShOPPING_NEWModel.FK_RECEIPT4">
+            <End Role="DELIVERY" EntitySet="DELIVERies" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCOUNT" Association="E_ShOPPING_NEWModel.FK_DISCOUNT">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="DISCOUNT" EntitySet="DISCOUNTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGES" Association="E_ShOPPING_NEWModel.FK_IMAGES">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="IMAGE" EntitySet="IMAGES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTOFPRODUCTBUY" Association="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY">
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+            <End Role="LISTOFPRODUCTBUY" EntitySet="LISTOFPRODUCTBUYs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MDS" Association="E_ShOPPING_NEWModel.FK_MDS">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="MANAGEPRODUCTSYSTEM" EntitySet="MANAGEPRODUCTSYSTEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTIFY" Association="E_ShOPPING_NEWModel.FK_NOTIFY">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER1" Association="E_ShOPPING_NEWModel.FK_ORDER1">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="ORDER" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_RECEIPT1" Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT1">
+            <End Role="ORDER" EntitySet="ORDERS" />
+            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERSRECEIPT1" Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT1">
+            <End Role="ORDER" EntitySet="ORDERS" />
+            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_RECEIPT2" Association="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2">
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERSRECEIPT2" Association="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT2">
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEOPLEINFO3" Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO3">
+            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
+            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT2" Association="E_ShOPPING_NEWModel.FK_RECEIPT2">
+            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEOPLE" Association="E_ShOPPING_NEWModel.FK_PEOPLE">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Person" EntitySet="PEOPLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEOPLEINFO1" Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO1">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTRATE1" Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE1">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="PRODUCTRATE" EntitySet="PRODUCTRATEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT1" Association="E_ShOPPING_NEWModel.FK_RECEIPT1">
+            <End Role="Person" EntitySet="PEOPLE" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PEOPLEINFO2" Association="E_ShOPPING_NEWModel.FK_PEOPLEINFO2">
+            <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATIONs" />
+            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTRATE2" Association="E_ShOPPING_NEWModel.FK_PRODUCTRATE2">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="PRODUCTRATE" EntitySet="PRODUCTRATEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PT" Association="E_ShOPPING_NEWModel.FK_PT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="PRODUCTTECHNICAL" EntitySet="PRODUCTTECHNICALs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT3" Association="E_ShOPPING_NEWModel.FK_RECEIPT3">
+            <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATIONs" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CART">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idCustomer" Type="Int32" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_CART" FromRole="CART" ToRole="PEOPLE" />
-          <NavigationProperty Name="ORDERS" Relationship="Self.FK_ORDER2" FromRole="CART" ToRole="ORDERS" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_CART" FromRole="CART" ToRole="Person" />
+          <NavigationProperty Name="ORDERS" Relationship="E_ShOPPING_NEWModel.FK_ORDER2" FromRole="CART" ToRole="ORDER" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -695,7 +857,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PRODUCTs" Relationship="Self.FK_PRODUCT" FromRole="CATEGORY" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCTs" Relationship="E_ShOPPING_NEWModel.FK_PRODUCT" FromRole="CATEGORY" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="CHATBOX">
           <Key>
@@ -708,8 +870,8 @@
           <Property Name="idAssistant" Type="Int32" Nullable="false" />
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="isSend" Type="Int32" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_CB1" FromRole="CHATBOX" ToRole="PEOPLE" />
-          <NavigationProperty Name="Person1" Relationship="Self.FK_CB2" FromRole="CHATBOX" ToRole="PEOPLE" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_CB1" FromRole="CHATBOX" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="E_ShOPPING_NEWModel.FK_CB2" FromRole="CHATBOX" ToRole="Person" />
         </EntityType>
         <EntityType Name="CREDITCARD">
           <Key>
@@ -717,7 +879,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PAYMENTINFORMATIONs" Relationship="Self.FK_PAYMENTINFORMATION" FromRole="CREDITCARD" ToRole="PAYMENTINFORMATION" />
+          <NavigationProperty Name="PAYMENTINFORMATIONs" Relationship="E_ShOPPING_NEWModel.FK_PAYMENTINFORMATION" FromRole="CREDITCARD" ToRole="PAYMENTINFORMATION" />
         </EntityType>
         <EntityType Name="DELIVERY">
           <Key>
@@ -727,7 +889,7 @@
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="time" Type="DateTime" Precision="0" />
           <Property Name="cost" Type="Int64" />
-          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT4" FromRole="DELIVERY" ToRole="RECEIPT" />
+          <NavigationProperty Name="RECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT4" FromRole="DELIVERY" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="DISCOUNT">
           <Key>
@@ -739,7 +901,7 @@
           <Property Name="value" Type="Int64" />
           <Property Name="exp_time" Type="DateTime" Precision="0" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_DISCOUNT" FromRole="DISCOUNT" ToRole="PEOPLE" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_DISCOUNT" FromRole="DISCOUNT" ToRole="Person" />
         </EntityType>
         <EntityType Name="IMAGE">
           <Key>
@@ -750,7 +912,7 @@
           <Property Name="idSP" Type="Int32" Nullable="false" />
           <Property Name="imageLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_IMAGES" FromRole="IMAGES" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCT" Relationship="E_ShOPPING_NEWModel.FK_IMAGES" FromRole="IMAGE" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="LISTOFPRODUCTBUY">
           <Key>
@@ -762,7 +924,7 @@
           <Property Name="idReceipt" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
           <Property Name="purchaseDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="RECEIPT" Relationship="Self.FK_LISTOFPRODUCTBUY" FromRole="LISTOFPRODUCTBUY" ToRole="RECEIPT" />
+          <NavigationProperty Name="RECEIPT" Relationship="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY" FromRole="LISTOFPRODUCTBUY" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="MANAGEPRODUCTSYSTEM">
           <Key>
@@ -770,7 +932,7 @@
           </Key>
           <Property Name="idSP" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Int32" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_MDS" FromRole="MANAGEPRODUCTSYSTEM" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCT" Relationship="E_ShOPPING_NEWModel.FK_MDS" FromRole="MANAGEPRODUCTSYSTEM" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -780,7 +942,7 @@
           <Property Name="IDPEOPLE" Type="Int32" />
           <Property Name="NOTIFY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CHECKED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_NOTIFY" FromRole="Notification" ToRole="PEOPLE" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_NOTIFY" FromRole="Notification" ToRole="Person" />
         </EntityType>
         <EntityType Name="ORDER">
           <Key>
@@ -792,10 +954,10 @@
           <Property Name="quantity" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
-          <NavigationProperty Name="CART" Relationship="Self.FK_ORDER2" FromRole="ORDERS" ToRole="CART" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_ORDER1" FromRole="ORDERS" ToRole="PRODUCT" />
-          <NavigationProperty Name="ORDERSRECEIPTs" Relationship="Self.FK_ORDERS_RECEIPT1" FromRole="ORDERS" ToRole="ORDERSRECEIPT" />
-          <NavigationProperty Name="ORDERSRECEIPTs1" Relationship="Self.FK_ORDERSRECEIPT1" FromRole="ORDERS" ToRole="ORDERSRECEIPT" />
+          <NavigationProperty Name="CART" Relationship="E_ShOPPING_NEWModel.FK_ORDER2" FromRole="ORDER" ToRole="CART" />
+          <NavigationProperty Name="PRODUCT" Relationship="E_ShOPPING_NEWModel.FK_ORDER1" FromRole="ORDER" ToRole="PRODUCT" />
+          <NavigationProperty Name="ORDERSRECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT1" FromRole="ORDER" ToRole="ORDERSRECEIPT" />
+          <NavigationProperty Name="ORDERSRECEIPTs1" Relationship="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT1" FromRole="ORDER" ToRole="ORDERSRECEIPT" />
         </EntityType>
         <EntityType Name="ORDERSRECEIPT">
           <Key>
@@ -804,10 +966,10 @@
           </Key>
           <Property Name="idReceipt" Type="Int32" Nullable="false" />
           <Property Name="idOrder" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ORDER" Relationship="Self.FK_ORDERS_RECEIPT1" FromRole="ORDERSRECEIPT" ToRole="ORDERS" />
-          <NavigationProperty Name="ORDER1" Relationship="Self.FK_ORDERSRECEIPT1" FromRole="ORDERSRECEIPT" ToRole="ORDERS" />
-          <NavigationProperty Name="RECEIPT" Relationship="Self.FK_ORDERS_RECEIPT2" FromRole="ORDERSRECEIPT" ToRole="RECEIPT" />
-          <NavigationProperty Name="RECEIPT1" Relationship="Self.FK_ORDERSRECEIPT2" FromRole="ORDERSRECEIPT" ToRole="RECEIPT" />
+          <NavigationProperty Name="ORDER" Relationship="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT1" FromRole="ORDERSRECEIPT" ToRole="ORDER" />
+          <NavigationProperty Name="ORDER1" Relationship="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT1" FromRole="ORDERSRECEIPT" ToRole="ORDER" />
+          <NavigationProperty Name="RECEIPT" Relationship="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2" FromRole="ORDERSRECEIPT" ToRole="RECEIPT" />
+          <NavigationProperty Name="RECEIPT1" Relationship="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT2" FromRole="ORDERSRECEIPT" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="PAYMENTINFORMATION">
           <Key>
@@ -820,9 +982,9 @@
           <Property Name="ownName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="csv" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="idPerson" Type="Int32" />
-          <NavigationProperty Name="CREDITCARD" Relationship="Self.FK_PAYMENTINFORMATION" FromRole="PAYMENTINFORMATION" ToRole="CREDITCARD" />
-          <NavigationProperty Name="PEOPLEINFOes" Relationship="Self.FK_PEOPLEINFO3" FromRole="PAYMENTINFORMATION" ToRole="PEOPLEINFO" />
-          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT2" FromRole="PAYMENTINFORMATION" ToRole="RECEIPT" />
+          <NavigationProperty Name="CREDITCARD" Relationship="E_ShOPPING_NEWModel.FK_PAYMENTINFORMATION" FromRole="PAYMENTINFORMATION" ToRole="CREDITCARD" />
+          <NavigationProperty Name="PEOPLEINFOes" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO3" FromRole="PAYMENTINFORMATION" ToRole="PEOPLEINFO" />
+          <NavigationProperty Name="RECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT2" FromRole="PAYMENTINFORMATION" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -840,15 +1002,15 @@
           <Property Name="avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="idRole" Type="Int32" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CARTs" Relationship="Self.FK_CART" FromRole="PEOPLE" ToRole="CART" />
-          <NavigationProperty Name="CHATBOXes" Relationship="Self.FK_CB1" FromRole="PEOPLE" ToRole="CHATBOX" />
-          <NavigationProperty Name="CHATBOXes1" Relationship="Self.FK_CB2" FromRole="PEOPLE" ToRole="CHATBOX" />
-          <NavigationProperty Name="DISCOUNTs" Relationship="Self.FK_DISCOUNT" FromRole="PEOPLE" ToRole="DISCOUNT" />
-          <NavigationProperty Name="Notifications" Relationship="Self.FK_NOTIFY" FromRole="PEOPLE" ToRole="Notification" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_PEOPLE" FromRole="PEOPLE" ToRole="Role" />
-          <NavigationProperty Name="PEOPLEINFOes" Relationship="Self.FK_PEOPLEINFO1" FromRole="PEOPLE" ToRole="PEOPLEINFO" />
-          <NavigationProperty Name="PRODUCTRATEs" Relationship="Self.FK_PRODUCTRATE1" FromRole="PEOPLE" ToRole="PRODUCTRATE" />
-          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT1" FromRole="PEOPLE" ToRole="RECEIPT" />
+          <NavigationProperty Name="CARTs" Relationship="E_ShOPPING_NEWModel.FK_CART" FromRole="Person" ToRole="CART" />
+          <NavigationProperty Name="CHATBOXes" Relationship="E_ShOPPING_NEWModel.FK_CB1" FromRole="Person" ToRole="CHATBOX" />
+          <NavigationProperty Name="CHATBOXes1" Relationship="E_ShOPPING_NEWModel.FK_CB2" FromRole="Person" ToRole="CHATBOX" />
+          <NavigationProperty Name="DISCOUNTs" Relationship="E_ShOPPING_NEWModel.FK_DISCOUNT" FromRole="Person" ToRole="DISCOUNT" />
+          <NavigationProperty Name="Notifications" Relationship="E_ShOPPING_NEWModel.FK_NOTIFY" FromRole="Person" ToRole="Notification" />
+          <NavigationProperty Name="Role" Relationship="E_ShOPPING_NEWModel.FK_PEOPLE" FromRole="Person" ToRole="Role" />
+          <NavigationProperty Name="PEOPLEINFOes" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO1" FromRole="Person" ToRole="PEOPLEINFO" />
+          <NavigationProperty Name="PRODUCTRATEs" Relationship="E_ShOPPING_NEWModel.FK_PRODUCTRATE1" FromRole="Person" ToRole="PRODUCTRATE" />
+          <NavigationProperty Name="RECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT1" FromRole="Person" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="PEOPLEINFO">
           <Key>
@@ -859,9 +1021,9 @@
           <Property Name="idCustomer" Type="Int32" Nullable="false" />
           <Property Name="idReceiverInfo" Type="Int32" />
           <Property Name="idPaymentOption" Type="Int32" />
-          <NavigationProperty Name="PAYMENTINFORMATION" Relationship="Self.FK_PEOPLEINFO3" FromRole="PEOPLEINFO" ToRole="PAYMENTINFORMATION" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_PEOPLEINFO1" FromRole="PEOPLEINFO" ToRole="PEOPLE" />
-          <NavigationProperty Name="RECEIVERINFORMATION" Relationship="Self.FK_PEOPLEINFO2" FromRole="PEOPLEINFO" ToRole="RECEIVERINFORMATION" />
+          <NavigationProperty Name="PAYMENTINFORMATION" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO3" FromRole="PEOPLEINFO" ToRole="PAYMENTINFORMATION" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO1" FromRole="PEOPLEINFO" ToRole="Person" />
+          <NavigationProperty Name="RECEIVERINFORMATION" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO2" FromRole="PEOPLEINFO" ToRole="RECEIVERINFORMATION" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -875,12 +1037,13 @@
           <Property Name="price" Type="Int64" />
           <Property Name="status" Type="Int32" />
           <Property Name="idCategory" Type="Int32" />
-          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_PRODUCT" FromRole="PRODUCT" ToRole="CATEGORY" />
-          <NavigationProperty Name="IMAGES" Relationship="Self.FK_IMAGES" FromRole="PRODUCT" ToRole="IMAGES" />
-          <NavigationProperty Name="MANAGEPRODUCTSYSTEM" Relationship="Self.FK_MDS" FromRole="PRODUCT" ToRole="MANAGEPRODUCTSYSTEM" />
-          <NavigationProperty Name="ORDERS" Relationship="Self.FK_ORDER1" FromRole="PRODUCT" ToRole="ORDERS" />
-          <NavigationProperty Name="PRODUCTRATEs" Relationship="Self.FK_PRODUCTRATE2" FromRole="PRODUCT" ToRole="PRODUCTRATE" />
-          <NavigationProperty Name="PRODUCTTECHNICALs" Relationship="Self.FK_PT" FromRole="PRODUCT" ToRole="PRODUCTTECHNICAL" />
+          <Property Name="thumbnailimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="E_ShOPPING_NEWModel.FK_PRODUCT" FromRole="PRODUCT" ToRole="CATEGORY" />
+          <NavigationProperty Name="IMAGES" Relationship="E_ShOPPING_NEWModel.FK_IMAGES" FromRole="PRODUCT" ToRole="IMAGE" />
+          <NavigationProperty Name="MANAGEPRODUCTSYSTEM" Relationship="E_ShOPPING_NEWModel.FK_MDS" FromRole="PRODUCT" ToRole="MANAGEPRODUCTSYSTEM" />
+          <NavigationProperty Name="ORDERS" Relationship="E_ShOPPING_NEWModel.FK_ORDER1" FromRole="PRODUCT" ToRole="ORDER" />
+          <NavigationProperty Name="PRODUCTRATEs" Relationship="E_ShOPPING_NEWModel.FK_PRODUCTRATE2" FromRole="PRODUCT" ToRole="PRODUCTRATE" />
+          <NavigationProperty Name="PRODUCTTECHNICALs" Relationship="E_ShOPPING_NEWModel.FK_PT" FromRole="PRODUCT" ToRole="PRODUCTTECHNICAL" />
         </EntityType>
         <EntityType Name="PRODUCTRATE">
           <Key>
@@ -890,8 +1053,8 @@
           <Property Name="idCustomer" Type="Int32" />
           <Property Name="idProduct" Type="Int32" />
           <Property Name="rate" Type="Int32" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_PRODUCTRATE1" FromRole="PRODUCTRATE" ToRole="PEOPLE" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PRODUCTRATE2" FromRole="PRODUCTRATE" ToRole="PRODUCT" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_PRODUCTRATE1" FromRole="PRODUCTRATE" ToRole="Person" />
+          <NavigationProperty Name="PRODUCT" Relationship="E_ShOPPING_NEWModel.FK_PRODUCTRATE2" FromRole="PRODUCTRATE" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="PRODUCTTECHNICAL">
           <Key>
@@ -904,7 +1067,7 @@
           <Property Name="uses" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="material" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="exps" Type="Int32" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PT" FromRole="PRODUCTTECHNICAL" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCT" Relationship="E_ShOPPING_NEWModel.FK_PT" FromRole="PRODUCTTECHNICAL" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="RECEIPT">
           <Key>
@@ -918,15 +1081,15 @@
           <Property Name="totalCost" Type="Int64" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
-          <Property Name="idDiscount" Type="Int32" />
           <Property Name="saleValue" Type="Int64" />
-          <NavigationProperty Name="DELIVERY" Relationship="Self.FK_RECEIPT4" FromRole="RECEIPT" ToRole="DELIVERY" />
-          <NavigationProperty Name="LISTOFPRODUCTBUYs" Relationship="Self.FK_LISTOFPRODUCTBUY" FromRole="RECEIPT" ToRole="LISTOFPRODUCTBUY" />
-          <NavigationProperty Name="ORDERSRECEIPTs" Relationship="Self.FK_ORDERS_RECEIPT2" FromRole="RECEIPT" ToRole="ORDERSRECEIPT" />
-          <NavigationProperty Name="ORDERSRECEIPTs1" Relationship="Self.FK_ORDERSRECEIPT2" FromRole="RECEIPT" ToRole="ORDERSRECEIPT" />
-          <NavigationProperty Name="PAYMENTINFORMATION" Relationship="Self.FK_RECEIPT2" FromRole="RECEIPT" ToRole="PAYMENTINFORMATION" />
-          <NavigationProperty Name="Person" Relationship="Self.FK_RECEIPT1" FromRole="RECEIPT" ToRole="PEOPLE" />
-          <NavigationProperty Name="RECEIVERINFORMATION" Relationship="Self.FK_RECEIPT3" FromRole="RECEIPT" ToRole="RECEIVERINFORMATION" />
+          <Property Name="idDiscount" Type="Int32" />
+          <NavigationProperty Name="DELIVERY" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT4" FromRole="RECEIPT" ToRole="DELIVERY" />
+          <NavigationProperty Name="LISTOFPRODUCTBUYs" Relationship="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY" FromRole="RECEIPT" ToRole="LISTOFPRODUCTBUY" />
+          <NavigationProperty Name="ORDERSRECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2" FromRole="RECEIPT" ToRole="ORDERSRECEIPT" />
+          <NavigationProperty Name="ORDERSRECEIPTs1" Relationship="E_ShOPPING_NEWModel.FK_ORDERSRECEIPT2" FromRole="RECEIPT" ToRole="ORDERSRECEIPT" />
+          <NavigationProperty Name="PAYMENTINFORMATION" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT2" FromRole="RECEIPT" ToRole="PAYMENTINFORMATION" />
+          <NavigationProperty Name="Person" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT1" FromRole="RECEIPT" ToRole="Person" />
+          <NavigationProperty Name="RECEIVERINFORMATION" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT3" FromRole="RECEIPT" ToRole="RECEIVERINFORMATION" />
         </EntityType>
         <EntityType Name="RECEIVERINFORMATION">
           <Key>
@@ -938,8 +1101,8 @@
           <Property Name="phoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PEOPLEINFOes" Relationship="Self.FK_PEOPLEINFO2" FromRole="RECEIVERINFORMATION" ToRole="PEOPLEINFO" />
-          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT3" FromRole="RECEIVERINFORMATION" ToRole="RECEIPT" />
+          <NavigationProperty Name="PEOPLEINFOes" Relationship="E_ShOPPING_NEWModel.FK_PEOPLEINFO2" FromRole="RECEIVERINFORMATION" ToRole="PEOPLEINFO" />
+          <NavigationProperty Name="RECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT3" FromRole="RECEIVERINFORMATION" ToRole="RECEIPT" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -947,13 +1110,13 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PEOPLE" Relationship="Self.FK_PEOPLE" FromRole="Role" ToRole="PEOPLE" />
+          <NavigationProperty Name="PEOPLE" Relationship="E_ShOPPING_NEWModel.FK_PEOPLE" FromRole="Role" ToRole="Person" />
         </EntityType>
         <Association Name="FK_CART">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
-          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.CART" Role="CART" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="CART">
@@ -962,20 +1125,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER2">
-          <End Role="CART" Type="Self.CART" Multiplicity="0..1" />
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.CART" Role="CART" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.ORDER" Role="ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CART">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ORDERS">
+            <Dependent Role="ORDER">
               <PropertyRef Name="idCart" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCT">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.CATEGORY" Role="CATEGORY" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
               <PropertyRef Name="id" />
@@ -986,10 +1149,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CB1">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="1" />
-          <End Role="CHATBOX" Type="Self.CHATBOX" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.CHATBOX" Role="CHATBOX" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="CHATBOX">
@@ -998,10 +1161,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CB2">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="1" />
-          <End Role="CHATBOX" Type="Self.CHATBOX" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.CHATBOX" Role="CHATBOX" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="CHATBOX">
@@ -1010,8 +1173,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PAYMENTINFORMATION">
-          <End Role="CREDITCARD" Type="Self.CREDITCARD" Multiplicity="0..1" />
-          <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.CREDITCARD" Role="CREDITCARD" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Role="PAYMENTINFORMATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CREDITCARD">
               <PropertyRef Name="id" />
@@ -1022,8 +1185,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RECEIPT4">
-          <End Role="DELIVERY" Type="Self.DELIVERY" Multiplicity="0..1" />
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.DELIVERY" Role="DELIVERY" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DELIVERY">
               <PropertyRef Name="id" />
@@ -1034,10 +1197,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DISCOUNT">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
-          <End Role="DISCOUNT" Type="Self.DISCOUNT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.DISCOUNT" Role="DISCOUNT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="DISCOUNT">
@@ -1046,20 +1209,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IMAGES">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
-          <End Role="IMAGES" Type="Self.IMAGE" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.IMAGE" Role="IMAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="IMAGES">
+            <Dependent Role="IMAGE">
               <PropertyRef Name="idSP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LISTOFPRODUCTBUY">
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="0..1" />
-          <End Role="LISTOFPRODUCTBUY" Type="Self.LISTOFPRODUCTBUY" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY" Role="LISTOFPRODUCTBUY" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RECEIPT">
               <PropertyRef Name="id" />
@@ -1070,8 +1233,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MDS">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
-          <End Role="MANAGEPRODUCTSYSTEM" Type="Self.MANAGEPRODUCTSYSTEM" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM" Role="MANAGEPRODUCTSYSTEM" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
               <PropertyRef Name="id" />
@@ -1082,10 +1245,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_NOTIFY">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
-          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.Notification" Role="Notification" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Notification">
@@ -1094,22 +1257,22 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDER1">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.ORDER" Role="ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="ORDERS">
+            <Dependent Role="ORDER">
               <PropertyRef Name="idProduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERS_RECEIPT1">
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="1" />
-          <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.ORDER" Role="ORDER" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.ORDERSRECEIPT" Role="ORDERSRECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ORDERS">
+            <Principal Role="ORDER">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="ORDERSRECEIPT">
@@ -1118,10 +1281,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERSRECEIPT1">
-          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="1" />
-          <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.ORDER" Role="ORDER" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.ORDERSRECEIPT" Role="ORDERSRECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ORDERS">
+            <Principal Role="ORDER">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="ORDERSRECEIPT">
@@ -1130,8 +1293,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERS_RECEIPT2">
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
-          <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.ORDERSRECEIPT" Role="ORDERSRECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RECEIPT">
               <PropertyRef Name="id" />
@@ -1142,8 +1305,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ORDERSRECEIPT2">
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
-          <End Role="ORDERSRECEIPT" Type="Self.ORDERSRECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.ORDERSRECEIPT" Role="ORDERSRECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RECEIPT">
               <PropertyRef Name="id" />
@@ -1154,8 +1317,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEOPLEINFO3">
-          <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="0..1" />
-          <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Role="PAYMENTINFORMATION" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PEOPLEINFO" Role="PEOPLEINFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PAYMENTINFORMATION">
               <PropertyRef Name="id" />
@@ -1166,8 +1329,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RECEIPT2">
-          <End Role="PAYMENTINFORMATION" Type="Self.PAYMENTINFORMATION" Multiplicity="0..1" />
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PAYMENTINFORMATION" Role="PAYMENTINFORMATION" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PAYMENTINFORMATION">
               <PropertyRef Name="id" />
@@ -1178,22 +1341,22 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEOPLE">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="PEOPLE">
+            <Dependent Role="Person">
               <PropertyRef Name="idRole" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEOPLEINFO1">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="1" />
-          <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="E_ShOPPING_NEWModel.PEOPLEINFO" Role="PEOPLEINFO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="PEOPLEINFO">
@@ -1202,10 +1365,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCTRATE1">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
-          <End Role="PRODUCTRATE" Type="Self.PRODUCTRATE" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCTRATE" Role="PRODUCTRATE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="PRODUCTRATE">
@@ -1214,10 +1377,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RECEIPT1">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PEOPLE">
+            <Principal Role="Person">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="RECEIPT">
@@ -1226,8 +1389,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PEOPLEINFO2">
-          <End Role="RECEIVERINFORMATION" Type="Self.RECEIVERINFORMATION" Multiplicity="0..1" />
-          <End Role="PEOPLEINFO" Type="Self.PEOPLEINFO" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Role="RECEIVERINFORMATION" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PEOPLEINFO" Role="PEOPLEINFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RECEIVERINFORMATION">
               <PropertyRef Name="id" />
@@ -1238,8 +1401,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PRODUCTRATE2">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
-          <End Role="PRODUCTRATE" Type="Self.PRODUCTRATE" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCTRATE" Role="PRODUCTRATE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
               <PropertyRef Name="id" />
@@ -1250,8 +1413,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PT">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
-          <End Role="PRODUCTTECHNICAL" Type="Self.PRODUCTTECHNICAL" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.PRODUCTTECHNICAL" Role="PRODUCTTECHNICAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUCT">
               <PropertyRef Name="id" />
@@ -1262,8 +1425,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RECEIPT3">
-          <End Role="RECEIVERINFORMATION" Type="Self.RECEIVERINFORMATION" Multiplicity="0..1" />
-          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <End Type="E_ShOPPING_NEWModel.RECEIVERINFORMATION" Role="RECEIVERINFORMATION" Multiplicity="0..1" />
+          <End Type="E_ShOPPING_NEWModel.RECEIPT" Role="RECEIPT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RECEIVERINFORMATION">
               <PropertyRef Name="id" />
@@ -1273,138 +1436,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="E_ShOPPING_NEWEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CARTs" EntityType="Self.CART" />
-          <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
-          <EntitySet Name="CHATBOXes" EntityType="Self.CHATBOX" />
-          <EntitySet Name="CREDITCARDs" EntityType="Self.CREDITCARD" />
-          <EntitySet Name="DELIVERies" EntityType="Self.DELIVERY" />
-          <EntitySet Name="DISCOUNTs" EntityType="Self.DISCOUNT" />
-          <EntitySet Name="IMAGES" EntityType="Self.IMAGE" />
-          <EntitySet Name="LISTOFPRODUCTBUYs" EntityType="Self.LISTOFPRODUCTBUY" />
-          <EntitySet Name="MANAGEPRODUCTSYSTEMs" EntityType="Self.MANAGEPRODUCTSYSTEM" />
-          <EntitySet Name="Notifications" EntityType="Self.Notification" />
-          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
-          <EntitySet Name="ORDERSRECEIPTs" EntityType="Self.ORDERSRECEIPT" />
-          <EntitySet Name="PAYMENTINFORMATIONs" EntityType="Self.PAYMENTINFORMATION" />
-          <EntitySet Name="PEOPLE" EntityType="Self.Person" />
-          <EntitySet Name="PEOPLEINFOes" EntityType="Self.PEOPLEINFO" />
-          <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
-          <EntitySet Name="PRODUCTRATEs" EntityType="Self.PRODUCTRATE" />
-          <EntitySet Name="PRODUCTTECHNICALs" EntityType="Self.PRODUCTTECHNICAL" />
-          <EntitySet Name="RECEIPTs" EntityType="Self.RECEIPT" />
-          <EntitySet Name="RECEIVERINFORMATIONs" EntityType="Self.RECEIVERINFORMATION" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <AssociationSet Name="FK_CART" Association="Self.FK_CART">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="CART" EntitySet="CARTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDER2" Association="Self.FK_ORDER2">
-            <End Role="CART" EntitySet="CARTs" />
-            <End Role="ORDERS" EntitySet="ORDERS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRODUCT" Association="Self.FK_PRODUCT">
-            <End Role="CATEGORY" EntitySet="CATEGORies" />
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CB1" Association="Self.FK_CB1">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="CHATBOX" EntitySet="CHATBOXes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CB2" Association="Self.FK_CB2">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="CHATBOX" EntitySet="CHATBOXes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PAYMENTINFORMATION" Association="Self.FK_PAYMENTINFORMATION">
-            <End Role="CREDITCARD" EntitySet="CREDITCARDs" />
-            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RECEIPT4" Association="Self.FK_RECEIPT4">
-            <End Role="DELIVERY" EntitySet="DELIVERies" />
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DISCOUNT" Association="Self.FK_DISCOUNT">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="DISCOUNT" EntitySet="DISCOUNTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IMAGES" Association="Self.FK_IMAGES">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="IMAGES" EntitySet="IMAGES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LISTOFPRODUCTBUY" Association="Self.FK_LISTOFPRODUCTBUY">
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-            <End Role="LISTOFPRODUCTBUY" EntitySet="LISTOFPRODUCTBUYs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MDS" Association="Self.FK_MDS">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="MANAGEPRODUCTSYSTEM" EntitySet="MANAGEPRODUCTSYSTEMs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NOTIFY" Association="Self.FK_NOTIFY">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDER1" Association="Self.FK_ORDER1">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="ORDERS" EntitySet="ORDERS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERS_RECEIPT1" Association="Self.FK_ORDERS_RECEIPT1">
-            <End Role="ORDERS" EntitySet="ORDERS" />
-            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERSRECEIPT1" Association="Self.FK_ORDERSRECEIPT1">
-            <End Role="ORDERS" EntitySet="ORDERS" />
-            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERS_RECEIPT2" Association="Self.FK_ORDERS_RECEIPT2">
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORDERSRECEIPT2" Association="Self.FK_ORDERSRECEIPT2">
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-            <End Role="ORDERSRECEIPT" EntitySet="ORDERSRECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PEOPLEINFO3" Association="Self.FK_PEOPLEINFO3">
-            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
-            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RECEIPT2" Association="Self.FK_RECEIPT2">
-            <End Role="PAYMENTINFORMATION" EntitySet="PAYMENTINFORMATIONs" />
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PEOPLE" Association="Self.FK_PEOPLE">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PEOPLEINFO1" Association="Self.FK_PEOPLEINFO1">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTRATE1" Association="Self.FK_PRODUCTRATE1">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="PRODUCTRATE" EntitySet="PRODUCTRATEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RECEIPT1" Association="Self.FK_RECEIPT1">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PEOPLEINFO2" Association="Self.FK_PEOPLEINFO2">
-            <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATIONs" />
-            <End Role="PEOPLEINFO" EntitySet="PEOPLEINFOes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRODUCTRATE2" Association="Self.FK_PRODUCTRATE2">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="PRODUCTRATE" EntitySet="PRODUCTRATEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PT" Association="Self.FK_PT">
-            <End Role="PRODUCT" EntitySet="PRODUCTs" />
-            <End Role="PRODUCTTECHNICAL" EntitySet="PRODUCTTECHNICALs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RECEIPT3" Association="Self.FK_RECEIPT3">
-            <End Role="RECEIVERINFORMATION" EntitySet="RECEIVERINFORMATIONs" />
-            <End Role="RECEIPT" EntitySet="RECEIPTs" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1413,231 +1445,232 @@
           <EntitySetMapping Name="CARTs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CART">
               <MappingFragment StoreEntitySet="CART">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CATEGORies">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CATEGORY">
               <MappingFragment StoreEntitySet="CATEGORY">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CHATBOXes">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CHATBOX">
               <MappingFragment StoreEntitySet="CHATBOX">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="idAssistant" ColumnName="idAssistant" />
-                <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="isSend" ColumnName="isSend" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="idAssistant" ColumnName="idAssistant" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CREDITCARDs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.CREDITCARD">
               <MappingFragment StoreEntitySet="CREDITCARD">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DELIVERies">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.DELIVERY">
               <MappingFragment StoreEntitySet="DELIVERY">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DISCOUNTs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.DISCOUNT">
               <MappingFragment StoreEntitySet="DISCOUNT">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="value" ColumnName="value" />
-                <ScalarProperty Name="exp_time" ColumnName="exp_time" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="exp_time" ColumnName="exp_time" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IMAGES">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.IMAGE">
               <MappingFragment StoreEntitySet="IMAGES">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idSP" ColumnName="idSP" />
-                <ScalarProperty Name="imageLink" ColumnName="imageLink" />
                 <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="imageLink" ColumnName="imageLink" />
+                <ScalarProperty Name="idSP" ColumnName="idSP" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LISTOFPRODUCTBUYs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.LISTOFPRODUCTBUY">
               <MappingFragment StoreEntitySet="LISTOFPRODUCTBUY">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MANAGEPRODUCTSYSTEMs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.MANAGEPRODUCTSYSTEM">
               <MappingFragment StoreEntitySet="MANAGEPRODUCTSYSTEM">
-                <ScalarProperty Name="idSP" ColumnName="idSP" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idSP" ColumnName="idSP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
-                <ScalarProperty Name="NOTIFY" ColumnName="NOTIFY" />
                 <ScalarProperty Name="CHECKED" ColumnName="CHECKED" />
+                <ScalarProperty Name="NOTIFY" ColumnName="NOTIFY" />
+                <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDERS">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.ORDER">
               <MappingFragment StoreEntitySet="ORDERS">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCart" ColumnName="idCart" />
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idCart" ColumnName="idCart" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDERSRECEIPTs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.ORDERSRECEIPT">
               <MappingFragment StoreEntitySet="ORDERSRECEIPT">
-                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
                 <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PAYMENTINFORMATIONs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PAYMENTINFORMATION">
               <MappingFragment StoreEntitySet="PAYMENTINFORMATION">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="typeOfCard" ColumnName="typeOfCard" />
-                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
-                <ScalarProperty Name="expDate" ColumnName="expDate" />
-                <ScalarProperty Name="ownName" ColumnName="ownName" />
-                <ScalarProperty Name="csv" ColumnName="csv" />
                 <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="csv" ColumnName="csv" />
+                <ScalarProperty Name="ownName" ColumnName="ownName" />
+                <ScalarProperty Name="expDate" ColumnName="expDate" />
+                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+                <ScalarProperty Name="typeOfCard" ColumnName="typeOfCard" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PEOPLE">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Person">
               <MappingFragment StoreEntitySet="PEOPLE">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="cmnd_passport" ColumnName="cmnd_passport" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="idRole" ColumnName="idRole" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="cmnd_passport" ColumnName="cmnd_passport" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PEOPLEINFOes">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PEOPLEINFO">
               <MappingFragment StoreEntitySet="PEOPLEINFO">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="idReceiverInfo" ColumnName="idReceiverInfo" />
                 <ScalarProperty Name="idPaymentOption" ColumnName="idPaymentOption" />
+                <ScalarProperty Name="idReceiverInfo" ColumnName="idReceiverInfo" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nameOfManufacturer" ColumnName="nameOfManufacturer" />
-                <ScalarProperty Name="descriptionInformation" ColumnName="descriptionInformation" />
-                <ScalarProperty Name="technicalInformation" ColumnName="technicalInformation" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="thumbnailimage" ColumnName="thumbnailimage" />
                 <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="technicalInformation" ColumnName="technicalInformation" />
+                <ScalarProperty Name="descriptionInformation" ColumnName="descriptionInformation" />
+                <ScalarProperty Name="nameOfManufacturer" ColumnName="nameOfManufacturer" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTRATEs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCTRATE">
               <MappingFragment StoreEntitySet="PRODUCTRATE">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
                 <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTTECHNICALs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.PRODUCTTECHNICAL">
               <MappingFragment StoreEntitySet="PRODUCTTECHNICAL">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-                <ScalarProperty Name="nameOfAttribute" ColumnName="nameOfAttribute" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="uses" ColumnName="uses" />
-                <ScalarProperty Name="material" ColumnName="material" />
                 <ScalarProperty Name="exps" ColumnName="exps" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="uses" ColumnName="uses" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="nameOfAttribute" ColumnName="nameOfAttribute" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RECEIPTs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.RECEIPT">
               <MappingFragment StoreEntitySet="RECEIPT">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-                <ScalarProperty Name="paymentInfo" ColumnName="paymentInfo" />
-                <ScalarProperty Name="receiverInfo" ColumnName="receiverInfo" />
-                <ScalarProperty Name="typeOfDelivery" ColumnName="typeOfDelivery" />
-                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="idDiscount" ColumnName="idDiscount" />
                 <ScalarProperty Name="saleValue" ColumnName="saleValue" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+                <ScalarProperty Name="typeOfDelivery" ColumnName="typeOfDelivery" />
+                <ScalarProperty Name="receiverInfo" ColumnName="receiverInfo" />
+                <ScalarProperty Name="paymentInfo" ColumnName="paymentInfo" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RECEIVERINFORMATIONs">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.RECEIVERINFORMATION">
               <MappingFragment StoreEntitySet="RECEIVERINFORMATION">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="E_ShOPPING_NEWModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
