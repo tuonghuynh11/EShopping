@@ -56,7 +56,15 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 42 "..\..\MainWindow.xaml"
+        #line 41 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal E_Shopping.UserControlBar.ControlBarUC ControlBar;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 45 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ContentControl Pages;
         
@@ -64,7 +72,7 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 93 "..\..\MainWindow.xaml"
+        #line 96 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListView MessageList;
         
@@ -72,7 +80,7 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 115 "..\..\MainWindow.xaml"
+        #line 118 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox messageTb;
         
@@ -80,7 +88,7 @@ namespace E_Shopping {
         #line hidden
         
         
-        #line 117 "..\..\MainWindow.xaml"
+        #line 120 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button sendBtn;
         
@@ -128,17 +136,20 @@ namespace E_Shopping {
             this.mainWindow = ((E_Shopping.MainWindow)(target));
             return;
             case 2:
-            this.Pages = ((System.Windows.Controls.ContentControl)(target));
+            this.ControlBar = ((E_Shopping.UserControlBar.ControlBarUC)(target));
             return;
             case 3:
+            this.Pages = ((System.Windows.Controls.ContentControl)(target));
+            return;
+            case 4:
             
-            #line 47 "..\..\MainWindow.xaml"
+            #line 50 "..\..\MainWindow.xaml"
             ((MaterialDesignThemes.Wpf.Flipper)(target)).Loaded += new System.Windows.RoutedEventHandler(this.Flipper_Loaded);
             
             #line default
             #line hidden
             return;
-            case 4:
+            case 8:
             
             #line 55 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
@@ -155,7 +166,7 @@ namespace E_Shopping {
             case 7:
             this.sendBtn = ((System.Windows.Controls.Button)(target));
             
-            #line 117 "..\..\MainWindow.xaml"
+            #line 120 "..\..\MainWindow.xaml"
             this.sendBtn.Click += new System.Windows.RoutedEventHandler(this.sendBtn_Click);
             
             #line default

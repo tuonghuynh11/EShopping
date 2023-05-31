@@ -1,6 +1,7 @@
 ﻿using E_Shopping.Class;
 using E_Shopping.Model;
 using E_Shopping.ViewModel;
+using E_Shopping.UserControlBar;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,8 +36,8 @@ namespace E_Shopping
         DispatcherTimer timer;
         public MainWindow()
         {
+        
             InitializeComponent();
-            this.DataContext = new MainViewModel();
 
             //Timer for chatbox
              timer = new DispatcherTimer();
@@ -141,6 +142,13 @@ namespace E_Shopping
             {
                 MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
 
+        private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ControlBarUC obj = sender as ControlBarUC;
+            ControlBarViewModel vm = obj.DataContext as ControlBarViewModel;
+            if ((bool)e.NewValue)
+            {
+                vm.VisibleCommand.Execute(obj as UserControl);
             }
         }
     }

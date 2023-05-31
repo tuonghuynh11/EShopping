@@ -45,5 +45,7 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:SearchFilterProductViewModel}">
         <view2:SearchFilterProduct/>
+    <DataTemplate DataType="{x:Type vm:ControlBarViewModel}">
+        <view1:ControlBarUC></view1:ControlBarUC>
     </DataTemplate>
 </ResourceDictionary>

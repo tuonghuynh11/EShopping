@@ -10,7 +10,6 @@
              xmlns:uc="clr-namespace:E_Shopping.UserControlBar"
              x:Name="SearchFliterProduct"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             DataContext="{StaticResource SearchFilterProductVM}"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1300">
     <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
@@ -114,7 +113,7 @@
                         <DockPanel>
                             <materialDesign:PackIcon Kind="LightbulbOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24">
-                                Search result for '<TextBlock Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"></TextBlock>'
+                                Search result for '<TextBlock Text="{Binding SearchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>'
                             </TextBlock>
                         </DockPanel>
                     </Grid>
@@ -147,7 +146,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProductsWrapper, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970"  SelectionChanged="ListViewProducts_SelectionChanged" SelectionMode="Single" >
+                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProducts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedProduct}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=5}" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border HorizontalAlignment="Center"

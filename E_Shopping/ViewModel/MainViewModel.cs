@@ -36,7 +36,6 @@ namespace E_Shopping.ViewModel
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
         }
-
         private static MainViewModel _Instance;
         public static MainViewModel Instance
         {
@@ -121,6 +120,15 @@ namespace E_Shopping.ViewModel
                 if (loginVM.IsLogin)
                 {
                     AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
+                    // Startup Page
+                    if (AccessUser.currentUser.idRole == 1)
+                    {
+                        chatBox = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(m => m.idCustomer == AccessUser.currentUser.id));
+
+                    }
+                    Instance.CurrentView = new CategoryViewModel();
+                    stackView.Push(CurrentView);
+                    (p as MainWindow).ControlBar.DataContext = new ControlBarViewModel();
                     p.Show();
                     //ChatBox
                     if (AccessUser.currentUser.idRole == 1)

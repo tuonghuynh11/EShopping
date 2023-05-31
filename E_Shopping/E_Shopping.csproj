@@ -276,6 +276,9 @@
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainScreen.xaml.cs">
+      <DependentUpon>MainScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\CART.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -424,6 +427,7 @@
     <Compile Include="ViewModel\DeliveryOptionViewModel.cs" />
     <Compile Include="ViewModel\FeedBackViewModel.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
+    <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderedHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentOptionsViewModel.cs" />
@@ -487,6 +491,10 @@
     <Compile Include="View\SearchFilterProduct.xaml.cs">
       <DependentUpon>SearchFilterProduct.xaml</DependentUpon>
     </Compile>
+    <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -746,6 +754,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icon\ShopGo.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

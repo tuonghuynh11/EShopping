@@ -10,28 +10,45 @@ using System.Data.SqlClient;
 using System.Data;
 using E_Shopping.Model;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Controls;
+using E_Shopping.Class;
+using System.Windows;
+using E_Shopping.UserControlBar;
 
 namespace E_Shopping.ViewModel
 {
     internal class CategoryViewModel:BaseViewModel
     {
         string connectionString = ConfigurationManager.ConnectionStrings["connString"].ConnectionString;
+        public ICommand CategoryClick;
+        
         private ObservableCollection<CATEGORY> cATEGORies;
         public ObservableCollection<CATEGORY> CATEGORies
         {
             get { return cATEGORies; }
             set { cATEGORies = value;  OnPropertyChanged(); }
         }
-        private ObservableCollection<PRODUCT> items;
+        private List<PRODUCT> items;
         
-       public ObservableCollection<PRODUCT> Items { get { return items; } set { items = value; OnPropertyChanged(); } }
+       public List<PRODUCT> Items { get { return items; } set { items = value; OnPropertyChanged(); } }
+        
+
 
         private CATEGORY selectedcat;
         public CATEGORY SelectedCategory { get { return selectedcat; } set { selectedcat = value; OnPropertyChanged(); } }
         public CategoryViewModel()
         {
             cATEGORies = new ObservableCollection<CATEGORY>(DataProvider.ins.DB.CATEGORies);
-            items = new ObservableCollection<PRODUCT>(DataProvider.ins.DB.PRODUCTs);
+            items = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u=> u.ORDERS.Count).Take(10).ToList();
+            CategoryClick = new RelayCommand<DashboardUC>((p) => { return p != null ? true : false; },
+                (p) =>
+                {
+                   
+                    AccessUser.searchWd = SelectedCategory.type;
+                    MainViewModel.Instance.CurrentView = new SearchFilterProductViewModel();
+                }
+                );
             
             
         }

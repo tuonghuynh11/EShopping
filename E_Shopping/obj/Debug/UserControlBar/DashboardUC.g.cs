@@ -25,6 +25,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -46,7 +47,15 @@ namespace E_Shopping.UserControlBar {
     public partial class DashboardUC : System.Windows.Controls.UserControl, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
         
         
-        #line 50 "..\..\..\UserControlBar\DashboardUC.xaml"
+        #line 19 "..\..\..\UserControlBar\DashboardUC.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal E_Shopping.UserControlBar.DashboardUC Dashboard;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 51 "..\..\..\UserControlBar\DashboardUC.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Image Advertisement;
         
@@ -54,7 +63,15 @@ namespace E_Shopping.UserControlBar {
         #line hidden
         
         
-        #line 127 "..\..\..\UserControlBar\DashboardUC.xaml"
+        #line 109 "..\..\..\UserControlBar\DashboardUC.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListView CategoryList;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 142 "..\..\..\UserControlBar\DashboardUC.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListView ItemBox;
         
@@ -92,26 +109,44 @@ namespace E_Shopping.UserControlBar {
             switch (connectionId)
             {
             case 1:
-            this.Advertisement = ((System.Windows.Controls.Image)(target));
+            this.Dashboard = ((E_Shopping.UserControlBar.DashboardUC)(target));
             return;
             case 2:
+            this.Advertisement = ((System.Windows.Controls.Image)(target));
+            return;
+            case 3:
             
-            #line 57 "..\..\..\UserControlBar\DashboardUC.xaml"
+            #line 58 "..\..\..\UserControlBar\DashboardUC.xaml"
             ((System.Windows.Controls.Primitives.ToggleButton)(target)).Click += new System.Windows.RoutedEventHandler(this.ButtonLeft_Click);
             
             #line default
             #line hidden
             return;
-            case 3:
+            case 4:
             
-            #line 80 "..\..\..\UserControlBar\DashboardUC.xaml"
+            #line 81 "..\..\..\UserControlBar\DashboardUC.xaml"
             ((System.Windows.Controls.Primitives.ToggleButton)(target)).Click += new System.Windows.RoutedEventHandler(this.ButtonRight_Click);
             
             #line default
             #line hidden
             return;
-            case 4:
+            case 5:
+            this.CategoryList = ((System.Windows.Controls.ListView)(target));
+            
+            #line 109 "..\..\..\UserControlBar\DashboardUC.xaml"
+            this.CategoryList.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.lv_SelectionChanged);
+            
+            #line default
+            #line hidden
+            return;
+            case 6:
             this.ItemBox = ((System.Windows.Controls.ListView)(target));
+            
+            #line 142 "..\..\..\UserControlBar\DashboardUC.xaml"
+            this.ItemBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.Product_SelectionChanged);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;
@@ -126,17 +161,17 @@ namespace E_Shopping.UserControlBar {
         void System.Windows.Markup.IStyleConnector.Connect(int connectionId, object target) {
             switch (connectionId)
             {
-            case 5:
+            case 7:
             
-            #line 141 "..\..\..\UserControlBar\DashboardUC.xaml"
+            #line 156 "..\..\..\UserControlBar\DashboardUC.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Purchase_Click);
             
             #line default
             #line hidden
             break;
-            case 6:
+            case 8:
             
-            #line 144 "..\..\..\UserControlBar\DashboardUC.xaml"
+            #line 159 "..\..\..\UserControlBar\DashboardUC.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.AddtoCart_Click);
             
             #line default

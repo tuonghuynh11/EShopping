@@ -125,7 +125,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border Grid.Row="3" Background="Lavender" Margin="50 0 50 0">
+            <Border Grid.Row="3" Background="#FF91D6C2" Margin="50 0 50 0">
                 <ListView x:Name="ItemBox" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -151,7 +151,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-            <Border Grid.Row="4">
+            <Border Grid.Row="4"  Margin="50 0 50 0">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>

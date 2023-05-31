@@ -16,6 +16,8 @@ using System.Security.Cryptography.Xml;
 using Stripe;
 using System.Diagnostics;
 using MaterialDesignThemes.Wpf;
+using E_Shopping.Class;
+using E_Shopping.UserControlBar;
 
 namespace E_Shopping.ViewModel
 {
@@ -222,7 +224,15 @@ namespace E_Shopping.ViewModel
             {
                 CATEGORY category = product.CATEGORY;
                 string productName = product.name;
-                if (category.type.ToLower().Contains(search) || productName.ToLower().Contains(search))
+                if(DashboardUC.m == 1)
+                {
+                    if (category.type.Contains(SearchValue))
+                    {
+                        ListProducts.Add(product);
+                    }
+                }  
+                else
+                if (category.type.Contains(SearchValue) || productName.Contains(SearchValue))
                 {
                     ListProductsFiltered.Add(product);
                 }
@@ -372,7 +382,7 @@ namespace E_Shopping.ViewModel
         public SearchFilterProductViewModel() { }
         public SearchFilterProductViewModel(string searchValue)
         {
-            SearchValue = searchValue;
+            SearchValue = AccessUser.searchWd;
             FilterPrice = 0;
             ProductToList();
             BackCommand = new RelayCommand<object>((p) =>
@@ -653,6 +663,8 @@ namespace E_Shopping.ViewModel
                 }
                 OnPropertyChanged();
             });
+
+
         }
     }
 }

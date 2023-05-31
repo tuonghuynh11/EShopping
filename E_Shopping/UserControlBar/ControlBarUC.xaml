@@ -15,6 +15,7 @@
               FontFamily="{DynamicResource MaterialDesignFont}"
                Background="Transparent"
              DataContext="{StaticResource ControlBarVM}"
+             
              d:DesignHeight="800" d:DesignWidth="1300">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseLeftButtonDown">
@@ -117,19 +118,22 @@
         </materialDesign:ColorZone>
 
         <!--<Grid Background="#FF52AE4B" Height="65">-->
-        <Grid Height="65">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 65">
-                    <GradientStop Color="#3f3269" Offset="0"></GradientStop>
-                    <GradientStop Color="#6e21" Offset="2"></GradientStop>
-                </LinearGradientBrush>
-            </Grid.Background>
+        <Grid Height="65" Background="#f2d94e">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"></ColumnDefinition>
                 <ColumnDefinition Width="600"></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0"></Grid>
+            <Grid Grid.Column="0">
+                <Button BorderBrush="#f2d94e" Height="65" Margin="100 0" Background="#f2d94e" Command="{Binding IconClick}" CommandParameter="{Binding ElementName=ucControlBar}">
+                    <Button.Content>
+                        <Image Source="/Icon/ShopGo.png"/>
+                    </Button.Content>
+                    
+
+                </Button>
+            </Grid>
 
             <Border Grid.Column="1" Width="600" Margin="0 10 0 10" Background="White" CornerRadius="10" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal"
@@ -141,21 +145,30 @@
                                 Opacity=".56" />
                     </Button>
                     <TextBox  Grid.Column="1"
+                              x:Name="SearchBox"
                                   HorizontalAlignment="Center"
                                   Margin="8 0 0 0" 
                                   materialDesign:HintAssist.Hint="Build a search bar"
                                   materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                   BorderThickness="0"
                                   MinWidth="520"
-                                  VerticalAlignment="Center" />
+                                  VerticalAlignment="Center"
+                              Text="{Binding SearchWD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=ucControlBar}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
                     <Button
                             Style="{DynamicResource MaterialDesignToolButton}"
                          HorizontalAlignment="Right"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding ElementName=ucControlBar}"
                             Grid.Column="2">
                         <materialDesign:PackIcon
                                 Kind="Microphone" 
                                 Opacity=".56"
                                 Margin="8 0 0 0" />
+                       
                     </Button>
                 </StackPanel>
 
@@ -167,34 +180,37 @@
                         <ImageBrush ImageSource="\Image\cart.png"></ImageBrush>
                     </Border.Background>
                     <Border.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding CartClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding CartClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
                     </Border.InputBindings>
                 </Border>
                 <Border x:Name="ChatIcon" Margin="0 0 30 0" CornerRadius="5" BorderBrush="Aqua" Height="33" Width="33">
-                    <Border.Background>
+                    <!--<Border.Background>
                         <ImageBrush ImageSource="\Image\chat.png"></ImageBrush>
-                    </Border.Background>
+                    </Border.Background>-->
                     <Border.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding PartyInTheUSA}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding PartyInTheUSA}" CommandParameter="{Binding ElementName=ucControlBar}"/>
                     </Border.InputBindings>
+                    <materialDesign:PackIcon Kind="Chat" HorizontalAlignment="Center" Foreground="#FFADA5BB" Height="33" VerticalAlignment="Center" Width="33"></materialDesign:PackIcon>
                 </Border>
-                <Border x:Name="FeedBackIcon" Margin="0 0 30 0" CornerRadius="5" BorderBrush="Aqua" Height="33" Width="33" MouseUp="FeedBack_Mouse_Up" >
-                    <Border.Background>
+                <Border x:Name="FeedBackIcon" Margin="0 0 30 0" CornerRadius="5"  Height="33" Width="33" MouseUp="FeedBack_Mouse_Up" >
+                    <!--<Border.Background>
                         <ImageBrush ImageSource="\Image\feedback.png"></ImageBrush>
-                    </Border.Background>
+                    </Border.Background>-->
                     <Border.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding FeedBackClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding FeedBackClick}" CommandParameter="{Binding ElementName=ucControlBar}"/>
                     </Border.InputBindings>
+                    <materialDesign:PackIcon Foreground="White" Kind="Feedback" Opacity=".56" HorizontalAlignment="Center" Height="33" VerticalAlignment="Center" Width="33"></materialDesign:PackIcon>
+                    
                 </Border>
                 <Grid Margin="0 0 20 0" >
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <materialDesign:PopupBox x:Name="notifipopup" ToolTip="Bạn có 0 thông báo mới"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0" Opened="PopOpened" Closed="PopClosed" >
+                    <materialDesign:PopupBox x:Name="notifipopup" ToolTip="{Binding NotifyPopUp}"  PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 0 0" Opened="PopOpened" Closed="PopClosed" >
                         <materialDesign:PopupBox.ToggleContent>
-                            <materialDesign:PackIcon Kind="Bell" Foreground="White" Height="25" Width="25"  Margin="0 0 0 0" />
+                            <materialDesign:PackIcon Kind="Bell" Foreground="#FFC8BDC5" Height="25" Width="25"  Margin="0 0 0 0" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged" >
+                        <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged" ItemsSource="{Binding Notifies,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                             <ListView.View>
                                 <GridView >
                                     <GridViewColumn Header="Thông báo"  Width="300"  >
@@ -246,7 +262,7 @@
                             </ListView.GroupStyle>
                         </ListView>
                     </materialDesign:PopupBox>
-                    <materialDesign:Badged Badge="3" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
+                    <materialDesign:Badged Badge="{Binding Uncheck}" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
                     </materialDesign:Badged>
 
                 </Grid>
@@ -254,18 +270,19 @@
 
                 <Border CornerRadius="50" BorderThickness="1" BorderBrush="Gray" Height="30" Width="33">
                     <Border.Background>
-                        <ImageBrush x:Name="avatar" Stretch="Fill" ></ImageBrush>
+                        <ImageBrush ImageSource="{Binding Avatar}" x:Name="avatar" Stretch="Fill" ></ImageBrush>
                     </Border.Background>
                 </Border>
-                <Label x:Name="UserNamelb" Content="User1" VerticalAlignment="Center" Margin="5"></Label>
-                <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" >
-                    <ComboBoxItem >
+                <Label x:Name="UserNamelb"  VerticalAlignment="Center" Margin="5" Content="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <ComboBox x:Name="Accountcbb" HorizontalAlignment="Center" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden" Width="17"  BorderThickness="0 0 0 0" BorderBrush="Gray" Background="Transparent" 
+                         Loaded="Accountcbb_Loaded" SelectionChanged="Accountcbb_SelectionChanged">
+                    <ComboBoxItem x:Name="ProfileCmb">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/personalinfo.png" Stretch="Fill" Height="20"></Image>
-                            <TextBlock Text="Thông tin cá nhân"/>
+                            <TextBlock Text="Profile"/>
                         </StackPanel>
                     </ComboBoxItem>
-                    <ComboBoxItem>
+                    <ComboBoxItem x:Name="BillingCmb">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/billing.png" Stretch="Fill" Height="20"></Image>
                             <TextBlock Text="Billing"/>
@@ -274,44 +291,45 @@
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/setting.png" Stretch="Fill" Height="20"></Image>
-                            <TextBlock Text="Cài đặt"/>
+                            <TextBlock Text="Confirm Order"/>
                         </StackPanel>
                     </ComboBoxItem>
 
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/contact.png" Stretch="Fill" Height="20"></Image>
-                            <TextBlock Text="Liên lạc"/>
+                            <TextBlock Text="Chat with customer"/>
                         </StackPanel>
                     </ComboBoxItem>
+                    
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Image/logout.png" Stretch="Fill" Height="20"></Image>
-                            <TextBlock Text="Đăng xuất"/>
-                        </StackPanel>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text ="Thay đổi mật khẩu"/>
+                            <TextBlock Text ="Change Pass"/>
                         </StackPanel>
                     </ComboBoxItem>
                     <ComboBoxItem x:Name="cmbAccountList">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Danh sách account"/>
+                            <TextBlock Text="List of accounts"/>
                         </StackPanel>
                     </ComboBoxItem>
                     
                     <ComboBoxItem x:Name="cmbItemList">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Thêm sản phẩm"/>
+                            <TextBlock Text="Product management"/>
                         </StackPanel>
                     </ComboBoxItem>
                     <ComboBoxItem x:Name="cmbUnConfirmed">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Danh sách đơn hàng chưa giao"/>
+                            <TextBlock Text="Unconfirmed Orders"/>
                         </StackPanel>
                     </ComboBoxItem>
-
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Image/logout.png" Stretch="Fill" Height="20"></Image>
+                            <TextBlock Text="Log out"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    
                 </ComboBox>
             </StackPanel>
 
