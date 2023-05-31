@@ -36,7 +36,7 @@ namespace E_Shopping.UserControlBar
         {
             foreach (ORDER item in CartView.Items)
             {
-                item.check = true;
+                //item.check = true;
             }
              (this.DataContext as CartViewModel).calculateSubTotal();
             CartView.Items.Refresh();
@@ -45,7 +45,7 @@ namespace E_Shopping.UserControlBar
         {
             foreach (ORDER item in CartView.Items)
             {
-                item.check = false;
+                //item.check = false;
             }
              (this.DataContext as CartViewModel).calculateSubTotal();
             CartView.Items.Refresh();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Shopping.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace E_Shopping
         public SignupWindow()
         {
             InitializeComponent();
+            this.DataContext = new SignupViewModel();
         }
     }
 }

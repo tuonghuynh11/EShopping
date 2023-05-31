@@ -1,4 +1,5 @@
 ﻿using E_Shopping.Model;
+using E_Shopping.PopUp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,12 +44,22 @@ namespace E_Shopping.ViewModel
                 {
                     foreach (var order in orders)
                     {
-                        order.status = 1;
+                        order.status = 2;
                     }
                     DataProvider.ins.db.SaveChanges();
                     SelectedOrder = null;
                     LoadOrderData();
-                    MessageBox.Show("Confirm");
+
+                        
+                    foreach(var order in orders)
+                    {
+                        var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is confirmed" , CHECKED = "0"});
+                    }
+                    DataProvider.ins.db.SaveChanges();
+
+                    SucceedNotify succeedNotify = new SucceedNotify();
+                    succeedNotify.ShowDialog();
                 }
                 
             });
@@ -64,7 +75,15 @@ namespace E_Shopping.ViewModel
                     DataProvider.ins.db.SaveChanges();
                     SelectedOrder = null;
                     LoadOrderData();
-                    MessageBox.Show("Cancel");
+
+                    foreach (var order in orders)
+                    {
+                        var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is cancelled" , CHECKED = "0"});
+                    }
+                    DataProvider.ins.db.SaveChanges();
+                    ValidationNotify validationNotify = new ValidationNotify("Cancel order");
+                    validationNotify.ShowDialog();
                 }
 
             });
@@ -78,8 +97,8 @@ namespace E_Shopping.ViewModel
                 List<Int32> cartList = new List<Int32>();
                 foreach (var o in orders)
                 {
-                    //Status = 1 thi da duoc confirm, status = -1 thi bi cancel
-                    if (o.status == 0)
+                    //Status = 2 thi da duoc confirm, status = -1 thi bi cancel, 1 la chua duoc confirm hay cancel
+                    if (o.status == 1)
                     {
                         var cart = DataProvider.ins.db.CARTs.Where(c => c.id == o.idCart).FirstOrDefault();
 

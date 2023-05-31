@@ -195,8 +195,8 @@
     <Property Name="totalCost" Type="bigint" />
     <Property Name="date" Type="date" />
     <Property Name="status" Type="int" />
-    <Property Name="idDiscount" Type="int" />
     <Property Name="saleValue" Type="bigint" />
+    <Property Name="idDiscount" Type="int" />
   </EntityType>
   <EntityType Name="RECEIVERINFORMATION">
     <Key>

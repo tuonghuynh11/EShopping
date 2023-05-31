@@ -200,8 +200,8 @@
           <Property Name="totalCost" Type="bigint" />
           <Property Name="date" Type="date" />
           <Property Name="status" Type="int" />
-          <Property Name="idDiscount" Type="int" />
           <Property Name="saleValue" Type="bigint" />
+          <Property Name="idDiscount" Type="int" />
         </EntityType>
         <EntityType Name="RECEIVERINFORMATION">
           <Key>
@@ -1050,8 +1050,8 @@
           <Property Name="totalCost" Type="Int64" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Int32" />
-          <Property Name="idDiscount" Type="Int32" />
           <Property Name="saleValue" Type="Int64" />
+          <Property Name="idDiscount" Type="Int32" />
           <NavigationProperty Name="DELIVERY" Relationship="E_ShOPPING_NEWModel.FK_RECEIPT4" FromRole="RECEIPT" ToRole="DELIVERY" />
           <NavigationProperty Name="LISTOFPRODUCTBUYs" Relationship="E_ShOPPING_NEWModel.FK_LISTOFPRODUCTBUY" FromRole="RECEIPT" ToRole="LISTOFPRODUCTBUY" />
           <NavigationProperty Name="ORDERSRECEIPTs" Relationship="E_ShOPPING_NEWModel.FK_ORDERS_RECEIPT2" FromRole="RECEIPT" ToRole="ORDERSRECEIPT" />

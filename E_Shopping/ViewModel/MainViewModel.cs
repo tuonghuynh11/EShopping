@@ -1,6 +1,7 @@
 ﻿using E_Shopping.Class;
 using E_Shopping.Model;
 using E_Shopping.PopUp;
+using E_Shopping.UserControlBar;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -120,7 +121,7 @@ namespace E_Shopping.ViewModel
                 if (loginVM.IsLogin)
                 {
 
-                    AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
+                    //AccessUser.currentUser = DataProvider.ins.db.PEOPLE.Where(k => k.userName == loginVM.UserName).FirstOrDefault();
                     p.Show();
                     //ChatBox
                     if (AccessUser.currentUser.idRole == 1)
@@ -140,6 +141,8 @@ namespace E_Shopping.ViewModel
 
                     }
 
+
+                    
 
                 }
                 else

@@ -34,6 +34,7 @@ namespace E_Shopping.ViewModel
             var peopleList = DataProvider.ins.db.PEOPLE;
             foreach(var people in peopleList)
             {
+                if(people.userName != LoginViewModel.AppUser)
                 People.Add(people);
             }
         }

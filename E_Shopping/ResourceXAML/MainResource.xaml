@@ -24,6 +24,7 @@
     <viewmodel:ChatBoxScreenViewModel x:Key="ChatBoxScreenVM"></viewmodel:ChatBoxScreenViewModel>
     <viewmodel:FeedBackViewModel x:Key="FeedBackVM"></viewmodel:FeedBackViewModel>
 
+    <viewmodel:EditProductViewModel x:Key="EditProductVM"></viewmodel:EditProductViewModel>
     <viewmodel:CategoryViewModel x:Key="CategoryVM">
         
     </viewmodel:CategoryViewModel>
