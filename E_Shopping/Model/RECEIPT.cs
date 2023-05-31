@@ -30,8 +30,8 @@ namespace E_Shopping.Model
         public Nullable<long> totalCost { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<int> status { get; set; }
-        public Nullable<int> idDiscount { get; set; }
         public Nullable<long> saleValue { get; set; }
+        public Nullable<int> idDiscount { get; set; }
     
         public virtual DELIVERY DELIVERY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

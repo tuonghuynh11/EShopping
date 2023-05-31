@@ -37,7 +37,7 @@ namespace E_Shopping.UserControlBar
             lvUsers.ItemsSource = Notifies;
             notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
 
-            UserNamelb.Content = DataProvider.ins.DB.PEOPLE.Find(2).userName;
+            UserNamelb.Content = DataProvider.ins.DB.PEOPLE.Find(1).userName;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("CHECKED");

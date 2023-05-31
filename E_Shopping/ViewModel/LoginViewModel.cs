@@ -1,5 +1,7 @@
-﻿using E_Shopping.Model;
+﻿using E_Shopping.Class;
+using E_Shopping.Model;
 using E_Shopping.PasswordEncode;
+using E_Shopping.PopUp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,20 +85,41 @@ namespace E_Shopping.ViewModel
             var account = DataProvider.ins.db.PEOPLE.Where(user=>user.userName == UserName && user.password == passEncode).Count();
             if(account > 0)
             {
-                IsLogin = true;
-                if (IsChecked && UserName != "" && PassWord != "")
+                var checkBan = DataProvider.ins.db.PEOPLE.Where(user => user.userName == UserName).SingleOrDefault();
+                if(checkBan != null)
                 {
-                    Properties.Settings.Default.username = UserName;
-                    Properties.Settings.Default.passWord = PassWord;
-                    Properties.Settings.Default.Save();
+                    if(checkBan.cmnd_passport == "0")
+                    {
+                        ValidationNotify validationNotify = new ValidationNotify("This account has been banned");
+                        validationNotify.ShowDialog();
+                    }
+                    else
+                    {
+                        if (IsChecked && UserName != "" && PassWord != "")
+                        {
+                            Properties.Settings.Default.username = UserName;
+                            Properties.Settings.Default.passWord = PassWord;
+                            Properties.Settings.Default.Save();
+                        }
+                        AppUser = UserName;
+                        var person = DataProvider.ins.db.PEOPLE.Where(user => user.userName == UserName).SingleOrDefault();
+                        if (person != null)
+                        {
+
+                            AccessUser.currentUser = person;
+                        }
+                        IsLogin = true;
+
+                        p.Close();
+                    }
                 }
-                AppUser = UserName;
-                p.Close();
+                
             }
             else
             {
                 IsLogin = false;
-                MessageBox.Show("sai");
+                ValidationNotify validationNotify = new ValidationNotify("Username or Password is not correct");
+                validationNotify.ShowDialog();
             }
         }
     }

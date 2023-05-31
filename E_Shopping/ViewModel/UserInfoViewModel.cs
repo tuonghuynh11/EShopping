@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace E_Shopping.ViewModel
 {
@@ -18,6 +20,11 @@ namespace E_Shopping.ViewModel
         //Them column gender vo database
         public ObservableCollection<string> GenderList { get; private set; }
         public ObservableCollection<string> CardList { get; private set; }
+
+        private String _displayedImagePath;
+        public String DisplayedImagePath { get => _displayedImagePath; set { _displayedImagePath = value; OnPropertyChanged(); } }
+
+        
 
         private string _Name;
         public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
@@ -74,22 +81,61 @@ namespace E_Shopping.ViewModel
                 var user = DataProvider.ins.db.PEOPLE.Where(x => x.userName == LoginViewModel.AppUser).SingleOrDefault();
                 if(user != null)
                 {
-                    Name = user.name;
-                    SelectedDate = (DateTime)user.birthday;
-                    string tempDoB = user.birthday.ToString();
-                    if (tempDoB != "")
-                        DOB = tempDoB.Substring(0, tempDoB.IndexOf(' '));
-                    Address = user.address;
-                    Gender = user.gender;
-                    SelectedGender = user.gender;
-                    PhoneNumber = user.phoneNumber;
-                    Email = user.email;
+                    if(user.avatar != null)
+                    {
+
+                        DisplayedImagePath = user.avatar;
+                        
+
+                    }
+                    else
+                    {
+                        DisplayedImagePath = @"/Image/Avatar.jpeg";
+                        
+                    }
+                    if(user.name != null)
+                        Name = user.name;
+                    if(user.birthday != null)
+                    {
+                        SelectedDate = (DateTime)user.birthday;
+                        string tempDoB = user.birthday.ToString();
+                        if (tempDoB != "")
+                            DOB = tempDoB.Substring(0, tempDoB.IndexOf(' '));
+
+                    }
+                    else
+                    {
+                        SelectedDate = DateTime.Now;
+                    }
+                    if(user.address != null)
+                        Address = user.address;
+                    if(user.gender != null)
+                    {
+
+                        Gender = user.gender;
+                        SelectedGender = user.gender;
+                    }
+                    if(user.phoneNumber != null)
+                        PhoneNumber = user.phoneNumber;
+                    if(user.email != null)
+                        Email = user.email;
                     //Them id cua person vo paymentinfomation
                     var card = DataProvider.ins.db.PAYMENTINFORMATIONs.Where(x => x.idPerson == user.id).SingleOrDefault();
-                    var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
-                    CardNum = card.cardNumber;
-                    CardType = type.type_name;
-                    SelectedCardType = type.type_name;
+                    
+                    if(card != null)
+                    {
+
+                        CardNum = card.cardNumber;
+                        var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
+                        if (type != null)
+                        {
+
+
+                            CardType = type.type_name;
+                            SelectedCardType = type.type_name;
+                        }
+                    }
+                    
                 }
             });
 
@@ -97,21 +143,49 @@ namespace E_Shopping.ViewModel
                 var user = DataProvider.ins.db.PEOPLE.Where(x => x.userName == LoginViewModel.AppUser).SingleOrDefault();
                 if (user != null)
                 {
-                    Name = user.name;
-                    SelectedDate = (DateTime)user.birthday;
-                    string tempDoB = user.birthday.ToString();
-                    if(tempDoB != "")
-                        DOB = tempDoB.Substring(0, tempDoB.IndexOf(' '));
-                    Address = user.address;
-                    Gender = user.gender;
-                    SelectedGender = user.gender;
-                    PhoneNumber = user.phoneNumber;
-                    Email = user.email;
+                    if (user.name != null)
+                        Name = user.name;
+                    if (user.birthday != null)
+                    {
+                        SelectedDate = (DateTime)user.birthday;
+                        string tempDoB = user.birthday.ToString();
+                        if (tempDoB != "")
+                            DOB = tempDoB.Substring(0, tempDoB.IndexOf(' '));
+
+                    }
+                    else
+                    {
+                        SelectedDate = DateTime.Now;
+                    }
+                    if (user.address != null)
+                        Address = user.address;
+                    if (user.gender != null)
+                    {
+
+                        Gender = user.gender;
+                        SelectedGender = user.gender;
+                    }
+                    if (user.phoneNumber != null)
+                        PhoneNumber = user.phoneNumber;
+                    if (user.email != null)
+                        Email = user.email;
+                    //Them id cua person vo paymentinfomation
                     var card = DataProvider.ins.db.PAYMENTINFORMATIONs.Where(x => x.idPerson == user.id).SingleOrDefault();
-                    var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
-                    CardNum = card.cardNumber;
-                    CardType = type.type_name;
-                    SelectedCardType = type.type_name;
+
+                    if (card != null)
+                    {
+
+                        CardNum = card.cardNumber;
+                        var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
+                        if (type != null)
+                        {
+
+
+                            CardType = type.type_name;
+                            SelectedCardType = type.type_name;
+                        }
+                    }
+
                 }
             });
             SaveCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
@@ -125,11 +199,16 @@ namespace E_Shopping.ViewModel
                     user.phoneNumber = PhoneNumber;
                     user.email = Email;
                     var card = DataProvider.ins.db.PAYMENTINFORMATIONs.Where(x => x.idPerson == user.id).SingleOrDefault();
-                    var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
-                    card.cardNumber = CardNum;
-                    CardType = SelectedCardType;
-                    var idCardtype = DataProvider.ins.db.CREDITCARDs.Where(x => x.type_name == CardType).SingleOrDefault();
-                    card.typeOfCard = idCardtype.id;
+                    if(card != null)
+                    {
+
+                        var type = DataProvider.ins.db.CREDITCARDs.Where(x => x.type_name == SelectedCardType).SingleOrDefault();
+                        card.cardNumber = CardNum;
+                        CardType = SelectedCardType;
+                        if(type != null)
+                            card.typeOfCard = type.id;
+                        
+                    }
                     DataProvider.ins.db.SaveChanges();
 
                     Name = user.name;
@@ -143,17 +222,23 @@ namespace E_Shopping.ViewModel
                     PhoneNumber = user.phoneNumber;
                     Email = user.email;
                     var card2 = DataProvider.ins.db.PAYMENTINFORMATIONs.Where(x => x.idPerson == user.id).SingleOrDefault();
-                    var type2 = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
-                    CardNum = card2.cardNumber;
-                    CardType = type2.type_name;
-                    SelectedCardType = type2.type_name;
-                    MessageBox.Show("Da save");
+                    if (card2 != null)
+                    {
+
+                        var type2 = DataProvider.ins.db.CREDITCARDs.Where(x => x.id == card.typeOfCard).SingleOrDefault();
+                        CardNum = card2.cardNumber;
+                        if(type2 != null)
+                        {
+                            CardType = type2.type_name;
+                            SelectedCardType = type2.type_name;
+
+                        }
+                    }
+                    //MessageBox.Show("Da save");
                 }
             });
             UploadCommand = new RelayCommand<object>((p) => { return true; }, (p) => { 
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
-                openFileDialog.ShowDialog();
+                
             });
         }
     }

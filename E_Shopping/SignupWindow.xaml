@@ -19,7 +19,7 @@
         WindowStyle="None"
         ResizeMode="NoResize" 
         Name="signUp"
-        DataContext="{StaticResource SignupVM}"
+        
         Background="Transparent" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -77,7 +77,7 @@
                                 </Grid>
                                 <Grid Grid.Column="1">
                                     <TextBox Margin="8 0 8 0" VerticalAlignment="Center" Text="{Binding UserName}"
-                            materialDesign:HintAssist.Hint="Enter Email or Phone number"
+                            materialDesign:HintAssist.Hint="Enter Email"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                                 </Grid>
 

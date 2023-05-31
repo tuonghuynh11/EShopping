@@ -24,7 +24,7 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="470"></ColumnDefinition>
+                    <ColumnDefinition Width="500"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1">
                     <materialDesign:Card Margin="30">
@@ -49,18 +49,18 @@
                             <Border BorderBrush="Black" BorderThickness="3" Grid.Row="3" Margin="10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image x:Name="image1" Width="100" Height="100" HorizontalAlignment="Left"
-                                   Margin="0" Stretch="Fill" Source="/Image/image.png"></Image>
+                                   Margin="0" Stretch="Fill" Source="{Binding DisplayPath1}"></Image>
                             </Border>
-                            <Image x:Name="image2" Grid.Row="3" Width="100" Height="100"
-                                   HorizontalAlignment="Left" Margin="50 10 10 10"></Image>
-                            <Image x:Name="image3" Grid.Row="3" Width="100" Height="100"
-                                   HorizontalAlignment="Left" Margin="90 10 10 10"></Image>
-                            <Image x:Name="image4" Grid.Row="3" Width="100" Height="100"
-                                   HorizontalAlignment="Left" Margin="130 10 10 10"></Image>
+                            <Image x:Name="image2" Grid.Row="3" Width="100" Height="100" Source="{Binding DisplayPath2}"
+                                   HorizontalAlignment="Left" Margin="121,13,0,13"></Image>
+                            <Image x:Name="image3" Grid.Row="3" Width="100" Height="100" Source="{Binding DisplayPath3}"
+                                   HorizontalAlignment="Left" Margin="225,13,0,13"></Image>
+                            <Image x:Name="image4" Grid.Row="3" Width="100" Height="100" Source="{Binding DisplayPath4}"
+                                   HorizontalAlignment="Left" Margin="330,13,0,13"></Image>
                             <Button Height="50" Foreground="#878787" Grid.Row="4" Margin="10"
                                 Style="{StaticResource MaterialDesignFlatButton}" 
                                 Width="250" FontSize="11" HorizontalAlignment="Left"
-                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2" Click="Button_Click">
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <TextBlock Margin="0 2 70 0" HorizontalAlignment="Center" 
                                            FontSize="22">Upload</TextBlock>
@@ -72,7 +72,7 @@
                             <Button Height="50" Foreground="#878787" Grid.Row="5" Margin="10"
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Width="250" FontSize="11" HorizontalAlignment="Left"
-                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2" Click="Button_Click_1">
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <TextBlock Margin="0 2 18 0" HorizontalAlignment="Center" 
                                            FontSize="22">Reset Image</TextBlock>
@@ -88,12 +88,12 @@
                             <Border BorderBrush="Black" BorderThickness="3" Grid.Row="8" Margin="10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image x:Name="imageThumbnail" Width="100" Height="100" HorizontalAlignment="Left"
-                                   Margin="0" Stretch="Fill" Source="/Image/image.png"></Image>
+                                   Margin="0" Stretch="Fill" Source="{Binding DisplayPathThumb}"></Image>
                             </Border>
                             <Button Height="50" Foreground="#878787" Grid.Row="9" Margin="10"
                                 Style="{StaticResource MaterialDesignFlatButton}" 
                                 Width="250" FontSize="11" HorizontalAlignment="Left"
-                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2" Click="Button_Click_2">
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <TextBlock Margin="0 2 70 0" HorizontalAlignment="Center" 
                                            FontSize="22">Upload</TextBlock>
@@ -105,7 +105,7 @@
                             <Button Height="50" Foreground="#878787" Grid.Row="10" Margin="10"
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Width="250" FontSize="11" HorizontalAlignment="Left"
-                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2">
+                                ToolTip="Upload" BorderBrush="#878787" BorderThickness="2" Click="Button_Click_3">
                                 <StackPanel Orientation="Horizontal" Width="170">
                                     <TextBlock Margin="0 2 18 0" HorizontalAlignment="Center" 
                                            FontSize="22">Reset Image</TextBlock>
@@ -134,21 +134,22 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" FontSize="30" VerticalAlignment="Top" 
                                    HorizontalAlignment="Left">PRODUCT DETAILS</Label>
-                            <TextBox Grid.Row="1" FontSize="20" Margin="10 10 40 10"
-                                  materialDesign:HintAssist.Hint="Name" Text="Somthing"
+                            <TextBox Grid.Row="1" FontSize="20" Margin="10 10 10 10" Text="{Binding Name, Mode=TwoWay}"
+                                  materialDesign:HintAssist.Hint="Name" x:Name="txbName"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
                                 <Label FontSize="20">Choose Category:</Label>
-                                <RadioButton GroupName="Category" IsChecked="True" FontSize="20"
-                                             Margin="20 0 0 0">Old Category</RadioButton>
-                                <RadioButton GroupName="Category" FontSize="20" Margin="65 0 0 0">New Category</RadioButton>
+                                <RadioButton GroupName="Category" x:Name="oldRad" FontSize="20" IsChecked="{Binding OldCheked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="20 0 0 0" Checked="oldRad_Checked">Old Category</RadioButton>
+                                <RadioButton GroupName="Category" x:Name="newRad" Checked="newRad_Checked" IsChecked="{Binding NewCheked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="75 0 0 0">New Category</RadioButton>
                             </StackPanel>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <ComboBox FontSize="20" Margin="10"
                                       materialDesign:HintAssist.Hint="Category"
-                                      MinWidth="72"
-                                      Width="350"
-                                      ItemsSource="{Binding ListCategory}"
+                                      MinWidth="72" IsEditable="False" IsHitTestVisible="False"
+                                      Width="350" x:Name="CateCB"
+                                      ItemsSource="{Binding CateList}"
+                                          SelectedValue="{Binding SelectedCate, Mode=TwoWay}"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                                     <ComboBox.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -156,34 +157,39 @@
                                         </ItemsPanelTemplate>
                                     </ComboBox.ItemsPanel>
                                 </ComboBox>
-                                <TextBox Grid.Row="1" FontSize="20" Margin="33 10 10 10" IsEnabled="False"
-                                         IsHitTestVisible="False" 
+                                <TextBox Grid.Row="1" FontSize="20" Margin="40 10 10 10" IsEnabled="False"
+                                         IsHitTestVisible="False" x:Name="newCateTxb" Text="{Binding NewCate}"
                                   materialDesign:HintAssist.Hint="New Category" Width="350"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             </StackPanel>
-                            <TextBox Grid.Row="4" FontSize="20" Margin="10 10 40 10"
-                                  materialDesign:HintAssist.Hint="Price (USD)" Text="200"
+                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                <TextBox FontSize="20" Margin="10 10 40 10" x:Name="txbPrice"  Width="350"
+                                  materialDesign:HintAssist.Hint="Price (VND)" Text="{Binding Price}"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                <TextBox FontSize="20" Margin="10 10 40 10" x:Name="txbQuantity"  Width="350"
+                                  materialDesign:HintAssist.Hint="Quantity" Text="{Binding Quantity}"
+                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            </StackPanel>
                             <StackPanel Grid.Row="5" Orientation="Horizontal">
-                                <TextBox  FontSize="20" Margin="10" Width="350"
-                                  materialDesign:HintAssist.Hint="Producer name" Text="Apple"
+                                <TextBox  FontSize="20" Margin="10" Width="350" x:Name="txbProName"
+                                  materialDesign:HintAssist.Hint="Producer name" Text="{Binding ProducerName}"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                <TextBox  FontSize="20" Margin="35 10 10 10" Width="350"
-                                  materialDesign:HintAssist.Hint="Warranty time (Month)" Text="12"
+                                <TextBox  FontSize="20" Margin="35 10 10 10" Width="350" x:Name="txbWanTime"
+                                  materialDesign:HintAssist.Hint="Warranty time (Month)" Text="{Binding WarrantyTime}"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             </StackPanel>
                             <StackPanel Grid.Row="6" Orientation="Horizontal">
-                                <TextBox  FontSize="20" Margin="10" Width="350"
-                                  materialDesign:HintAssist.Hint="Material" Text="Gold"
+                                <TextBox  FontSize="20" Margin="10" Width="350" x:Name="txbMaterial"
+                                  materialDesign:HintAssist.Hint="Material" Text="{Binding Materital}"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                <TextBox  FontSize="20" Margin="35 10 10 10" Width="350"
-                                  materialDesign:HintAssist.Hint="Function" Text="Do somthing"
+                                <TextBox  FontSize="20" Margin="35 10 10 10" Width="350" x:Name="txbFunc"
+                                  materialDesign:HintAssist.Hint="Function" Text="{Binding Function}"
                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             </StackPanel>
-                            <TextBox Margin="10 10 40 10" Grid.Row="7" FontSize="20"
-                                TextWrapping="Wrap" Text="Apple"
+                            <TextBox Margin="10 10 10 10" Grid.Row="7" FontSize="20"
+                                TextWrapping="Wrap" Text="{Binding Description}"
                                 VerticalAlignment="Stretch"
-                                MinWidth="280"
+                                MinWidth="280" x:Name="txbProDes"
                                 AcceptsReturn="True"
                                 VerticalScrollBarVisibility="Auto"
                                 SpellCheck.IsEnabled="True"
@@ -196,15 +202,16 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                                             Margin="0 10 20 0">
                                     <Button
+                                        Command="{Binding CancelCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="150" FontSize="20"
                                 ToolTip="CANCEL" Background="#f89090">
                                         _CANCEL
                                     </Button>
-                                    <Button
+                                    <Button Command="{Binding SaveCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="150" FontSize="20" Margin="20 0 0 0"
-                                ToolTip="SAVE" Background="#b6d7a8">
+                                ToolTip="SAVE" Background="#b6d7a8" Click="Button_Click_4">
                                         _SAVE
                                     </Button>
                                 </StackPanel>

@@ -22,4 +22,22 @@
     <DataTemplate DataType="{x:Type vm:OrderedHistoryViewModel}">
         <view:OrderedHistory />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ManageProductForOwnerViewModel}">
+        <view1:ManageProductForOwnerUC/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UploadProductViewModel}">
+        <view1:UploadProductUC/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserInfoViewModel}">
+        <view1:UserInfoUC/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserManageViewModel}">
+        <view1:UserManageUC/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EditProductViewModel}">
+        <view1:EditProductUC/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ConfirmOrderViewModel}">
+        <view1:ConfirmOrderUC/>
+    </DataTemplate>
 </ResourceDictionary>

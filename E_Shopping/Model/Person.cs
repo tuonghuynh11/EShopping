@@ -11,8 +11,7 @@ namespace E_Shopping.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
+    
     public partial class Person
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,16 +26,7 @@ namespace E_Shopping.Model
             this.PRODUCTRATEs = new HashSet<PRODUCTRATE>();
             this.RECEIPTs = new HashSet<RECEIPT>();
         }
-        public int idCart
-        {
-            get
-            {
-                CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == this.id).FirstOrDefault();
-                return cart.id;
-
-            }
-            set { }
-        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }

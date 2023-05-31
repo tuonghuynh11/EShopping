@@ -13,15 +13,15 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        DataContext="{StaticResource ManageProductForOwnerVM}"
+        
         Background="Transparent" 
              Name="manageProductForOwner"
              d:DesignHeight="800" d:DesignWidth="1300">
-    <i:Interaction.Triggers>
+    <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=manageProductForOwner}"/>
         </i:EventTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <Border CornerRadius="10" Background="#f5f2f2">
         <Grid>
             <Grid.RowDefinitions>
@@ -74,7 +74,7 @@
                                 ToolTip="FILTER and SORT" Background="#b6d7a8" HorizontalAlignment="Left">
                                 _FILTER and SORT
                             </Button>
-                            <Button Grid.Row="5" 
+                            <Button Grid.Row="5" Command="{Binding AddProductCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="250" FontSize="20" Margin="0 20 0 0"
                                 ToolTip="Add Product" Background="#9fc5e8" HorizontalAlignment="Center">
@@ -178,7 +178,7 @@
                                                     Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Image Stretch="Fill"
-                                                  Source="/Image/image.png"
+                                                  Source="{Binding thumbnailimage}"
                                                   Height="180"
                                                   
                                                    />
@@ -199,6 +199,7 @@
                                                   Orientation="Horizontal"
                                                   Margin="8">
                                                     <Button 
+                                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor},Path=DataContext.EditCommand}"
                                                             Style="{StaticResource MaterialDesignRaisedButton}"
                                                             Width="65" FontSize="15"
                                                             ToolTip="Edit" Background="#ffd966" HorizontalAlignment="Left">

@@ -11,8 +11,7 @@ namespace E_Shopping.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
+    
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,16 +22,7 @@ namespace E_Shopping.Model
             this.PRODUCTRATEs = new HashSet<PRODUCTRATE>();
             this.PRODUCTTECHNICALs = new HashSet<PRODUCTTECHNICAL>();
         }
-        public string mainImage
-        {
-            get
-            {
-                IMAGE image = DataProvider.ins.DB.IMAGES.Where(p => p.idSP == this.id && p.title == "Thumnail").FirstOrDefault();
-                return image.imageLink;
-
-            }
-            set { }
-        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string nameOfManufacturer { get; set; }
@@ -41,6 +31,7 @@ namespace E_Shopping.Model
         public Nullable<long> price { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> idCategory { get; set; }
+        public string thumbnailimage { get; set; }
     
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

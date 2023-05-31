@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Shopping.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace E_Shopping.UserControlBar
         public UserManageUC()
         {
             InitializeComponent();
+            this.DataContext = new UserManageViewModel();
         }
+
+        
     }
 }
