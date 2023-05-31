@@ -23,5 +23,9 @@ namespace E_Shopping
         {
             InitializeComponent();
         }
+        private void Close_but_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

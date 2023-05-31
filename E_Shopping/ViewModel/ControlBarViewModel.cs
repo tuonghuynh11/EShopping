@@ -1,4 +1,6 @@
-﻿using System;
+﻿using E_Shopping.Class;
+using E_Shopping.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -68,12 +70,19 @@ namespace E_Shopping.ViewModel
             FeedBackClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
                 {
+                    //ChatBoxScreen chatBoxScreen = new ChatBoxScreen();
+                    //chatBoxScreen.ShowDialog();
 
+                    //ObservableCollection<ORDER> buyingList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(e => (e.status == 1 || e.status == 2) && e.idCart == AccessUser.currentUser.idCart));
+                    //buyingList[0].status = 3;
+                    //DataProvider.ins.DB.SaveChanges();
+                    Feedback feedBack = new Feedback();
+                    feedBack.Show();
                 });
             CartClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
                 {
-
+                    MainViewModel.Instance.CurrentView = new CartViewModel();
                 });
         }
         FrameworkElement GetWindowParent(UserControl p)

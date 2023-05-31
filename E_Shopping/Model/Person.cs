@@ -27,16 +27,7 @@ namespace E_Shopping.Model
             this.PRODUCTRATEs = new HashSet<PRODUCTRATE>();
             this.RECEIPTs = new HashSet<RECEIPT>();
         }
-        public int idCart
-        {
-            get
-            {
-                CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == this.id).FirstOrDefault();
-                return cart.id;
-
-            }
-            set { }
-        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
@@ -49,7 +40,17 @@ namespace E_Shopping.Model
         public string avatar { get; set; }
         public Nullable<int> idRole { get; set; }
         public string gender { get; set; }
-    
+        public int idCart
+        {
+            get
+            {
+                CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == this.id).FirstOrDefault();
+                return cart.id;
+
+            }
+            set { }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CART> CARTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

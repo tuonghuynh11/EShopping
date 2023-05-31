@@ -11,7 +11,8 @@ namespace E_Shopping.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows;
+
     public partial class CHATBOX
     {
         public int id { get; set; }
@@ -19,9 +20,6 @@ namespace E_Shopping.Model
         public int idAssistant { get; set; }
         public string content { get; set; }
         public Nullable<int> isSend { get; set; }
-    
-        public virtual Person Person { get; set; }
-        public virtual Person Person1 { get; set; }
         public Person Customer
         {
             get
@@ -55,5 +53,20 @@ namespace E_Shopping.Model
             }
             set { }
         }
+        public Visibility visibility
+        {
+            get
+            {
+                if (this.isSend == 0)
+                {
+                    return Visibility.Collapsed;
+                }
+                return Visibility.Visible;
+
+            }
+            set { }
+        }
+        public virtual Person Person { get; set; }
+        public virtual Person Person1 { get; set; }
     }
 }

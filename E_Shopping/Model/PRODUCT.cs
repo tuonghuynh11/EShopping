@@ -23,6 +23,16 @@ namespace E_Shopping.Model
             this.PRODUCTRATEs = new HashSet<PRODUCTRATE>();
             this.PRODUCTTECHNICALs = new HashSet<PRODUCTTECHNICAL>();
         }
+    
+        public int id { get; set; }
+        public string name { get; set; }
+        public string nameOfManufacturer { get; set; }
+        public string descriptionInformation { get; set; }
+        public string technicalInformation { get; set; }
+        public Nullable<long> price { get; set; }
+        public Nullable<int> status { get; set; }
+        public Nullable<int> idCategory { get; set; }
+        public string thumbnailimage { get; set; }
         public string mainImage
         {
             get
@@ -33,15 +43,6 @@ namespace E_Shopping.Model
             }
             set { }
         }
-        public int id { get; set; }
-        public string name { get; set; }
-        public string nameOfManufacturer { get; set; }
-        public string descriptionInformation { get; set; }
-        public string technicalInformation { get; set; }
-        public Nullable<long> price { get; set; }
-        public Nullable<int> status { get; set; }
-        public Nullable<int> idCategory { get; set; }
-    
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMAGE> IMAGES { get; set; }

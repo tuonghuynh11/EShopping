@@ -160,6 +160,7 @@
     <Property Name="price" Type="bigint" />
     <Property Name="status" Type="int" />
     <Property Name="idCategory" Type="int" />
+    <Property Name="thumbnailimage" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="PRODUCTRATE">
     <Key>

@@ -155,7 +155,7 @@
                         <Separator BorderBrush="Black" BorderThickness="1"> </Separator>
                         <StackPanel Orientation="Horizontal" Margin="20">
                             <Border Width="auto" Height="46" CornerRadius="10" BorderBrush="#A2A6B0" BorderThickness="2" Margin="0 0 20 0">
-                                <Button x:Name="continueShopbtn" Height="44" Margin="0 0 0 0" FontSize="14" FontFamily="Poppins" FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent"  Content="Continue Shopping" Foreground="#A2A6B0" HorizontalContentAlignment="Center" ></Button>
+                                <Button x:Name="continueShopbtn" Height="44" Margin="0 0 0 0" FontSize="14" FontFamily="Poppins" FontWeight="SemiBold" BorderBrush="Transparent" Background="Transparent"  Content="Continue Shopping" Foreground="#A2A6B0" HorizontalContentAlignment="Center" Command="{Binding ContinueShoppingCommand}"></Button>
                             </Border>
                             <Border Width="auto" CornerRadius="10" Height="46" Background="Black" BorderThickness="2" Margin="0 0 20 0">
                                 <Button x:Name="clearShoppingCartbtn" Height="42" Content="Clear Shopping Cart" Background="Transparent" BorderThickness="0" FontSize="14" FontFamily="Poppins" FontWeight="SemiBold" Click="clearShoppingCartbtn_Click"></Button>

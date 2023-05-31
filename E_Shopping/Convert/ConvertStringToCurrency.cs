@@ -14,7 +14,7 @@ namespace E_Shopping.Convert
             string currency = "";
             if (value != null)
             {
-                currency = String.Format("{0:n0}đ", double.Parse(value.ToString()));
+                currency = String.Format("{0:n0}VND", double.Parse(value.ToString()));
             }
             return currency;
         }

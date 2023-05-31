@@ -27,6 +27,8 @@ namespace E_Shopping.ViewModel
         }
 
         public ICommand ProceedCheckoutCommand { get; set; }
+        public ICommand ContinueShoppingCommand { get; set; }
+        
         private void ShippingDetail()
         {
             itemIsBuy.Clear();
@@ -54,7 +56,7 @@ namespace E_Shopping.ViewModel
 
             //Chỉnh thành những item chưa được mua
             //Mốt chỉnh idcart thành idcart của user
-            shoppingCarts = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>p.idCart==2 && p.status==0));
+            shoppingCarts = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>p.idCart==AccessUser.currentUser.idCart && p.status==0));
 
             //shoppingCarts = new ObservableCollection<ShoppingCart>();
             //shoppingCarts.Add(new ShoppingCart() { name = "Thanh Long", image = "https://vinmec-prod.s3.amazonaws.com/images/20210419_031329_240031_qua-thanh-long.max-1800x1800.jpg", quantity = 2, price = 100000000 ,check=false});
@@ -62,13 +64,22 @@ namespace E_Shopping.ViewModel
             //shoppingCarts.Add(new ShoppingCart() { name = "Xoài", image = "https://bizweb.dktcdn.net/100/324/966/products/nhanxuongcomvang-c1876ecb-51c1-4db5-942e-e84e6d998158.jpg?v=1624982757580", quantity = 1, price = 200000,check=false});
             //shoppingCarts.Add(new ShoppingCart() { name = "Đu Đủ", image = "https://bizweb.dktcdn.net/100/324/966/products/nhanxuongcomvang-c1876ecb-51c1-4db5-942e-e84e6d998158.jpg?v=1624982757580", quantity = 1, price = 200000,check=false});
             ////subTotal=calculateSubTotal();
+            ContinueShoppingCommand = new RelayCommand<object>((p) => {
+                return true;
+            }, (p) => {
+                MainViewModel.stackView.Clear();
+                MainViewModel.Instance.CurrentView = new CategoryViewModel();
+            }
+            );
+            
+
             ProceedCheckoutCommand = new RelayCommand<object>((p) => {
                 return true;
             }, (p) => {
                 //MainViewModel.returnToEmptyCard();
                 ShippingDetail();
             }
-            );
+           );
 
         }
 
@@ -107,7 +118,7 @@ namespace E_Shopping.ViewModel
             //    }
             //}
             shoppingCarts.Clear();
-            shoppingCarts= new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => p.idCart == 2 && p.status == 0));
+            shoppingCarts= new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => p.idCart == AccessUser.currentUser.idCart && p.status == 0));
             //shoppingCarts = temp;
             subTotal = 0;
         }

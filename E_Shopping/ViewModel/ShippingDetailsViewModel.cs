@@ -50,9 +50,8 @@ namespace E_Shopping.ViewModel
                 return true;
             }, (p) =>
             {
-                //Mốt chỉnh lại id user
-                int id = 2;
-                PEOPLEINFO peopleInfo = DataProvider.ins.DB.PEOPLEINFOes.Where(v=>v.idCustomer==id).FirstOrDefault();
+                
+                PEOPLEINFO peopleInfo = DataProvider.ins.DB.PEOPLEINFOes.Where(v=>v.idCustomer== AccessUser.currentUser.id).FirstOrDefault();
                 if (peopleInfo!=null)
                 {
                     RECEIVERINFORMATION receiver = DataProvider.ins.DB.RECEIVERINFORMATIONs.Find(peopleInfo.idReceiverInfo);

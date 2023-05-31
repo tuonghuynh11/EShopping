@@ -102,6 +102,7 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -123,6 +124,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChatBoxScreen.xaml.cs">
+      <DependentUpon>ChatBoxScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class\AccessUser.cs" />
     <Compile Include="Class\Category.cs" />
     <Compile Include="Class\DistanceCalculate.cs" />
@@ -274,14 +278,22 @@
     <Compile Include="UserControlBar\Screen\ShippingDetails.xaml.cs">
       <DependentUpon>ShippingDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBar\UserControlMessageReceived.xaml.cs">
+      <DependentUpon>UserControlMessageReceived.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\UserControlMessageSent.xaml.cs">
+      <DependentUpon>UserControlMessageSent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="UserControlBar\DashboardUC.xaml.cs">
       <DependentUpon>DashboardUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\ChatBoxScreenViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\DeliveryOptionViewModel.cs" />
+    <Compile Include="ViewModel\FeedBackViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderedHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentOptionsViewModel.cs" />
@@ -314,6 +326,10 @@
     <Compile Include="ViewModel\SignupViewModel.cs" />
     <Compile Include="ViewModel\UserManageViewModel.cs" />
     <Page Include="AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChatBoxScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -434,6 +450,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\UploadProductUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\UserControlMessageReceived.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\UserControlMessageSent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

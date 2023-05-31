@@ -28,7 +28,7 @@
         Title="MainWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"  CommandParameter="{Binding ElementName=mainWindow}"/>
+            <i:InvokeCommandAction Command="{Binding Instance.LoadedWindowCommand}"  CommandParameter="{Binding ElementName=mainWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -44,7 +44,7 @@
             </Border>
         </Grid>
 
-        <materialDesign:Flipper HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="270" Height="350" Margin="0 0 20 20" Loaded="Flipper_Loaded">
+        <materialDesign:Flipper Visibility="{Binding Instance.ChatVisibility,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="270" Height="350" Margin="0 0 20 20" Loaded="Flipper_Loaded">
             <materialDesign:Flipper.FrontContent>
                 <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                          Command="{x:Static materialDesign:Flipper.FlipCommand}"
@@ -52,7 +52,7 @@
                         Width="50"
                         Height="50"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Bottom" Click="Button_Click"
                         >
                     <materialDesign:PackIcon
                         Kind="Wechat" Height="24" Width="24" />
@@ -90,7 +90,7 @@
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" Margin="0 2 0 2" Height="200" Background="AliceBlue" >
 
-                            <ListView x:Name="MessageList" ItemsSource="{Binding chatBox,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ListView x:Name="MessageList"  ItemsSource="{Binding Instance.chatBox,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical">

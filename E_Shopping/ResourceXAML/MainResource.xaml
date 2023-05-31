@@ -21,6 +21,9 @@
     <viewmodel:ConfirmOrderViewModel x:Key="ConfirmOrderVM"></viewmodel:ConfirmOrderViewModel>
     <viewmodel:UploadProductViewModel x:Key="UploadProductVM"></viewmodel:UploadProductViewModel>
     <viewmodel:ManageProductForOwnerViewModel x:Key="ManageProductForOwnerVM"></viewmodel:ManageProductForOwnerViewModel>
+    <viewmodel:ChatBoxScreenViewModel x:Key="ChatBoxScreenVM"></viewmodel:ChatBoxScreenViewModel>
+    <viewmodel:FeedBackViewModel x:Key="FeedBackVM"></viewmodel:FeedBackViewModel>
+
     <viewmodel:CategoryViewModel x:Key="CategoryVM">
         
     </viewmodel:CategoryViewModel>

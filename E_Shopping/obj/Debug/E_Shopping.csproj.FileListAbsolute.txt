@@ -336,3 +336,9 @@ C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\obj\Debug\E_Shopping.cspro
 C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\obj\Debug\E_Shopping.csproj.CopyComplete
 C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\obj\Debug\E_Shopping.exe
 C:\Users\Tuong_301\Source\Repos\EShopping5\E_Shopping\obj\Debug\E_Shopping.pdb
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\ChatBoxScreen.g.cs
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\ChatBoxScreen.baml
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\UserControlBar\UserControlMessageReceived.g.cs
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\UserControlBar\UserControlMessageSent.g.cs
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\UserControlBar\UserControlMessageReceived.baml
+C:\Users\Tuong_301\source\repos\EShopping5\E_Shopping\obj\Debug\UserControlBar\UserControlMessageSent.baml

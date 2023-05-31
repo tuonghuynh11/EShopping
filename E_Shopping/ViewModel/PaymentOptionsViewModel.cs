@@ -216,12 +216,12 @@ namespace E_Shopping.ViewModel
                //Mốt sửa idCustomer thành id user
                if (idcard==0)
                {
-                   receipt = new RECEIPT() { idCustomer = 2, receiverInfo = ShippingDetailsViewModel.receiverInfo.id, typeOfDelivery = DeliveryOptionViewModel.deliveryInfo.id, totalCost = (long)total, idDiscount = ShippingAddressViewModel.Instance.idGiftCode, saleValue = (long)ShippingAddressViewModel.Instance.saleTax, date = DateTime.Today, status = 0 };
+                   receipt = new RECEIPT() { idCustomer = AccessUser.currentUser.id, receiverInfo = ShippingDetailsViewModel.receiverInfo.id, typeOfDelivery = DeliveryOptionViewModel.deliveryInfo.id, totalCost = (long)total, idDiscount = ShippingAddressViewModel.Instance.idGiftCode, saleValue = (long)ShippingAddressViewModel.Instance.saleTax, date = DateTime.Today, status = 0 };
 
                }
                else
                {
-                   receipt = new RECEIPT() { idCustomer = 2, receiverInfo = ShippingDetailsViewModel.receiverInfo.id, paymentInfo = idcard, typeOfDelivery = DeliveryOptionViewModel.deliveryInfo.id, totalCost = (long)total,idDiscount=ShippingAddressViewModel.Instance.idGiftCode,saleValue=(long)ShippingAddressViewModel.Instance.saleTax, date = DateTime.Today, status = 0 };
+                   receipt = new RECEIPT() { idCustomer = AccessUser.currentUser.id, receiverInfo = ShippingDetailsViewModel.receiverInfo.id, paymentInfo = idcard, typeOfDelivery = DeliveryOptionViewModel.deliveryInfo.id, totalCost = (long)total,idDiscount=ShippingAddressViewModel.Instance.idGiftCode,saleValue=(long)ShippingAddressViewModel.Instance.saleTax, date = DateTime.Today, status = 0 };
                }
                DataProvider.ins.DB.RECEIPTs.Add(receipt);
                DataProvider.ins.DB.SaveChanges();

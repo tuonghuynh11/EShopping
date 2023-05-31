@@ -15,6 +15,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
+            Style="{StaticResource Page_Style}"
              d:DesignHeight="700" d:DesignWidth="1300"
              DataContext="{StaticResource CategoryVM}">
     <UserControl.Resources>

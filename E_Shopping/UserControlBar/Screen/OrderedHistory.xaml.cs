@@ -4,6 +4,7 @@ using E_Shopping.PopUp;
 using E_Shopping.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace E_Shopping.UserControlBar.Screen
 {
@@ -28,36 +30,13 @@ namespace E_Shopping.UserControlBar.Screen
         List<ORDER> carts = new List<ORDER>();
 
         public OrderedHistoryViewModel orderedHistoryViewModel;
+
+        public static int checkChange = 0;
+       public int flag = 0;
         public OrderedHistory()
         {
             InitializeComponent();
-            //categories.Add(new Category() { id = 1, name = "Electronic" });
-            //categories.Add(new Category() { id = 2, name = "Meat"  });
-            //categories.Add(new Category() { id = 3, name = "Medicine" });
-            //categories.Add(new Category() { id = 4, name = "Machine1"});
-            //categories.Add(new Category() { id = 4, name = "Machine2" });
-            //categories.Add(new Category() { id = 4, name = "Machine3" });
-            //categories.Add(new Category() { id = 4, name = "Machine4"});
-            //categories.Add(new Category() { id = 4, name = "Machine5" });
-            //categories.Add(new Category() { id = 4, name = "Machine6" });
-            //categories.Add(new Category() { id = 4, name = "Machine7" });
-            //categories.Add(new Category() { id = 4, name = "Machine8"});
-
-
-            //carts.Add(new ShoppingCart() { name = "Thanh Long", image = "https://vinmec-prod.s3.amazonaws.com/images/20210419_031329_240031_qua-thanh-long.max-1800x1800.jpg", quantity = 222, price = 100000000, check = false ,category="Electronic",status="Waiting"});
-            //carts.Add(new ShoppingCart() { name = "Nhãn", image = "https://bizweb.dktcdn.net/100/324/966/products/nhanxuongcomvang-c1876ecb-51c1-4db5-942e-e84e6d998158.jpg?v=1624982757580", quantity = 1, price = 200000, check = false,category="Meat", status = "Waiting" });
-            //carts.Add(new ShoppingCart() { name = "Xoài", image = "https://bizweb.dktcdn.net/100/324/966/products/nhanxuongcomvang-c1876ecb-51c1-4db5-942e-e84e6d998158.jpg?v=1624982757580", quantity = 21, price = 200000, check = false,category="Meat", status = "Verified" });
-            //carts.Add(new ShoppingCart() { name = "Đu Đủ", image = "https://bizweb.dktcdn.net/100/324/966/products/nhanxuongcomvang-c1876ecb-51c1-4db5-942e-e84e6d998158.jpg?v=1624982757580", quantity = 1, price = 200000, check = false,category="Medicine", status = "Verified" });
-
-
-            //categories.Add(new Category() { id=1,name= "Electronic" });
-            //categories.Add(new Category() { id=1,name= "Meat" });
-            //categories.Add(new Category() { id=1,name= "Medicine" });
-            //categories.Add(new Category() { id=1,name= "ALL" });
-        
-            //categoryDataGrid.ItemsSource = categories;
-            //itemboughtlist.ItemsSource = carts;
-            //itemBuyingDataGrid.ItemsSource=carts;
+           
             this.orderedHistoryViewModel = new OrderedHistoryViewModel();
 
             //Group product theo id đơn hàng
@@ -66,7 +45,70 @@ namespace E_Shopping.UserControlBar.Screen
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("idReceipt");
             view.GroupDescriptions.Add(groupDescription);
 
+            //Timer for chatbox
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(3.5);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+
         }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            //Update Current Order
+            orderedHistoryViewModel.buyingList= new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => (p.status == 1 || p.status == 2) && p.idCart == AccessUser.currentUser.idCart));
+            lvBuying.ItemsSource = orderedHistoryViewModel.buyingList;
+            //Group product theo id đơn hàng
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvBuying.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("idReceipt");
+            view.GroupDescriptions.Add(groupDescription);
+
+
+            //Update History
+            if (flag == 0)
+            {
+                flag = 1;
+                checkChange = DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count();
+                return;
+            }
+            else
+            {
+                if (DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count() != checkChange)
+                {
+                    orderedHistoryViewModel.boughtList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => p.status == 3 && p.idCart == AccessUser.currentUser.idCart));
+
+                    orderedHistoryViewModel.productCategory = new ObservableCollection<CATEGORY>();
+                    var productCategoryReplace = orderedHistoryViewModel.boughtList
+                        .Join(DataProvider.ins.DB.CATEGORies,
+                        p => p.idProductType,
+                        k => k.id,
+                        (p, k) => new CATEGORY()
+                        {
+                            id = k.id,
+                            type = k.type,
+                        });
+
+                    List<CATEGORY> distinctCategory = productCategoryReplace
+                                                      .GroupBy(m => m.type)
+                                                      .Select(g => g.First())
+                                                       .ToList();
+                    orderedHistoryViewModel.productCategory.Add(new CATEGORY() { type = "ALL" });
+
+                    foreach (CATEGORY category in distinctCategory)
+                    {
+                        orderedHistoryViewModel.productCategory.Add(category);
+                    }
+                    categoryDataGrid.ItemsSource = orderedHistoryViewModel.productCategory;
+                    itemboughtlist.ItemsSource = orderedHistoryViewModel.boughtList;
+
+                    checkChange = DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count();
+                }
+            }
+          
+
+
+            
+        }
+
 
         private void searchtb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -123,8 +165,8 @@ namespace E_Shopping.UserControlBar.Screen
                 DataProvider.ins.DB.SaveChanges();
             }
 
-            //  //Mốt chỉnh 2 thành id cart của current user
-            ORDER order = new ORDER() { idCart = 2, idProduct = product.idProduct, quantity = 1, date = DateTime.Today, status = 0 };
+          
+            ORDER order = new ORDER() { idCart = AccessUser.currentUser.idCart, idProduct = product.idProduct, quantity = 1, date = DateTime.Today, status = 0 };
             DataProvider.ins.DB.ORDERS.Add(order);
             DataProvider.ins.DB.SaveChanges();
             MainViewModel.Instance.CurrentView = new CartViewModel();
@@ -137,8 +179,8 @@ namespace E_Shopping.UserControlBar.Screen
             {
                 return;
             }
-            //Mốt chỉnh 2 thành id của current user
-            RateProduc rateProduc = new RateProduc(2, product);
+           
+            RateProduc rateProduc = new RateProduc(AccessUser.currentUser.id, product);
             rateProduc.ShowDialog();
         }
     }

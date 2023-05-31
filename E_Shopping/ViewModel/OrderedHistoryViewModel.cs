@@ -1,4 +1,5 @@
-﻿using E_Shopping.Model;
+﻿using E_Shopping.Class;
+using E_Shopping.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,16 +25,14 @@ namespace E_Shopping.ViewModel
         private static ObservableCollection<CATEGORY> _productCategory;
         public ObservableCollection<CATEGORY> productCategory { get => _productCategory; set { _productCategory = value; OnPropertyChanged(); } }
         public OrderedHistoryViewModel()
-        {
-            //id customer mốt sửa sau
+        { 
             //Binding cho OrderedHistory
-            int idcustomer = 1;
-            int idCart=2;
-            buyingList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>(p.status ==1 ||p.status==2) && p.idCart== idCart));
+          
+            buyingList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>(p.status ==1 ||p.status==2) && p.idCart== AccessUser.currentUser.idCart));
 
 
 
-            boughtList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>p.status ==3 && p.idCart== idCart));
+            boughtList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>p.status ==3 && p.idCart== AccessUser.currentUser.idCart));
 
             productCategory = new ObservableCollection<CATEGORY>();
             var productCategoryReplace = boughtList
@@ -45,12 +44,17 @@ namespace E_Shopping.ViewModel
                     id = e.id,
                     type = e.type,
                 });
-            var temp = productCategoryReplace.Select(m => m.type).Distinct();
-            foreach (CATEGORY category in productCategoryReplace)
+            List<CATEGORY> distinctCategory = productCategoryReplace
+                                                .GroupBy(m => m.type)
+                                                .Select(g => g.First())
+                                                 .ToList();
+          
+            productCategory.Add(new CATEGORY() { type = "ALL" });
+
+            foreach (CATEGORY category in distinctCategory)
             {
                 productCategory.Add(category);
             }
-            productCategory.Add(new CATEGORY() { type = "ALL" });
         }
     }
 }

@@ -201,9 +201,8 @@ namespace E_Shopping.ViewModel
             }
             else
             {
-                //Mốt đổi idCus thành id User
-                int idCus = 2;
-                if (dis.idCustomer != idCus)
+                
+                if (dis.idCustomer != AccessUser.currentUser.id)
                 {
                     ValidationNotify validationNotify = new ValidationNotify("Giftcode is not belong to user!!");
                     validationNotify.ShowDialog();
