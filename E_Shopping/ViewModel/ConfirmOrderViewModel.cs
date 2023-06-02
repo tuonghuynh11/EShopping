@@ -42,9 +42,13 @@ namespace E_Shopping.ViewModel
                 var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == temp.order.idCart);
                 if(orders != null)
                 {
+                    int orderid = -1;
+
                     foreach (var order in orders)
                     {
+
                         order.status = 2;
+                        orderid = order.id;
                     }
                     DataProvider.ins.db.SaveChanges();
                     SelectedOrder = null;
@@ -54,9 +58,25 @@ namespace E_Shopping.ViewModel
                     foreach(var order in orders)
                     {
                         var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
-                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is confirmed" , CHECKED = "0"});
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is confirmed" , CHECKED = "Unseen"});
                     }
                     DataProvider.ins.db.SaveChanges();
+
+                    if(orderid != -1)
+                    {
+
+                        var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == orderid).SingleOrDefault();
+                        if(orderrec != null)
+                        {
+
+                            var rec = DataProvider.ins.db.RECEIPTs.Find(orderrec.idReceipt);
+                            if(rec != null)
+                            {
+                                rec.status = 1;
+                                DataProvider.ins.db.SaveChanges();
+                            }
+                        }
+                    }
 
                     SucceedNotify succeedNotify = new SucceedNotify();
                     succeedNotify.ShowDialog();
@@ -79,7 +99,7 @@ namespace E_Shopping.ViewModel
                     foreach (var order in orders)
                     {
                         var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
-                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is cancelled" , CHECKED = "0"});
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is cancelled" , CHECKED = "Unseen"});
                     }
                     DataProvider.ins.db.SaveChanges();
                     ValidationNotify validationNotify = new ValidationNotify("Cancel order");

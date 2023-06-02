@@ -171,7 +171,7 @@ namespace E_Shopping.UserControlBar
                         }
                     case 2:
                         {
-                            
+                            MainViewModel.Instance.CurrentView = new ConfirmOrderViewModel();
                             break;
                         }
                     case 3:
@@ -199,7 +199,7 @@ namespace E_Shopping.UserControlBar
                         }
                     case 7:
                         {
-                            MainViewModel.Instance.CurrentView = new ConfirmOrderViewModel();
+                            MainViewModel.Instance.CurrentView = new ChartViewModel();
                             break;
                         }
                     case 8:

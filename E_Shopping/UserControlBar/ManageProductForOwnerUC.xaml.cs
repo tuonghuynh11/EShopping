@@ -28,10 +28,7 @@ namespace E_Shopping.UserControlBar
 
             
 
-            List<int> temp = new List<int>();
-            temp.Add(1);
             
-                CbPage.ItemsSource = temp;
 
             
         }

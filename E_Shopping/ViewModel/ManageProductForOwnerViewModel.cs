@@ -170,7 +170,7 @@ namespace E_Shopping.ViewModel
                         break;
                     if(index > 8 * (SelectedPage - 1))
                     {
-                        ListProduct.Add(product);
+                        
                         if (product.thumbnailimage == null)
                         {
                             product.thumbnailimage = @"/Image/image.png";
@@ -193,7 +193,7 @@ namespace E_Shopping.ViewModel
                         break;
                     if (index > 8 * (SelectedPage - 1))
                     {
-                        ListProduct.Add(product);
+                        
                         if (product.thumbnailimage == null)
                         {
                             product.thumbnailimage = @"/Image/image.png";
@@ -222,7 +222,7 @@ namespace E_Shopping.ViewModel
                         break;
                     if (index > 8 * (SelectedPage - 1))
                     {
-                        ListProduct.Add(product);
+                        
                         if (product.thumbnailimage == null)
                         {
                             product.thumbnailimage = @"/Image/image.png";
@@ -330,24 +330,35 @@ namespace E_Shopping.ViewModel
             });
 
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                if(SelectedProduct == null)
+                if (SelectedProduct == null)
                 {
                     ValidationNotify validationNotify = new ValidationNotify("You need to choose 1 product");
                     validationNotify.ShowDialog();
                     return;
                 }
 
+                var imagePro = DataProvider.ins.db.IMAGES.Where(X => X.idSP == SelectedProduct.id);
+                if (imagePro != null)
+                {
+                    foreach (IMAGE iMAGE in imagePro)
+                    {
+                        DataProvider.ins.db.IMAGES.Remove(iMAGE);
+                    }
+                    DataProvider.ins.db.SaveChanges();
+                }
+
                 var proTech = DataProvider.ins.db.PRODUCTTECHNICALs.Where(pt => pt.idProduct == SelectedProduct.id).SingleOrDefault();
                 if (proTech != null)
                 {
-                    
+
                     DataProvider.ins.db.PRODUCTTECHNICALs.Remove(proTech);
                     DataProvider.ins.db.SaveChanges();
 
                 }
 
+
                 var proManage = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Where(x => x.idSP == SelectedProduct.id).SingleOrDefault();
-                if(proManage != null)
+                if (proManage != null)
                 {
                     DataProvider.ins.db.Database.ExecuteSqlCommand("delete from MANAGEPRODUCTSYSTEM where idsp = " + proManage.idSP.ToString());
                     //DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Remove(proManage);
@@ -361,7 +372,7 @@ namespace E_Shopping.ViewModel
                     DataProvider.ins.db.PRODUCTs.Remove(product);
                     DataProvider.ins.db.SaveChanges();
 
-                    
+
                     ListPage = new ObservableCollection<int>();
                     var listProduct = DataProvider.ins.db.PRODUCTs;
                     Int32 numberOfProducts = listProduct.Count();
@@ -386,7 +397,7 @@ namespace E_Shopping.ViewModel
                     {
                         if (index > 8)
                             break;
-                        
+
                         if (product.thumbnailimage == null)
                         {
                             product.thumbnailimage = @"/Image/image.png";
@@ -398,6 +409,14 @@ namespace E_Shopping.ViewModel
                     SucceedNotify succeedNotify = new SucceedNotify();
                     succeedNotify.ShowDialog();
                 }
+
+
+
+                
+
+                
+
+                
                 
                 
             });

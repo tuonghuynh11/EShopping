@@ -50,4 +50,7 @@
     <DataTemplate DataType="{x:Type vm:ControlBarViewModel}">
         <view1:ControlBarUC></view1:ControlBarUC>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ChartViewModel}">
+        <view1:ChartUC></view1:ChartUC>
+    </DataTemplate>
 </ResourceDictionary>

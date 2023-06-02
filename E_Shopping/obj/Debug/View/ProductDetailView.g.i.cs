@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DevExpress.Xpf.DXBinding;
 using E_Shopping.View;
 using E_Shopping.ViewModel;
 using MaterialDesignThemes.Wpf;

@@ -281,161 +281,181 @@ namespace E_Shopping.UserControlBar
 
             if (image1.Source != null)
             {
-                var cancellation = new CancellationTokenSource();
-                var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                if(fileName1 != null)
                 {
-                    ThrowOnCancel = true
-                })
-                .Child("productImages")
-                .Child(nameImg(fileName1))
-                .PutAsync(stream1, cancellation.Token);
+                    var cancellation = new CancellationTokenSource();
+                    var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                    {
+                        ThrowOnCancel = true
+                    })
+                    .Child("productImages")
+                    .Child(nameImg(fileName1))
+                    .PutAsync(stream1, cancellation.Token);
 
-                try
-                {
-                    String link1 = (await task);
-                    var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image1").SingleOrDefault();
-                    if(imagedb != null)
+                    try
                     {
-                        imagedb.imageLink = link1;
-                        DataProvider.ins.db.SaveChanges();
+                        String link1 = (await task);
+                        var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image1").SingleOrDefault();
+                        if (imagedb != null)
+                        {
+                            imagedb.imageLink = link1;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                        else
+                        {
+                            IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image1", imageLink = link1 };
+                            DataProvider.ins.db.IMAGES.Add(iMAGE);
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image1", imageLink = link1 };
-                        DataProvider.ins.db.IMAGES.Add(iMAGE);
-                        DataProvider.ins.db.SaveChanges();
+                        flag = 0;
                     }
                 }
-                catch (Exception ex)
-                {
-                    flag = 0;
-                }
+                
                 
             }
             if (image2.Source != null)
             {
-                var cancellation = new CancellationTokenSource();
-                var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                if (fileName2 != null)
                 {
-                    ThrowOnCancel = true
-                })
-                .Child("productImages")
-                .Child(nameImg(fileName2))
-                .PutAsync(stream2, cancellation.Token);
+                    var cancellation = new CancellationTokenSource();
+                    var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                    {
+                        ThrowOnCancel = true
+                    })
+                    .Child("productImages")
+                    .Child(nameImg(fileName2))
+                    .PutAsync(stream2, cancellation.Token);
 
-                try
-                {
-                    String link2 = (await task);
-                    var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image2").SingleOrDefault();
-                    if (imagedb != null)
+                    try
                     {
-                        imagedb.imageLink = link2;
-                        DataProvider.ins.db.SaveChanges();
+                        String link2 = (await task);
+                        var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image2").SingleOrDefault();
+                        if (imagedb != null)
+                        {
+                            imagedb.imageLink = link2;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                        else
+                        {
+                            IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image2", imageLink = link2 };
+                            DataProvider.ins.db.IMAGES.Add(iMAGE);
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image2", imageLink = link2 };
-                        DataProvider.ins.db.IMAGES.Add(iMAGE);
-                        DataProvider.ins.db.SaveChanges();
+                        flag = 0;
                     }
                 }
-                catch (Exception ex)
-                {
-                    flag = 0;
-                }
+                
 
             }
             if (image3.Source != null)
             {
-                var cancellation = new CancellationTokenSource();
-                var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                if (fileName3 != null)
                 {
-                    ThrowOnCancel = true
-                })
-                .Child("productImages")
-                .Child(nameImg(fileName3))
-                .PutAsync(stream3, cancellation.Token);
+                    var cancellation = new CancellationTokenSource();
+                    var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                    {
+                        ThrowOnCancel = true
+                    })
+                    .Child("productImages")
+                    .Child(nameImg(fileName3))
+                    .PutAsync(stream3, cancellation.Token);
 
-                try
-                {
-                    String link3 = (await task);
-                    var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image3").SingleOrDefault();
-                    if (imagedb != null)
+                    try
                     {
-                        imagedb.imageLink = link3;
-                        DataProvider.ins.db.SaveChanges();
+                        String link3 = (await task);
+                        var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image3").SingleOrDefault();
+                        if (imagedb != null)
+                        {
+                            imagedb.imageLink = link3;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                        else
+                        {
+                            IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image3", imageLink = link3 };
+                            DataProvider.ins.db.IMAGES.Add(iMAGE);
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image3", imageLink = link3 };
-                        DataProvider.ins.db.IMAGES.Add(iMAGE);
-                        DataProvider.ins.db.SaveChanges();
+                        flag = 0;
                     }
                 }
-                catch (Exception ex)
-                {
-                    flag = 0;
-                }
+                 
 
             }
             if (image4.Source != null)
             {
-                var cancellation = new CancellationTokenSource();
-                var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                if (fileName4 != null)
                 {
-                    ThrowOnCancel = true
-                })
-                .Child("productImages")
-                .Child(nameImg(fileName4))
-                .PutAsync(stream4, cancellation.Token);
+                    var cancellation = new CancellationTokenSource();
+                    var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                    {
+                        ThrowOnCancel = true
+                    })
+                    .Child("productImages")
+                    .Child(nameImg(fileName4))
+                    .PutAsync(stream4, cancellation.Token);
 
-                try
-                {
-                    String link4 = (await task);
-                    var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image4").SingleOrDefault();
-                    if (imagedb != null)
+                    try
                     {
-                        imagedb.imageLink = link4;
-                        DataProvider.ins.db.SaveChanges();
+                        String link4 = (await task);
+                        var imagedb = DataProvider.ins.db.IMAGES.Where(x => x.idSP == pRODUCT.id && x.title == "image4").SingleOrDefault();
+                        if (imagedb != null)
+                        {
+                            imagedb.imageLink = link4;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                        else
+                        {
+                            IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image4", imageLink = link4 };
+                            DataProvider.ins.db.IMAGES.Add(iMAGE);
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image4", imageLink = link4 };
-                        DataProvider.ins.db.IMAGES.Add(iMAGE);
-                        DataProvider.ins.db.SaveChanges();
+                        flag = 0;
                     }
                 }
-                catch (Exception ex)
-                {
-                    flag = 0;
-                }
+                
 
             }
             if (imageThumbnail.Source != null)
             {
-                var cancellation = new CancellationTokenSource();
-                var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
+                if (fileNameThumb != null)
                 {
-                    ThrowOnCancel = true
-                })
-                .Child("productImages")
-                .Child(nameImg(fileNameThumb))
-                .PutAsync(streamThumb, cancellation.Token);
-
-                try
-                {
-                    String linkThumb = (await task);
-                    var proThumb = DataProvider.ins.db.PRODUCTs.Where(x => x.id == pRODUCT.id).SingleOrDefault();
-                    if(proThumb != null)
+                    var cancellation = new CancellationTokenSource();
+                    var task = new FirebaseStorage("e-shop-af11b.appspot.com", new FirebaseStorageOptions
                     {
-                        proThumb.thumbnailimage = linkThumb;
-                        DataProvider.ins.db.SaveChanges();
+                        ThrowOnCancel = true
+                    })
+                    .Child("productImages")
+                    .Child(nameImg(fileNameThumb))
+                    .PutAsync(streamThumb, cancellation.Token);
+
+                    try
+                    {
+                        String linkThumb = (await task);
+                        var proThumb = DataProvider.ins.db.PRODUCTs.Where(x => x.id == pRODUCT.id).SingleOrDefault();
+                        if (proThumb != null)
+                        {
+                            proThumb.thumbnailimage = linkThumb;
+                            DataProvider.ins.db.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        flag = 0;
                     }
                 }
-                catch (Exception ex)
-                {
-                    flag = 0;
-                }
+                
 
             }
 

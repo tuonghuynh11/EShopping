@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DevExpress.Xpf.DXBinding;
 using E_Shopping.PopUp;
 using System;
 using System.Diagnostics;
