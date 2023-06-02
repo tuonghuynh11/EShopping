@@ -47,22 +47,34 @@
             </Border>
         </Grid>
 
-        <materialDesign:Flipper Visibility="{Binding Instance.ChatVisibility,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="270" Height="350" Margin="0 0 20 20" Loaded="Flipper_Loaded">
-            <materialDesign:Flipper.FrontContent>
-                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                         Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                         Margin="20"
+        <Button x:Name="chatBtn" Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                Visibility="{Binding Instance.ChatVisibility,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="20 0 38 52"
                         Width="50"
                         Height="50"
                         HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" Click="chatBtn_Click"
+                        >
+            <materialDesign:PackIcon
+                        Kind="Wechat" Height="24" Width="24" />
+        </Button>
+        <materialDesign:Flipper  x:Name="chatFlipper" Visibility="Collapsed"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="270" Height="350" Margin="0 0 20 20" Loaded="Flipper_Loaded">
+            <materialDesign:Flipper.FrontContent>
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                         Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                        Background="Orange"
+                         Margin="20"
+                        Width="50"
+                        Height="50"
+                        Content="Start"
+                        HorizontalAlignment="Right"
                         VerticalAlignment="Bottom" Click="Button_Click"
                         >
-                    <materialDesign:PackIcon
-                        Kind="Wechat" Height="24" Width="24" />
+
                 </Button>
             </materialDesign:Flipper.FrontContent>
-            <materialDesign:Flipper.BackContent>
-                <Grid Height="306" Width="270" Background="White">
+            <materialDesign:Flipper.BackContent >
+                <Grid  Height="306" Width="270" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition  Height="Auto" />
                         <RowDefinition Height="*" />
@@ -71,7 +83,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
                                     Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    HorizontalAlignment="Left">
+                                    HorizontalAlignment="Left" Click="Button_Click_1">
                                 <materialDesign:PackIcon
                                     Kind="ArrowLeft"
                                     HorizontalAlignment="Right" />
@@ -105,14 +117,14 @@
                                                 </Border>
                                                 <TextBlock Margin="3 0 0 0" VerticalAlignment="Center" Text="{Binding content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                                             </StackPanel>
-                                            
+
                                         </StackPanel>
-                                        
+
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </Border>
-                       
+
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <Border Background="#FFE8DDDD" Height="40" BorderThickness="1" CornerRadius="5">
                                 <TextBox x:Name="messageTb" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  materialDesign:HintAssist.Hint="Enter your message" Margin="5 0 5 0"  FontSize="14" Height="50" BorderThickness="0 0 0 0" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Transparent"  ></TextBox>
