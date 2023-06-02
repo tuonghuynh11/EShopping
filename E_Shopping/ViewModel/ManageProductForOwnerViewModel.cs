@@ -113,7 +113,7 @@ namespace E_Shopping.ViewModel
 
                 if(product.thumbnailimage == null)
                 {
-                    product.thumbnailimage = @"/Image/image.png";
+                    product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                 }
                 ListProduct.Add(product);
                 
@@ -173,7 +173,7 @@ namespace E_Shopping.ViewModel
                         
                         if (product.thumbnailimage == null)
                         {
-                            product.thumbnailimage = @"/Image/image.png";
+                            product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                         }
                         ListProduct.Add(product);
                     }
@@ -196,7 +196,7 @@ namespace E_Shopping.ViewModel
                         
                         if (product.thumbnailimage == null)
                         {
-                            product.thumbnailimage = @"/Image/image.png";
+                            product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                         }
                         ListProduct.Add(product);
                     }
@@ -225,7 +225,7 @@ namespace E_Shopping.ViewModel
                         
                         if (product.thumbnailimage == null)
                         {
-                            product.thumbnailimage = @"/Image/image.png";
+                            product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                         }
                         ListProduct.Add(product);
                     }
@@ -322,7 +322,7 @@ namespace E_Shopping.ViewModel
                     
                     if (product.thumbnailimage == null)
                     {
-                        product.thumbnailimage = @"/Image/image.png";
+                        product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                     }
                     ListProduct.Add(product);
                     index++;
@@ -400,7 +400,7 @@ namespace E_Shopping.ViewModel
 
                         if (product.thumbnailimage == null)
                         {
-                            product.thumbnailimage = @"/Image/image.png";
+                            product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
                         }
                         ListProduct.Add(pd);
                         index++;

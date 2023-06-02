@@ -57,7 +57,7 @@
                             <Border BorderBrush="Black" BorderThickness="3" Grid.Row="3" Margin="10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image x:Name="image1" Width="100" Height="100" HorizontalAlignment="Left"
-                                   Margin="0" Stretch="Fill" Source="/Image/image.png"></Image>
+                                   Margin="0" Stretch="Fill" ></Image>
                             </Border>
                             <Image x:Name="image2" Grid.Row="3" Width="100" Height="100"
                                    HorizontalAlignment="Left" Margin="121,13,0,13"></Image>
@@ -96,7 +96,7 @@
                             <Border BorderBrush="Black" BorderThickness="3" Grid.Row="8" Margin="10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image x:Name="imageThumbnail" Width="100" Height="100" HorizontalAlignment="Left"
-                                   Margin="0" Stretch="Fill" Source="/Image/image.png"></Image>
+                                   Margin="0" Stretch="Fill" ></Image>
                             </Border>
                             <Button Height="50" Foreground="#878787" Grid.Row="9" Margin="10"
                                 Style="{StaticResource MaterialDesignFlatButton}" 

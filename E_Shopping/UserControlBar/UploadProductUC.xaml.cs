@@ -316,6 +316,12 @@ namespace E_Shopping.UserControlBar
                 
                 
             }
+            else
+            {
+                IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image1", imageLink = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA." };
+                DataProvider.ins.db.IMAGES.Add(iMAGE);
+                DataProvider.ins.db.SaveChanges();
+            }
             if (image2.Source != null)
             {
                 if (fileName2 != null)
@@ -352,6 +358,12 @@ namespace E_Shopping.UserControlBar
                 }
                 
 
+            }
+            else
+            {
+                IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image2", imageLink = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA." };
+                DataProvider.ins.db.IMAGES.Add(iMAGE);
+                DataProvider.ins.db.SaveChanges();
             }
             if (image3.Source != null)
             {
@@ -390,6 +402,12 @@ namespace E_Shopping.UserControlBar
                  
 
             }
+            else
+            {
+                IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image3", imageLink = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA." };
+                DataProvider.ins.db.IMAGES.Add(iMAGE);
+                DataProvider.ins.db.SaveChanges();
+            }
             if (image4.Source != null)
             {
                 if (fileName4 != null)
@@ -427,6 +445,12 @@ namespace E_Shopping.UserControlBar
                 
 
             }
+            else
+            {
+                IMAGE iMAGE = new IMAGE() { idSP = pRODUCT.id, title = "image4", imageLink = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA." };
+                DataProvider.ins.db.IMAGES.Add(iMAGE);
+                DataProvider.ins.db.SaveChanges();
+            }
             if (imageThumbnail.Source != null)
             {
                 if (fileNameThumb != null)
@@ -458,8 +482,18 @@ namespace E_Shopping.UserControlBar
                 
 
             }
+            else
+            {
+                var proThumb = DataProvider.ins.db.PRODUCTs.Where(x => x.id == pRODUCT.id).SingleOrDefault();
+                if (proThumb != null)
+                {
+                    proThumb.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
+                    DataProvider.ins.db.SaveChanges();
+                }
+                
+            }
 
-            if(flag == 0)
+            if (flag == 0)
             {
                 progressBar.Close();
                 ValidationNotify validationNotify = new ValidationNotify("Failed to upload image");

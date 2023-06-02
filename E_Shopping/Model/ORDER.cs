@@ -93,8 +93,8 @@ namespace E_Shopping.Model
         {
             get
             {
-                IMAGE image = DataProvider.ins.DB.IMAGES.Where(p => p.idSP == this.idProduct && p.title == "Thumnail").FirstOrDefault();
-                return image.imageLink;
+                PRODUCT p = DataProvider.ins.DB.PRODUCTs.Where(p1 => p1.id == this.idProduct).FirstOrDefault();
+                return p.thumbnailimage;
 
             }
             set { }
