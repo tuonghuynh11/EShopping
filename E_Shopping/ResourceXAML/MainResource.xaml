@@ -32,17 +32,8 @@
     </DataTemplate>
 
     
-    <DataTemplate DataType="{x:Type viewmodel:ProductDetailViewModel}">
-        <view:ProductDetailView></view:ProductDetailView>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:SearchFilterProductViewModel}">
-        <view:SearchFilterProduct>
-            
-        </view:SearchFilterProduct>
-        <DataTemplate.Triggers>
-            
-        </DataTemplate.Triggers>
-    </DataTemplate>
+   
+    
     <viewmodel:ProductDetailViewModel x:Key="ProductDetailVM"></viewmodel:ProductDetailViewModel>
     <viewmodel:SearchFilterProductViewModel x:Key="SearchFilterProductVM"></viewmodel:SearchFilterProductViewModel>
 </ResourceDictionary>

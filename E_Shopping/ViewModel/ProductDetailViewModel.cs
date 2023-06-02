@@ -394,7 +394,7 @@ namespace E_Shopping.ViewModel
             ProductWrapper = new PRODUCTWRAPPER()
             {
                 Product = Product,
-                MainImage = new BitmapImage(new Uri(Product.mainImage)),
+                MainImage = new BitmapImage(new Uri(Product.thumbnailimage)),
                 CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0}", Product.price),
                 RatingStarImage = RatingImage(Product),
                 NameCategory = category.type,

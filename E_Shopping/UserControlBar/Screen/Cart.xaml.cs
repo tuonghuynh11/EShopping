@@ -36,7 +36,7 @@ namespace E_Shopping.UserControlBar
         {
             foreach (ORDER item in CartView.Items)
             {
-                //item.check = true;
+                item.check = true;
             }
              (this.DataContext as CartViewModel).calculateSubTotal();
             CartView.Items.Refresh();
@@ -45,7 +45,7 @@ namespace E_Shopping.UserControlBar
         {
             foreach (ORDER item in CartView.Items)
             {
-                //item.check = false;
+                item.check = false;
             }
              (this.DataContext as CartViewModel).calculateSubTotal();
             CartView.Items.Refresh();
@@ -59,10 +59,10 @@ namespace E_Shopping.UserControlBar
 
             DataProvider.ins.DB.SaveChanges();
             MANAGEPRODUCTSYSTEM available_quantiy = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Find(shoppingCart.idProduct);
-            
-            if (available_quantiy.quantity==0)
+
+            if (available_quantiy.quantity == 0)
             {
-                ValidationNotify validationNotify = new ValidationNotify("Product is out of stock"); 
+                ValidationNotify validationNotify = new ValidationNotify("Product is out of stock");
                 validationNotify.ShowDialog();
                 return;
             }
@@ -71,7 +71,7 @@ namespace E_Shopping.UserControlBar
                 available_quantiy.quantity--;
                 DataProvider.ins.DB.SaveChanges();
             }
-            
+
             CartView.Items.Refresh();
             (this.DataContext as CartViewModel).calculateSubTotal();
         }
@@ -81,7 +81,7 @@ namespace E_Shopping.UserControlBar
             ORDER shoppingCart = CartView.SelectedItem as ORDER;
             MANAGEPRODUCTSYSTEM available_quantiy = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Find(shoppingCart.idProduct);
 
-            if (shoppingCart.quantity !=1)
+            if (shoppingCart.quantity != 1)
             {
                 shoppingCart.quantity--;
                 available_quantiy.quantity++;
@@ -112,12 +112,12 @@ namespace E_Shopping.UserControlBar
 
         private void isBuy_Checked(object sender, RoutedEventArgs e)
         {
-            if (CartView.SelectedItem!=null)
+            if (CartView.SelectedItem != null)
             {
                 (CartView.SelectedItem as ORDER).check = true;
                 (this.DataContext as CartViewModel).calculateSubTotal();
             }
-           
+
         }
 
         private void isBuy_Unchecked(object sender, RoutedEventArgs e)
@@ -127,13 +127,13 @@ namespace E_Shopping.UserControlBar
                 (CartView.SelectedItem as ORDER).check = false;
                 (this.DataContext as CartViewModel).calculateSubTotal();
             }
-           
+
         }
 
         private void deleteItembtn_Click(object sender, RoutedEventArgs e)
         {
             CartViewModel cartViewModel = this.DataContext as CartViewModel;
-            ORDER shoppingCart= (ORDER)CartView.SelectedItem;
+            ORDER shoppingCart = (ORDER)CartView.SelectedItem;
             MANAGEPRODUCTSYSTEM available_quantiy = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Find(shoppingCart.idProduct);
             available_quantiy.quantity += shoppingCart.quantity;
             cartViewModel.shoppingCarts.Remove(shoppingCart);

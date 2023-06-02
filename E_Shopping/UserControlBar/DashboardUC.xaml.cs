@@ -45,8 +45,12 @@ namespace E_Shopping.UserControlBar
             timer.Tick += timer_tick;
 
             t1 = 0;
-            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/ad1.jpg")));
-            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/ad2.jpg")));
+            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/new_offer.jpg")));
+            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/LG.jpg")));
+            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/1.png")));
+            Images.Add(new BitmapImage(new Uri("pack://application:,,,/image/2.png")));
+
+
             Advertisement.Source = Images[0];
             
             timer.Start();
@@ -127,7 +131,7 @@ namespace E_Shopping.UserControlBar
             try
             {
                 PRODUCT pdt = bt.DataContext as PRODUCT;
-                MessageBox.Show(pdt.id.ToString());
+                //MessageBox.Show(pdt.id.ToString());
                 CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == AccessUser.currentUser.id).FirstOrDefault();
                 DateTime date = DateTime.Now;
                 DateTime x = new DateTime(date.Year, date.Month, date.Day);
@@ -155,7 +159,7 @@ namespace E_Shopping.UserControlBar
                             conn.Close();
                         }
                     }
-                    DataProvider.Ins.DB.Notifications.Add(new Notification() { IDPEOPLE = AccessUser.currentUser.id, CHECKED = "Chưa xem", NOTIFY = "Đã thêm vào giỏ hàng " + pdt.name });
+                    DataProvider.Ins.DB.Notifications.Add(new Notification() { IDPEOPLE = AccessUser.currentUser.id, CHECKED = "Unseen", NOTIFY = "Add " + pdt.name + " to cart" });
                     DataProvider.Ins.DB.SaveChanges();
                     SucceedNotify succeedNotify = new SucceedNotify();
                     succeedNotify.ShowDialog();
@@ -163,7 +167,7 @@ namespace E_Shopping.UserControlBar
                 }
                 else
                 {
-                    ValidationNotify failure = new ValidationNotify("Bạn đã thêm sản phẩm này vào giỏ hàng rồi");
+                    ValidationNotify failure = new ValidationNotify("You've already added this product to cart");
                     failure.ShowDialog();
 
 
@@ -214,15 +218,18 @@ namespace E_Shopping.UserControlBar
                             conn.Close();
                         }
                     }
-                    DataProvider.Ins.DB.Notifications.Add(new Notification() { IDPEOPLE = AccessUser.currentUser.id, CHECKED = "Chưa xem", NOTIFY = "Đã thêm vào giỏ hàng " + pdt.name });
+                    DataProvider.Ins.DB.Notifications.Add(new Notification() { IDPEOPLE = AccessUser.currentUser.id, CHECKED = "Unseen", NOTIFY = "Add " + pdt.name + " to cart"});
                     DataProvider.Ins.DB.SaveChanges();
                 }
                 else
                 {
-                    MessageBox.Show("Bạn đã thêm vào giỏ hàng");
-                }    
-                   
-                
+                    ValidationNotify failure = new ValidationNotify("You've already added this product to cart");
+                    failure.ShowDialog();
+
+
+                }
+
+
             }
             catch (NullReferenceException)
             {
@@ -241,6 +248,7 @@ namespace E_Shopping.UserControlBar
                 AccessUser.searchWd = selectedItem.type;
                 MainViewModel.Instance.CurrentView = new SearchFilterProductViewModel();
             }
+            
         }
 
         private void Product_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -249,6 +257,7 @@ namespace E_Shopping.UserControlBar
             PRODUCT product = x.SelectedItem as PRODUCT;
             if(product != null)
             {
+                MainViewModel.Instance.CurrentView = new ProductDetailViewModel(product);
 
             }
 

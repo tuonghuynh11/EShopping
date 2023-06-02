@@ -215,7 +215,7 @@ namespace E_Shopping.ViewModel
             }
             return ratingURL;
         }
-        private void ProductToList()
+        public void ProductToList()
         {
             string search = SearchValue.ToLower();
             ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
@@ -226,13 +226,13 @@ namespace E_Shopping.ViewModel
                 string productName = product.name;
                 if(DashboardUC.m == 1)
                 {
-                    if (category.type.Contains(SearchValue))
+                    if (category.type.ToLower().Contains(search))
                     {
-                        ListProducts.Add(product);
+                        ListProductsFiltered.Add(product);
                     }
                 }  
                 else
-                if (category.type.Contains(SearchValue) || productName.Contains(SearchValue))
+                if (category.type.ToLower().Contains(search) || productName.ToLower().Contains(search))
                 {
                     ListProductsFiltered.Add(product);
                 }
@@ -243,7 +243,7 @@ namespace E_Shopping.ViewModel
                 PRODUCTWRAPPER productWrapper = new PRODUCTWRAPPER()
                 {
                     Product = product,
-                    MainImage = new BitmapImage(new Uri(product.mainImage)),
+                    MainImage = new BitmapImage(new Uri(product.thumbnailimage)),
                     CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0} VND", product.price),
                     RatingStarImage = RatingImage(product),
                 };
@@ -379,8 +379,8 @@ namespace E_Shopping.ViewModel
             }
             return (i == 5) ? true : false;
         }
-        public SearchFilterProductViewModel() { }
-        public SearchFilterProductViewModel(string searchValue)
+        //public SearchFilterProductViewModel() { }
+        public SearchFilterProductViewModel()
         {
             SearchValue = AccessUser.searchWd;
             FilterPrice = 0;

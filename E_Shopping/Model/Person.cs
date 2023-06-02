@@ -11,7 +11,8 @@ namespace E_Shopping.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Person
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

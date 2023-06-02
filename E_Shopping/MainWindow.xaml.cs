@@ -141,15 +141,20 @@ namespace E_Shopping
             if (MessageList != null && MessageList.Items.Count != 0)
             {
                 MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
-
-        private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            ControlBarUC obj = sender as ControlBarUC;
-            ControlBarViewModel vm = obj.DataContext as ControlBarViewModel;
-            if ((bool)e.NewValue)
-            {
-                vm.VisibleCommand.Execute(obj as UserControl);
             }
         }
+
+
+        //private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    ControlBarUC obj = sender as ControlBarUC;
+        //    ControlBarViewModel vm = obj.DataContext as ControlBarViewModel;
+        //    if ((bool)e.NewValue)
+        //    {
+        //        vm.VisibleCommand.Execute(obj as UserControl);
+        //    }
+        //}
     }
 }
+
+        

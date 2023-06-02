@@ -32,7 +32,10 @@ namespace E_Shopping.ViewModel
         private List<PRODUCT> items;
         
        public List<PRODUCT> Items { get { return items; } set { items = value; OnPropertyChanged(); } }
-        
+        private List<PRODUCT> latestItems;
+        public List<PRODUCT> LatestItems { get { return latestItems; } set { latestItems = value; OnPropertyChanged(); } }
+        private List<PRODUCT> randomItems;
+        public List<PRODUCT> RandomItems { get { return randomItems; } set { randomItems = value; OnPropertyChanged(); } }
 
 
         private CATEGORY selectedcat;
@@ -40,7 +43,10 @@ namespace E_Shopping.ViewModel
         public CategoryViewModel()
         {
             cATEGORies = new ObservableCollection<CATEGORY>(DataProvider.ins.DB.CATEGORies);
-            items = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u=> u.ORDERS.Count).Take(10).ToList();
+            items = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u=> u.ORDERS.Count).Take(4).ToList();
+            latestItems = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u => u.id).Take(4).ToList();
+            randomItems = DataProvider.ins.DB.PRODUCTs.OrderBy(u=>u.id).Take(8).ToList();
+
             CategoryClick = new RelayCommand<DashboardUC>((p) => { return p != null ? true : false; },
                 (p) =>
                 {

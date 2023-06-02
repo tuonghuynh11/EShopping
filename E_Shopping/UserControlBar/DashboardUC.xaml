@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert ="clr-namespace:E_Shopping.Convert"
               xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:E_Shopping.UserControlBar"
              mc:Ignorable="d" 
@@ -18,38 +19,42 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
             Style="{StaticResource Page_Style}"
              x:Name="Dashboard"
-             d:DesignHeight="700" d:DesignWidth="1300"
+             d:DesignHeight="800" d:DesignWidth="1300"
              DataContext="{StaticResource CategoryVM}">
     <UserControl.Resources>
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="White"/>
         </Style>
+       
+        <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
     </UserControl.Resources>
-    <UserControl.Background>
-        <ImageBrush ImageSource="\Image\christmas.jpg"></ImageBrush>
-
-    </UserControl.Background>
     
-    <ScrollViewer>
+    <Border CornerRadius="0 0 10 10" >
+        <Border.Background>
+            <ImageBrush ImageSource="\Image\christmas.jpg"/>
+        </Border.Background>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="250"></RowDefinition>
                 <RowDefinition Height="250"></RowDefinition>
-                <RowDefinition Height="500"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
+                <RowDefinition Height="700"></RowDefinition>
 
-            </Grid.RowDefinitions>
+
+                </Grid.RowDefinitions>
             <Border Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="210"></RowDefinition>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0"   Margin="50,4,50,0" BorderBrush="LightPink" BorderThickness="2" CornerRadius="10 10 10 10" Height="210" VerticalAlignment="Top" Grid.RowSpan="2">
-
-                        <Image x:Name="Advertisement"  Stretch= "Fill"/>
+                    <Border Grid.Row="0"   Margin="50,4,50,0" BorderBrush="LightPink" BorderThickness="2"  Height="210" VerticalAlignment="Top" Grid.RowSpan="2">
+                        
+                        <Image x:Name="Advertisement" Stretch="Fill"  />
                     </Border>
                     <Border Grid.Row="1" >
                         <StackPanel Grid.Row="1" Height="auto" HorizontalAlignment="Center" Margin="10 0 10 10" Orientation="Horizontal">
@@ -106,7 +111,7 @@
             <Border Grid.Row="2" Background="#FF91D6C2" Margin="50 0 50 0" BorderBrush="Red" BorderThickness="2" CornerRadius="10 10 10 10">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="DANH MỤC SẢN PHẨM" FontSize="40" FontWeight="Black"></Label>
+                        <Label Content="CATEGORY" FontSize="40" FontWeight="Black"></Label>
                         <ListView  x:Name="CategoryList" SelectionChanged="lv_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding CATEGORies}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -135,38 +140,117 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border Grid.Row="3" Background="#FF91D6C2" Margin="50 0 50 0">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="TOP 10 SẢN PHẨM BÁN CHẠY" FontSize="40" FontWeight="Black"></Label>
+                <Border Grid.Row="3" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="TOP-SELLING PRODUCTS" FontSize="40" FontWeight="Black"></Label>
+
+                            <ListView x:Name="ItemBox"   HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionChanged="Product_SelectionChanged">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="4" Margin="20"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
+                                            <StackPanel Margin="20" x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Image x:Name="Thumbnail" Source="{Binding thumbnailimage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                                                <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold"  HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding price, Converter={StaticResource ResourceKey=currencyconvert}}" HorizontalAlignment="Center"></TextBlock>
+                                                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                                    <Label/>
+                                                    <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
+                                                    <Label></Label>
+                                                    <Label/>
+                                                    <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
+                                                    <Label/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+                <Border Grid.Row="4" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="LATEST PRODUCTS" FontSize="40" FontWeight="Black"></Label>
 
 
-                    <ListView x:Name="ItemBox" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Items}" SelectionChanged="Product_SelectionChanged">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="5" Margin="4"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
-                                <StackPanel x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Image x:Name="Thumbnail" Source="{Binding mainImage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
-                                    <TextBlock Text="{Binding name}"  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding price}"></TextBlock>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
-                                        <Label></Label>
-                                        <Label/>
-                                        <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                </StackPanel>
-            </Border>
-            <!--<Border Grid.Row="4">
+                            <ListView x:Name="NewItemList"   HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding LatestItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="Product_SelectionChanged">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="4" Margin="30"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
+                                            <StackPanel Margin="20" x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Image x:Name="Thumbnail" Source="{Binding thumbnailimage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                                                <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold"  HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding price, Converter={StaticResource ResourceKey=currencyconvert}}" HorizontalAlignment="Center"></TextBlock>
+                                                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                                    <Label/>
+                                                    <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
+                                                    <Label></Label>
+                                                    <Label/>
+                                                    <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
+                                                    <Label/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+                <Border Grid.Row="5" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="OTHER PRODUCTS" FontSize="40" FontWeight="Black"></Label>
+
+
+                            <ListView x:Name="RandomItemList"   HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding RandomItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionChanged="Product_SelectionChanged">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="4" Margin="30"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="Border1" CornerRadius="20" BorderBrush="Red" Background="White">
+                                            <StackPanel Margin="20" x:Name="stack" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Image x:Name="Thumbnail" Source="{Binding thumbnailimage}" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" Width="100" Height="100" MaxWidth="270" MaxHeight="270" />
+                                                <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold"  HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding price, Converter={StaticResource ResourceKey=currencyconvert}}" HorizontalAlignment="Center"></TextBlock>
+                                                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                                    
+                                                    <Label/>
+                                                    <Button x:Name="Purchasebtn" Background="Green" Content="Order" HorizontalAlignment="Left" Click="Purchase_Click"/>
+                                                    <Label></Label>
+                                                    <Label/>
+                                                    <Button x:Name="Cartbtn" Content="Add to cart" Background="gREEN" HorizontalAlignment="Right" Click="AddtoCart_Click"/>
+                                                    <Label/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+
+                <!--<Border Grid.Row="4">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -218,4 +302,5 @@
             </Border>-->
         </Grid>
     </ScrollViewer>
+    </Border>
 </UserControl>
