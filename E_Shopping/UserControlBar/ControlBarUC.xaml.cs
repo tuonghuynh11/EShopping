@@ -167,7 +167,7 @@ namespace E_Shopping.UserControlBar
                         }
                     case 2:
                         {
-                            
+                            MainViewModel.Instance.CurrentView = new ConfirmOrderViewModel();
                             break;
                         }
                     case 3:
@@ -177,7 +177,8 @@ namespace E_Shopping.UserControlBar
                     
                     case 4:
                         {
-                            MainViewModel.Instance.CurrentView = new ChangePassViewModel();
+                            AccountInfo accountInfo = new AccountInfo();
+                            accountInfo.ShowDialog();
                             break;
                         }
                     case 5:
@@ -187,12 +188,12 @@ namespace E_Shopping.UserControlBar
                         }
                     case 6:
                         {
-                            MainViewModel.Instance.CurrentView = new UploadProductViewModel();
+                            MainViewModel.Instance.CurrentView = new ManageProductForOwnerViewModel();
                             break;
                         }
                     case 7:
                         {
-                            MainViewModel.Instance.CurrentView = new ConfirmOrderViewModel();
+                            MainViewModel.Instance.CurrentView = new ChartViewModel();
                             break;
                         }
                     case 8:
@@ -201,10 +202,11 @@ namespace E_Shopping.UserControlBar
 
                             if (window != null)
                             {
-                                LoginWindow mainWindow = new LoginWindow();
+                                MainWindow mainWindow = new MainWindow();
+                                window.Close();
+
                                 Application.Current.MainWindow = mainWindow;
                                 Application.Current.MainWindow.Show();
-                                window.Close();
                             }
                             break;
                         }

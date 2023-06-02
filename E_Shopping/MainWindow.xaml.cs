@@ -141,6 +141,8 @@ namespace E_Shopping
             if (MessageList != null && MessageList.Items.Count != 0)
             {
                 MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
+            }
+        }
 
         private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {

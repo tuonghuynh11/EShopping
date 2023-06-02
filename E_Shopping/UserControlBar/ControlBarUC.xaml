@@ -320,7 +320,7 @@
                     </ComboBoxItem>
                     <ComboBoxItem x:Name="cmbUnConfirmed">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Unconfirmed Orders"/>
+                            <TextBlock Text="Statistics"/>
                         </StackPanel>
                     </ComboBoxItem>
                     <ComboBoxItem>

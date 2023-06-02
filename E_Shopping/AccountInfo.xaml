@@ -26,7 +26,7 @@
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=changePass}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Border CornerRadius="10" Background="#f5f2f2">
+    <Border CornerRadius="10" Background="#f5f2f2" BorderThickness="2">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -148,6 +148,7 @@
                     </Grid>
                     <Grid Grid.Row="5">
                         <Button Margin="30 0 0 0" Command="{Binding OKCommand}"
+                                CommandParameter="{Binding ElementName=changePass}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="230" Background="#eda4a4"
                                 ToolTip="OK">

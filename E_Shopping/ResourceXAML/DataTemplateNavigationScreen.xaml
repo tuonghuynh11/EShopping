@@ -40,12 +40,17 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ConfirmOrderViewModel}">
         <view1:ConfirmOrderUC/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ProductDetailViewModel}">
         <view2:ProductDetailView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:SearchFilterProductViewModel}">
         <view2:SearchFilterProduct/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ControlBarViewModel}">
         <view1:ControlBarUC></view1:ControlBarUC>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ChartViewModel}">
+        <view1:ChartUC></view1:ChartUC>
     </DataTemplate>
 </ResourceDictionary>

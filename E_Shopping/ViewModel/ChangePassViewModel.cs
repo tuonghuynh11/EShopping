@@ -59,7 +59,7 @@ namespace E_Shopping.ViewModel
                     {
 
                         MailMessage msg = new MailMessage();
-                        msg.From = new MailAddress("eshoppingprojectcnpm@gmail.com");
+                        msg.From = new MailAddress("shopgo870@gmail.com");
                         msg.To.Add(LoginViewModel.AppUser);
 
                         msg.Subject = "OTP for forget password confirmation";
@@ -68,8 +68,8 @@ namespace E_Shopping.ViewModel
                         SmtpClient smt = new SmtpClient();
                         smt.Host = "smtp.gmail.com";
                         System.Net.NetworkCredential ntcd = new NetworkCredential();
-                        ntcd.UserName = "eshoppingprojectcnpm@gmail.com";
-                        ntcd.Password = "skczhwysbwxkwfxy";
+                        ntcd.UserName = "shopgo870@gmail.com";
+                        ntcd.Password = "jkotoxlrmbqchpqu";
                         smt.Credentials = ntcd;
                         smt.EnableSsl = true;
                         smt.Port = 587;
@@ -108,7 +108,7 @@ namespace E_Shopping.ViewModel
             }, (p) => {
                 
                 var user = DataProvider.ins.db.PEOPLE.Where(x => x.userName == LoginViewModel.AppUser).SingleOrDefault();
-                if (LoginViewModel.AppUser != "" && newPassWord != "" && newPassWord == rePassWord && otp.ToString() == OTP && user.password == oldPassWord)
+                if (LoginViewModel.AppUser != "" && newPassWord != "" && newPassWord == rePassWord && otp.ToString() == OTP && user.password == EncodeString.EncodePass(oldPassWord))
                 {
                     user.password = EncodeString.EncodePass(newPassWord);
                     DataProvider.ins.db.SaveChanges();

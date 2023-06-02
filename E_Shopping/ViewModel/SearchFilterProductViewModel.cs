@@ -215,10 +215,10 @@ namespace E_Shopping.ViewModel
             }
             return ratingURL;
         }
-        private void ProductToList()
+        public void ProductToList()
         {
             string search = SearchValue.ToLower();
-            ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
+            ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.ins.db.PRODUCTs);
             ListProductsFiltered = new ObservableCollection<PRODUCT>();
             foreach (PRODUCT product in ListProductsOG)
             {
@@ -228,7 +228,7 @@ namespace E_Shopping.ViewModel
                 {
                     if (category.type.Contains(SearchValue))
                     {
-                        ListProducts.Add(product);
+                        ListProductsFiltered.Add(product);
                     }
                 }  
                 else
@@ -243,7 +243,7 @@ namespace E_Shopping.ViewModel
                 PRODUCTWRAPPER productWrapper = new PRODUCTWRAPPER()
                 {
                     Product = product,
-                    MainImage = new BitmapImage(new Uri(product.mainImage)),
+                    
                     CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0} VND", product.price),
                     RatingStarImage = RatingImage(product),
                 };
@@ -379,8 +379,8 @@ namespace E_Shopping.ViewModel
             }
             return (i == 5) ? true : false;
         }
-        public SearchFilterProductViewModel() { }
-        public SearchFilterProductViewModel(string searchValue)
+        //public SearchFilterProductViewModel() { }
+        public SearchFilterProductViewModel()
         {
             SearchValue = AccessUser.searchWd;
             FilterPrice = 0;
