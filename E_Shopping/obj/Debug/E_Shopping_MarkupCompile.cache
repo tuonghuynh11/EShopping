@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\WorkSpace\C#\NMCNPM\Last\E_Shopping\obj\Debug\
+D:\WorkSpace\C#\NMCNPM\Main\E_Shopping\obj\Debug\
 E_Shopping
 none
 false
 DEBUG;TRACE
-D:\WorkSpace\C#\NMCNPM\Last\E_Shopping\App.xaml
-32-1592715328
+D:\WorkSpace\C#\NMCNPM\Main\E_Shopping\App.xaml
+36-1643642231
 2739969757
-94-1085911888
-1421500072048
-AccountInfo.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;Dashboard.xaml;MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\Screen\Cart.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\CategoryCardUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;UserControlBar\DashboardUC.xaml;View\ProductDetailView.xaml;View\SearchFilterProduct.xaml;
+1021741672033
+150382174695
+AccountInfo.xaml;ChatBoxScreen.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;Dashboard.xaml;MainScreen.xaml;MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\Screen\Cart.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\CategoryCardUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserControlMessageReceived.xaml;UserControlBar\UserControlMessageSent.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;UserControlBar\DashboardUC.xaml;View\ProductDetailView.xaml;View\SearchFilterProduct.xaml;
 
 False
 

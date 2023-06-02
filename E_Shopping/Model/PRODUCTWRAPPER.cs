@@ -85,5 +85,15 @@ namespace E_Shopping.Model
                 OnPropertyChanged();
             }
         }
+        private int _sold;
+        public int Sold
+        {
+            get => _sold;
+            set
+            {
+                _sold = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

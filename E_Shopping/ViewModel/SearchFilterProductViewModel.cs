@@ -215,10 +215,11 @@ namespace E_Shopping.ViewModel
             }
             return ratingURL;
         }
-        private void ProductToList()
+        public void ProductToList()
         {
             string search = SearchValue.ToLower();
             ListProductsOG = new ObservableCollection<PRODUCT>(DataProvider.Ins.DB.PRODUCTs);
+            ObservableCollection<ORDER> orders = new ObservableCollection<ORDER>(DataProvider.Ins.DB.ORDERS.Where(o => o.status == 3));
             ListProductsFiltered = new ObservableCollection<PRODUCT>();
             foreach (PRODUCT product in ListProductsOG)
             {
@@ -226,13 +227,13 @@ namespace E_Shopping.ViewModel
                 string productName = product.name;
                 if(DashboardUC.m == 1)
                 {
-                    if (category.type.Contains(SearchValue))
+                    if (category.type.ToLower().Contains(search))
                     {
-                        ListProducts.Add(product);
+                        ListProductsFiltered.Add(product);
                     }
                 }  
                 else
-                if (category.type.Contains(SearchValue) || productName.Contains(SearchValue))
+                if (category.type.ToLower().Contains(search) || productName.ToLower().Contains(search))
                 {
                     ListProductsFiltered.Add(product);
                 }
@@ -240,12 +241,21 @@ namespace E_Shopping.ViewModel
             ListProductsFilteredWrapper = new ObservableCollection<PRODUCTWRAPPER>();
             foreach (PRODUCT product in ListProductsFiltered)
             {
+                int count = 0;
+                foreach (ORDER order in orders)
+                {
+                    if (order.idProduct.Equals(product.id))
+                    {
+                        count++;
+                    }
+                }
                 PRODUCTWRAPPER productWrapper = new PRODUCTWRAPPER()
                 {
                     Product = product,
-                    MainImage = new BitmapImage(new Uri(product.mainImage)),
+                    MainImage = new BitmapImage(new Uri(product.thumbnailimage)),
                     CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0} VND", product.price),
                     RatingStarImage = RatingImage(product),
+                    Sold = count,
                 };
                 ListProductsFilteredWrapper.Add(productWrapper);
             }
@@ -254,6 +264,7 @@ namespace E_Shopping.ViewModel
             {
                 CheckRatingStar[i] = 0;
             }
+            OnPropertyChanged();
         }
 
         private string _minPrice;
@@ -379,8 +390,7 @@ namespace E_Shopping.ViewModel
             }
             return (i == 5) ? true : false;
         }
-        public SearchFilterProductViewModel() { }
-        public SearchFilterProductViewModel(string searchValue)
+        public SearchFilterProductViewModel()
         {
             SearchValue = AccessUser.searchWd;
             FilterPrice = 0;
@@ -599,21 +609,59 @@ namespace E_Shopping.ViewModel
             });
             TopSalesCommand = new RelayCommand<object>((p) =>
             {
-                return false;
+                if (ListProductsFilteredWrapper.Count == 0)
+                {
+                    return false;
+                }
+                return true;
             }, (p) =>
             {
-
+                ObservableCollection<PRODUCTWRAPPER> ListProductsFilteredWrapperTemp = new ObservableCollection<PRODUCTWRAPPER>();
+                ObservableCollection<ORDER> orders = new ObservableCollection<ORDER>(DataProvider.Ins.DB.ORDERS.Where(o => o.status == 3));
+                if (isCheckPrice() || isCheckRating())
+                {
+                    ListProductsFilteredWrapperTemp = ListProductsWrapper;
+                }
+                else
+                {
+                    ListProductsFilteredWrapperTemp = ListProductsFilteredWrapper;
+                }
+                FilterChanged = true;
+                if (FilterPrice != -1)
+                {
+                    FilterPrice = 1;
+                    ListProductsWrapper = new ObservableCollection<PRODUCTWRAPPER>(ListProductsFilteredWrapperTemp.OrderByDescending(o => o.Sold));
+                }
             });
             LatestCommand = new RelayCommand<object>((p) =>
             {
-                return false;
+                if (ListProductsFilteredWrapper.Count == 0)
+                {
+                    return false;
+                }
+                return true;
             }, (p) =>
             {
+                ObservableCollection<PRODUCTWRAPPER> ListProductsFilteredWrapperTemp = new ObservableCollection<PRODUCTWRAPPER>();
+                ObservableCollection<ORDER> orders = new ObservableCollection<ORDER>(DataProvider.Ins.DB.ORDERS.Where(o => o.status == 3));
+                if (isCheckPrice() || isCheckRating())
+                {
+                    ListProductsFilteredWrapperTemp = ListProductsWrapper;
+                }
+                else
+                {
+                    ListProductsFilteredWrapperTemp = ListProductsFilteredWrapper;
+                }
                 FilterChanged = true;
+                if (FilterPrice != -1)
+                {
+                    FilterPrice = 1;
+                    ListProductsWrapper = new ObservableCollection<PRODUCTWRAPPER>(ListProductsFilteredWrapperTemp.OrderByDescending(o => o.Product.id));
+                }
             });
             LowToHighCommand = new RelayCommand<object>((p) =>
             {
-                if (ListProductsFilteredWrapper == null)
+                if (ListProductsFilteredWrapper.Count == 0)
                 {
                     return false;
                 }
@@ -639,7 +687,7 @@ namespace E_Shopping.ViewModel
             });
             HighToLowCommand = new RelayCommand<object>((p) =>
             {
-                if (ListProductsFilteredWrapper == null)
+                if (ListProductsFilteredWrapper.Count == 0)
                 {
                     return false;
                 }
