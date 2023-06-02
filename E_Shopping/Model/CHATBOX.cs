@@ -53,7 +53,20 @@ namespace E_Shopping.Model
             }
             set { }
         }
-        public Visibility visibility
+        public Visibility visibility2
+        {
+            get
+            {
+                if (this.isSend == 1)
+                {
+                    return Visibility.Collapsed;
+                }
+                return Visibility.Visible;
+
+            }
+            set { }
+        }
+        public Visibility visibility1
         {
             get
             {

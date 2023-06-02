@@ -106,7 +106,7 @@ namespace E_Shopping.ViewModel
                 if (p == null)
                     return;
                 //p = new MainWindow();
-                p.Hide();
+               p.Hide();
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
                 if (loginWindow.DataContext == null)

@@ -126,7 +126,7 @@
                 <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Button BorderBrush="#f2d94e" Height="65" Margin="100 0" Background="#f2d94e" Command="{Binding IconClick}" CommandParameter="{Binding ElementName=ucControlBar}">
+                <Button  Height="65" Margin="100 0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Command="{Binding IconClick}" CommandParameter="{Binding ElementName=ucControlBar}">
                     <Button.Content>
                         <Image Source="/Icon/ShopGo.png"/>
                     </Button.Content>
@@ -285,7 +285,7 @@
                     <ComboBoxItem x:Name="BillingCmb">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/billing.png" Stretch="Fill" Height="20"></Image>
-                            <TextBlock Text="Billing"/>
+                            <TextBlock Text="History"/>
                         </StackPanel>
                     </ComboBoxItem>
                     <ComboBoxItem>

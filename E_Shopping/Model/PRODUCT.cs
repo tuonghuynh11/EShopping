@@ -40,7 +40,7 @@ namespace E_Shopping.Model
                 IMAGE image = DataProvider.ins.DB.IMAGES.Where(p => p.idSP == this.id && p.title == "Thumnail").FirstOrDefault();
                 //if(image.imageLink != null)
                 //    return image.imageLink;
-                return null;
+                return thumbnailimage;
 
             }
             set { }

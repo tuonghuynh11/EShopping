@@ -172,12 +172,15 @@ namespace E_Shopping.UserControlBar
                         }
                     case 3:
                         {
+                            ChatBoxScreen chatBoxScreen = new ChatBoxScreen();
+                            chatBoxScreen.ShowDialog();
                             break;
                         }
                     
                     case 4:
                         {
-                            MainViewModel.Instance.CurrentView = new ChangePassViewModel();
+                            AccountInfo accountInfo = new AccountInfo();
+                            accountInfo.ShowDialog();
                             break;
                         }
                     case 5:
@@ -187,7 +190,7 @@ namespace E_Shopping.UserControlBar
                         }
                     case 6:
                         {
-                            MainViewModel.Instance.CurrentView = new UploadProductViewModel();
+                            MainViewModel.Instance.CurrentView = new ManageProductForOwnerViewModel();
                             break;
                         }
                     case 7:
@@ -201,16 +204,18 @@ namespace E_Shopping.UserControlBar
 
                             if (window != null)
                             {
-                                LoginWindow mainWindow = new LoginWindow();
+                                MainWindow mainWindow = new MainWindow();
+                                window.Close();
                                 Application.Current.MainWindow = mainWindow;
                                 Application.Current.MainWindow.Show();
-                                window.Close();
                             }
                             break;
                         }
+                       
 
                 }
-                
+                combo.SelectedItem = null;
+
             }
         }
 
