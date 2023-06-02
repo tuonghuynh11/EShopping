@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.PeerToPeer;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -137,6 +138,16 @@ namespace E_Shopping.ViewModel
             set
             {
                 descriptionInformation = value;
+                OnPropertyChanged();
+            }
+        }
+        private string technicalInformation;
+        public string TechnicalInformation
+        {
+            get => technicalInformation;
+            set
+            {
+                technicalInformation = value;
                 OnPropertyChanged();
             }
         }
@@ -394,7 +405,7 @@ namespace E_Shopping.ViewModel
             ProductWrapper = new PRODUCTWRAPPER()
             {
                 Product = Product,
-                MainImage = new BitmapImage(new Uri(Product.mainImage)),
+                MainImage = new BitmapImage(new Uri(product.thumbnailimage)),
                 CustomPrice = string.Format(new CultureInfo("vi-VN"), "{0:#,##0}", Product.price),
                 RatingStarImage = RatingImage(Product),
                 NameCategory = category.type,
@@ -402,6 +413,16 @@ namespace E_Shopping.ViewModel
             CountRatingStar(Product);
             foreach (IMAGE img in ProductWrapper.Product.IMAGES)
             {
+                Images.Add(img);
+            }
+            if (Images.Count == 0)
+            {
+                IMAGE img = new IMAGE()
+                {
+                    idSP = Product.id,
+                    title = "Thumnail",
+                    imageLink = Product.thumbnailimage,
+                };
                 Images.Add(img);
             }
             Name = ProductWrapper.Product.name;
@@ -413,7 +434,9 @@ namespace E_Shopping.ViewModel
             CategoryProduct = ProductWrapper.NameCategory;
             CurrentImage = ConvertImageLinkToBitMapImage(Images.First().imageLink);
             Brand = ProductWrapper.Product.nameOfManufacturer;
-            QuantityProduct = (int)manageProductSystem.quantity;
+            QuantityProduct = (Product.status == 0) ? 0 : (int)manageProductSystem.quantity;
+            DescriptionInformation = ProductWrapper.Product.descriptionInformation;
+            TechnicalInformation = ProductWrapper.Product.technicalInformation;
             //
             QuantityTextBox = "1";
             IncreaseQuantityCommand = new RelayCommand<object>((p) =>
@@ -455,13 +478,23 @@ namespace E_Shopping.ViewModel
                     idCart = AccessUser.currentUser.idCart,
                     idProduct = ProductWrapper.Product.id,
                     quantity = Int32.Parse(QuantityTextBox),
+                    date = DateTime.Now,
                     status = 0,
-                    check = true,
                 };
                 if (Order.status != null)
                 {
-                    DataProvider.ins.DB.ORDERS.Add(Order);
-                    DataProvider.ins.DB.SaveChanges();
+                    /* Error
+                    try
+                    {
+                        DataProvider.ins.db.ORDERS.Add(Order);
+                        DataProvider.ins.db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.InnerException.Message);
+                    }
+                    */
+                    //
                     MainViewModel.Instance.CurrentView = new CartViewModel();
                     MainViewModel.stackView.Push(MainViewModel.Instance.CurrentView);
                 }
@@ -481,12 +514,13 @@ namespace E_Shopping.ViewModel
                     idProduct = ProductWrapper.Product.id,
                     quantity = Int32.Parse(QuantityTextBox),
                     status = 0,
-                    check = false,
                 };
                 if (Order.status != null)
                 {
+                    /* Error
                     DataProvider.ins.DB.ORDERS.Add(Order);
-                    DataProvider.ins.DB.SaveChanges();
+                    //DataProvider.ins.DB.SaveChanges();
+                    */
                     succeedNotify.content.Text = "Added To Cart";
                     succeedNotify.content.FontSize = 20;
                     succeedNotify.ShowDialog();

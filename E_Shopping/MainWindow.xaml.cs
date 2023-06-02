@@ -142,6 +142,8 @@ namespace E_Shopping
             {
                 MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
 
+            }
+        }
         private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             ControlBarUC obj = sender as ControlBarUC;
