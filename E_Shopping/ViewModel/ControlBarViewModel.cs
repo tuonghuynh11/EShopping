@@ -82,7 +82,8 @@ namespace E_Shopping.ViewModel
                 Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id).OrderByDescending(x => x.CHECKED).OrderByDescending(x => x.ID));
                 uncheck = DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id && x.CHECKED == "Chưa xem").ToList().Count();
                 notePopUp = "Bạn có " + uncheck + " thông báo mới";
-                userName = AccessUser.currentUser.userName;
+                userName = AccessUser.currentUser.userName.Substring(0, 5) +"..";
+                Avatar = AccessUser.currentUser.avatar;
                 
             }
 
@@ -170,22 +171,26 @@ namespace E_Shopping.ViewModel
             SearchCommand = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
                 {
-                    DashboardUC.m = 0;   
-                    AccessUser.searchWd = searchWd;
-                    if (!MainViewModel.Instance.CurrentView.GetType().Equals(typeof(SearchFilterProductViewModel)))
+                    if(searchWd != null)
                     {
-                        MainViewModel.addViewToStack(new SearchFilterProductViewModel(/*SearchWD*/));
+                        DashboardUC.m = 0;
+                        AccessUser.searchWd = searchWd;
+                        if (!MainViewModel.Instance.CurrentView.GetType().Equals(typeof(SearchFilterProductViewModel)))
+                        {
+                            MainViewModel.addViewToStack(new SearchFilterProductViewModel(/*SearchWD*/));
 
+                        }
+                        else
+                        {
+                            //MainViewModel.Instance.CurrentView = new CategoryViewModel(/*SearchWD*/);
+                            SearchFilterProduct._searchFilterProductViewModel.SearchValue = searchWd;
+                            SearchFilterProduct._searchFilterProductViewModel.ProductToList();
+
+
+                        }
+                        //MainViewModel.Instance.CurrentView = new SearchFilterProductViewModel();
                     }
-                    else
-                    {
-                        //MainViewModel.Instance.CurrentView = new CategoryViewModel(/*SearchWD*/);
-                        SearchFilterProduct._searchFilterProductViewModel.SearchValue = searchWd;
-                        SearchFilterProduct._searchFilterProductViewModel.ProductToList();
 
-
-                    }
-                    //MainViewModel.Instance.CurrentView = new SearchFilterProductViewModel();
 
 
                 });

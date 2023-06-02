@@ -115,7 +115,7 @@ namespace E_Shopping.UserControlBar
             Notification update = DataProvider.ins.DB.Notifications.Find(notification.ID);
             try
             {
-                update.CHECKED = "Đã xem";
+                update.CHECKED = "Seen";
                 DataProvider.ins.DB.SaveChanges();
             }
             catch (Exception)
@@ -128,7 +128,7 @@ namespace E_Shopping.UserControlBar
 
         private void PopOpened(object sender, RoutedEventArgs e)
         {
-            int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDPEOPLE == AccessUser.currentUser.id && p.CHECKED == "Chưa xem").ToList().Count();
+            int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDPEOPLE == AccessUser.currentUser.id && p.CHECKED == "Unseen").ToList().Count();
             numberofnotifies.Badge = uncheck;
             Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(p => p.IDPEOPLE == AccessUser.currentUser.id));
             lvUsers.ItemsSource = Notifies;
@@ -140,9 +140,13 @@ namespace E_Shopping.UserControlBar
 
         private void PopClosed(object sender, RoutedEventArgs e)
         {
-            int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDPEOPLE == AccessUser.currentUser.id && p.CHECKED == "Chưa xem").ToList().Count();
+            int uncheck = DataProvider.ins.DB.Notifications.Where(p => p.IDPEOPLE == AccessUser.currentUser.id && p.CHECKED == "Unseen").ToList().Count();
             numberofnotifies.Badge = uncheck;
-            notifipopup.ToolTip = $"Bạn có {uncheck} thông báo mới";
+            if(uncheck == 1)
+                notifipopup.ToolTip = $"You have {uncheck} new notification";
+            else
+                notifipopup.ToolTip = $"You have {uncheck} new notifications";
+
         }
 
         private void Accountcbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -217,6 +221,7 @@ namespace E_Shopping.UserControlBar
                 combo.SelectedItem = null;
 
             }
+            combo.SelectedIndex = -1;
         }
 
         private void Accountcbb_Loaded(object sender, RoutedEventArgs e)
@@ -249,6 +254,8 @@ namespace E_Shopping.UserControlBar
                         }
                     case 3:
                         {
+                            ComboBoxItem item = (ComboBoxItem)Accountcbb.Items[3];
+                            item.Visibility = Visibility.Collapsed;
                             break;
                         }
                 }

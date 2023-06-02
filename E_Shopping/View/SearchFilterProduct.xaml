@@ -10,6 +10,8 @@
              xmlns:uc="clr-namespace:E_Shopping.UserControlBar"
              x:Name="SearchFliterProduct"
              FontFamily="{DynamicResource MaterialDesignFont}"
+                         Style="{StaticResource Page_Style}"
+
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1300">
     <Grid Background="#F5F5F5" Width="1300">

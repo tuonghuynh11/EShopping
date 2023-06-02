@@ -144,16 +144,17 @@ namespace E_Shopping
             }
         }
 
-            }
-        }
-        private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            ControlBarUC obj = sender as ControlBarUC;
-            ControlBarViewModel vm = obj.DataContext as ControlBarViewModel;
-            if ((bool)e.NewValue)
-            {
-                vm.VisibleCommand.Execute(obj as UserControl);
-            }
-        }
+
+        //private void controlBar_VisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    ControlBarUC obj = sender as ControlBarUC;
+        //    ControlBarViewModel vm = obj.DataContext as ControlBarViewModel;
+        //    if ((bool)e.NewValue)
+        //    {
+        //        vm.VisibleCommand.Execute(obj as UserControl);
+        //    }
+        //}
     }
 }
+
+        

@@ -755,6 +755,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\ShopGo.png" />
+    <Resource Include="Image\LG.jpg" />
+    <Resource Include="Image\new_offer.jpg" />
+    <Resource Include="Image\1.png" />
+    <Resource Include="Image\2.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

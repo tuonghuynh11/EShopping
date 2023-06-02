@@ -16,7 +16,7 @@
                Background="Transparent"
              DataContext="{StaticResource ControlBarVM}"
              
-             d:DesignHeight="800" d:DesignWidth="1300">
+             d:DesignHeight="800" d:DesignWidth="1290">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseLeftButtonDown">
             <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}"/>
@@ -262,7 +262,7 @@
                             </ListView.GroupStyle>
                         </ListView>
                     </materialDesign:PopupBox>
-                    <materialDesign:Badged Badge="{Binding Uncheck}" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
+                    <materialDesign:Badged Badge="{Binding Uncheck, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="numberofnotifies" BadgeForeground="White" BadgeBackground="Red"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 10 14 10">
                     </materialDesign:Badged>
 
                 </Grid>
@@ -270,7 +270,7 @@
 
                 <Border CornerRadius="50" BorderThickness="1" BorderBrush="Gray" Height="30" Width="33">
                     <Border.Background>
-                        <ImageBrush ImageSource="{Binding Avatar}" x:Name="avatar" Stretch="Fill" ></ImageBrush>
+                        <ImageBrush ImageSource="{Binding Avatar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="avatar" Stretch="Fill" ></ImageBrush>
                     </Border.Background>
                 </Border>
                 <Label x:Name="UserNamelb"  VerticalAlignment="Center" Margin="5" Content="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Label>
