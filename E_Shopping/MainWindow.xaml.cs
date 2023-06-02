@@ -138,10 +138,24 @@ namespace E_Shopping
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             if (MessageList != null && MessageList.Items.Count != 0)
             {
                 MessageList.ScrollIntoView(MessageList.Items[MessageList.Items.Count - 1]);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            chatFlipper.Visibility = Visibility.Collapsed;
+            chatBtn.Visibility = Visibility.Visible;
+        }
+
+        private void chatBtn_Click(object sender, RoutedEventArgs e)
+        {
+            chatFlipper.Visibility = Visibility.Visible;
+            chatBtn.Visibility = Visibility.Collapsed;
+
         }
 
 
