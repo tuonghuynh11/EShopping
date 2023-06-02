@@ -146,7 +146,7 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProducts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedProduct}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=5}" >
+                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProductsFilteredWrapper, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedProduct}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=5}" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border HorizontalAlignment="Center"
