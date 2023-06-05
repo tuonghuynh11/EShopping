@@ -213,7 +213,7 @@
                         <ListView Name="lvUsers" Width="300" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lvUsers_SelectionChanged" ItemsSource="{Binding Notifies,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                             <ListView.View>
                                 <GridView >
-                                    <GridViewColumn Header="Thông báo"  Width="300"  >
+                                    <GridViewColumn Header="Notifications"  Width="300"  >
                                         <GridViewColumn.HeaderContainerStyle>
                                             <Style TargetType="{x:Type GridViewColumnHeader}">
                                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
