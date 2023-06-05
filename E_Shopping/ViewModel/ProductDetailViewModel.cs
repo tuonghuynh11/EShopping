@@ -483,7 +483,7 @@ namespace E_Shopping.ViewModel
                 };
                 if (Order.status != null)
                 {
-                    /* Error
+                    
                     try
                     {
                         DataProvider.ins.db.ORDERS.Add(Order);
@@ -493,8 +493,7 @@ namespace E_Shopping.ViewModel
                     {
                         MessageBox.Show(e.InnerException.Message);
                     }
-                    */
-                    //
+                   
                     MainViewModel.Instance.CurrentView = new CartViewModel();
                     MainViewModel.stackView.Push(MainViewModel.Instance.CurrentView);
                 }
@@ -517,10 +516,10 @@ namespace E_Shopping.ViewModel
                 };
                 if (Order.status != null)
                 {
-                    /* Error
+                    
                     DataProvider.ins.DB.ORDERS.Add(Order);
-                    //DataProvider.ins.DB.SaveChanges();
-                    */
+                    DataProvider.ins.DB.SaveChanges();
+                    
                     succeedNotify.content.Text = "Added To Cart";
                     succeedNotify.content.FontSize = 20;
                     succeedNotify.ShowDialog();
