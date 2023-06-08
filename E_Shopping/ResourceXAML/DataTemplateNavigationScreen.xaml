@@ -53,4 +53,7 @@
     <DataTemplate DataType="{x:Type vm:ChartViewModel}">
         <view1:ChartUC></view1:ChartUC>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:FinishOrderViewModel}">
+        <view1:FinishOrderUC></view1:FinishOrderUC>
+    </DataTemplate>
 </ResourceDictionary>

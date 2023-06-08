@@ -204,6 +204,11 @@ namespace E_Shopping.UserControlBar
                         }
                     case 8:
                         {
+                            MainViewModel.Instance.CurrentView = new FinishOrderViewModel();
+                            break;
+                        }
+                    case 9:
+                        {
                             Window window = Application.Current.MainWindow as Window;
 
                             if (window != null)
@@ -238,8 +243,9 @@ namespace E_Shopping.UserControlBar
                             ComboBoxItem item1 = (ComboBoxItem)Accountcbb.Items[5];
                             ComboBoxItem item2 = (ComboBoxItem)Accountcbb.Items[6];
                             ComboBoxItem item3 = (ComboBoxItem)Accountcbb.Items[7];
+                            ComboBoxItem item4 = (ComboBoxItem)Accountcbb.Items[8];
 
-                            item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = Visibility.Collapsed;
+                            item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility = Visibility.Collapsed;
                             
                             break;
                         }
@@ -248,8 +254,9 @@ namespace E_Shopping.UserControlBar
                             ComboBoxItem item1 = (ComboBoxItem)Accountcbb.Items[5];
                             ComboBoxItem item2 = (ComboBoxItem)Accountcbb.Items[6];
                             ComboBoxItem item3 = (ComboBoxItem)Accountcbb.Items[7];
+                            ComboBoxItem item4 = (ComboBoxItem)Accountcbb.Items[8];
 
-                            item1.Visibility = item2.Visibility = item3.Visibility = Visibility.Collapsed;
+                            item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility = Visibility.Collapsed;
                             break;
                         }
                     case 3:

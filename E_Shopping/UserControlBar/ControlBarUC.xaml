@@ -323,6 +323,11 @@
                             <TextBlock Text="Statistics"/>
                         </StackPanel>
                     </ComboBoxItem>
+                    <ComboBoxItem x:Name="cmbFinish">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Finish Orders"/>
+                        </StackPanel>
+                    </ComboBoxItem>
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/logout.png" Stretch="Fill" Height="20"></Image>
