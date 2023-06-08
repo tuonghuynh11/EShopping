@@ -62,17 +62,18 @@ namespace E_Shopping.ViewModel
                     }
                     DataProvider.ins.db.SaveChanges();
 
-                    if(orderid != -1)
+                    if (orderid != -1)
                     {
 
                         var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == orderid).SingleOrDefault();
-                        if(orderrec != null)
+                        if (orderrec != null)
                         {
 
                             var rec = DataProvider.ins.db.RECEIPTs.Find(orderrec.idReceipt);
-                            if(rec != null)
+                            if (rec != null)
                             {
-                                rec.status = 1;
+                                rec.status = -1;
+                                // -1 la trang thai cho nhan hang
                                 DataProvider.ins.db.SaveChanges();
                             }
                         }

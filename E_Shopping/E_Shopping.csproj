@@ -374,6 +374,7 @@
     <Compile Include="Model\ORDERSRECEIPT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Order_finish.cs" />
     <Compile Include="Model\PAYMENTINFORMATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -419,6 +420,9 @@
     <Compile Include="Untils\VnPhoneNumberValidator.cs" />
     <Compile Include="UserControlBar\ChartUC.xaml.cs">
       <DependentUpon>ChartUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlBar\FinishOrderUC.xaml.cs">
+      <DependentUpon>FinishOrderUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlBar\Screen\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
@@ -473,6 +477,7 @@
     <Compile Include="ViewModel\DeliveryOptionViewModel.cs" />
     <Compile Include="ViewModel\FeedBackViewModel.cs" />
     <Compile Include="ViewModel\EditProductViewModel.cs" />
+    <Compile Include="ViewModel\FinishOrderViewModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderedHistoryViewModel.cs" />
@@ -582,6 +587,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\ChartUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\FinishOrderUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
