@@ -1,4 +1,4 @@
-﻿using E_Shopping.Model;
+using E_Shopping.Model;
 using E_Shopping.PopUp;
 using System;
 using System.Collections.Generic;
@@ -14,11 +14,11 @@ namespace E_Shopping.ViewModel
 {
     public class ConfirmOrderViewModel:BaseViewModel
     {
-        private ObservableCollection<Customer_order> _orderList;
-        public ObservableCollection<Customer_order> OrderList { get => _orderList; set { _orderList = value; OnPropertyChanged(); } }
+        private ObservableCollection<Order_finish> _orderList;
+        public ObservableCollection<Order_finish> OrderList { get => _orderList; set { _orderList = value; OnPropertyChanged(); } }
 
-        private Customer_order _selectedOrder;
-        public Customer_order SelectedOrder { get => _selectedOrder; set { _selectedOrder = value; OnPropertyChanged(); } }
+        private Order_finish _selectedOrder;
+        public Order_finish SelectedOrder { get => _selectedOrder; set { _selectedOrder = value; OnPropertyChanged(); } }
 
         private ObservableCollection<Product_order> _productList;
         public ObservableCollection<Product_order> ProductList { get => _productList; set { _productList = value; OnPropertyChanged(); } }
@@ -38,120 +38,86 @@ namespace E_Shopping.ViewModel
                     LoadProductData(SelectedOrder);
             });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                Customer_order temp = SelectedOrder;
-                var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == temp.order.idCart);
-
-                List<Int32> OrderID = new List<Int32>();
-                if (orders != null)
+                Order_finish temp = SelectedOrder;
+                if (temp != null)
                 {
-                    int orderid = -1;
-
-                    foreach (var order in orders)
+                    var rec = DataProvider.ins.db.RECEIPTs.Where(x => x.id == temp.re.id).SingleOrDefault();
+                    if (rec != null)
                     {
+                        rec.status = -1;
+                        DataProvider.ins.db.SaveChanges();
+                        LoadOrderData();
+                        SucceedNotify succeedNotify = new SucceedNotify();
+                        succeedNotify.ShowDialog();
 
-                        order.status = 2;
-                        var rec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == order.id);
-                        if(rec != null)
+                        var finishorder = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == rec.id);
+                        if (finishorder != null)
                         {
-                            foreach(ORDERSRECEIPT or in rec)
+                            foreach (ORDERSRECEIPT or in finishorder)
                             {
-                                if(!checkId(OrderID, or.idReceipt))
-                                {
-                                    OrderID.Add(or.idReceipt);
-                                }
+                                var od = DataProvider.ins.db.ORDERS.Where(x => x.id == or.idOrder).SingleOrDefault();
+                                od.status = 2;
                             }
+                            DataProvider.ins.db.SaveChanges();
                         }
                     }
-                    DataProvider.ins.db.SaveChanges();
-                    SelectedOrder = null;
-                    LoadOrderData();
-
-                        
-                    foreach(var order in orders)
-                    {
-                        var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
-                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is confirmed" , CHECKED = "Unseen"});
-                    }
-                    DataProvider.ins.db.SaveChanges();
-
-                    //if (orderid != -1)
-                    //{
-
-                    //    var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == orderid).SingleOrDefault();
-                    //    if (orderrec != null)
-                    //    {
-
-                    //        var rec = DataProvider.ins.db.RECEIPTs.Find(orderrec.idReceipt);
-                    //        if (rec != null)
-                    //        {
-                    //            rec.status = -1;
-                    //            // -1 la trang thai cho nhan hang
-                    //            DataProvider.ins.db.SaveChanges();
-                    //        }
-                    //    }
-                    //}
-                    foreach(Int32 orID in OrderID)
-                    {
-                        var rece = DataProvider.ins.db.RECEIPTs.Where(x => x.id == orID).SingleOrDefault();
-                        rece.status = -1;
-                        DataProvider.ins.db.SaveChanges();
-                    }
-
-                    SucceedNotify succeedNotify = new SucceedNotify();
-                    succeedNotify.ShowDialog();
                 }
+                
                 
             });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                Customer_order temp = SelectedOrder;
-                var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == temp.order.idCart);
-                if (orders != null)
+                Order_finish temp = SelectedOrder;
+                if (temp != null)
                 {
-                    foreach (var order in orders)
+                    var rec = DataProvider.ins.db.RECEIPTs.Where(x => x.id == temp.re.id).SingleOrDefault();
+                    if (rec != null)
                     {
-                        order.status = -1;
-                    }
-                    DataProvider.ins.db.SaveChanges();
-                    SelectedOrder = null;
-                    LoadOrderData();
+                        rec.status = 0;
+                        DataProvider.ins.db.SaveChanges();
+                        LoadOrderData();
+                        ValidationNotify validationNotify = new ValidationNotify("Cancel order");
+                        validationNotify.ShowDialog();
 
-                    foreach (var order in orders)
-                    {
-                        var cart = DataProvider.ins.db.CARTs.Where(x => x.id == order.idCart).FirstOrDefault();
-                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = cart.idCustomer, NOTIFY = "Your order for product " + order.prodductName + " is cancelled" , CHECKED = "Unseen"});
+                        var finishorder = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == rec.id);
+                        if (finishorder != null)
+                        {
+                            foreach (ORDERSRECEIPT or in finishorder)
+                            {
+                                var od = DataProvider.ins.db.ORDERS.Where(x => x.id == or.idOrder).SingleOrDefault();
+                                od.status = -1;
+                            }
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
-                    DataProvider.ins.db.SaveChanges();
-                    ValidationNotify validationNotify = new ValidationNotify("Cancel order");
-                    validationNotify.ShowDialog();
                 }
 
             });
         }
         void LoadOrderData()
         {
-            OrderList = new ObservableCollection<Customer_order>();
+            OrderList = new ObservableCollection<Order_finish>();
             var orders = DataProvider.ins.db.ORDERS;
-            if(orders != null)
-            {
-                List<Int32> cartList = new List<Int32>();
-                foreach (var o in orders)
-                {
-                    //Status = 2 thi da duoc confirm, status = -1 thi bi cancel, 1 la chua duoc confirm hay cancel
-                    if (o.status == 1)
-                    {
-                        var cart = DataProvider.ins.db.CARTs.Where(c => c.id == o.idCart).FirstOrDefault();
 
-                        var customer = DataProvider.ins.db.PEOPLE.Where(p => p.id == cart.idCustomer).SingleOrDefault();
-                        if (!checkId(cartList, System.Convert.ToInt32(cart.id)))
+
+
+            List<Int32> OrderID = new List<Int32>();
+
+            var receipts = DataProvider.ins.db.RECEIPTs;
+            if (receipts != null)
+            {
+                foreach (RECEIPT re in receipts)
+                {
+                    if (re.status == 0)
+                    {
+                        var customer = DataProvider.ins.db.PEOPLE.Where(p => p.id == re.idCustomer).SingleOrDefault();
+                        if (customer != null)
                         {
-                            Customer_order customer_Order = new Customer_order(o, customer.name);
-                            OrderList.Add(customer_Order);
+                            OrderList.Add(new Order_finish(re, customer.name, customer.phoneNumber));
                         }
-                        cartList.Add(System.Convert.ToInt32(o.idCart));
                     }
                 }
             }
-            
+
 
         }
         Boolean checkId(List<Int32> l, Int32 id)
@@ -164,23 +130,31 @@ namespace E_Shopping.ViewModel
             return false;
         }
 
-        void LoadProductData(Customer_order co)
+        void LoadProductData(Order_finish co)
         {
-            var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == co.order.idCart);
-            if (orders != null)
+            
+            var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == co.re.id);
+            if (orderrec != null)
             {
-                foreach (ORDER oRDER in orders)
+                foreach (var item in orderrec)
                 {
-
-                    var products = DataProvider.ins.db.PRODUCTs.Where(p => p.id == oRDER.idProduct).SingleOrDefault();
-                    if (products != null)
+                    var order = DataProvider.ins.db.ORDERS.Where(x => x.id == item.idOrder);
+                    if (order != null)
                     {
-                        Product_order product_Order = new Product_order(products.id, products.name, oRDER);
-                        ProductList.Add(product_Order);
+                        foreach (ORDER oRDER in order)
+                        {
+
+                            var products = DataProvider.ins.db.PRODUCTs.Where(p => p.id == oRDER.idProduct).SingleOrDefault();
+                            if (products != null)
+                            {
+                                Product_order product_Order = new Product_order(products.id, products.name, oRDER);
+                                ProductList.Add(product_Order);
+                            }
+                        }
                     }
                 }
             }
-            
+
         }
     }
 }
