@@ -40,7 +40,9 @@ namespace E_Shopping.ViewModel
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 Customer_order temp = SelectedOrder;
                 var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == temp.order.idCart);
-                if(orders != null)
+
+                List<Int32> OrderID = new List<Int32>();
+                if (orders != null)
                 {
                     int orderid = -1;
 
@@ -48,7 +50,17 @@ namespace E_Shopping.ViewModel
                     {
 
                         order.status = 2;
-                        orderid = order.id;
+                        var rec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == order.id);
+                        if(rec != null)
+                        {
+                            foreach(ORDERSRECEIPT or in rec)
+                            {
+                                if(!checkId(OrderID, or.idReceipt))
+                                {
+                                    OrderID.Add(or.idReceipt);
+                                }
+                            }
+                        }
                     }
                     DataProvider.ins.db.SaveChanges();
                     SelectedOrder = null;
@@ -62,21 +74,27 @@ namespace E_Shopping.ViewModel
                     }
                     DataProvider.ins.db.SaveChanges();
 
-                    if (orderid != -1)
+                    //if (orderid != -1)
+                    //{
+
+                    //    var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == orderid).SingleOrDefault();
+                    //    if (orderrec != null)
+                    //    {
+
+                    //        var rec = DataProvider.ins.db.RECEIPTs.Find(orderrec.idReceipt);
+                    //        if (rec != null)
+                    //        {
+                    //            rec.status = -1;
+                    //            // -1 la trang thai cho nhan hang
+                    //            DataProvider.ins.db.SaveChanges();
+                    //        }
+                    //    }
+                    //}
+                    foreach(Int32 orID in OrderID)
                     {
-
-                        var orderrec = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idOrder == orderid).SingleOrDefault();
-                        if (orderrec != null)
-                        {
-
-                            var rec = DataProvider.ins.db.RECEIPTs.Find(orderrec.idReceipt);
-                            if (rec != null)
-                            {
-                                rec.status = -1;
-                                // -1 la trang thai cho nhan hang
-                                DataProvider.ins.db.SaveChanges();
-                            }
-                        }
+                        var rece = DataProvider.ins.db.RECEIPTs.Where(x => x.id == orID).SingleOrDefault();
+                        rece.status = -1;
+                        DataProvider.ins.db.SaveChanges();
                     }
 
                     SucceedNotify succeedNotify = new SucceedNotify();
