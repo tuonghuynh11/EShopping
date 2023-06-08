@@ -41,10 +41,12 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
 - Đăng nhập
 - Đăng xuất
 - Quên mật khẩu
--
--
--
--
+- Chỉnh sửa thông tin cá nhân
+- Đổi mật khẩu
+- Xem sản phẩm
+- Thêm sản phẩm vào giỏ hàng
+- Thanh toán
+- Gửi feedback
 
 </details>
 
@@ -53,41 +55,69 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   <details>
     <summary>Quản lý toàn bộ danh sách các mặt hàng </summary>
 
-  - Thêm
-  - Sắp xếp
-  - Xóa
-  - Xem chi tiết
-  - Sửa
+  - Thêm sản phẩm
+  - Xem tổng hợp các sản phẩm (có thể lọc và sắp xếp)
+  - Xóa sản phẩm
+  - Xem chi tiết sản phẩm
+  - Sửa thông tin sản phẩm
+  - Xem thống kê
+  - Xác nhận đơn hàng
+  - Xác nhận đơn hàng hoàn thành
 
   </details>
 
   <details>
     <summary>Quản lý toàn bộ danh sách các tài khoản </summary>
 
-  - Xem chi tiết
-  - Cấp quyền
-  - Ban
-  - Hủy ban
+  - Xem các tài khoản người dùng
+  - Xem chi tiết thông tin người dùng
+  - Phân quyền cho người dùng
+  - Ban người dùng
+  - Unban người dùng
 
   </details>
 
   ###### Assistant (Nhân viên cửa hàng)
 
   <details>
+    <summary>Tài khoản </summary>
+ 
+  - Đăng kí
+ 
     <summary>Trò chuyện với khách hàng </summary>
+ 
+  - Trò chuyện với khách hàng
+ 
+    <summary>Xem sản phẩm </summary>
 
-  - Phản hồi đến khách hàng
+  - Tìm kiếm sản phẩm
+  - Sắp xếp thứ tự sản phẩm
+  - Xem chi tiết sản phẩm
+  - Thêm sản phẩm vào giỏ hàng
+  - Mua sản phẩm
+  - Thanh toán sản phẩm
 
   </details>
 
   ###### Customer (Khách hàng)
 <details>
-<summary>Xem sản phẩm </summary>
+     <summary>Tài khoản </summary>
+ 
+  - Đăng kí
+ 
+   <summary>Xem sản phẩm </summary>
 
-  - Tìm kiếm
-  - Sắp xếp
-  - Xem chi tiết
+  - Tìm kiếm sản phẩm
+  - Sắp xếp thứ tự sản phẩm
+  - Xem chi tiết sản phẩm
+  - Thêm sản phẩm vào giỏ hàng
+  - Mua sản phẩm
+  - Thanh toán sản phẩm
 
+    <summary>Trò chuyện với shop </summary>
+
+  - Nhắn tin cho shop
+ 
   </details>
 
 #### 3.2 Công nghệ sử dụng
@@ -135,9 +165,9 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
 | 1   | 21520123| [Huỳnh Mạnh Tường](https://github.com/tuonghuynh11)           | KTPM2021 | 
 | 2   | 21520341| [Dương Ngọc Mẫn](https://github.com/DNM03)              | KTPM2021 | 
 | 3   | 21520613| [Nguyễn Hoàng Quốc Bảo](https://github.com/QuocBaoKho) | KTPM2021 | 
-| 4   | | [Nguyễn Thái Công]()         	  | KTPM2021 | 
+| 4   | 21520169 | [Nguyễn Thái Công](https://github.com/thai-cong-nguyen)         	  | KTPM2021 | 
 * Sinh viên khoa Công nghệ Phần mềm, trường Đại học Công nghệ Thông tin, Đại học Quốc gia thành phố Hồ Chí Minh.
 
 ## 7. Giảng viên hướng dẫn
 
-* Cô , giảng viên Khoa Công Nghệ Phần Mềm, trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh.
+* Cô Nguyễn Thị Thanh Trúc, giảng viên Khoa Công Nghệ Phần Mềm, trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh.
