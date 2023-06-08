@@ -84,10 +84,15 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
  
   - Đăng kí
  
-    <summary>Trò chuyện với khách hàng </summary>
+  </details>
+  <details>
+   <summary>Hỗ trợ khách hàng </summary>
  
   - Trò chuyện với khách hàng
  
+  </details>
+  
+  <details>
     <summary>Xem sản phẩm </summary>
 
   - Tìm kiếm sản phẩm
@@ -104,7 +109,8 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
      <summary>Tài khoản </summary>
  
   - Đăng kí
- 
+ </details>
+ <details>
    <summary>Xem sản phẩm </summary>
 
   - Tìm kiếm sản phẩm
@@ -113,7 +119,8 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   - Thêm sản phẩm vào giỏ hàng
   - Mua sản phẩm
   - Thanh toán sản phẩm
-
+</details>
+<details>
     <summary>Trò chuyện với shop </summary>
 
   - Nhắn tin cho shop
