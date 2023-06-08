@@ -46,6 +46,17 @@ namespace E_Shopping.ViewModel
                         LoadOrderData();
                         SucceedNotify succeedNotify = new SucceedNotify();
                         succeedNotify.ShowDialog();
+
+                        var finishorder = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == rec.id);
+                        if(finishorder != null)
+                        {
+                            foreach(ORDERSRECEIPT or in finishorder)
+                            {
+                                var od = DataProvider.ins.db.ORDERS.Where(x => x.id == or.idOrder).SingleOrDefault();
+                                od.status = 3;
+                            }
+                            DataProvider.ins.db.SaveChanges();
+                        }
                     }
                 }
                 //var orders = DataProvider.ins.db.ORDERS.Where(o => o.idCart == temp.order.idCart);
