@@ -137,6 +137,8 @@ namespace E_Shopping.UserControlBar
                         {
                             user.avatar = link;
                             DataProvider.ins.db.SaveChanges();
+                            ControlBarViewModel.changedAvatar = link;
+
                         }
                         progressBar.Close();
                     }

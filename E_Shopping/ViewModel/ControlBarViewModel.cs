@@ -18,6 +18,7 @@ using E_Shopping.UserControlBar;
 using E_Shopping.View;
 using Stripe;
 using Stripe.Radar;
+using System.Windows.Threading;
 
 namespace E_Shopping.ViewModel
 {
@@ -45,9 +46,9 @@ namespace E_Shopping.ViewModel
         public string UserName
         {
             get { return userName; }
-            set { userName = value;  OnPropertyChanged(); }
+            set { userName = value; OnPropertyChanged(); }
         }
-         string searchWd;
+        string searchWd;
         public string SearchWD
         {
             get { return searchWd; }
@@ -57,9 +58,9 @@ namespace E_Shopping.ViewModel
         public string Avatar
         {
             get { return avatar; }
-            set { avatar = value; OnPropertyChanged(); }
+            set { avatar = value; OnPropertyChanged("Avatar"); }
         }
-        
+
         #region comands
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
@@ -73,24 +74,39 @@ namespace E_Shopping.ViewModel
         public ICommand SearchCommand { get; set; }
         public ICommand PopUpOpened { get; set; }
         #endregion
-
-
+        List<Notification> currentNotifies;
+        List<Notification> changedNotifies;
+        int flag = 0;
+        public static string changedAvatar;
+        DispatcherTimer timer_Avatar;
+        DispatcherTimer timer_Notification;
         public ControlBarViewModel()
         {
             if (AccessUser.currentUser != null)
             {
                 Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id).OrderByDescending(x => x.CHECKED).OrderByDescending(x => x.ID));
-                uncheck = DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id && x.CHECKED == "Chưa xem").ToList().Count();
-                notePopUp = "Bạn có " + uncheck + " thông báo mới";
-                userName = AccessUser.currentUser.userName.Substring(0, 5) +"..";
+                uncheck = DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id && x.CHECKED == "Unseen").ToList().Count();
+                if (uncheck == 1)
+                    notePopUp = $"You have {uncheck} new notification";
+                else
+                    notePopUp = $"You have {uncheck} new notifications";
+                userName = AccessUser.currentUser.userName.Length > 7 ? AccessUser.currentUser.userName.Substring(0, 5) + ".." : AccessUser.currentUser.userName;
                 Avatar = AccessUser.currentUser.avatar;
-                
+                timer_Avatar = new DispatcherTimer();
+                timer_Avatar.Interval = TimeSpan.FromSeconds(3);
+                timer_Avatar.Tick += new EventHandler(timer_Tick_avatartimer);
+                timer_Avatar.Start();
+                timer_Notification = new DispatcherTimer();
+                timer_Notification.Interval = TimeSpan.FromSeconds(3);
+                timer_Notification.Tick += new EventHandler(timer_Tick_notifies);
+                timer_Notification.Start();
+
             }
 
-            PopUpOpened = new RelayCommand<UserControl>((p) => { return p != null ? true : false; }, 
+            PopUpOpened = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
                 {
-                    
+
 
                 });
             CloseWindowCommand = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
@@ -100,6 +116,9 @@ namespace E_Shopping.ViewModel
                     if (w != null)
                     {
                         w.Close();
+                        timer_Avatar.Stop();
+                        timer_Notification.Stop();
+
                     }
 
                 });
@@ -149,7 +168,7 @@ namespace E_Shopping.ViewModel
 
                 });
             VisibleCommand = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
-                (p)=>
+                (p) =>
                 {
                     if (AccessUser.currentUser == null)
                     {
@@ -159,11 +178,11 @@ namespace E_Shopping.ViewModel
                     uncheck = DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id && x.CHECKED == "Chưa xem").ToList().Count();
                     notePopUp = "Bạn có " + uncheck + " thông báo mới";
                     userName = AccessUser.currentUser.userName;
-                    
+
 
                 });
-            IconClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; }, 
-                (p)=>
+            IconClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
+                (p) =>
                 {
                     MainViewModel.Instance.CurrentView = new CategoryViewModel();
                 }
@@ -171,7 +190,7 @@ namespace E_Shopping.ViewModel
             SearchCommand = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
                 {
-                    if(searchWd != null)
+                    if (searchWd != null)
                     {
                         DashboardUC.m = 0;
                         AccessUser.searchWd = searchWd;
@@ -194,6 +213,47 @@ namespace E_Shopping.ViewModel
 
 
                 });
+
+
+        }
+        void timer_Tick_avatartimer(object sender, EventArgs e)
+        {
+
+            if (changedAvatar != null && changedAvatar.Length != 0)
+            {
+                if (changedAvatar != Avatar)
+                {
+                    Avatar = changedAvatar;
+
+                }
+            }
+
+
+        }
+        void timer_Tick_notifies(object sender, EventArgs e)
+        {
+            changedNotifies = DataProvider.ins.db.Notifications.ToList();
+            if (flag == 0)
+            {
+                flag = 1;
+            }
+            else
+            {
+                if (currentNotifies.Count != changedNotifies.Count)
+                {
+                    Notifies = new ObservableCollection<Notification>(DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id).OrderByDescending(x => x.CHECKED).OrderByDescending(x => x.ID));
+                    Uncheck = DataProvider.ins.DB.Notifications.Where(x => x.IDPEOPLE == AccessUser.currentUser.id && x.CHECKED == "Unseen").ToList().Count();
+
+                    if (uncheck == 1)
+                        NotifyPopUp = $"You have {uncheck} new notification";
+                    else
+                        NotifyPopUp = $"You have {uncheck} new notifications";
+
+                }
+            }
+            currentNotifies = changedNotifies;
+
+
         }
         FrameworkElement GetWindowParent(UserControl p)
         {
@@ -206,7 +266,7 @@ namespace E_Shopping.ViewModel
             }
             return parent;
         }
-        
+
 
     }
 }

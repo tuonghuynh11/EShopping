@@ -45,6 +45,21 @@ namespace E_Shopping.Model
             }
             set { }
         }
+        public string subName
+        {
+            get
+            {
+                if (name.Length < 21)
+                {
+                    return name;
+                }
+                return name.Substring(0, 21) + "...";
+            }
+            set
+            {
+
+            }
+        }
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMAGE> IMAGES { get; set; }

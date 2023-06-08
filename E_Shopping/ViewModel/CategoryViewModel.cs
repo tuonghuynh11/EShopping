@@ -45,7 +45,7 @@ namespace E_Shopping.ViewModel
             cATEGORies = new ObservableCollection<CATEGORY>(DataProvider.ins.DB.CATEGORies);
             items = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u=> u.ORDERS.Count).Take(4).ToList();
             latestItems = DataProvider.ins.DB.PRODUCTs.OrderByDescending(u => u.id).Take(4).ToList();
-            randomItems = DataProvider.ins.DB.PRODUCTs.OrderBy(u=>u.id).Take(8).ToList();
+            randomItems = DataProvider.ins.DB.PRODUCTs.OrderBy(u => Guid.NewGuid()).Take(8).ToList();
 
             CategoryClick = new RelayCommand<DashboardUC>((p) => { return p != null ? true : false; },
                 (p) =>
