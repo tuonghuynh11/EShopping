@@ -108,7 +108,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="2" Background="#FF91D6C2" Margin="50 0 50 0" BorderBrush="Red" BorderThickness="2" CornerRadius="10 10 10 10">
+                <Border Grid.Row="2" Background="#FEFEFE" Margin="50 0 50 0" BorderBrush="Red" BorderThickness="2" CornerRadius="10 10 10 10">
                     <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
                         <StackPanel Orientation="Vertical">
                             <Label Content="CATEGORY" FontSize="40" FontWeight="Black"></Label>
@@ -140,7 +140,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-                <Border Grid.Row="3" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                <Border Grid.Row="3" Background="#76FAF7" Margin="50 20 50 0" CornerRadius="10 10 10 10">
                     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
                         <StackPanel Orientation="Vertical">
@@ -175,7 +175,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-                <Border Grid.Row="4" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                <Border Grid.Row="4" Background="#76FAF7" Margin="50 20 50 0" CornerRadius="10 10 10 10">
                     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
                         <StackPanel Orientation="Vertical">
@@ -211,7 +211,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-                <Border Grid.Row="5" Background="#FF91D6C2" Margin="50 20 50 0" CornerRadius="10 10 10 10">
+                <Border Grid.Row="5" Background="#76FAF7" Margin="50 20 50 0" CornerRadius="10 10 10 10">
                     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
                         <StackPanel Orientation="Vertical">
