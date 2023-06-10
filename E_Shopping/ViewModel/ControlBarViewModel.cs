@@ -116,6 +116,7 @@ namespace E_Shopping.ViewModel
                     if (w != null)
                     {
                         w.Close();
+                        System.Windows.Application.Current.Shutdown();
                         timer_Avatar.Stop();
                         timer_Notification.Stop();
 
