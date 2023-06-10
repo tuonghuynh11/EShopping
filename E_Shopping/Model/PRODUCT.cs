@@ -28,7 +28,18 @@ namespace E_Shopping.Model
         public string name { get; set; }
         public string nameOfManufacturer { get; set; }
         public string descriptionInformation { get; set; }
-        public string technicalInformation { get; set; }
+          public string technicalInformation { get
+            {
+                PRODUCTTECHNICAL tech = DataProvider.ins.DB.PRODUCTTECHNICALs.Where(p=>p.idProduct==this.id).FirstOrDefault();
+                if (tech==null)
+                {
+                    return "";
+                }
+                string info = "Function: " + tech.uses + "\nMaterial: " + tech.material + "\nExpire: " + tech.exps;
+                return info;
+
+            } 
+            set { } }
         public Nullable<long> price { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> idCategory { get; set; }
