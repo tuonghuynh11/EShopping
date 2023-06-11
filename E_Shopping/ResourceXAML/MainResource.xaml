@@ -25,6 +25,7 @@
 
     <viewmodel:EditProductViewModel x:Key="EditProductVM"></viewmodel:EditProductViewModel>
     <viewmodel:CategoryViewModel x:Key="CategoryVM">
+        
     </viewmodel:CategoryViewModel>
     <DataTemplate DataType="{x:Type viewmodel:CategoryViewModel}">
         <uc:DashboardUC></uc:DashboardUC>
@@ -33,6 +34,4 @@
     <viewmodel:SearchFilterProductViewModel x:Key="SearchFilterProductVM"></viewmodel:SearchFilterProductViewModel>
     <viewmodel:ChartViewModel x:Key="ChartVM"></viewmodel:ChartViewModel>
     <viewmodel:FinishOrderViewModel x:Key="FinishOrderVM"></viewmodel:FinishOrderViewModel>
-
-    <viewmodel:ManageGiftCodeViewModel x:Key="ManageGiftCodeVM"></viewmodel:ManageGiftCodeViewModel>
 </ResourceDictionary>

@@ -55,7 +55,7 @@ namespace E_Shopping.UserControlBar.Screen
         private void Timer_Tick(object sender, EventArgs e)
         {
             //Update Current Order
-            orderedHistoryViewModel.buyingList= new ObservableCollection<ORDER>(DataProvider.ins.db.ORDERS.Where(p => (p.status == 1 || p.status == 2) && p.idCart == AccessUser.currentUser.idCart));
+            orderedHistoryViewModel.buyingList= new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => (p.status == 1 || p.status == 2) && p.idCart == AccessUser.currentUser.idCart));
             lvBuying.ItemsSource = orderedHistoryViewModel.buyingList;
             //Group product theo id đơn hàng
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvBuying.ItemsSource);
@@ -151,7 +151,7 @@ namespace E_Shopping.UserControlBar.Screen
                 return;
             }
             //Check xem sản phẩm còn hàng không
-            MANAGEPRODUCTSYSTEM available_quantiy = DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Find(product.idProduct);
+            MANAGEPRODUCTSYSTEM available_quantiy = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Find(product.idProduct);
 
             if (available_quantiy.quantity == 0)
             {
