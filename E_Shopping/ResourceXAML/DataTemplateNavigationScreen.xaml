@@ -56,7 +56,4 @@
     <DataTemplate DataType="{x:Type vm:FinishOrderViewModel}">
         <view1:FinishOrderUC></view1:FinishOrderUC>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ManageGiftCodeViewModel}">
-        <view:manageGiftCode></view:manageGiftCode>
-    </DataTemplate>
 </ResourceDictionary>

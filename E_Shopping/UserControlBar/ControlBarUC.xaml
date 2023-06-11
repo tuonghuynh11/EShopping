@@ -328,11 +328,6 @@
                             <TextBlock Text="Finish Orders"/>
                         </StackPanel>
                     </ComboBoxItem>
-                    <ComboBoxItem x:Name="cmbGiftCode">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Manage GiftCode"/>
-                        </StackPanel>
-                    </ComboBoxItem>
                     <ComboBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Image/logout.png" Stretch="Fill" Height="20"></Image>
