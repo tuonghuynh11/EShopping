@@ -114,7 +114,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn  Header="Subotal" Width="170"  IsReadOnly="True">
+                                <DataGridTemplateColumn  Header="Subtotal" Width="170"  IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate >
                                             <TextBlock  Text="{Binding total , Converter={StaticResource ResourceKey=currencyconvert}}"  VerticalAlignment="Center"></TextBlock>

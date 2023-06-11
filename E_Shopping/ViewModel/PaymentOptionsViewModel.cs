@@ -204,7 +204,7 @@ namespace E_Shopping.ViewModel
                //RECEIVERINFORMATION rev= DataProvider.ins.DB.Database.SqlQuery<RECEIVERINFORMATION>("SELECT TOP(1) *  FROM RECEIVERINFORMATION ORDER BY ID DESC ").FirstOrDefault<RECEIVERINFORMATION>();
 
                //Check giftCode
-               if (ShippingAddressViewModel.Instance.idGiftCode!=null)
+               if (ShippingAddressViewModel.Instance.idGiftCode!=null&& ShippingAddressViewModel.Instance.idGiftCode != 0)
                {
                    DISCOUNT discount = DataProvider.ins.DB.DISCOUNTs.Where(u => u.id == ShippingAddressViewModel.Instance.idGiftCode).FirstOrDefault();
                    discount.status = "Used";

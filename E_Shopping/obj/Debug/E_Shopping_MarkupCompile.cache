@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\VS\E_Shopping_June_8\E_Shopping\obj\Debug\
+C:\Users\Tuong_301\Source\Repos\EShoppingNew2\E_Shopping\obj\Debug\
 E_Shopping
 none
 false
 DEBUG;TRACE
-D:\VS\E_Shopping_June_8\E_Shopping\App.xaml
-38971662646
+C:\Users\Tuong_301\Source\Repos\EShoppingNew2\E_Shopping\App.xaml
+401478549797
 2739969757
-107-1030498204
-192-136265791
-AccountInfo.xaml;ChatBoxScreen.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;Dashboard.xaml;MainScreen.xaml;MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\ChartUC.xaml;UserControlBar\FinishOrderUC.xaml;UserControlBar\Screen\Cart.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\CategoryCardUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserControlMessageReceived.xaml;UserControlBar\UserControlMessageSent.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;UserControlBar\DashboardUC.xaml;View\ProductDetailView.xaml;View\SearchFilterProduct.xaml;
+110-1635307081
+192854486287
+AccountInfo.xaml;addNewGiftCode.xaml;ChatBoxScreen.xaml;Feedback.xaml;ForgetPassword.xaml;LoginWindow.xaml;Dashboard.xaml;MainScreen.xaml;MainWindow.xaml;PopUp\ProgressBar.xaml;PopUp\RateProduc.xaml;PopUp\SucceedNotify.xaml;PopUp\ValidationNotify.xaml;ResourceXAML\DataTemplateNavigationScreen.xaml;ResourceXAML\MainResource.xaml;Styles\Page.xaml;UserControlBar\ChartUC.xaml;UserControlBar\FinishOrderUC.xaml;UserControlBar\Screen\Cart.xaml;SignupWindow.xaml;UserAccountDetail.xaml;UserControlBar\ConfirmOrderUC.xaml;UserControlBar\CategoryCardUC.xaml;UserControlBar\ControlBarUC.xaml;UserControlBar\Screen\DeliveryOption.xaml;UserControlBar\Screen\manageGiftCode.xaml;UserControlBar\Screen\OrderedHistory.xaml;UserControlBar\Screen\PaymentOptions.xaml;UserControlBar\Screen\ShippingAddress.xaml;UserControlBar\Screen\ShippingDetails.xaml;UserControlBar\EditProductUC.xaml;UserControlBar\ManageProductForOwnerUC.xaml;UserControlBar\UploadProductUC.xaml;UserControlBar\UserControlMessageReceived.xaml;UserControlBar\UserControlMessageSent.xaml;UserControlBar\UserInfoUC.xaml;UserControlBar\UserManageUC.xaml;UserControlBar\DashboardUC.xaml;View\ProductDetailView.xaml;View\SearchFilterProduct.xaml;
 
 False
 
