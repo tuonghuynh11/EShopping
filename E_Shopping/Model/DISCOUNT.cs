@@ -20,7 +20,19 @@ namespace E_Shopping.Model
         public Nullable<long> value { get; set; }
         public Nullable<System.DateTime> exp_time { get; set; }
         public string status { get; set; }
-    
+
+        public string isExpire { get {
+                if (this.exp_time >= DateTime.Today)
+                {
+                    return "Unexpired";
+                }
+                return "Expired";
+            }
+            set
+            {
+
+            }
+        }
         public virtual Person Person { get; set; }
     }
 }
