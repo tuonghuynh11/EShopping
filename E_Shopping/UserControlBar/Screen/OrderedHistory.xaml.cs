@@ -67,18 +67,18 @@ namespace E_Shopping.UserControlBar.Screen
             if (flag == 0)
             {
                 flag = 1;
-                checkChange = DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count();
+                checkChange = DataProvider.ins.db.ORDERS.Where(p => p.status == 3).Count();
                 return;
             }
             else
             {
-                if (DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count() != checkChange)
+                if (DataProvider.ins.db.ORDERS.Where(p => p.status == 3).Count() != checkChange)
                 {
-                    orderedHistoryViewModel.boughtList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p => p.status == 3 && p.idCart == AccessUser.currentUser.idCart));
+                    orderedHistoryViewModel.boughtList = new ObservableCollection<ORDER>(DataProvider.ins.db.ORDERS.Where(p => p.status == 3 && p.idCart == AccessUser.currentUser.idCart));
 
                     orderedHistoryViewModel.productCategory = new ObservableCollection<CATEGORY>();
                     var productCategoryReplace = orderedHistoryViewModel.boughtList
-                        .Join(DataProvider.ins.DB.CATEGORies,
+                        .Join(DataProvider.ins.db.CATEGORies,
                         p => p.idProductType,
                         k => k.id,
                         (p, k) => new CATEGORY()
@@ -100,7 +100,7 @@ namespace E_Shopping.UserControlBar.Screen
                     categoryDataGrid.ItemsSource = orderedHistoryViewModel.productCategory;
                     itemboughtlist.ItemsSource = orderedHistoryViewModel.boughtList;
 
-                    checkChange = DataProvider.ins.DB.ORDERS.Where(p => p.status == 3).Count();
+                    checkChange = DataProvider.ins.db.ORDERS.Where(p => p.status == 3).Count();
                 }
             }
           
