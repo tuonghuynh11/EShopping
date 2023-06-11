@@ -159,7 +159,7 @@ namespace E_Shopping.ViewModel
                     //buyingList[0].status = 3;
                     //DataProvider.ins.DB.SaveChanges();
                     Feedback feedBack = new Feedback();
-                    feedBack.Show();
+                    feedBack.ShowDialog();
                 });
             CartClick = new RelayCommand<UserControl>((p) => { return p != null ? true : false; },
                 (p) =>
