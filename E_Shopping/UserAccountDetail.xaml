@@ -84,14 +84,14 @@
                 </Button>
                 <Button x:Name="AuthoBTT" 
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="150" FontSize="20" Margin="70 0 0 0"
+                                Width="150" FontSize="20" Margin="45 0 0 0"
                                 ToolTip="Authorize" Background="#b6d7a8" Click="Button_Click">
                     _Authorize
                 </Button>
                 <Button x:Name="BanBtt" Visibility="Hidden"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="150" FontSize="20"
-                                Margin="20 0 0 0" 
+                                Margin="40 0 0 0" 
                                 ToolTip="Ban" Background="#f89090" Click="Button_Click_1">
                     _Ban
                 </Button>
