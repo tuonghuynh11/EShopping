@@ -28,15 +28,15 @@ namespace E_Shopping.ViewModel
         { 
             //Binding cho OrderedHistory
           
-            buyingList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>(p.status ==1 ||p.status==2) && p.idCart== AccessUser.currentUser.idCart));
+            buyingList = new ObservableCollection<ORDER>(DataProvider.ins.db.ORDERS.Where(p=>(p.status ==1 ||p.status==2) && p.idCart== AccessUser.currentUser.idCart));
 
 
 
-            boughtList = new ObservableCollection<ORDER>(DataProvider.ins.DB.ORDERS.Where(p=>p.status ==3 && p.idCart== AccessUser.currentUser.idCart));
+            boughtList = new ObservableCollection<ORDER>(DataProvider.ins.db.ORDERS.Where(p=>p.status ==3 && p.idCart== AccessUser.currentUser.idCart));
 
             productCategory = new ObservableCollection<CATEGORY>();
             var productCategoryReplace = boughtList
-                .Join(DataProvider.ins.DB.CATEGORies,
+                .Join(DataProvider.ins.db.CATEGORies,
                 p => p.idProductType,
                 e => e.id,
                 (p, e) => new CATEGORY()
