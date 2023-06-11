@@ -34,4 +34,5 @@
     <viewmodel:SearchFilterProductViewModel x:Key="SearchFilterProductVM"></viewmodel:SearchFilterProductViewModel>
     <viewmodel:ChartViewModel x:Key="ChartVM"></viewmodel:ChartViewModel>
     <viewmodel:FinishOrderViewModel x:Key="FinishOrderVM"></viewmodel:FinishOrderViewModel>
+    <viewmodel:ManageGiftCodeViewModel x:Key="ManageGiftCodeVM"></viewmodel:ManageGiftCodeViewModel>
 </ResourceDictionary>

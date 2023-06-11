@@ -1970,3 +1970,9 @@ D:\WorkSpace\C#\NMCNPM\Final2\E_Shopping\obj\Debug\E_Shopping.csproj.CoreCompile
 D:\WorkSpace\C#\NMCNPM\Final2\E_Shopping\obj\Debug\E_Shopping.csproj.CopyComplete
 D:\WorkSpace\C#\NMCNPM\Final2\E_Shopping\obj\Debug\E_Shopping.exe
 D:\WorkSpace\C#\NMCNPM\Final2\E_Shopping\obj\Debug\E_Shopping.pdb
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\UserControlBar\FinishOrderUC.g.cs
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\UserControlBar\Screen\ManageGiftCode.g.cs
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\UserControlBar\FinishOrderUC.baml
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\UserControlBar\Screen\ManageGiftCode.baml
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\AddNewGiftCode.g.cs
+C:\Users\Tuong_301\Source\Repos\EShoppingNew\E_Shopping\obj\Debug\AddNewGiftCode.baml

@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="E_Shopping.UserControlBar.Screen.ManageGiftCode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:E_Shopping.UserControlBar.Screen"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Name="manageGiftCode"
+        Style="{StaticResource Page_Style}"
+        Background="Transparent" 
+             d:DesignHeight="800" d:DesignWidth="1300">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=confirmOrder}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border CornerRadius="10" Background="#f5f2f2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Margin="30" Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" FontSize="50" HorizontalAlignment="Center">
+                        List Of Gift Codes
+                    </Label>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="DTGorders" IsReadOnly="True" Grid.Column="0"
+                      Margin="50,20,50,0"  RowBackground="#eeeeee" ItemsSource="{Binding PersonList, Mode=TwoWay}"
+                                AlternatingRowBackground="#E6EBF0" SelectedItem="{Binding SelectedPerson}"
+                      Background="#eeeeee" RenderTransformOrigin="0.494,0.52"
+                      CanUserAddRows="False" ScrollViewer.CanContentScroll="True"
+                      AutoGenerateColumns="False" VerticalAlignment="Top"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="520">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=DTGorders}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background" Value="#93c47d"/>
+                                    <Setter Property="Height" Value="33"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Width="100" 
+                                        Binding="{Binding id}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Customer name" Width="200" 
+                                        Binding="{Binding name}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn  Width="150">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Background="#6fa8dc" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor},Path=DataContext.ConfirmCommand}">Add New</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="List of products" HorizontalAlignment="Center" FontSize="25" Margin="0 20 0 0"/>
+                            <DataGrid x:Name="DTGproducts" IsReadOnly="True" ItemsSource="{Binding DiscountList}"
+                      Margin="50,20,50,0"  RowBackground="#eeeeee"
+                                AlternatingRowBackground="#E6EBF0"
+                      Background="#eeeeee" RenderTransformOrigin="0.494,0.52"
+                      CanUserAddRows="False" ScrollViewer.CanContentScroll="True"
+                      AutoGenerateColumns="False" VerticalAlignment="Top"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="460">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="Background" Value="#93c47d"/>
+                                        <Setter Property="Height" Value="33"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Width="70" 
+                                        Binding="{Binding id}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Code" Width="200" 
+                                        Binding="{Binding code}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Value(%)" Width="100" 
+                                        Binding="{Binding value}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Expiry" Width="110" 
+                                        Binding="{Binding isExpire}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Status" Width="110" 
+                                        Binding="{Binding status}">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Border>
+</UserControl>

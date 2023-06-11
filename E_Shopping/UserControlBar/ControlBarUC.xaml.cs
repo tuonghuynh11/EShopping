@@ -209,6 +209,11 @@ namespace E_Shopping.UserControlBar
                         }
                     case 9:
                         {
+                            MainViewModel.Instance.CurrentView = new ManageGiftCodeViewModel();
+                            break;
+                        }
+                    case 10:
+                        {
                             Window window = Application.Current.MainWindow as Window;
 
                             if (window != null)
@@ -244,8 +249,9 @@ namespace E_Shopping.UserControlBar
                             ComboBoxItem item2 = (ComboBoxItem)Accountcbb.Items[6];
                             ComboBoxItem item3 = (ComboBoxItem)Accountcbb.Items[7];
                             ComboBoxItem item4 = (ComboBoxItem)Accountcbb.Items[8];
+                            ComboBoxItem item5 = (ComboBoxItem)Accountcbb.Items[9];
 
-                            item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility = Visibility.Collapsed;
+                            item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility=item5.Visibility = Visibility.Collapsed;
                             
                             break;
                         }
