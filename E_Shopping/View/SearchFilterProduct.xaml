@@ -14,178 +14,180 @@
 
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1300">
-    <Grid Background="#F5F5F5" Width="1300">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="330"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="130"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="330"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                <Button
+    <Border CornerRadius="0 0 10 10" Background="#F5F5F5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="330"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="330"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <Button
                         Command="{Binding BackCommand}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                             ToolTip="MaterialDesignFloatingActionMiniLightButton" HorizontalAlignment="Left" Margin="50,20,0,0" Foreground="#FF156F9A" Background="#FFB9D6E3" BorderBrush="{x:Null}" VerticalAlignment="Top">
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                             Width="30"
                             Height="30"
                             Kind="ArrowBack" HorizontalAlignment="Center" />
-                </Button>
-                <DockPanel Margin="0,20,0,0">
-                    <materialDesign:PackIcon Kind="FilterOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
-                    <TextBlock Text="SEARCH FILTER" FontSize="36" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
-                </DockPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="1">
-                <TextBlock Text="Price Range" Padding="0,10,0,0" Margin="15,0,0,0" FontSize="24"/>
-                <DockPanel Margin="0,20,0,0">
-                    <TextBox  x:Name="TextBoxMin" Text="{Binding MinPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,15,0" AutomationProperties.HelpText="MIN" TextChanged="checkText"/>
-                    <Canvas VerticalAlignment="Center">
-                        <Line
+                    </Button>
+                    <DockPanel Margin="0,20,0,0">
+                        <materialDesign:PackIcon Kind="FilterOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
+                        <TextBlock Text="SEARCH FILTER" FontSize="36" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Price Range" Padding="0,10,0,0" Margin="15,0,0,0" FontSize="24"/>
+                    <DockPanel Margin="0,20,0,0">
+                        <TextBox  x:Name="TextBoxMin" Text="{Binding MinPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,15,0" AutomationProperties.HelpText="MIN" TextChanged="checkText"/>
+                        <Canvas VerticalAlignment="Center">
+                            <Line
                             X1="50" Y1="0"
                             X2="0" Y2="0"
                             Stroke="Black"
                             StrokeThickness="1" />
-                    </Canvas>
-                    <TextBox Name="TextBoxMax" Text="{Binding MaxPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,0,0" Tag="" ToolTip="" AutomationProperties.HelpText="MAX" TextChanged="checkText"/>
-                </DockPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="2">
-                <TextBlock Text="Rating" Padding="0,10,0,0" Margin="15,0,0,0" FontSize="24"/>
-                <Button Command="{Binding Rating5Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating5" Source="/Assets/Images/Star_rating_5_of_5.png"/>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding Rating4Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating4" Source="/Assets/Images/Star_rating_4_of_5.png"/>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding Rating3Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating3" Source="/Assets/Images/Star_rating_3_of_5.png"/>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding Rating2Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating2" Source="/Assets/Images/Star_rating_2_of_5.png"/>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding Rating1Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating1" Source="/Assets/Images/Star_rating_1_of_5.png"/>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding Rating0Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
-                    <Button.Content>
-                        <Image x:Name="StartRating0" Source="/Assets/Images/Star_rating_0_of_5.png"/>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="3">
-                <Button Command="{Binding ApplyCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="15,10,0,0" Width="275">
-                    <Button.Content>
-                        <TextBlock Foreground="WhiteSmoke">APPLY</TextBlock>
-                    </Button.Content>
-                </Button>
-                <Button Command="{Binding ClearCommand}" HorizontalAlignment="Left" Background="#FFE0281A" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="15,10,0,0" Width="275">
-                    <Button.Content>
-                        <TextBlock Foreground="WhiteSmoke">CLEAR ALL</TextBlock>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-        </Grid>
+                        </Canvas>
+                        <TextBox Name="TextBoxMax" Text="{Binding MaxPrice}" TextAlignment="Center" Width="100" FontSize="20" Margin="15,0,0,0" Tag="" ToolTip="" AutomationProperties.HelpText="MAX" TextChanged="checkText"/>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Rating" Padding="0,10,0,0" Margin="15,0,0,0" FontSize="24"/>
+                    <Button Command="{Binding Rating5Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating5" Source="/Assets/Images/Star_rating_5_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding Rating4Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating4" Source="/Assets/Images/Star_rating_4_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding Rating3Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating3" Source="/Assets/Images/Star_rating_3_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding Rating2Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating2" Source="/Assets/Images/Star_rating_2_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding Rating1Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating1" Source="/Assets/Images/Star_rating_1_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding Rating0Star}" HorizontalAlignment="Center" Background="#FFE0DCDC" BorderBrush="{x:Null}" Foreground="{x:Null}" FontSize="21" BorderThickness="0,0,0,0" Height="37" Width="147" Margin="0,10,0,0">
+                        <Button.Content>
+                            <Image x:Name="StartRating0" Source="/Assets/Images/Star_rating_0_of_5.png"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="3">
+                    <Button Command="{Binding ApplyCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="15,10,0,0" Width="275">
+                        <Button.Content>
+                            <TextBlock Foreground="WhiteSmoke">APPLY</TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding ClearCommand}" HorizontalAlignment="Left" Background="#FFE0281A" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="15,10,0,0" Width="275">
+                        <Button.Content>
+                            <TextBlock Foreground="WhiteSmoke">CLEAR ALL</TextBlock>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid Margin="20,0,20,0">
-                    <DockPanel>
-                        <materialDesign:PackIcon Kind="LightbulbOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid Margin="20,0,20,0">
+                        <DockPanel>
+                            <materialDesign:PackIcon Kind="LightbulbOutline" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="36" Height="36" />
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24">
                                 Search result for '<TextBlock Text="{Binding SearchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>'
                             </TextBlock>
-                    </DockPanel>
+                        </DockPanel>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid Margin="20,0,20,0" Background="#FFF0EDED">
-                    <DockPanel>
-                        <TextBlock FontSize="30" VerticalAlignment="Center" Margin="25,0,0,0" HorizontalAlignment="Left" >Sort by</TextBlock>
-                        <Button Command="{Binding TopSalesCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
-                            <Button.Content>
-                                <TextBlock Foreground="WhiteSmoke">Top Sales</TextBlock>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding LatestCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
-                            <Button.Content>
-                                <TextBlock Foreground="WhiteSmoke">Latest</TextBlock>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding LowToHighCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
-                            <Button.Content>
-                                <TextBlock Foreground="WhiteSmoke">Low to High</TextBlock>
-                            </Button.Content>
-                        </Button>
-                        <Button Command="{Binding HighToLowCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
-                            <Button.Content>
-                                <TextBlock Foreground="WhiteSmoke">High to Low</TextBlock>
-                            </Button.Content>
-                        </Button>
-                    </DockPanel>
+                <Grid Grid.Row="1">
+                    <Grid Margin="20,0,20,0" Background="#FFF0EDED">
+                        <DockPanel>
+                            <TextBlock FontSize="30" VerticalAlignment="Center" Margin="25,0,0,0" HorizontalAlignment="Left" >Sort by</TextBlock>
+                            <Button Command="{Binding TopSalesCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
+                                <Button.Content>
+                                    <TextBlock Foreground="WhiteSmoke">Top Sales</TextBlock>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding LatestCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
+                                <Button.Content>
+                                    <TextBlock Foreground="WhiteSmoke">Latest</TextBlock>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding LowToHighCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
+                                <Button.Content>
+                                    <TextBlock Foreground="WhiteSmoke">Low to High</TextBlock>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding HighToLowCommand}" HorizontalAlignment="Left" Background="#FF267DD6" BorderBrush="WhiteSmoke" Foreground="Black" FontSize="21" BorderThickness="0,0,0,0" Height="60" Margin="20,0,0,0" Width="150">
+                                <Button.Content>
+                                    <TextBlock Foreground="WhiteSmoke">High to Low</TextBlock>
+                                </Button.Content>
+                            </Button>
+                        </DockPanel>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="2">
-                <!--
+                <Grid Grid.Row="2">
+                    <!--
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden"> -->
-                <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProductsWrapper, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.CanContentScroll="False"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListViewProducts_SelectionChanged" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border HorizontalAlignment="Center"
+                    <ListView x:Name="ListViewProducts" ItemsSource="{Binding ListProductsWrapper, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedProduct}" ScrollViewer.CanContentScroll="False"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" BorderThickness="0" Background="Transparent" Width="970" d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListViewProducts_SelectionChanged" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border HorizontalAlignment="Center"
                                 CornerRadius="10"
                                 BorderThickness="1" BorderBrush="DarkOrange"
                                 Width="300"
                                 Height="350"
                                 Padding="5"
                                 Background="#22202f">
-                                <StackPanel Orientation="Vertical">
-                                    <DockPanel Height="210">
-                                        <Border Height="200"
+                                    <StackPanel Orientation="Vertical">
+                                        <DockPanel Height="210">
+                                            <Border Height="200"
                                                 Padding="3 0 3 0"
                                                 CornerRadius="10"
                                                 BorderThickness="1.6" BorderBrush="Gray">
-                                            <Border.Background>
-                                                <ImageBrush Stretch="Fill" ImageSource="{Binding MainImage, UpdateSourceTrigger=PropertyChanged}"/>
-                                            </Border.Background>
-                                        </Border>
-                                    </DockPanel>
-                                    <StackPanel VerticalAlignment="Center" Margin="0 9">
-                                        <TextBlock FontSize="20" Text="{Binding Product.name}" Foreground="White" HorizontalAlignment="Center"/>
-                                        <TextBlock FontSize="20" Text="{Binding CustomPrice}" Foreground="#DDFFFFFF" HorizontalAlignment="Center" Margin="0,20,0,0"></TextBlock>
-                                        <Image Source="{Binding RatingStarImage, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="120" Margin="0,20,0,0"/>
+                                                <Border.Background>
+                                                    <ImageBrush Stretch="Fill" ImageSource="{Binding MainImage, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </Border.Background>
+                                            </Border>
+                                        </DockPanel>
+                                        <StackPanel VerticalAlignment="Center" Margin="0 9">
+                                            <TextBlock FontSize="20" Text="{Binding Product.name}" Foreground="White" HorizontalAlignment="Center"/>
+                                            <TextBlock FontSize="20" Text="{Binding CustomPrice}" Foreground="#DDFFFFFF" HorizontalAlignment="Center" Margin="0,20,0,0"></TextBlock>
+                                            <Image Source="{Binding RatingStarImage, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="120" Margin="0,20,0,0"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>

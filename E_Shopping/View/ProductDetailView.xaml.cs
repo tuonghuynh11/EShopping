@@ -34,7 +34,7 @@ namespace E_Shopping.View
         }
         private void checkText(object sender, TextChangedEventArgs e)
         {
-            if ((TextBoxQuantity.Text == null || TextBoxQuantity.Text.Equals("")) || (!System.Text.RegularExpressions.Regex.IsMatch(TextBoxQuantity.Text, "^[1-9]*$")))
+            if ((TextBoxQuantity.Text == null || TextBoxQuantity.Text.Equals("")) || (!System.Text.RegularExpressions.Regex.IsMatch(TextBoxQuantity.Text, "^[0-9]*$")) || TextBoxQuantity.Text.Equals("0"))
             {
                 TextBoxQuantity.Text = "1";
             }
@@ -42,6 +42,7 @@ namespace E_Shopping.View
             {
                 TextBoxQuantity.Text = quantity.ToString();
             }
+            TextBoxQuantity.Text = Int32.Parse(TextBoxQuantity.Text).ToString();
         }
     }
 }
