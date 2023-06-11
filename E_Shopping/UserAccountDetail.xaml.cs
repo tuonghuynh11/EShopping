@@ -68,6 +68,7 @@ namespace E_Shopping
                 DataProvider.ins.db.SaveChanges();
                 SucceedNotify succeedNotify = new SucceedNotify();
                 succeedNotify.ShowDialog();
+                this.Close();
             }
         }
 
@@ -81,6 +82,7 @@ namespace E_Shopping
                 DataProvider.ins.db.SaveChanges();
                 SucceedNotify succeedNotify = new SucceedNotify();
                 succeedNotify.ShowDialog();
+                this.Close();
             }
         }
 
@@ -93,6 +95,7 @@ namespace E_Shopping
                 DataProvider.ins.db.SaveChanges();
                 SucceedNotify succeedNotify = new SucceedNotify();
                 succeedNotify.ShowDialog();
+                this.Close();
             }
         }
     }
