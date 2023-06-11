@@ -294,6 +294,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddNewGiftCode.xaml.cs">
+      <DependentUpon>AddNewGiftCode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChatBoxScreen.xaml.cs">
       <DependentUpon>ChatBoxScreen.xaml</DependentUpon>
     </Compile>
@@ -447,6 +450,9 @@
     <Compile Include="UserControlBar\Screen\DeliveryOption.xaml.cs">
       <DependentUpon>DeliveryOption.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBar\Screen\ManageGiftCode.xaml.cs">
+      <DependentUpon>ManageGiftCode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlBar\Screen\OrderedHistory.xaml.cs">
       <DependentUpon>OrderedHistory.xaml</DependentUpon>
     </Compile>
@@ -480,6 +486,7 @@
     <Compile Include="ViewModel\FinishOrderViewModel.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ManageGiftCodeViewModel.cs" />
     <Compile Include="ViewModel\OrderedHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentOptionsViewModel.cs" />
     <Compile Include="ViewModel\ShippingAddressViewModel.cs" />
@@ -511,6 +518,10 @@
     <Compile Include="ViewModel\SignupViewModel.cs" />
     <Compile Include="ViewModel\UserManageViewModel.cs" />
     <Page Include="AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddNewGiftCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -619,6 +630,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBar\Screen\DeliveryOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlBar\Screen\ManageGiftCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
