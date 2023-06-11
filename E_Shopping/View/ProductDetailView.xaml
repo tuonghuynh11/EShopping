@@ -197,14 +197,6 @@
                         <TextBlock Text="Stock:" FontSize="25" Opacity="0.5" Grid.Column="0"/>
                         <TextBlock Text="{Binding QuantityProduct}" FontSize="25" Grid.Column="1"/>
                     </Grid>
-                    <Grid Margin="200,0,0,20" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Condition:" FontSize="25" Opacity="0.5" Grid.Column="0"/>
-                        <TextBlock Text="{Binding Condition}" FontSize="25" Grid.Column="1"/>
-                    </Grid>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="4" Background="#F5F5F5" >
