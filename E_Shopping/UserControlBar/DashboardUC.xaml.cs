@@ -257,7 +257,8 @@ namespace E_Shopping.UserControlBar
             PRODUCT product = x.SelectedItem as PRODUCT;
             if(product != null)
             {
-                MainViewModel.Instance.CurrentView = new ProductDetailViewModel(product);
+                MainViewModel.addViewToStack(new ProductDetailViewModel(product));
+
 
             }
 
