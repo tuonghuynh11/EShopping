@@ -319,7 +319,7 @@
                                                                 <ColumnDefinition Width="600"></ColumnDefinition>
                                                                 <ColumnDefinition Width="180"></ColumnDefinition>
                                                             </Grid.ColumnDefinitions>
-                                                            <Image Margin="10" Grid.Column="0" Source="https://vinmec-prod.s3.amazonaws.com/images/20210419_031329_240031_qua-thanh-long.max-1800x1800.jpg"></Image>
+                                                            <Image Margin="10" Grid.Column="0" Source="{Binding productImage }"></Image>
                                                             <StackPanel Grid.Column="1">
                                                                 <TextBlock Text="{Binding prodductName}" HorizontalAlignment="Left" Margin="10 15 10 5"  FontFamily="Poppins" FontSize="25" FontWeight="DemiBold"/>
                                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 5 10 5" >
