@@ -55,8 +55,9 @@ namespace E_Shopping.Model
         }
         private DataProvider()
         {
-            DB = new E_ShOPPING_NEWEntities();
+            //DB = new E_ShOPPING_NEWEntities();
             db = new E_ShOPPING_NEWEntities();
+            DB = db;
         }
 
      
