@@ -139,7 +139,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
 
   * Liên hệ với nhà phát triển để được hỗ trợ khởi tạo cơ sở dữ liệu và kết nối đến cơ sở dữ liệu.
   * Giải nén và chạy file 
-    * Dowload phần mềm tại: 
+    * Dowload phần mềm tại: https://drive.google.com/file/d/1IODuHFrwfaUSXxlWB65ZAlHFgjfTPM18/view?usp=sharing
 
 </details>
 
@@ -147,17 +147,17 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
     <summary>Đối với nhà phát triển</summary>
 
   * Dowload, giải nén phần mềm
-    * Github: 
-    * Google Drive:
+    * Github: https://github.com/tuonghuynh11/EShopping.git
+    * Google Drive:https://drive.google.com/file/d/1B2bFCOPPAHvnsJtt5IaZ0amicwWj3P9j/view?usp=sharing
   * Cài đặt database
     * Khuyến nghị sử dụng các dịch vụ đám mây như Azure, AWS,… để sử dụng tất cả tính năng hiện có của chương trình  (server đi kèm với chương trình đã đóng).
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
   * Khởi tạo Database bằng cách chạy script chứa trong file Seed.sql
-    * Tải file script tại: 
+    * Tải file script tại: https://drive.google.com/file/d/1Kp7b02ttG-B0XrpQTL-WzeID6H_LesGO/view?usp=sharing
   * Kết nối với Database vừa tạo bằng cách thay đổi connectionStrings trong file App.config.
   * Đăng nhập với vai trò admin
-      * tên đăng nhập: 
-      * mật khẩu: 
+      * tên đăng nhập: admin
+      * mật khẩu: 1234
 
 </details>
 
