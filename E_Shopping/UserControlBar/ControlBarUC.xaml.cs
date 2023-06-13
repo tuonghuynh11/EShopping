@@ -244,6 +244,7 @@ namespace E_Shopping.UserControlBar
                 {
                     case 1:
                         {
+                            ComboBoxItem items = (ComboBoxItem)Accountcbb.Items[2];
                             ComboBoxItem item = (ComboBoxItem)Accountcbb.Items[3];
                             ComboBoxItem item1 = (ComboBoxItem)Accountcbb.Items[5];
                             ComboBoxItem item2 = (ComboBoxItem)Accountcbb.Items[6];
@@ -251,7 +252,7 @@ namespace E_Shopping.UserControlBar
                             ComboBoxItem item4 = (ComboBoxItem)Accountcbb.Items[8];
                             ComboBoxItem item5 = (ComboBoxItem)Accountcbb.Items[9];
 
-                            item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility=item5.Visibility = Visibility.Collapsed;
+                            items.Visibility= item.Visibility = item1.Visibility = item2.Visibility = item3.Visibility = item4.Visibility=item5.Visibility = Visibility.Collapsed;
                             
                             break;
                         }
