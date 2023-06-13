@@ -49,6 +49,8 @@ namespace E_Shopping.ViewModel
                         LoadOrderData();
                         SucceedNotify succeedNotify = new SucceedNotify();
                         succeedNotify.ShowDialog();
+                        
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = rec.idCustomer, NOTIFY = "Your order is confirmed", CHECKED = "Unseen" });
 
                         var finishorder = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == rec.id);
                         if (finishorder != null)
@@ -77,6 +79,8 @@ namespace E_Shopping.ViewModel
                         LoadOrderData();
                         ValidationNotify validationNotify = new ValidationNotify("Cancel order");
                         validationNotify.ShowDialog();
+                        
+                        DataProvider.ins.db.Notifications.Add(new Notification() { IDPEOPLE = rec.idCustomer, NOTIFY = "Your order is cancelled", CHECKED = "Unseen" });
 
                         var finishorder = DataProvider.ins.db.ORDERSRECEIPTs.Where(x => x.idReceipt == rec.id);
                         if (finishorder != null)
