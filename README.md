@@ -158,6 +158,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   * Đăng nhập với vai trò admin
       * tên đăng nhập: admin
       * mật khẩu: 1234
+  * LƯU Ý: Cần phải cài DevExpress để có thể chạy được chương trình.
 
 </details>
 
