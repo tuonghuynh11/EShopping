@@ -36,7 +36,7 @@ namespace E_Shopping.PopUp
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PRODUCTRATE productRate= new PRODUCTRATE() { idCustomer=this.idCustomer,idProduct=this.product.id,rate= int.Parse(RatingBar.Value.ToString())};
+            PRODUCTRATE productRate= new PRODUCTRATE() { idCustomer=this.idCustomer,idProduct=this.product.idProduct,rate= int.Parse(RatingBar.Value.ToString())};
             DataProvider.ins.DB.PRODUCTRATEs.Add(productRate);
             DataProvider.ins.DB.SaveChanges();
             this.Close();
