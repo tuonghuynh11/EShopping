@@ -60,11 +60,11 @@ namespace E_Shopping.Model
         {
             get
             {
-                if (name.Length < 21)
+                if (name.Length < 17)
                 {
                     return name;
                 }
-                return name.Substring(0, 21) + "...";
+                return name.Substring(0, 17) + "...";
             }
             set
             {
