@@ -85,7 +85,7 @@
                             <Label Grid.Row="2" FontSize="15" VerticalAlignment="Top" Foreground="Red"
                                    HorizontalAlignment="Left">* If you upload more, it will replace the old one</Label>
                             <Label Grid.Row="6" FontSize="20" VerticalAlignment="Top" 
-                                   HorizontalAlignment="Left">THUMBNAIL IMAGES</Label>
+                                   HorizontalAlignment="Left">THUMBNAIL IMAGE</Label>
                             <Border BorderBrush="Black" BorderThickness="3" Grid.Row="8" Margin="10"
                                     HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image x:Name="imageThumbnail" Width="100" Height="100" HorizontalAlignment="Left"
