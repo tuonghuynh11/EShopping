@@ -143,7 +143,7 @@ namespace E_Shopping.UserControlBar
                 //Person person = DataProvider.ins.DB.PEOPLE.Find(2);
                 //person.userName = "LaParka";
                 //DataProvider.ins.DB.SaveChanges();
-                ORDER order2 = DataProvider.ins.DB.ORDERS.Where(y => y.idProduct == pdt.id && y.idCart == cart.id).FirstOrDefault();
+                ORDER order2 = DataProvider.ins.DB.ORDERS.Where(y => y.idProduct == pdt.id && y.idCart == cart.id  && y.status == 0).FirstOrDefault();
                 if (order2 == null)
                 {
                     string query = "INSERT ORDERS values(@cartid, @pdtid, 1, @date, 0)";
@@ -202,7 +202,7 @@ namespace E_Shopping.UserControlBar
                 //Person person = DataProvider.ins.DB.PEOPLE.Find(2);
                 //person.userName = "LaParka";
                 //DataProvider.ins.DB.SaveChanges();
-                ORDER order2 = DataProvider.ins.DB.ORDERS.Where(y => y.idProduct == pdt.id && y.idCart == cart.id).FirstOrDefault();
+                ORDER order2 = DataProvider.ins.DB.ORDERS.Where(y => y.idProduct == pdt.id && y.idCart == cart.id  && y.status == 0).FirstOrDefault();
                 if(order2 == null)
                 {
                     string query = "INSERT ORDERS values(@cartid, @pdtid, 1, @date, 0)";
