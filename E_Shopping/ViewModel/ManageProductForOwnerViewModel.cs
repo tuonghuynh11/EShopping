@@ -330,84 +330,93 @@ namespace E_Shopping.ViewModel
             });
 
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                if (SelectedProduct == null)
+                try
                 {
-                    ValidationNotify validationNotify = new ValidationNotify("You need to choose 1 product");
+                    if (SelectedProduct == null)
+                    {
+                        ValidationNotify validationNotify = new ValidationNotify("You need to choose 1 product");
+                        validationNotify.ShowDialog();
+                        return;
+                    }
+
+                    var imagePro = DataProvider.ins.db.IMAGES.Where(X => X.idSP == SelectedProduct.id);
+                    if (imagePro != null)
+                    {
+                        foreach (IMAGE iMAGE in imagePro)
+                        {
+                            DataProvider.ins.db.IMAGES.Remove(iMAGE);
+                        }
+                        DataProvider.ins.db.SaveChanges();
+                    }
+
+                    var proTech = DataProvider.ins.db.PRODUCTTECHNICALs.Where(pt => pt.idProduct == SelectedProduct.id).SingleOrDefault();
+                    if (proTech != null)
+                    {
+
+                        DataProvider.ins.db.PRODUCTTECHNICALs.Remove(proTech);
+                        DataProvider.ins.db.SaveChanges();
+
+                    }
+
+
+                    var proManage = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Where(x => x.idSP == SelectedProduct.id).SingleOrDefault();
+                    if (proManage != null)
+                    {
+                        DataProvider.ins.db.Database.ExecuteSqlCommand("delete from MANAGEPRODUCTSYSTEM where idsp = " + proManage.idSP.ToString());
+                        //DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Remove(proManage);
+                        DataProvider.ins.db.SaveChanges();
+                    }
+
+                    var product = DataProvider.ins.db.PRODUCTs.Where(pd => pd.id == SelectedProduct.id).SingleOrDefault();
+                    if (product != null)
+                    {
+
+                        DataProvider.ins.db.Database.ExecuteSqlCommand("delete from PRODUCT where id = " + product.id.ToString());
+                        DataProvider.ins.db.SaveChanges();
+
+
+                        ListPage = new ObservableCollection<int>();
+                        var listProduct = DataProvider.ins.db.PRODUCTs;
+                        Int32 numberOfProducts = listProduct.Count();
+                        Int32 lastPage = 0;
+                        if (numberOfProducts % 8 != 0)
+                            lastPage = 1;
+                        Int32 numberOfPages = numberOfProducts / 8 + lastPage;
+                        for (int i = 1; i <= numberOfPages; i++)
+                        {
+                            ListPage.Add(i);
+                        }
+                        SelectedPage = 1;
+                        ListAllProduct = new ObservableCollection<PRODUCT>();
+                        ListProduct = new ObservableCollection<PRODUCT>();
+                        var products = DataProvider.ins.db.PRODUCTs;
+                        foreach (var pro in products)
+                        {
+                            ListAllProduct.Add(pro);
+                        }
+                        int index = 1;
+                        foreach (var pd in ListAllProduct)
+                        {
+                            if (index > 8)
+                                break;
+
+                            if (product.thumbnailimage == null)
+                            {
+                                product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
+                            }
+                            ListProduct.Add(pd);
+                            index++;
+                        }
+
+                        SucceedNotify succeedNotify = new SucceedNotify();
+                        succeedNotify.ShowDialog();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    ValidationNotify validationNotify = new ValidationNotify("Failed to delete");
                     validationNotify.ShowDialog();
                     return;
-                }
-
-                var imagePro = DataProvider.ins.db.IMAGES.Where(X => X.idSP == SelectedProduct.id);
-                if (imagePro != null)
-                {
-                    foreach (IMAGE iMAGE in imagePro)
-                    {
-                        DataProvider.ins.db.IMAGES.Remove(iMAGE);
-                    }
-                    DataProvider.ins.db.SaveChanges();
-                }
-
-                var proTech = DataProvider.ins.db.PRODUCTTECHNICALs.Where(pt => pt.idProduct == SelectedProduct.id).SingleOrDefault();
-                if (proTech != null)
-                {
-
-                    DataProvider.ins.db.PRODUCTTECHNICALs.Remove(proTech);
-                    DataProvider.ins.db.SaveChanges();
-
-                }
-
-
-                var proManage = DataProvider.ins.DB.MANAGEPRODUCTSYSTEMs.Where(x => x.idSP == SelectedProduct.id).SingleOrDefault();
-                if (proManage != null)
-                {
-                    DataProvider.ins.db.Database.ExecuteSqlCommand("delete from MANAGEPRODUCTSYSTEM where idsp = " + proManage.idSP.ToString());
-                    //DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Remove(proManage);
-                    DataProvider.ins.db.SaveChanges();
-                }
-
-                var product = DataProvider.ins.db.PRODUCTs.Where(pd => pd.id == SelectedProduct.id).SingleOrDefault();
-                if (product != null)
-                {
-
-                    DataProvider.ins.db.PRODUCTs.Remove(product);
-                    DataProvider.ins.db.SaveChanges();
-
-
-                    ListPage = new ObservableCollection<int>();
-                    var listProduct = DataProvider.ins.db.PRODUCTs;
-                    Int32 numberOfProducts = listProduct.Count();
-                    Int32 lastPage = 0;
-                    if (numberOfProducts % 8 != 0)
-                        lastPage = 1;
-                    Int32 numberOfPages = numberOfProducts / 8 + lastPage;
-                    for (int i = 1; i <= numberOfPages; i++)
-                    {
-                        ListPage.Add(i);
-                    }
-                    SelectedPage = 1;
-                    ListAllProduct = new ObservableCollection<PRODUCT>();
-                    ListProduct = new ObservableCollection<PRODUCT>();
-                    var products = DataProvider.ins.db.PRODUCTs;
-                    foreach (var pro in products)
-                    {
-                        ListAllProduct.Add(pro);
-                    }
-                    int index = 1;
-                    foreach (var pd in ListAllProduct)
-                    {
-                        if (index > 8)
-                            break;
-
-                        if (product.thumbnailimage == null)
-                        {
-                            product.thumbnailimage = "https://firebasestorage.googleapis.com/v0/b/e-shop-af11b.appspot.com/o/productImages%2F46546465454imagenotavail.jpg?alt=media&token=1167d6f0-759f-4256-9137-61c2d04195de&_gl=1*mkhfsw*_ga*MTI3OTgzODg3LjE2ODI2NDgyNzI.*_ga_CW55HF8NVT*MTY4NTcyMDA0Ny40MC4xLjE2ODU3MjAzMTUuMC4wLjA.";
-                        }
-                        ListProduct.Add(pd);
-                        index++;
-                    }
-
-                    SucceedNotify succeedNotify = new SucceedNotify();
-                    succeedNotify.ShowDialog();
                 }
 
 
