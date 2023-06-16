@@ -61,6 +61,7 @@ namespace E_Shopping.ViewModel
                     var send = client.SendMailAsync(msg);
                     SucceedNotify thankyouWindow = new SucceedNotify();
                     thankyouWindow.ShowDialog();
+                    fb.Close();
                 }
             }
             catch (Exception ex)
