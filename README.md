@@ -139,7 +139,8 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
 
   * Liên hệ với nhà phát triển để được hỗ trợ khởi tạo cơ sở dữ liệu và kết nối đến cơ sở dữ liệu.
   * Giải nén và chạy file 
-    * Dowload phần mềm tại: https://drive.google.com/file/d/1IODuHFrwfaUSXxlWB65ZAlHFgjfTPM18/view?usp=sharing
+    * Dowload phần mềm tại:
+      https://uithcm my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EdAgXm87iYxGiTFklJu6KBUBs6U1tHa6lD4K_rGoExPB1Q?e=LcrF0b
 
 </details>
 
@@ -148,12 +149,14 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
 
   * Dowload, giải nén phần mềm
     * Github: https://github.com/tuonghuynh11/EShopping.git
-    * Google Drive:https://drive.google.com/file/d/1B2bFCOPPAHvnsJtt5IaZ0amicwWj3P9j/view?usp=sharing
+    * Google Drive:
+      https://uithcm-my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EWnqN6RXCRBMjfKTI0c3fUwB50ufChzYFMV47c4J5r_-mg?e=aCWgKw
   * Cài đặt database
     * Khuyến nghị sử dụng các dịch vụ đám mây như Azure, AWS,… để sử dụng tất cả tính năng hiện có của chương trình  (server đi kèm với chương trình đã đóng).
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
   * Khởi tạo Database bằng cách chạy script chứa trong file Seed.sql
-    * Tải file script tại: https://drive.google.com/file/d/1Kp7b02ttG-B0XrpQTL-WzeID6H_LesGO/view?usp=sharing
+    * Tải file script tại:
+      https://uithcm-my.sharepoint.com/:f:/g/personal/21520123_ms_uit_edu_vn/Eg6Me6flEfROpg5qG9i2kqMBj8JV_MHF4yOC0_wDNNuwNQ?e=Up4W3p
   * Kết nối với Database vừa tạo bằng cách thay đổi connectionStrings trong file App.config.
   * Đăng nhập với vai trò admin
       * tên đăng nhập: admin
