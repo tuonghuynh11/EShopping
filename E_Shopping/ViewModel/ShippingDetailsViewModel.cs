@@ -135,6 +135,12 @@ namespace E_Shopping.ViewModel
 
                 var distance = await DistanceCalculate.GetDistance("Đường Hàn Thuyên, khu phố 6 P, Thủ Đức, Thành phố Hồ Chí Minh", p.shippingAddresstb.Text);
                 progressBar.Close();
+                 if (distance<=0)
+                {
+                    ValidationNotify val = new ValidationNotify("Your address isn't clear. Please type again");
+                    val.ShowDialog();
+                    return;
+                }
                 ShippingAddressViewModel.addViewToStack(distance) ;
 
             });
