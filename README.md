@@ -140,7 +140,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   * Liên hệ với nhà phát triển để được hỗ trợ khởi tạo cơ sở dữ liệu và kết nối đến cơ sở dữ liệu.
   * Giải nén và chạy file 
     * Dowload phần mềm tại:
-      [ShopGo](https://uithcm-my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EdAgXm87iYxGiTFklJu6KBUBs6U1tHa6lD4K_rGoExPB1Q?e=7avL9E)
+      [ShopGo](https://uithcm-my.sharepoint.com/:f:/g/personal/21520123_ms_uit_edu_vn/ErFwwdW_IcZNmuSio4aQqWkBoOotKqS4OcqN8S0C3UiPHg?e=s4bqHP)
 
 </details>
 
