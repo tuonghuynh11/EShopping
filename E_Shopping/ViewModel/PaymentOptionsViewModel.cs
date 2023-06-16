@@ -126,6 +126,7 @@ namespace E_Shopping.ViewModel
                RECEIPT receipt = new RECEIPT();
                double total = 0;
                int idcard = 0;
+               PAYMENTINFORMATION paymentInfo = new PAYMENTINFORMATION();
                List<ORDER> temp = ShippingAddressViewModel.Instance.listItem.ToList();
                if (payOnDelivery)
                {
@@ -151,6 +152,7 @@ namespace E_Shopping.ViewModel
                    {
                        EmailService.sendEmail(ShippingAddressViewModel.Instance.listItem, ShippingAddressViewModel.stackView, DateTime.Now);
                        PAYMENTINFORMATION payment = new PAYMENTINFORMATION() {typeOfCard=1,cardNumber=cardNumber,ownName=cardName,expDate=cardExp,csv=cardCSV  };
+                        paymentInfo = payment;
                        DataProvider.ins.DB.PAYMENTINFORMATIONs.Add(payment);
                        DataProvider.ins.DB.SaveChanges();
                       idcard = payment.id;
@@ -176,6 +178,7 @@ namespace E_Shopping.ViewModel
                    {
                        EmailService.sendEmail(ShippingAddressViewModel.Instance.listItem, ShippingAddressViewModel.stackView, DateTime.Now);
                        PAYMENTINFORMATION payment = new PAYMENTINFORMATION() { typeOfCard = 2, cardNumber = cardNumber, ownName = cardName, expDate = cardExp, csv = cardCSV };
+                       paymentInfo = payment;
                        DataProvider.ins.DB.PAYMENTINFORMATIONs.Add(payment);
                        DataProvider.ins.DB.SaveChanges();
                        idcard = payment.id;
@@ -200,6 +203,9 @@ namespace E_Shopping.ViewModel
                DataProvider.ins.DB.DELIVERies.Add(DeliveryOptionViewModel.deliveryInfo);
                DataProvider.ins.DB.RECEIVERINFORMATIONs.Add(ShippingDetailsViewModel.receiverInfo);
                DataProvider.ins.DB.SaveChanges();
+            
+               DataProvider.ins.DB.PEOPLEINFOes.Add(new PEOPLEINFO() { idCustomer=AccessUser.currentUser.id,idReceiverInfo= ShippingDetailsViewModel.receiverInfo.id, idPaymentOption=paymentInfo.id});
+
                //DELIVERY delv = DataProvider.ins.DB.Database.SqlQuery<DELIVERY>("SELECT TOP(1) *  FROM DELIVERY ORDER BY ID DESC ").FirstOrDefault<DELIVERY>();
                //RECEIVERINFORMATION rev= DataProvider.ins.DB.Database.SqlQuery<RECEIVERINFORMATION>("SELECT TOP(1) *  FROM RECEIVERINFORMATION ORDER BY ID DESC ").FirstOrDefault<RECEIVERINFORMATION>();
 
