@@ -304,8 +304,9 @@ namespace E_Shopping.ViewModel
             }
             catch (Exception ex)
             {
-                progressBar.Close();
-                notify.content.Text = ex.Message;
+                 progressBar.Close();
+               // notify.content.Text = ;
+                notify = new ValidationNotify(ex.Message);
                 notify.ShowDialog();
                 return false;
             }
@@ -378,8 +379,9 @@ namespace E_Shopping.ViewModel
             }
             catch (Exception ex)
             {
-                progressBar.Close();
-                notify.content.Text = ex.Message;
+                 progressBar.Close();
+               // notify.content.Text = ;
+                notify = new ValidationNotify(ex.Message);
                 notify.ShowDialog();
                 return false;
             }
