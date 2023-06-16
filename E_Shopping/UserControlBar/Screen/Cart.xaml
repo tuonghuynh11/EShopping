@@ -17,7 +17,7 @@
             FontFamily="{DynamicResource MaterialDesignFont}"
             Style="{StaticResource Page_Style}"
              DataContext="{StaticResource CartVM}"
-             d:DesignHeight="800" d:DesignWidth="1300">
+             d:DesignHeight="800" d:DesignWidth="1300" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <convert:ConvertStringToCurrency x:Key="currencyconvert"/>
     </UserControl.Resources>
