@@ -141,5 +141,18 @@ namespace E_Shopping.UserControlBar
             DataProvider.ins.DB.SaveChanges();
             (this.DataContext as CartViewModel).calculateSubTotal();
         }
+         private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                (this.DataContext as CartViewModel).calculateSubTotal();
+
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+        }
     }
 }
