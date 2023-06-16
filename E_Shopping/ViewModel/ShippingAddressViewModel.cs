@@ -156,6 +156,7 @@ namespace E_Shopping.ViewModel
         }
         public ShippingAddressViewModel()
         {
+            giftcode = "";
             list = new List<object>();
             //listItem = CartViewModel.getitembuy();
             listItem = new ObservableCollection<ORDER>();
