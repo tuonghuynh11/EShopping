@@ -156,7 +156,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
   * Khởi tạo Database bằng cách chạy script chứa trong file Seed.sql
     * Tải file script tại:
-      [ShopGo](https://uithcm-my.sharepoint.com/:f:/g/personal/21520123_ms_uit_edu_vn/Eg6Me6flEfROpg5qG9i2kqMBj8JV_MHF4yOC0_wDNNuwNQ?e=Up4W3p)
+      [ShopGo](https://uithcm-my.sharepoint.com/:f:/g/personal/21520123_ms_uit_edu_vn/EjijeR1YKtFDgSKkriOfHVUBfLcyPp0QkSL-5xFSJ07v9w?e=ZlXDr1)
   * Kết nối với Database vừa tạo bằng cách thay đổi connectionStrings trong file App.config.
   * Đăng nhập với vai trò admin
       * tên đăng nhập: admin
