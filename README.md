@@ -140,7 +140,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   * Liên hệ với nhà phát triển để được hỗ trợ khởi tạo cơ sở dữ liệu và kết nối đến cơ sở dữ liệu.
   * Giải nén và chạy file 
     * Dowload phần mềm tại:
-      [ShopGo](https://uithcm-my.sharepoint.com/:f:/g/personal/21520123_ms_uit_edu_vn/ErFwwdW_IcZNmuSio4aQqWkBoOotKqS4OcqN8S0C3UiPHg?e=s4bqHP)
+      [ShopGo](https://uithcm-my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EblGRmoKIyhFtaSRXsmBEFEBsPFC8xwfVG7vKSkqv2N2rQ?e=aODPRC)
 
 </details>
 
@@ -150,7 +150,7 @@ Hiện nay việc mua sắm là một nhu cầu cần thiết của mỗi ngư�
   * Dowload, giải nén phần mềm
     * Github: https://github.com/tuonghuynh11/EShopping.git
     * Google Drive:
-      [ShopGo](https://uithcm-my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EWnqN6RXCRBMjfKTI0c3fUwB50ufChzYFMV47c4J5r_-mg?e=M8XUF6)
+      [ShopGo](https://uithcm-my.sharepoint.com/:u:/g/personal/21520123_ms_uit_edu_vn/EfjIW5HTRMpEiBJzPwmxb-MBfJPsOEChKeo77A_XSMbfCg?e=zpNQmb)
   * Cài đặt database
     * Khuyến nghị sử dụng các dịch vụ đám mây như Azure, AWS,… để sử dụng tất cả tính năng hiện có của chương trình  (server đi kèm với chương trình đã đóng).
     * Ngoài ra có thể sử dụng SQL Server (Lưu ý: cách này sẽ mất đi tính năng tương tác giữa các user ở các máy tính khác nhau).
