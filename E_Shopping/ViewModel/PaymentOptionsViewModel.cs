@@ -127,9 +127,11 @@ namespace E_Shopping.ViewModel
                double total = 0;
                int idcard = 0;
                PAYMENTINFORMATION paymentInfo = new PAYMENTINFORMATION();
+               int isCreditCard=0;
                List<ORDER> temp = ShippingAddressViewModel.Instance.listItem.ToList();
                if (payOnDelivery)
                {
+                    isCreditCard = 0;
                    SucceedNotify succeed = new SucceedNotify();
                    succeed.content.Text = "Your items will delivery in some days!!";
                    succeed.content.FontSize = 20;
@@ -153,6 +155,7 @@ namespace E_Shopping.ViewModel
                        EmailService.sendEmail(ShippingAddressViewModel.Instance.listItem, ShippingAddressViewModel.stackView, DateTime.Now);
                        PAYMENTINFORMATION payment = new PAYMENTINFORMATION() {typeOfCard=1,cardNumber=cardNumber,ownName=cardName,expDate=cardExp,csv=cardCSV  };
                         paymentInfo = payment;
+                         isCreditCard = 1;
                        DataProvider.ins.DB.PAYMENTINFORMATIONs.Add(payment);
                        DataProvider.ins.DB.SaveChanges();
                       idcard = payment.id;
@@ -179,6 +182,7 @@ namespace E_Shopping.ViewModel
                        EmailService.sendEmail(ShippingAddressViewModel.Instance.listItem, ShippingAddressViewModel.stackView, DateTime.Now);
                        PAYMENTINFORMATION payment = new PAYMENTINFORMATION() { typeOfCard = 2, cardNumber = cardNumber, ownName = cardName, expDate = cardExp, csv = cardCSV };
                        paymentInfo = payment;
+                        isCreditCard = 1;
                        DataProvider.ins.DB.PAYMENTINFORMATIONs.Add(payment);
                        DataProvider.ins.DB.SaveChanges();
                        idcard = payment.id;
@@ -203,8 +207,16 @@ namespace E_Shopping.ViewModel
                DataProvider.ins.DB.DELIVERies.Add(DeliveryOptionViewModel.deliveryInfo);
                DataProvider.ins.DB.RECEIVERINFORMATIONs.Add(ShippingDetailsViewModel.receiverInfo);
                DataProvider.ins.DB.SaveChanges();
-            
-               DataProvider.ins.DB.PEOPLEINFOes.Add(new PEOPLEINFO() { idCustomer=AccessUser.currentUser.id,idReceiverInfo= ShippingDetailsViewModel.receiverInfo.id, idPaymentOption=paymentInfo.id});
+                 if (isCreditCard==1)
+               {
+                   DataProvider.ins.DB.PEOPLEINFOes.Add(new PEOPLEINFO() { idCustomer = AccessUser.currentUser.id, idReceiverInfo = ShippingDetailsViewModel.receiverInfo.id, idPaymentOption = paymentInfo.id });
+                   DataProvider.ins.DB.SaveChanges();
+               }
+               else if (isCreditCard == 0)
+               {
+                   DataProvider.ins.DB.PEOPLEINFOes.Add(new PEOPLEINFO() { idCustomer = AccessUser.currentUser.id, idReceiverInfo = ShippingDetailsViewModel.receiverInfo.id });
+                   DataProvider.ins.DB.SaveChanges();
+               }
 
                //DELIVERY delv = DataProvider.ins.DB.Database.SqlQuery<DELIVERY>("SELECT TOP(1) *  FROM DELIVERY ORDER BY ID DESC ").FirstOrDefault<DELIVERY>();
                //RECEIVERINFORMATION rev= DataProvider.ins.DB.Database.SqlQuery<RECEIVERINFORMATION>("SELECT TOP(1) *  FROM RECEIVERINFORMATION ORDER BY ID DESC ").FirstOrDefault<RECEIVERINFORMATION>();
