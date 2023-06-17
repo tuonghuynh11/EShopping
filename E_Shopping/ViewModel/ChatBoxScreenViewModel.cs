@@ -40,9 +40,12 @@ namespace E_Shopping.ViewModel
 
             listUserChat = new ObservableCollection<CHATBOX>(c);
 
-           CHATBOX person0= listUserChat.ElementAt(0);
-            Chat = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(m => m.idAssistant == 3 && m.idCustomer == person0.idCustomer));
-            person = DataProvider.ins.DB.PEOPLE.Find(person0.idCustomer);
+             if (listUserChat.Count!=0)
+            {
+                CHATBOX person0 = listUserChat.ElementAt(0);
+                Chat = new ObservableCollection<CHATBOX>(DataProvider.ins.DB.CHATBOXes.Where(m => m.idAssistant == 3 && m.idCustomer == person0.idCustomer));
+                person = DataProvider.ins.DB.PEOPLE.Find(person0.idCustomer);
+            }
         }
     }
 }
