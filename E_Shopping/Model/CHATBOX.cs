@@ -44,7 +44,7 @@ namespace E_Shopping.Model
         {
             get
             {
-                if (this.isSend == 0)
+                if (this.isSend == 1)
                 {
                     return Assistant;
                 }
