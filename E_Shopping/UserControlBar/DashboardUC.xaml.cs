@@ -131,6 +131,13 @@ namespace E_Shopping.UserControlBar
             try
             {
                 PRODUCT pdt = bt.DataContext as PRODUCT;
+                 MANAGEPRODUCTSYSTEM sl = DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Where(p => p.idSP == pdt.id).FirstOrDefault();
+                if (sl.quantity == 0)
+                {
+                    ValidationNotify va = new ValidationNotify("This product is out of stock");
+                    va.ShowDialog();
+                    return;
+                }
                 //MessageBox.Show(pdt.id.ToString());
                 CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == AccessUser.currentUser.id).FirstOrDefault();
                 DateTime date = DateTime.Now;
@@ -190,6 +197,13 @@ namespace E_Shopping.UserControlBar
             try
             {
                 PRODUCT pdt = bt.DataContext as PRODUCT;
+                 MANAGEPRODUCTSYSTEM sl = DataProvider.ins.db.MANAGEPRODUCTSYSTEMs.Where(p => p.idSP == pdt.id).FirstOrDefault();
+                if (sl.quantity == 0)
+                {
+                    ValidationNotify va = new ValidationNotify("This product is out of stock");
+                    va.ShowDialog();
+                    return;
+                }
                 //MessageBox.Show(pdt.id.ToString());
                 CART cart = DataProvider.ins.DB.CARTs.Where(p => p.idCustomer == AccessUser.currentUser.id).FirstOrDefault();
                 var date = DateTime.Now;
